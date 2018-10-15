@@ -1,0 +1,5 @@
+C:\GitRepo\WebDocsDev\WebDocs.BusinessApplicationLayer\bin\Debug\WebDocs.BusinessApplicationLayer.dll
+C:\GitRepo\WebDocsDev\WebDocs.BusinessApplicationLayer\bin\Debug\WebDocs.BusinessApplicationLayer.pdb
+C:\GitRepo\WebDocsDev\WebDocs.BusinessApplicationLayer\obj\Debug\WebDocs.BusinessApplicationLayer.csproj.CoreCompileInputs.cache
+C:\GitRepo\WebDocsDev\WebDocs.BusinessApplicationLayer\obj\Debug\WebDocs.BusinessApplicationLayer.dll
+C:\GitRepo\WebDocsDev\WebDocs.BusinessApplicationLayer\obj\Debug\WebDocs.BusinessApplicationLayer.pdb

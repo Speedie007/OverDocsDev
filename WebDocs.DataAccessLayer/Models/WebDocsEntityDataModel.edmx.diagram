@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="cd6b7ea9f3ab4490b4853dab60605ba9" Name="Diagram1">
+        <EntityTypeShape EntityType="WebDocsModel.AspNetRole" Width="1.5" PointX="0.75" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebDocsModel.AspNetUserClaim" Width="1.875" PointX="5.875" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebDocsModel.AspNetUserLogin" Width="1.875" PointX="5.75" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebDocsModel.AspNetUser" Width="2.125" PointX="3.25" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebDocsModel.FileCategory" Width="1.5" PointX="11.375" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebDocsModel.File" Width="2.625" PointX="8.25" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebDocsModel.FileSharedWithUser" Width="2.125" PointX="8.375" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebDocsModel.Notification" Width="1.5" PointX="13.5" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebDocsModel.UserThatDownloadedFile" Width="2.125" PointX="11.625" PointY="12.125" IsExpanded="true" />
+        <AssociationConnector Association="WebDocsModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="WebDocsModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="WebDocsModel.FK_Files_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="WebDocsModel.FK_FileSharedWithUsers_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="WebDocsModel.FK_Notifications_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="WebDocsModel.FK_Notifications_AspNetUsers1" ManuallyRouted="false" />
+        <AssociationConnector Association="WebDocsModel.FK_UserThatDownloadedFile_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="WebDocsModel.FK_FileCategories_Files" ManuallyRouted="false" />
+        <AssociationConnector Association="WebDocsModel.FK_FileSharedWithUsers_Files" ManuallyRouted="false" />
+        <AssociationConnector Association="WebDocsModel.FK_Notifications_Files" ManuallyRouted="false" />
+        <AssociationConnector Association="WebDocsModel.FK_UserThatDownloadedFile_Files" ManuallyRouted="false" />
+        <AssociationConnector Association="WebDocsModel.AspNetUserRoles" ManuallyRouted="false" />
+      </Diagram>
+      <Diagram DiagramId="bae7d04382a04c87bdf4e5eb9738f8cc" Name="Views" >
+        <EntityTypeShape EntityType="WebDocsModel.View_ReturnDocs_AllFilesThatHaveBeenDownloaded" Width="3.25" PointX="0.5" PointY="1" />
+        <EntityTypeShape EntityType="WebDocsModel.View_PublicDocView_AllFilesWithOwnerAndUserThatLastUpdatedFile" Width="4.5" PointX="4.125" PointY="1" />
+        <EntityTypeShape EntityType="WebDocsModel.View_PrivateDocView_AllSharedPrivateFiles" Width="3.125" PointX="0.5" PointY="5.25" />
+        <EntityTypeShape EntityType="WebDocsModel.View_FileDownloads_ViewAllFilesThatHaveBeenDownloaded" Width="3.875" PointX="7.5" PointY="6.125" />
+        <EntityTypeShape EntityType="WebDocsModel.View_UserDocs_AllUserCreatedDocs" Width="2.625" PointX="4.25" PointY="6.25" />
+      </Diagram>
+      <Diagram DiagramId="509c941d303f47c69ac6657ddb6dfde5" Name="Lookup Tables" >
+        <EntityTypeShape EntityType="WebDocsModel.LookupTableNotificationType" Width="2.25" PointX="2.75" PointY="2.625" />
+        <EntityTypeShape EntityType="WebDocsModel.LookupTable_FileCategories" Width="2.25" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="WebDocsModel.LookupTable_FileStatuses" Width="2.125" PointX="5.375" PointY="2.625" />
+        <EntityTypeShape EntityType="WebDocsModel.LookupTable_ShareStatues" Width="2.125" PointX="5.375" PointY="0.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

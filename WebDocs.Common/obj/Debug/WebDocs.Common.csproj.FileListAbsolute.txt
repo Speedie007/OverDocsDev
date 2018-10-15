@@ -1,0 +1,5 @@
+C:\GitRepo\WebDocsDev\WebDocs.Common\bin\Debug\WebDocs.Common.dll
+C:\GitRepo\WebDocsDev\WebDocs.Common\bin\Debug\WebDocs.Common.pdb
+C:\GitRepo\WebDocsDev\WebDocs.Common\obj\Debug\WebDocs.Common.csproj.CoreCompileInputs.cache
+C:\GitRepo\WebDocsDev\WebDocs.Common\obj\Debug\WebDocs.Common.dll
+C:\GitRepo\WebDocsDev\WebDocs.Common\obj\Debug\WebDocs.Common.pdb

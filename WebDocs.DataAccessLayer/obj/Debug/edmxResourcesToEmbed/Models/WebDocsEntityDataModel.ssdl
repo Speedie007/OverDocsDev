@@ -1,0 +1,734 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="WebDocsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AspNetRoles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaims">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ClaimType" Type="nvarchar(max)" />
+    <Property Name="ClaimValue" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogins">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUserRoles">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="256" />
+    <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+    <Property Name="PasswordHash" Type="nvarchar(max)" />
+    <Property Name="SecurityStamp" Type="nvarchar(max)" />
+    <Property Name="PhoneNumber" Type="nvarchar(max)" />
+    <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="datetime" />
+    <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar(max)" />
+    <Property Name="LastName" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="FileCategories">
+    <Key>
+      <PropertyRef Name="FileCategoryID" />
+    </Key>
+    <Property Name="FileCategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FileID" Type="int" Nullable="false" />
+    <Property Name="LookupTableFileCategoryID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Files">
+    <Key>
+      <PropertyRef Name="FileID" />
+    </Key>
+    <Property Name="FileID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ParentFileID" Type="int" Nullable="false" />
+    <Property Name="UserIDOfFileOwner" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="UserIDOfLastUploaded" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="FileLookupStatusID" Type="int" Nullable="false" />
+    <Property Name="FileShareStatusID" Type="int" Nullable="false" />
+    <Property Name="ContentType" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="FileName" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="FileExtension" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="FileImage" Type="image" Nullable="false" />
+    <Property Name="FileSize" Type="int" Nullable="false" />
+    <Property Name="CurrentVersionNumber" Type="int" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FileSharedWithUsers">
+    <Key>
+      <PropertyRef Name="FileSharedWithUserID" />
+    </Key>
+    <Property Name="FileSharedWithUserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserIDOfSharedDocs" Type="nvarchar" MaxLength="128" />
+    <Property Name="FileID" Type="int" Nullable="false" />
+    <Property Name="DateShared" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LookupTable_FileCategories">
+    <Key>
+      <PropertyRef Name="LookupTableFileCategoryID" />
+    </Key>
+    <Property Name="LookupTableFileCategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FileCategory" Type="varchar" MaxLength="200" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LookupTable_FileStatuses">
+    <Key>
+      <PropertyRef Name="FileLookupStatusID" />
+    </Key>
+    <Property Name="FileLookupStatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FileStatus" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="LookupTable_ShareStatues">
+    <Key>
+      <PropertyRef Name="FileShareStatusID" />
+    </Key>
+    <Property Name="FileShareStatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FileShareStatus" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="LookupTableNotificationTypes">
+    <Key>
+      <PropertyRef Name="NotificationTypeID" />
+    </Key>
+    <Property Name="NotificationTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NotificationType" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Notifications">
+    <Key>
+      <PropertyRef Name="NotificationID" />
+    </Key>
+    <Property Name="NotificationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FileID" Type="int" Nullable="false" />
+    <Property Name="NotificationTypeID" Type="int" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="UserIDOfNotificationSender" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="UserIDOfNotificationRecipient" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="UserHasAcknowledgement" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserThatDownloadedFile">
+    <Key>
+      <PropertyRef Name="FileID" />
+    </Key>
+    <Property Name="FileID" Type="int" Nullable="false" />
+    <Property Name="UserIDThatDownloadedFIle" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="DateDownloaded" Type="datetime" Nullable="false" />
+    <Property Name="HasFileBeenReturned" Type="bit" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'WebDocs.dbo.View_FileDownloads_ViewAllFilesThatHaveBeenDownloaded' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="View_FileDownloads_ViewAllFilesThatHaveBeenDownloaded">
+    <Key>
+      <PropertyRef Name="UserIDThatDownloadedFIle" />
+      <PropertyRef Name="HasFileBeenReturned" />
+    </Key>
+    <Property Name="FileID" Type="int" />
+    <Property Name="ParentFileID" Type="int" />
+    <Property Name="UserIDOfFileOwner" Type="nvarchar" MaxLength="128" />
+    <Property Name="UserIDOfLastUploaded" Type="nvarchar" MaxLength="128" />
+    <Property Name="CurrentVersionNumber" Type="int" />
+    <Property Name="UserIDThatDownloadedFIle" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="HasFileBeenReturned" Type="bit" Nullable="false" />
+    <Property Name="FullNameOfFileOwner" Type="nvarchar(max)" />
+    <Property Name="FullNameOfThePersonThatLastUpdatedTheFile" Type="nvarchar(max)" />
+    <Property Name="FullNameOfPersonThatDownloadedTheFile" Type="nvarchar(max)" />
+    <Property Name="FileSize" Type="int" />
+    <Property Name="FileName" Type="varchar" MaxLength="500" />
+    <Property Name="FileExtension" Type="varchar" MaxLength="50" />
+    <Property Name="FullFileName" Type="varchar" MaxLength="551" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'WebDocs.dbo.View_PrivateDocView_AllSharedPrivateFiles' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="View_PrivateDocView_AllSharedPrivateFiles">
+    <Key>
+      <PropertyRef Name="FileID" />
+      <PropertyRef Name="ParentFileID" />
+      <PropertyRef Name="UserIDOfFileOwner" />
+      <PropertyRef Name="UserIDOfLastUploaded" />
+      <PropertyRef Name="FileLookupStatusID" />
+      <PropertyRef Name="FileShareStatusID" />
+      <PropertyRef Name="ContentType" />
+      <PropertyRef Name="FileName" />
+      <PropertyRef Name="FileExtension" />
+      <PropertyRef Name="FileSize" />
+      <PropertyRef Name="CurrentVersionNumber" />
+      <PropertyRef Name="DateCreated" />
+      <PropertyRef Name="FullFileName" />
+      <PropertyRef Name="FileType" />
+      <PropertyRef Name="IdOfUserThatDownloadedTheFile" />
+    </Key>
+    <Property Name="FileID" Type="int" Nullable="false" />
+    <Property Name="ParentFileID" Type="int" Nullable="false" />
+    <Property Name="UserIDOfFileOwner" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="UserIDOfLastUploaded" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="FileLookupStatusID" Type="int" Nullable="false" />
+    <Property Name="FileShareStatusID" Type="int" Nullable="false" />
+    <Property Name="ContentType" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="FileName" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="FileExtension" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="FileSize" Type="int" Nullable="false" />
+    <Property Name="CurrentVersionNumber" Type="int" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="FileStatus" Type="varchar" MaxLength="100" />
+    <Property Name="NameOfFileOwner" Type="nvarchar(max)" />
+    <Property Name="UserThatLastUpdatedFile" Type="nvarchar(max)" />
+    <Property Name="RefID" Type="nvarchar" MaxLength="128" />
+    <Property Name="FullFileName" Type="varchar" MaxLength="551" Nullable="false" />
+    <Property Name="FileType" Type="varchar" MaxLength="1" Nullable="false" />
+    <Property Name="IdOfUserThatDownloadedTheFile" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'WebDocs.dbo.View_PublicDocView_AllFilesWithOwnerAndUserThatLastUpdatedFile' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="View_PublicDocView_AllFilesWithOwnerAndUserThatLastUpdatedFile">
+    <Key>
+      <PropertyRef Name="FileID" />
+      <PropertyRef Name="ParentFileID" />
+      <PropertyRef Name="UserIDOfFileOwner" />
+      <PropertyRef Name="UserIDOfLastUploaded" />
+      <PropertyRef Name="FileLookupStatusID" />
+      <PropertyRef Name="FileShareStatusID" />
+      <PropertyRef Name="ContentType" />
+      <PropertyRef Name="FileName" />
+      <PropertyRef Name="FileExtension" />
+      <PropertyRef Name="FullFileName" />
+      <PropertyRef Name="FileSize" />
+      <PropertyRef Name="CurrentVersionNumber" />
+      <PropertyRef Name="DateCreated" />
+      <PropertyRef Name="FileType" />
+      <PropertyRef Name="ListOfUserIDThatTheFileISsharedWith" />
+      <PropertyRef Name="IdOfUserThatDownloadedTheFile" />
+    </Key>
+    <Property Name="FileID" Type="int" Nullable="false" />
+    <Property Name="ParentFileID" Type="int" Nullable="false" />
+    <Property Name="UserIDOfFileOwner" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="UserIDOfLastUploaded" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="CurrentFileStatus" Type="varchar" MaxLength="100" />
+    <Property Name="FileLookupStatusID" Type="int" Nullable="false" />
+    <Property Name="CurrentFileShareStatus" Type="varchar" MaxLength="50" />
+    <Property Name="FileShareStatusID" Type="int" Nullable="false" />
+    <Property Name="ContentType" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="FileName" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="FileExtension" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="FullFileName" Type="varchar" MaxLength="551" Nullable="false" />
+    <Property Name="FileSize" Type="int" Nullable="false" />
+    <Property Name="CurrentVersionNumber" Type="int" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="NameOfFileOwner" Type="nvarchar(max)" />
+    <Property Name="NameOfUserThatLastUpdatedFile" Type="nvarchar(max)" />
+    <Property Name="FileType" Type="varchar" MaxLength="1" Nullable="false" />
+    <Property Name="ListOfUserIDThatTheFileISsharedWith" Type="varchar" MaxLength="1" Nullable="false" />
+    <Property Name="IdOfUserThatDownloadedTheFile" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'WebDocs.dbo.View_ReturnDocs_AllFilesThatHaveBeenDownloaded' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="View_ReturnDocs_AllFilesThatHaveBeenDownloaded">
+    <Key>
+      <PropertyRef Name="UserIDThatDownloadedFIle" />
+      <PropertyRef Name="HasFileBeenReturned" />
+    </Key>
+    <Property Name="FileID" Type="int" />
+    <Property Name="ParentFileID" Type="int" />
+    <Property Name="UserIDOfFileOwner" Type="nvarchar" MaxLength="128" />
+    <Property Name="UserIDOfLastUploaded" Type="nvarchar" MaxLength="128" />
+    <Property Name="CurrentVersionNumber" Type="int" />
+    <Property Name="UserIDThatDownloadedFIle" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="HasFileBeenReturned" Type="bit" Nullable="false" />
+    <Property Name="FullNameOfFileOwner" Type="nvarchar(max)" />
+    <Property Name="FullNameOfThePersonThatLastUpdatedTheFile" Type="nvarchar(max)" />
+    <Property Name="FullNameOfPersonThatDownloadedTheFile" Type="nvarchar(max)" />
+    <Property Name="FileSize" Type="int" />
+    <Property Name="FileName" Type="varchar" MaxLength="500" />
+    <Property Name="FileExtension" Type="varchar" MaxLength="50" />
+    <Property Name="FullFileName" Type="varchar" MaxLength="551" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'WebDocs.dbo.View_UserDocs_AllUserCreatedDocs' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="View_UserDocs_AllUserCreatedDocs">
+    <Key>
+      <PropertyRef Name="FileID" />
+      <PropertyRef Name="ParentFileID" />
+      <PropertyRef Name="UserIDOfFileOwner" />
+      <PropertyRef Name="UserIDOfLastUploaded" />
+      <PropertyRef Name="FileLookupStatusID" />
+      <PropertyRef Name="FileShareStatusID" />
+      <PropertyRef Name="ContentType" />
+      <PropertyRef Name="FileName" />
+      <PropertyRef Name="FileExtension" />
+      <PropertyRef Name="FileSize" />
+      <PropertyRef Name="CurrentVersionNumber" />
+      <PropertyRef Name="DateCreated" />
+      <PropertyRef Name="FullFileName" />
+      <PropertyRef Name="FileType" />
+    </Key>
+    <Property Name="FileID" Type="int" Nullable="false" />
+    <Property Name="ParentFileID" Type="int" Nullable="false" />
+    <Property Name="UserIDOfFileOwner" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="UserIDOfLastUploaded" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="FileLookupStatusID" Type="int" Nullable="false" />
+    <Property Name="FileShareStatusID" Type="int" Nullable="false" />
+    <Property Name="ContentType" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="FileName" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="FileExtension" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="FileSize" Type="int" Nullable="false" />
+    <Property Name="CurrentVersionNumber" Type="int" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="FileStatus" Type="varchar" MaxLength="100" />
+    <Property Name="FileShareStatus" Type="varchar" MaxLength="50" />
+    <Property Name="UserThatLastUpdated" Type="nvarchar(max)" />
+    <Property Name="FullFileName" Type="varchar" MaxLength="551" Nullable="false" />
+    <Property Name="FileType" Type="varchar" MaxLength="1" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaims">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogins">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+    <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetRoles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserRoles">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserRoles">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FileCategories_Files">
+    <End Role="Files" Type="Self.Files" Multiplicity="1" />
+    <End Role="FileCategories" Type="Self.FileCategories" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Files">
+        <PropertyRef Name="FileID" />
+      </Principal>
+      <Dependent Role="FileCategories">
+        <PropertyRef Name="FileID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FileCategories_LookupTable_FileCategories">
+    <End Role="LookupTable_FileCategories" Type="Self.LookupTable_FileCategories" Multiplicity="1" />
+    <End Role="FileCategories" Type="Self.FileCategories" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LookupTable_FileCategories">
+        <PropertyRef Name="LookupTableFileCategoryID" />
+      </Principal>
+      <Dependent Role="FileCategories">
+        <PropertyRef Name="LookupTableFileCategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Files_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="Files" Type="Self.Files" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Files">
+        <PropertyRef Name="UserIDOfFileOwner" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Files_LookupTable_FileStatuses">
+    <End Role="LookupTable_FileStatuses" Type="Self.LookupTable_FileStatuses" Multiplicity="1" />
+    <End Role="Files" Type="Self.Files" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LookupTable_FileStatuses">
+        <PropertyRef Name="FileLookupStatusID" />
+      </Principal>
+      <Dependent Role="Files">
+        <PropertyRef Name="FileLookupStatusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Files_LookupTable_ShareStatues">
+    <End Role="LookupTable_ShareStatues" Type="Self.LookupTable_ShareStatues" Multiplicity="1" />
+    <End Role="Files" Type="Self.Files" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LookupTable_ShareStatues">
+        <PropertyRef Name="FileShareStatusID" />
+      </Principal>
+      <Dependent Role="Files">
+        <PropertyRef Name="FileShareStatusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FileSharedWithUsers_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+    <End Role="FileSharedWithUsers" Type="Self.FileSharedWithUsers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FileSharedWithUsers">
+        <PropertyRef Name="UserIDOfSharedDocs" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FileSharedWithUsers_Files">
+    <End Role="Files" Type="Self.Files" Multiplicity="1" />
+    <End Role="FileSharedWithUsers" Type="Self.FileSharedWithUsers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Files">
+        <PropertyRef Name="FileID" />
+      </Principal>
+      <Dependent Role="FileSharedWithUsers">
+        <PropertyRef Name="FileID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Notifications_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="Notifications" Type="Self.Notifications" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Notifications">
+        <PropertyRef Name="UserIDOfNotificationSender" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Notifications_AspNetUsers1">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="Notifications" Type="Self.Notifications" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Notifications">
+        <PropertyRef Name="UserIDOfNotificationRecipient" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Notifications_Files">
+    <End Role="Files" Type="Self.Files" Multiplicity="1" />
+    <End Role="Notifications" Type="Self.Notifications" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Files">
+        <PropertyRef Name="FileID" />
+      </Principal>
+      <Dependent Role="Notifications">
+        <PropertyRef Name="FileID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Notifications_LookupTableNotificationTypes">
+    <End Role="LookupTableNotificationTypes" Type="Self.LookupTableNotificationTypes" Multiplicity="1" />
+    <End Role="Notifications" Type="Self.Notifications" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LookupTableNotificationTypes">
+        <PropertyRef Name="NotificationTypeID" />
+      </Principal>
+      <Dependent Role="Notifications">
+        <PropertyRef Name="NotificationTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserThatDownloadedFile_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="UserThatDownloadedFile" Type="Self.UserThatDownloadedFile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserThatDownloadedFile">
+        <PropertyRef Name="UserIDThatDownloadedFIle" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserThatDownloadedFile_Files">
+    <End Role="Files" Type="Self.Files" Multiplicity="1" />
+    <End Role="UserThatDownloadedFile" Type="Self.UserThatDownloadedFile" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Files">
+        <PropertyRef Name="FileID" />
+      </Principal>
+      <Dependent Role="UserThatDownloadedFile">
+        <PropertyRef Name="FileID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="File_R_AllFileDetailsWithoutFioleImage" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="FileID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Files_I_NewFile" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ParentFileID" Type="int" Mode="In" />
+    <Parameter Name="UserIDOfFileOwner" Type="nvarchar" Mode="In" />
+    <Parameter Name="UserIDOfLastUploaded" Type="nvarchar" Mode="In" />
+    <Parameter Name="FileLookupStatusID" Type="int" Mode="In" />
+    <Parameter Name="FileShareStatusID" Type="int" Mode="In" />
+    <Parameter Name="ContentType" Type="varchar" Mode="In" />
+    <Parameter Name="FileName" Type="varchar" Mode="In" />
+    <Parameter Name="FileExtension" Type="varchar" Mode="In" />
+    <Parameter Name="FileImage" Type="image" Mode="In" />
+    <Parameter Name="FileSize" Type="int" Mode="In" />
+    <Parameter Name="CurrentVersionNumber" Type="int" Mode="In" />
+  </Function>
+  <Function Name="Files_U_SetFileStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="FileID" Type="int" Mode="In" />
+    <Parameter Name="FileLookupStatusID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="PrivateDocs_R_GetAllPrivateSharedUserFiles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CurrentlyLoggedingUserID" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="PublicDocs_R_GetMostRecentFileVersion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="PublicDocs_R_GetSelectedFileHistory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="FileID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="UserDocs_R_GetAllUserCreatedDocs" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="nvarchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="WebDocsModelStoreContainer">
+    <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FileCategories" EntityType="Self.FileCategories" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Files" EntityType="Self.Files" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FileSharedWithUsers" EntityType="Self.FileSharedWithUsers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LookupTable_FileCategories" EntityType="Self.LookupTable_FileCategories" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LookupTable_FileStatuses" EntityType="Self.LookupTable_FileStatuses" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LookupTable_ShareStatues" EntityType="Self.LookupTable_ShareStatues" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LookupTableNotificationTypes" EntityType="Self.LookupTableNotificationTypes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Notifications" EntityType="Self.Notifications" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserThatDownloadedFile" EntityType="Self.UserThatDownloadedFile" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="View_FileDownloads_ViewAllFilesThatHaveBeenDownloaded" EntityType="Self.View_FileDownloads_ViewAllFilesThatHaveBeenDownloaded" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [View_FileDownloads_ViewAllFilesThatHaveBeenDownloaded].[FileID] AS [FileID], 
+    [View_FileDownloads_ViewAllFilesThatHaveBeenDownloaded].[ParentFileID] AS [ParentFileID], 
+    [View_FileDownloads_ViewAllFilesThatHaveBeenDownloaded].[UserIDOfFileOwner] AS [UserIDOfFileOwner], 
+    [View_FileDownloads_ViewAllFilesThatHaveBeenDownloaded].[UserIDOfLastUploaded] AS [UserIDOfLastUploaded], 
+    [View_FileDownloads_ViewAllFilesThatHaveBeenDownloaded].[CurrentVersionNumber] AS [CurrentVersionNumber], 
+    [View_FileDownloads_ViewAllFilesThatHaveBeenDownloaded].[UserIDThatDownloadedFIle] AS [UserIDThatDownloadedFIle], 
+    [View_FileDownloads_ViewAllFilesThatHaveBeenDownloaded].[HasFileBeenReturned] AS [HasFileBeenReturned], 
+    [View_FileDownloads_ViewAllFilesThatHaveBeenDownloaded].[FullNameOfFileOwner] AS [FullNameOfFileOwner], 
+    [View_FileDownloads_ViewAllFilesThatHaveBeenDownloaded].[FullNameOfThePersonThatLastUpdatedTheFile] AS [FullNameOfThePersonThatLastUpdatedTheFile], 
+    [View_FileDownloads_ViewAllFilesThatHaveBeenDownloaded].[FullNameOfPersonThatDownloadedTheFile] AS [FullNameOfPersonThatDownloadedTheFile], 
+    [View_FileDownloads_ViewAllFilesThatHaveBeenDownloaded].[FileSize] AS [FileSize], 
+    [View_FileDownloads_ViewAllFilesThatHaveBeenDownloaded].[FileName] AS [FileName], 
+    [View_FileDownloads_ViewAllFilesThatHaveBeenDownloaded].[FileExtension] AS [FileExtension], 
+    [View_FileDownloads_ViewAllFilesThatHaveBeenDownloaded].[FullFileName] AS [FullFileName]
+    FROM [dbo].[View_FileDownloads_ViewAllFilesThatHaveBeenDownloaded] AS [View_FileDownloads_ViewAllFilesThatHaveBeenDownloaded]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="View_PrivateDocView_AllSharedPrivateFiles" EntityType="Self.View_PrivateDocView_AllSharedPrivateFiles" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [View_PrivateDocView_AllSharedPrivateFiles].[FileID] AS [FileID], 
+    [View_PrivateDocView_AllSharedPrivateFiles].[ParentFileID] AS [ParentFileID], 
+    [View_PrivateDocView_AllSharedPrivateFiles].[UserIDOfFileOwner] AS [UserIDOfFileOwner], 
+    [View_PrivateDocView_AllSharedPrivateFiles].[UserIDOfLastUploaded] AS [UserIDOfLastUploaded], 
+    [View_PrivateDocView_AllSharedPrivateFiles].[FileLookupStatusID] AS [FileLookupStatusID], 
+    [View_PrivateDocView_AllSharedPrivateFiles].[FileShareStatusID] AS [FileShareStatusID], 
+    [View_PrivateDocView_AllSharedPrivateFiles].[ContentType] AS [ContentType], 
+    [View_PrivateDocView_AllSharedPrivateFiles].[FileName] AS [FileName], 
+    [View_PrivateDocView_AllSharedPrivateFiles].[FileExtension] AS [FileExtension], 
+    [View_PrivateDocView_AllSharedPrivateFiles].[FileSize] AS [FileSize], 
+    [View_PrivateDocView_AllSharedPrivateFiles].[CurrentVersionNumber] AS [CurrentVersionNumber], 
+    [View_PrivateDocView_AllSharedPrivateFiles].[DateCreated] AS [DateCreated], 
+    [View_PrivateDocView_AllSharedPrivateFiles].[FileStatus] AS [FileStatus], 
+    [View_PrivateDocView_AllSharedPrivateFiles].[NameOfFileOwner] AS [NameOfFileOwner], 
+    [View_PrivateDocView_AllSharedPrivateFiles].[UserThatLastUpdatedFile] AS [UserThatLastUpdatedFile], 
+    [View_PrivateDocView_AllSharedPrivateFiles].[RefID] AS [RefID], 
+    [View_PrivateDocView_AllSharedPrivateFiles].[FullFileName] AS [FullFileName], 
+    [View_PrivateDocView_AllSharedPrivateFiles].[FileType] AS [FileType], 
+    [View_PrivateDocView_AllSharedPrivateFiles].[IdOfUserThatDownloadedTheFile] AS [IdOfUserThatDownloadedTheFile]
+    FROM [dbo].[View_PrivateDocView_AllSharedPrivateFiles] AS [View_PrivateDocView_AllSharedPrivateFiles]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="View_PublicDocView_AllFilesWithOwnerAndUserThatLastUpdatedFile" EntityType="Self.View_PublicDocView_AllFilesWithOwnerAndUserThatLastUpdatedFile" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [View_PublicDocView_AllFilesWithOwnerAndUserThatLastUpdatedFile].[FileID] AS [FileID], 
+    [View_PublicDocView_AllFilesWithOwnerAndUserThatLastUpdatedFile].[ParentFileID] AS [ParentFileID], 
+    [View_PublicDocView_AllFilesWithOwnerAndUserThatLastUpdatedFile].[UserIDOfFileOwner] AS [UserIDOfFileOwner], 
+    [View_PublicDocView_AllFilesWithOwnerAndUserThatLastUpdatedFile].[UserIDOfLastUploaded] AS [UserIDOfLastUploaded], 
+    [View_PublicDocView_AllFilesWithOwnerAndUserThatLastUpdatedFile].[CurrentFileStatus] AS [CurrentFileStatus], 
+    [View_PublicDocView_AllFilesWithOwnerAndUserThatLastUpdatedFile].[FileLookupStatusID] AS [FileLookupStatusID], 
+    [View_PublicDocView_AllFilesWithOwnerAndUserThatLastUpdatedFile].[CurrentFileShareStatus] AS [CurrentFileShareStatus], 
+    [View_PublicDocView_AllFilesWithOwnerAndUserThatLastUpdatedFile].[FileShareStatusID] AS [FileShareStatusID], 
+    [View_PublicDocView_AllFilesWithOwnerAndUserThatLastUpdatedFile].[ContentType] AS [ContentType], 
+    [View_PublicDocView_AllFilesWithOwnerAndUserThatLastUpdatedFile].[FileName] AS [FileName], 
+    [View_PublicDocView_AllFilesWithOwnerAndUserThatLastUpdatedFile].[FileExtension] AS [FileExtension], 
+    [View_PublicDocView_AllFilesWithOwnerAndUserThatLastUpdatedFile].[FullFileName] AS [FullFileName], 
+    [View_PublicDocView_AllFilesWithOwnerAndUserThatLastUpdatedFile].[FileSize] AS [FileSize], 
+    [View_PublicDocView_AllFilesWithOwnerAndUserThatLastUpdatedFile].[CurrentVersionNumber] AS [CurrentVersionNumber], 
+    [View_PublicDocView_AllFilesWithOwnerAndUserThatLastUpdatedFile].[DateCreated] AS [DateCreated], 
+    [View_PublicDocView_AllFilesWithOwnerAndUserThatLastUpdatedFile].[NameOfFileOwner] AS [NameOfFileOwner], 
+    [View_PublicDocView_AllFilesWithOwnerAndUserThatLastUpdatedFile].[NameOfUserThatLastUpdatedFile] AS [NameOfUserThatLastUpdatedFile], 
+    [View_PublicDocView_AllFilesWithOwnerAndUserThatLastUpdatedFile].[FileType] AS [FileType], 
+    [View_PublicDocView_AllFilesWithOwnerAndUserThatLastUpdatedFile].[ListOfUserIDThatTheFileISsharedWith] AS [ListOfUserIDThatTheFileISsharedWith], 
+    [View_PublicDocView_AllFilesWithOwnerAndUserThatLastUpdatedFile].[IdOfUserThatDownloadedTheFile] AS [IdOfUserThatDownloadedTheFile]
+    FROM [dbo].[View_PublicDocView_AllFilesWithOwnerAndUserThatLastUpdatedFile] AS [View_PublicDocView_AllFilesWithOwnerAndUserThatLastUpdatedFile]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="View_ReturnDocs_AllFilesThatHaveBeenDownloaded" EntityType="Self.View_ReturnDocs_AllFilesThatHaveBeenDownloaded" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [View_ReturnDocs_AllFilesThatHaveBeenDownloaded].[FileID] AS [FileID], 
+    [View_ReturnDocs_AllFilesThatHaveBeenDownloaded].[ParentFileID] AS [ParentFileID], 
+    [View_ReturnDocs_AllFilesThatHaveBeenDownloaded].[UserIDOfFileOwner] AS [UserIDOfFileOwner], 
+    [View_ReturnDocs_AllFilesThatHaveBeenDownloaded].[UserIDOfLastUploaded] AS [UserIDOfLastUploaded], 
+    [View_ReturnDocs_AllFilesThatHaveBeenDownloaded].[CurrentVersionNumber] AS [CurrentVersionNumber], 
+    [View_ReturnDocs_AllFilesThatHaveBeenDownloaded].[UserIDThatDownloadedFIle] AS [UserIDThatDownloadedFIle], 
+    [View_ReturnDocs_AllFilesThatHaveBeenDownloaded].[HasFileBeenReturned] AS [HasFileBeenReturned], 
+    [View_ReturnDocs_AllFilesThatHaveBeenDownloaded].[FullNameOfFileOwner] AS [FullNameOfFileOwner], 
+    [View_ReturnDocs_AllFilesThatHaveBeenDownloaded].[FullNameOfThePersonThatLastUpdatedTheFile] AS [FullNameOfThePersonThatLastUpdatedTheFile], 
+    [View_ReturnDocs_AllFilesThatHaveBeenDownloaded].[FullNameOfPersonThatDownloadedTheFile] AS [FullNameOfPersonThatDownloadedTheFile], 
+    [View_ReturnDocs_AllFilesThatHaveBeenDownloaded].[FileSize] AS [FileSize], 
+    [View_ReturnDocs_AllFilesThatHaveBeenDownloaded].[FileName] AS [FileName], 
+    [View_ReturnDocs_AllFilesThatHaveBeenDownloaded].[FileExtension] AS [FileExtension], 
+    [View_ReturnDocs_AllFilesThatHaveBeenDownloaded].[FullFileName] AS [FullFileName]
+    FROM [dbo].[View_ReturnDocs_AllFilesThatHaveBeenDownloaded] AS [View_ReturnDocs_AllFilesThatHaveBeenDownloaded]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="View_UserDocs_AllUserCreatedDocs" EntityType="Self.View_UserDocs_AllUserCreatedDocs" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [View_UserDocs_AllUserCreatedDocs].[FileID] AS [FileID], 
+    [View_UserDocs_AllUserCreatedDocs].[ParentFileID] AS [ParentFileID], 
+    [View_UserDocs_AllUserCreatedDocs].[UserIDOfFileOwner] AS [UserIDOfFileOwner], 
+    [View_UserDocs_AllUserCreatedDocs].[UserIDOfLastUploaded] AS [UserIDOfLastUploaded], 
+    [View_UserDocs_AllUserCreatedDocs].[FileLookupStatusID] AS [FileLookupStatusID], 
+    [View_UserDocs_AllUserCreatedDocs].[FileShareStatusID] AS [FileShareStatusID], 
+    [View_UserDocs_AllUserCreatedDocs].[ContentType] AS [ContentType], 
+    [View_UserDocs_AllUserCreatedDocs].[FileName] AS [FileName], 
+    [View_UserDocs_AllUserCreatedDocs].[FileExtension] AS [FileExtension], 
+    [View_UserDocs_AllUserCreatedDocs].[FileSize] AS [FileSize], 
+    [View_UserDocs_AllUserCreatedDocs].[CurrentVersionNumber] AS [CurrentVersionNumber], 
+    [View_UserDocs_AllUserCreatedDocs].[DateCreated] AS [DateCreated], 
+    [View_UserDocs_AllUserCreatedDocs].[FileStatus] AS [FileStatus], 
+    [View_UserDocs_AllUserCreatedDocs].[FileShareStatus] AS [FileShareStatus], 
+    [View_UserDocs_AllUserCreatedDocs].[UserThatLastUpdated] AS [UserThatLastUpdated], 
+    [View_UserDocs_AllUserCreatedDocs].[FullFileName] AS [FullFileName], 
+    [View_UserDocs_AllUserCreatedDocs].[FileType] AS [FileType]
+    FROM [dbo].[View_UserDocs_AllUserCreatedDocs] AS [View_UserDocs_AllUserCreatedDocs]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FileCategories_Files" Association="Self.FK_FileCategories_Files">
+      <End Role="Files" EntitySet="Files" />
+      <End Role="FileCategories" EntitySet="FileCategories" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FileCategories_LookupTable_FileCategories" Association="Self.FK_FileCategories_LookupTable_FileCategories">
+      <End Role="LookupTable_FileCategories" EntitySet="LookupTable_FileCategories" />
+      <End Role="FileCategories" EntitySet="FileCategories" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Files_AspNetUsers" Association="Self.FK_Files_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Files" EntitySet="Files" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Files_LookupTable_FileStatuses" Association="Self.FK_Files_LookupTable_FileStatuses">
+      <End Role="LookupTable_FileStatuses" EntitySet="LookupTable_FileStatuses" />
+      <End Role="Files" EntitySet="Files" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Files_LookupTable_ShareStatues" Association="Self.FK_Files_LookupTable_ShareStatues">
+      <End Role="LookupTable_ShareStatues" EntitySet="LookupTable_ShareStatues" />
+      <End Role="Files" EntitySet="Files" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FileSharedWithUsers_AspNetUsers" Association="Self.FK_FileSharedWithUsers_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="FileSharedWithUsers" EntitySet="FileSharedWithUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FileSharedWithUsers_Files" Association="Self.FK_FileSharedWithUsers_Files">
+      <End Role="Files" EntitySet="Files" />
+      <End Role="FileSharedWithUsers" EntitySet="FileSharedWithUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Notifications_AspNetUsers" Association="Self.FK_Notifications_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Notifications" EntitySet="Notifications" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Notifications_AspNetUsers1" Association="Self.FK_Notifications_AspNetUsers1">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Notifications" EntitySet="Notifications" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Notifications_Files" Association="Self.FK_Notifications_Files">
+      <End Role="Files" EntitySet="Files" />
+      <End Role="Notifications" EntitySet="Notifications" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Notifications_LookupTableNotificationTypes" Association="Self.FK_Notifications_LookupTableNotificationTypes">
+      <End Role="LookupTableNotificationTypes" EntitySet="LookupTableNotificationTypes" />
+      <End Role="Notifications" EntitySet="Notifications" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserThatDownloadedFile_AspNetUsers" Association="Self.FK_UserThatDownloadedFile_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="UserThatDownloadedFile" EntitySet="UserThatDownloadedFile" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserThatDownloadedFile_Files" Association="Self.FK_UserThatDownloadedFile_Files">
+      <End Role="Files" EntitySet="Files" />
+      <End Role="UserThatDownloadedFile" EntitySet="UserThatDownloadedFile" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,710 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="WebDocsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="AspNetRole">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaim">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogin">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+    <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+    <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+    <NavigationProperty Name="Files" Relationship="Self.FK_Files_AspNetUsers" FromRole="AspNetUsers" ToRole="Files" />
+    <NavigationProperty Name="FileSharedWithUsers" Relationship="Self.FK_FileSharedWithUsers_AspNetUsers" FromRole="AspNetUsers" ToRole="FileSharedWithUsers" />
+    <NavigationProperty Name="Notifications" Relationship="Self.FK_Notifications_AspNetUsers" FromRole="AspNetUsers" ToRole="Notifications" />
+    <NavigationProperty Name="Notifications1" Relationship="Self.FK_Notifications_AspNetUsers1" FromRole="AspNetUsers" ToRole="Notifications" />
+    <NavigationProperty Name="UserThatDownloadedFiles" Relationship="Self.FK_UserThatDownloadedFile_AspNetUsers" FromRole="AspNetUsers" ToRole="UserThatDownloadedFile" />
+    <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+  </EntityType>
+  <EntityType Name="FileCategory">
+    <Key>
+      <PropertyRef Name="FileCategoryID" />
+    </Key>
+    <Property Name="FileCategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FileID" Type="Int32" Nullable="false" />
+    <Property Name="LookupTableFileCategoryID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="File" Relationship="Self.FK_FileCategories_Files" FromRole="FileCategories" ToRole="Files" />
+    <NavigationProperty Name="LookupTable_FileCategories" Relationship="Self.FK_FileCategories_LookupTable_FileCategories" FromRole="FileCategories" ToRole="LookupTable_FileCategories" />
+  </EntityType>
+  <EntityType Name="File">
+    <Key>
+      <PropertyRef Name="FileID" />
+    </Key>
+    <Property Name="FileID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ParentFileID" Type="Int32" Nullable="false" />
+    <Property Name="UserIDOfFileOwner" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserIDOfLastUploaded" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="FileLookupStatusID" Type="Int32" Nullable="false" />
+    <Property Name="FileShareStatusID" Type="Int32" Nullable="false" />
+    <Property Name="ContentType" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FileName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FileExtension" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FileImage" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <Property Name="FileSize" Type="Int32" Nullable="false" />
+    <Property Name="CurrentVersionNumber" Type="Int32" Nullable="false" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Files_AspNetUsers" FromRole="Files" ToRole="AspNetUsers" />
+    <NavigationProperty Name="FileCategories" Relationship="Self.FK_FileCategories_Files" FromRole="Files" ToRole="FileCategories" />
+    <NavigationProperty Name="LookupTable_FileStatuses" Relationship="Self.FK_Files_LookupTable_FileStatuses" FromRole="Files" ToRole="LookupTable_FileStatuses" />
+    <NavigationProperty Name="LookupTable_ShareStatues" Relationship="Self.FK_Files_LookupTable_ShareStatues" FromRole="Files" ToRole="LookupTable_ShareStatues" />
+    <NavigationProperty Name="FileSharedWithUsers" Relationship="Self.FK_FileSharedWithUsers_Files" FromRole="Files" ToRole="FileSharedWithUsers" />
+    <NavigationProperty Name="Notifications" Relationship="Self.FK_Notifications_Files" FromRole="Files" ToRole="Notifications" />
+    <NavigationProperty Name="UserThatDownloadedFile" Relationship="Self.FK_UserThatDownloadedFile_Files" FromRole="Files" ToRole="UserThatDownloadedFile" />
+  </EntityType>
+  <EntityType Name="FileSharedWithUser">
+    <Key>
+      <PropertyRef Name="FileSharedWithUserID" />
+    </Key>
+    <Property Name="FileSharedWithUserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserIDOfSharedDocs" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="FileID" Type="Int32" Nullable="false" />
+    <Property Name="DateShared" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_FileSharedWithUsers_AspNetUsers" FromRole="FileSharedWithUsers" ToRole="AspNetUsers" />
+    <NavigationProperty Name="File" Relationship="Self.FK_FileSharedWithUsers_Files" FromRole="FileSharedWithUsers" ToRole="Files" />
+  </EntityType>
+  <EntityType Name="LookupTable_FileCategories">
+    <Key>
+      <PropertyRef Name="LookupTableFileCategoryID" />
+    </Key>
+    <Property Name="LookupTableFileCategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FileCategory" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="FileCategories" Relationship="Self.FK_FileCategories_LookupTable_FileCategories" FromRole="LookupTable_FileCategories" ToRole="FileCategories" />
+  </EntityType>
+  <EntityType Name="LookupTable_FileStatuses">
+    <Key>
+      <PropertyRef Name="FileLookupStatusID" />
+    </Key>
+    <Property Name="FileLookupStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FileStatus" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Files" Relationship="Self.FK_Files_LookupTable_FileStatuses" FromRole="LookupTable_FileStatuses" ToRole="Files" />
+  </EntityType>
+  <EntityType Name="LookupTable_ShareStatues">
+    <Key>
+      <PropertyRef Name="FileShareStatusID" />
+    </Key>
+    <Property Name="FileShareStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FileShareStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Files" Relationship="Self.FK_Files_LookupTable_ShareStatues" FromRole="LookupTable_ShareStatues" ToRole="Files" />
+  </EntityType>
+  <EntityType Name="LookupTableNotificationType">
+    <Key>
+      <PropertyRef Name="NotificationTypeID" />
+    </Key>
+    <Property Name="NotificationTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NotificationType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Notifications" Relationship="Self.FK_Notifications_LookupTableNotificationTypes" FromRole="LookupTableNotificationTypes" ToRole="Notifications" />
+  </EntityType>
+  <EntityType Name="Notification">
+    <Key>
+      <PropertyRef Name="NotificationID" />
+    </Key>
+    <Property Name="NotificationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FileID" Type="Int32" Nullable="false" />
+    <Property Name="NotificationTypeID" Type="Int32" Nullable="false" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UserIDOfNotificationSender" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserIDOfNotificationRecipient" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserHasAcknowledgement" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Notifications_AspNetUsers" FromRole="Notifications" ToRole="AspNetUsers" />
+    <NavigationProperty Name="AspNetUser1" Relationship="Self.FK_Notifications_AspNetUsers1" FromRole="Notifications" ToRole="AspNetUsers" />
+    <NavigationProperty Name="File" Relationship="Self.FK_Notifications_Files" FromRole="Notifications" ToRole="Files" />
+    <NavigationProperty Name="LookupTableNotificationType" Relationship="Self.FK_Notifications_LookupTableNotificationTypes" FromRole="Notifications" ToRole="LookupTableNotificationTypes" />
+  </EntityType>
+  <EntityType Name="UserThatDownloadedFile">
+    <Key>
+      <PropertyRef Name="FileID" />
+    </Key>
+    <Property Name="FileID" Type="Int32" Nullable="false" />
+    <Property Name="UserIDThatDownloadedFIle" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DateDownloaded" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="HasFileBeenReturned" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_UserThatDownloadedFile_AspNetUsers" FromRole="UserThatDownloadedFile" ToRole="AspNetUsers" />
+    <NavigationProperty Name="File" Relationship="Self.FK_UserThatDownloadedFile_Files" FromRole="UserThatDownloadedFile" ToRole="Files" />
+  </EntityType>
+  <EntityType Name="View_FileDownloads_ViewAllFilesThatHaveBeenDownloaded">
+    <Key>
+      <PropertyRef Name="UserIDThatDownloadedFIle" />
+      <PropertyRef Name="HasFileBeenReturned" />
+    </Key>
+    <Property Name="FileID" Type="Int32" />
+    <Property Name="ParentFileID" Type="Int32" />
+    <Property Name="UserIDOfFileOwner" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="UserIDOfLastUploaded" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CurrentVersionNumber" Type="Int32" />
+    <Property Name="UserIDThatDownloadedFIle" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="HasFileBeenReturned" Type="Boolean" Nullable="false" />
+    <Property Name="FullNameOfFileOwner" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="FullNameOfThePersonThatLastUpdatedTheFile" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="FullNameOfPersonThatDownloadedTheFile" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="FileSize" Type="Int32" />
+    <Property Name="FileName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="FileExtension" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="FullFileName" Type="String" MaxLength="551" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="View_PrivateDocView_AllSharedPrivateFiles">
+    <Key>
+      <PropertyRef Name="FileID" />
+      <PropertyRef Name="ParentFileID" />
+      <PropertyRef Name="UserIDOfFileOwner" />
+      <PropertyRef Name="UserIDOfLastUploaded" />
+      <PropertyRef Name="FileLookupStatusID" />
+      <PropertyRef Name="FileShareStatusID" />
+      <PropertyRef Name="ContentType" />
+      <PropertyRef Name="FileName" />
+      <PropertyRef Name="FileExtension" />
+      <PropertyRef Name="FileSize" />
+      <PropertyRef Name="CurrentVersionNumber" />
+      <PropertyRef Name="DateCreated" />
+      <PropertyRef Name="FullFileName" />
+      <PropertyRef Name="FileType" />
+      <PropertyRef Name="IdOfUserThatDownloadedTheFile" />
+    </Key>
+    <Property Name="FileID" Type="Int32" Nullable="false" />
+    <Property Name="ParentFileID" Type="Int32" Nullable="false" />
+    <Property Name="UserIDOfFileOwner" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserIDOfLastUploaded" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="FileLookupStatusID" Type="Int32" Nullable="false" />
+    <Property Name="FileShareStatusID" Type="Int32" Nullable="false" />
+    <Property Name="ContentType" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FileName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FileExtension" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FileSize" Type="Int32" Nullable="false" />
+    <Property Name="CurrentVersionNumber" Type="Int32" Nullable="false" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="FileStatus" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="NameOfFileOwner" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="UserThatLastUpdatedFile" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="RefID" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="FullFileName" Type="String" MaxLength="551" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FileType" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IdOfUserThatDownloadedTheFile" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="View_PublicDocView_AllFilesWithOwnerAndUserThatLastUpdatedFile">
+    <Key>
+      <PropertyRef Name="FileID" />
+      <PropertyRef Name="ParentFileID" />
+      <PropertyRef Name="UserIDOfFileOwner" />
+      <PropertyRef Name="UserIDOfLastUploaded" />
+      <PropertyRef Name="FileLookupStatusID" />
+      <PropertyRef Name="FileShareStatusID" />
+      <PropertyRef Name="ContentType" />
+      <PropertyRef Name="FileName" />
+      <PropertyRef Name="FileExtension" />
+      <PropertyRef Name="FullFileName" />
+      <PropertyRef Name="FileSize" />
+      <PropertyRef Name="CurrentVersionNumber" />
+      <PropertyRef Name="DateCreated" />
+      <PropertyRef Name="FileType" />
+      <PropertyRef Name="ListOfUserIDThatTheFileISsharedWith" />
+      <PropertyRef Name="IdOfUserThatDownloadedTheFile" />
+    </Key>
+    <Property Name="FileID" Type="Int32" Nullable="false" />
+    <Property Name="ParentFileID" Type="Int32" Nullable="false" />
+    <Property Name="UserIDOfFileOwner" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserIDOfLastUploaded" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CurrentFileStatus" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="FileLookupStatusID" Type="Int32" Nullable="false" />
+    <Property Name="CurrentFileShareStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="FileShareStatusID" Type="Int32" Nullable="false" />
+    <Property Name="ContentType" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FileName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FileExtension" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FullFileName" Type="String" MaxLength="551" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FileSize" Type="Int32" Nullable="false" />
+    <Property Name="CurrentVersionNumber" Type="Int32" Nullable="false" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="NameOfFileOwner" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="NameOfUserThatLastUpdatedFile" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="FileType" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="ListOfUserIDThatTheFileISsharedWith" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="IdOfUserThatDownloadedTheFile" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="View_ReturnDocs_AllFilesThatHaveBeenDownloaded">
+    <Key>
+      <PropertyRef Name="UserIDThatDownloadedFIle" />
+      <PropertyRef Name="HasFileBeenReturned" />
+    </Key>
+    <Property Name="FileID" Type="Int32" />
+    <Property Name="ParentFileID" Type="Int32" />
+    <Property Name="UserIDOfFileOwner" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="UserIDOfLastUploaded" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CurrentVersionNumber" Type="Int32" />
+    <Property Name="UserIDThatDownloadedFIle" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="HasFileBeenReturned" Type="Boolean" Nullable="false" />
+    <Property Name="FullNameOfFileOwner" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="FullNameOfThePersonThatLastUpdatedTheFile" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="FullNameOfPersonThatDownloadedTheFile" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="FileSize" Type="Int32" />
+    <Property Name="FileName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="FileExtension" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="FullFileName" Type="String" MaxLength="551" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="View_UserDocs_AllUserCreatedDocs">
+    <Key>
+      <PropertyRef Name="FileID" />
+      <PropertyRef Name="ParentFileID" />
+      <PropertyRef Name="UserIDOfFileOwner" />
+      <PropertyRef Name="UserIDOfLastUploaded" />
+      <PropertyRef Name="FileLookupStatusID" />
+      <PropertyRef Name="FileShareStatusID" />
+      <PropertyRef Name="ContentType" />
+      <PropertyRef Name="FileName" />
+      <PropertyRef Name="FileExtension" />
+      <PropertyRef Name="FileSize" />
+      <PropertyRef Name="CurrentVersionNumber" />
+      <PropertyRef Name="DateCreated" />
+      <PropertyRef Name="FullFileName" />
+      <PropertyRef Name="FileType" />
+    </Key>
+    <Property Name="FileID" Type="Int32" Nullable="false" />
+    <Property Name="ParentFileID" Type="Int32" Nullable="false" />
+    <Property Name="UserIDOfFileOwner" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserIDOfLastUploaded" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="FileLookupStatusID" Type="Int32" Nullable="false" />
+    <Property Name="FileShareStatusID" Type="Int32" Nullable="false" />
+    <Property Name="ContentType" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FileName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FileExtension" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FileSize" Type="Int32" Nullable="false" />
+    <Property Name="CurrentVersionNumber" Type="Int32" Nullable="false" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="FileStatus" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="FileShareStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="UserThatLastUpdated" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="FullFileName" Type="String" MaxLength="551" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FileType" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserClaims" Type="Self.AspNetUserClaim" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaims">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserLogins" Type="Self.AspNetUserLogin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogins">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Files_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+    <End Role="Files" Type="Self.File" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Files">
+        <PropertyRef Name="UserIDOfFileOwner" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FileSharedWithUsers_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
+    <End Role="FileSharedWithUsers" Type="Self.FileSharedWithUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FileSharedWithUsers">
+        <PropertyRef Name="UserIDOfSharedDocs" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Notifications_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+    <End Role="Notifications" Type="Self.Notification" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Notifications">
+        <PropertyRef Name="UserIDOfNotificationSender" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Notifications_AspNetUsers1">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+    <End Role="Notifications" Type="Self.Notification" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Notifications">
+        <PropertyRef Name="UserIDOfNotificationRecipient" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserThatDownloadedFile_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+    <End Role="UserThatDownloadedFile" Type="Self.UserThatDownloadedFile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserThatDownloadedFile">
+        <PropertyRef Name="UserIDThatDownloadedFIle" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FileCategories_Files">
+    <End Role="Files" Type="Self.File" Multiplicity="1" />
+    <End Role="FileCategories" Type="Self.FileCategory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Files">
+        <PropertyRef Name="FileID" />
+      </Principal>
+      <Dependent Role="FileCategories">
+        <PropertyRef Name="FileID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FileCategories_LookupTable_FileCategories">
+    <End Role="LookupTable_FileCategories" Type="Self.LookupTable_FileCategories" Multiplicity="1" />
+    <End Role="FileCategories" Type="Self.FileCategory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LookupTable_FileCategories">
+        <PropertyRef Name="LookupTableFileCategoryID" />
+      </Principal>
+      <Dependent Role="FileCategories">
+        <PropertyRef Name="LookupTableFileCategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Files_LookupTable_FileStatuses">
+    <End Role="LookupTable_FileStatuses" Type="Self.LookupTable_FileStatuses" Multiplicity="1" />
+    <End Role="Files" Type="Self.File" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LookupTable_FileStatuses">
+        <PropertyRef Name="FileLookupStatusID" />
+      </Principal>
+      <Dependent Role="Files">
+        <PropertyRef Name="FileLookupStatusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Files_LookupTable_ShareStatues">
+    <End Role="LookupTable_ShareStatues" Type="Self.LookupTable_ShareStatues" Multiplicity="1" />
+    <End Role="Files" Type="Self.File" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LookupTable_ShareStatues">
+        <PropertyRef Name="FileShareStatusID" />
+      </Principal>
+      <Dependent Role="Files">
+        <PropertyRef Name="FileShareStatusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FileSharedWithUsers_Files">
+    <End Role="Files" Type="Self.File" Multiplicity="1" />
+    <End Role="FileSharedWithUsers" Type="Self.FileSharedWithUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Files">
+        <PropertyRef Name="FileID" />
+      </Principal>
+      <Dependent Role="FileSharedWithUsers">
+        <PropertyRef Name="FileID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Notifications_Files">
+    <End Role="Files" Type="Self.File" Multiplicity="1" />
+    <End Role="Notifications" Type="Self.Notification" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Files">
+        <PropertyRef Name="FileID" />
+      </Principal>
+      <Dependent Role="Notifications">
+        <PropertyRef Name="FileID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserThatDownloadedFile_Files">
+    <End Role="Files" Type="Self.File" Multiplicity="1" />
+    <End Role="UserThatDownloadedFile" Type="Self.UserThatDownloadedFile" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Files">
+        <PropertyRef Name="FileID" />
+      </Principal>
+      <Dependent Role="UserThatDownloadedFile">
+        <PropertyRef Name="FileID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Notifications_LookupTableNotificationTypes">
+    <End Role="LookupTableNotificationTypes" Type="Self.LookupTableNotificationType" Multiplicity="1" />
+    <End Role="Notifications" Type="Self.Notification" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LookupTableNotificationTypes">
+        <PropertyRef Name="NotificationTypeID" />
+      </Principal>
+      <Dependent Role="Notifications">
+        <PropertyRef Name="NotificationTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AspNetUserRoles">
+    <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="WebDocsEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
+    <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
+    <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
+    <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
+    <EntitySet Name="FileCategories" EntityType="Self.FileCategory" />
+    <EntitySet Name="Files" EntityType="Self.File" />
+    <EntitySet Name="FileSharedWithUsers" EntityType="Self.FileSharedWithUser" />
+    <EntitySet Name="LookupTable_FileCategories" EntityType="Self.LookupTable_FileCategories" />
+    <EntitySet Name="LookupTable_FileStatuses" EntityType="Self.LookupTable_FileStatuses" />
+    <EntitySet Name="LookupTable_ShareStatues" EntityType="Self.LookupTable_ShareStatues" />
+    <EntitySet Name="LookupTableNotificationTypes" EntityType="Self.LookupTableNotificationType" />
+    <EntitySet Name="Notifications" EntityType="Self.Notification" />
+    <EntitySet Name="UserThatDownloadedFiles" EntityType="Self.UserThatDownloadedFile" />
+    <EntitySet Name="View_FileDownloads_ViewAllFilesThatHaveBeenDownloaded" EntityType="Self.View_FileDownloads_ViewAllFilesThatHaveBeenDownloaded" />
+    <EntitySet Name="View_PrivateDocView_AllSharedPrivateFiles" EntityType="Self.View_PrivateDocView_AllSharedPrivateFiles" />
+    <EntitySet Name="View_PublicDocView_AllFilesWithOwnerAndUserThatLastUpdatedFile" EntityType="Self.View_PublicDocView_AllFilesWithOwnerAndUserThatLastUpdatedFile" />
+    <EntitySet Name="View_ReturnDocs_AllFilesThatHaveBeenDownloaded" EntityType="Self.View_ReturnDocs_AllFilesThatHaveBeenDownloaded" />
+    <EntitySet Name="View_UserDocs_AllUserCreatedDocs" EntityType="Self.View_UserDocs_AllUserCreatedDocs" />
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Files_AspNetUsers" Association="Self.FK_Files_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Files" EntitySet="Files" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FileSharedWithUsers_AspNetUsers" Association="Self.FK_FileSharedWithUsers_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="FileSharedWithUsers" EntitySet="FileSharedWithUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Notifications_AspNetUsers" Association="Self.FK_Notifications_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Notifications" EntitySet="Notifications" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Notifications_AspNetUsers1" Association="Self.FK_Notifications_AspNetUsers1">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Notifications" EntitySet="Notifications" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserThatDownloadedFile_AspNetUsers" Association="Self.FK_UserThatDownloadedFile_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="UserThatDownloadedFile" EntitySet="UserThatDownloadedFiles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FileCategories_Files" Association="Self.FK_FileCategories_Files">
+      <End Role="Files" EntitySet="Files" />
+      <End Role="FileCategories" EntitySet="FileCategories" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FileCategories_LookupTable_FileCategories" Association="Self.FK_FileCategories_LookupTable_FileCategories">
+      <End Role="LookupTable_FileCategories" EntitySet="LookupTable_FileCategories" />
+      <End Role="FileCategories" EntitySet="FileCategories" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Files_LookupTable_FileStatuses" Association="Self.FK_Files_LookupTable_FileStatuses">
+      <End Role="LookupTable_FileStatuses" EntitySet="LookupTable_FileStatuses" />
+      <End Role="Files" EntitySet="Files" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Files_LookupTable_ShareStatues" Association="Self.FK_Files_LookupTable_ShareStatues">
+      <End Role="LookupTable_ShareStatues" EntitySet="LookupTable_ShareStatues" />
+      <End Role="Files" EntitySet="Files" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FileSharedWithUsers_Files" Association="Self.FK_FileSharedWithUsers_Files">
+      <End Role="Files" EntitySet="Files" />
+      <End Role="FileSharedWithUsers" EntitySet="FileSharedWithUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Notifications_Files" Association="Self.FK_Notifications_Files">
+      <End Role="Files" EntitySet="Files" />
+      <End Role="Notifications" EntitySet="Notifications" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserThatDownloadedFile_Files" Association="Self.FK_UserThatDownloadedFile_Files">
+      <End Role="Files" EntitySet="Files" />
+      <End Role="UserThatDownloadedFile" EntitySet="UserThatDownloadedFiles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Notifications_LookupTableNotificationTypes" Association="Self.FK_Notifications_LookupTableNotificationTypes">
+      <End Role="LookupTableNotificationTypes" EntitySet="LookupTableNotificationTypes" />
+      <End Role="Notifications" EntitySet="Notifications" />
+    </AssociationSet>
+    <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+    </AssociationSet>
+    <FunctionImport Name="File_R_AllFileDetailsWithoutFioleImage" ReturnType="Collection(WebDocsModel.File_R_AllFileDetailsWithoutFioleImage_Result)">
+      <Parameter Name="FileID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Files_I_NewFile" ReturnType="Collection(WebDocsModel.Files_I_NewFile_Result)">
+      <Parameter Name="ParentFileID" Mode="In" Type="Int32" />
+      <Parameter Name="UserIDOfFileOwner" Mode="In" Type="String" />
+      <Parameter Name="UserIDOfLastUploaded" Mode="In" Type="String" />
+      <Parameter Name="FileLookupStatusID" Mode="In" Type="Int32" />
+      <Parameter Name="FileShareStatusID" Mode="In" Type="Int32" />
+      <Parameter Name="ContentType" Mode="In" Type="String" />
+      <Parameter Name="FileName" Mode="In" Type="String" />
+      <Parameter Name="FileExtension" Mode="In" Type="String" />
+      <Parameter Name="FileImage" Mode="In" Type="Binary" />
+      <Parameter Name="FileSize" Mode="In" Type="Int32" />
+      <Parameter Name="CurrentVersionNumber" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="Files_U_SetFileStatus">
+      <Parameter Name="FileID" Mode="In" Type="Int32" />
+      <Parameter Name="FileLookupStatusID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="PrivateDocs_R_GetAllPrivateSharedUserFiles" ReturnType="Collection(WebDocsModel.PrivateDocs_R_GetAllPrivateSharedUserFiles_Result)">
+      <Parameter Name="CurrentlyLoggedingUserID" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="PublicDocs_R_GetMostRecentFileVersion" />
+    <FunctionImport Name="PublicDocs_R_GetSelectedFileHistory" ReturnType="Collection(WebDocsModel.PublicDocs_R_GetSelectedFileHistory_Result)">
+      <Parameter Name="FileID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="UserDocs_R_GetAllUserCreatedDocs" ReturnType="Collection(WebDocsModel.UserDocs_R_GetAllUserCreatedDocs_Result)">
+      <Parameter Name="UserID" Mode="In" Type="String" />
+    </FunctionImport>
+  </EntityContainer>
+  <ComplexType Name="File_R_AllFileDetailsWithoutFioleImage_Result">
+    <Property Type="Int32" Name="FileID" Nullable="false" />
+    <Property Type="Int32" Name="ParentFileID" Nullable="false" />
+    <Property Type="String" Name="UserIDOfFileOwner" Nullable="false" MaxLength="128" />
+    <Property Type="String" Name="UserIDOfLastUploaded" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="FileLookupStatusID" Nullable="false" />
+    <Property Type="Int32" Name="FileShareStatusID" Nullable="false" />
+    <Property Type="String" Name="ContentType" Nullable="false" MaxLength="500" />
+    <Property Type="String" Name="FileName" Nullable="false" MaxLength="500" />
+    <Property Type="String" Name="FileExtension" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="FileSize" Nullable="false" />
+    <Property Type="Int32" Name="CurrentVersionNumber" Nullable="false" />
+    <Property Type="DateTime" Name="DateCreated" Nullable="false" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="Files_I_NewFile_Result">
+    <Property Type="Int32" Name="FileID" Nullable="false" />
+    <Property Type="Int32" Name="ParentFileID" Nullable="false" />
+    <Property Type="String" Name="UserIDOfFileOwner" Nullable="false" MaxLength="128" />
+    <Property Type="String" Name="UserIDOfLastUploaded" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="FileLookupStatusID" Nullable="false" />
+    <Property Type="Int32" Name="FileShareStatusID" Nullable="false" />
+    <Property Type="String" Name="ContentType" Nullable="false" MaxLength="500" />
+    <Property Type="String" Name="FileName" Nullable="false" MaxLength="500" />
+    <Property Type="String" Name="FileExtension" Nullable="false" MaxLength="50" />
+    <Property Type="Binary" Name="FileImage" Nullable="false" MaxLength="Max" />
+    <Property Type="Int32" Name="FileSize" Nullable="false" />
+    <Property Type="Int32" Name="CurrentVersionNumber" Nullable="false" />
+    <Property Type="DateTime" Name="DateCreated" Nullable="false" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="PrivateDocs_R_GetAllPrivateSharedUserFiles_Result">
+    <Property Type="Int32" Name="FileID" Nullable="false" />
+    <Property Type="Int32" Name="ParentFileID" Nullable="false" />
+    <Property Type="String" Name="UserIDOfFileOwner" Nullable="false" MaxLength="128" />
+    <Property Type="String" Name="UserIDOfLastUploaded" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="FileLookupStatusID" Nullable="false" />
+    <Property Type="Int32" Name="FileShareStatusID" Nullable="false" />
+    <Property Type="String" Name="ContentType" Nullable="false" MaxLength="500" />
+    <Property Type="String" Name="FileName" Nullable="false" MaxLength="500" />
+    <Property Type="String" Name="FileExtension" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="FileSize" Nullable="false" />
+    <Property Type="Int32" Name="CurrentVersionNumber" Nullable="false" />
+    <Property Type="DateTime" Name="DateCreated" Nullable="false" Precision="23" />
+    <Property Type="String" Name="FileStatus" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="NameOfFileOwner" Nullable="true" />
+    <Property Type="String" Name="UserThatLastUpdatedFile" Nullable="true" />
+    <Property Type="String" Name="RefID" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="FullFileName" Nullable="false" MaxLength="551" />
+    <Property Type="String" Name="FileType" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="IdOfUserThatDownloadedTheFile" Nullable="false" MaxLength="128" />
+  </ComplexType>
+  <ComplexType Name="PublicDocs_R_GetSelectedFileHistory_Result">
+    <Property Type="Int32" Name="FileID" Nullable="true" />
+    <Property Type="Int32" Name="ParentFileID" Nullable="true" />
+    <Property Type="String" Name="UserIDOfFileOwner" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="UserIDOfLastUploaded" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="CurrentFileStatus" Nullable="true" MaxLength="100" />
+    <Property Type="Int32" Name="FileLookupStatusID" Nullable="true" />
+    <Property Type="String" Name="CurrentFileShareStatus" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="FileShareStatusID" Nullable="true" />
+    <Property Type="String" Name="ContentType" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="FileName" Nullable="true" MaxLength="500" />
+    <Property Type="String" Name="FileExtension" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="FullFileName" Nullable="true" MaxLength="551" />
+    <Property Type="Int32" Name="FileSize" Nullable="true" />
+    <Property Type="Int32" Name="CurrentVersionNumber" Nullable="true" />
+    <Property Type="DateTime" Name="DateCreated" Nullable="true" Precision="23" />
+    <Property Type="String" Name="NameOfFileOwner" Nullable="true" />
+    <Property Type="String" Name="NameOfUserThatLastUpdatedFile" Nullable="true" />
+    <Property Type="String" Name="FileType" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="ListOfUserIDThatTheFileISsharedWith" Nullable="true" MaxLength="1" />
+    <Property Type="String" Name="IdOfUserThatDownloadedTheFile" Nullable="true" MaxLength="128" />
+  </ComplexType>
+  <ComplexType Name="UserDocs_R_GetAllUserCreatedDocs_Result">
+    <Property Type="Int32" Name="FileID" Nullable="false" />
+    <Property Type="Int32" Name="ParentFileID" Nullable="false" />
+    <Property Type="String" Name="UserIDOfFileOwner" Nullable="false" MaxLength="128" />
+    <Property Type="String" Name="UserIDOfLastUploaded" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="FileLookupStatusID" Nullable="false" />
+    <Property Type="Int32" Name="FileShareStatusID" Nullable="false" />
+    <Property Type="String" Name="ContentType" Nullable="false" MaxLength="500" />
+    <Property Type="String" Name="FileName" Nullable="false" MaxLength="500" />
+    <Property Type="String" Name="FileExtension" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="FileSize" Nullable="false" />
+    <Property Type="Int32" Name="CurrentVersionNumber" Nullable="false" />
+    <Property Type="DateTime" Name="DateCreated" Nullable="false" Precision="23" />
+    <Property Type="String" Name="FileStatus" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="FileShareStatus" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="UserThatLastUpdated" Nullable="true" />
+    <Property Type="String" Name="FullFileName" Nullable="false" MaxLength="551" />
+    <Property Type="String" Name="FileType" Nullable="false" MaxLength="1" />
+  </ComplexType>
+</Schema>

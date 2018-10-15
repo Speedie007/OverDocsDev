@@ -1,0 +1,85 @@
+2018/10/14 04:27:26	This log contains information about the import schema operation into project 'WebDocs.Database' on computer 'DESKTOP-BLJSHVF' by user 'Brendan Wood'.
+2018/10/14 04:27:26	Import of database schema has started.
+2018/10/14 04:27:33	Gathering database credentials
+2018/10/14 04:27:33	Gathering database options
+2018/10/14 04:27:33	Gathering generic database scoped configuration option
+2018/10/14 04:27:33	Gathering users
+2018/10/14 04:27:33	Gathering roles
+2018/10/14 04:27:33	Gathering application roles
+2018/10/14 04:27:33	Gathering role memberships
+2018/10/14 04:27:33	Gathering filegroups
+2018/10/14 04:27:33	Gathering full-text catalogs
+2018/10/14 04:27:33	Gathering assemblies
+2018/10/14 04:27:33	Gathering certificates
+2018/10/14 04:27:33	Gathering asymmetric keys
+2018/10/14 04:27:33	Gathering symmetric keys
+2018/10/14 04:27:33	Gathering encrypted symmetric keys
+2018/10/14 04:27:33	Gathering schemas
+2018/10/14 04:27:33	Gathering XML schema collections
+2018/10/14 04:27:33	Gathering user-defined data types
+2018/10/14 04:27:33	Gathering user-defined types
+2018/10/14 04:27:33	Gathering table types
+2018/10/14 04:27:33	Gathering unique keys for table types
+2018/10/14 04:27:33	Gathering primary keys for table types
+2018/10/14 04:27:33	Gathering indexes for table types
+2018/10/14 04:27:33	Gathering check constraints for table types
+2018/10/14 04:27:33	Gathering default constraints for table types
+2018/10/14 04:27:34	Gathering partition functions
+2018/10/14 04:27:34	Gathering partition schemes
+2018/10/14 04:27:34	Gathering functions
+2018/10/14 04:27:34	Gathering encrypted functions
+2018/10/14 04:27:34	Gathering aggregates
+2018/10/14 04:27:34	Gathering procedures
+2018/10/14 04:27:34	Gathering encrypted procedures
+2018/10/14 04:27:34	Gathering tables
+2018/10/14 04:27:34	Gathering primary keys
+2018/10/14 04:27:34	Gathering unique constraints
+2018/10/14 04:27:34	Gathering foreign keys
+2018/10/14 04:27:34	Gathering default constraints
+2018/10/14 04:27:34	Gathering check constraints
+2018/10/14 04:27:34	Gathering views
+2018/10/14 04:27:34	Gathering encrypted views
+2018/10/14 04:27:34	Gathering indexes
+2018/10/14 04:27:34	Gathering statistics
+2018/10/14 04:27:34	Gathering full-text index stoplists
+2018/10/14 04:27:34	Gathering search property lists
+2018/10/14 04:27:34	Gathering search properties
+2018/10/14 04:27:34	Gathering full-text indexes
+2018/10/14 04:27:34	Gathering column store indexes
+2018/10/14 04:27:39	Gathering spatial indexes
+2018/10/14 04:27:39	Gathering XML indexes
+2018/10/14 04:27:39	Gathering Selective XML indexes
+2018/10/14 04:27:39	Gathering encrypted triggers
+2018/10/14 04:27:39	Gathering triggers
+2018/10/14 04:27:39	Gathering encrypted and clr ddl triggers
+2018/10/14 04:27:39	Gathering ddl triggers
+2018/10/14 04:27:39	Gathering synonyms
+2018/10/14 04:27:39	Gathering defaults
+2018/10/14 04:27:39	Gathering data constraint uddt bindings
+2018/10/14 04:27:39	Gathering rules
+2018/10/14 04:27:39	Gathering data constraint uddt bindings
+2018/10/14 04:27:39	Gathering message types
+2018/10/14 04:27:39	Gathering queues
+2018/10/14 04:27:39	Gathering contracts
+2018/10/14 04:27:39	Gathering services
+2018/10/14 04:27:40	Gathering event notifications
+2018/10/14 04:27:40	Gathering remote service bindings
+2018/10/14 04:27:40	Gathering broker priorities
+2018/10/14 04:27:40	Gathering signatures
+2018/10/14 04:27:40	Gathering data compression options
+2018/10/14 04:27:40	Gathering sequence types
+2018/10/14 04:27:40	Gathering security policies
+2018/10/14 04:27:40	Gather column encryption keys
+2018/10/14 04:27:40	Gathering column master keys
+2018/10/14 04:27:40	Gathering external data sources
+2018/10/14 04:27:40	Gathering external file formats
+2018/10/14 04:27:40	Gathering external tables
+2018/10/14 04:27:40	Gathering extended properties
+2018/10/14 04:27:40	Gathering credentials
+2018/10/14 04:27:40	Gathering logins
+2018/10/14 04:27:40	Gathering server audits
+2018/10/14 04:27:41	Scanning project for duplicate elements
+2018/10/14 04:27:41	Finished duplicate element processing
+2018/10/14 04:27:41	Finished importing database.
+2018/10/14 04:27:41	A summary of the import was saved to the following location: C:\GitRepo\WebDocsDev\WebDocs.Database\Import Schema Logs\WebDocs.Database_20181014032726.log
+2018/10/14 04:27:41	Click Finish to continue...
