@@ -95,7 +95,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WebDocsDev\WebDocs.Web.csproj">
-      <Project>{A24EDEE8-3FA4-44D6-B880-2E449FF68C0F}</Project>
+      <Project>{a24edee8-3fa4-44d6-b880-2e449ff68c0f}</Project>
       <Name>WebDocs.Web</Name>
     </ProjectReference>
   </ItemGroup>

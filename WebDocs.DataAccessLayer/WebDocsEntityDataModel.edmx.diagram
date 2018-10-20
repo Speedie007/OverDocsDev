@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="cd6b7ea9f3ab4490b4853dab60605ba9" Name="Diagram1" ZoomLevel="100">
+        <EntityTypeShape EntityType="WebDocsModel.UsersModel" Width="2.625" PointX="0.75" PointY="10.25" />
+        <EntityTypeShape EntityType="WebDocsModel.ChatModel" Width="1.5" PointX="1.875" PointY="17" />
+        <EntityTypeShape EntityType="WebDocsModel.EmailSetting" Width="1.875" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="WebDocsModel.FileArchiveModel" Width="2.125" PointX="10.5" PointY="15.875" />
+        <EntityTypeShape EntityType="WebDocsModel.FileCategoryModel" Width="2.5" PointX="10.5" PointY="6.875" />
+        <EntityTypeShape EntityType="WebDocsModel.CategoriesModel" Width="2.375" PointX="7.375" PointY="1" />
+        <EntityTypeShape EntityType="WebDocsModel.FileShareStatusModel" Width="2" PointX="4.375" PointY="2.25" />
+        <EntityTypeShape EntityType="WebDocsModel.FileStatusModel" Width="2.25" PointX="4.125" PointY="4.875" />
+        <EntityTypeShape EntityType="WebDocsModel.NotificationTypesModel" Width="2.375" PointX="5" PointY="18" />
+        <EntityTypeShape EntityType="WebDocsModel.NotificationModel" Width="2.375" PointX="8.125" PointY="11.125" />
+        <EntityTypeShape EntityType="WebDocsModel.PrivateFilesSharedWithUser" Width="2.5" PointX="4.125" PointY="11.75" />
+        <EntityTypeShape EntityType="WebDocsModel.UserChatModel" Width="1.875" PointX="4.125" PointY="14.75" />
+        <EntityTypeShape EntityType="WebDocsModel.UserThatDownloadedFileModel" Width="2.25" PointX="4.125" PointY="8.75" />
+        <AssociationConnector Association="WebDocsModel.FK_FileSharedWithUsers_AspNetUsers" />
+        <AssociationConnector Association="WebDocsModel.FK_Notifications_AspNetUsers" />
+        <AssociationConnector Association="WebDocsModel.FK_Notifications_AspNetUsers1" />
+        <AssociationConnector Association="WebDocsModel.FK_UserChats_AspNetUsers" />
+        <AssociationConnector Association="WebDocsModel.FK_UserThatDownloadedFile_AspNetUsers" />
+        <AssociationConnector Association="WebDocsModel.FK_UserChats_Chats" />
+        <AssociationConnector Association="WebDocsModel.FK_FileCategories_LookupTable_FileCategories" />
+        <AssociationConnector Association="WebDocsModel.FK_Notifications_LookupTableNotificationTypes" />
+        <EntityTypeShape EntityType="WebDocsModel.FileBlobModel" Width="2.25" PointX="10.5" PointY="3.75" />
+        <EntityTypeShape EntityType="WebDocsModel.FileModel" Width="2.625" PointX="7.125" PointY="4.25" />
+        <AssociationConnector Association="WebDocsModel.FK_Files_AspNetUsers" />
+        <AssociationConnector Association="WebDocsModel.FK_Files_AspNetUsers1" />
+        <AssociationConnector Association="WebDocsModel.FK_FileArchives_Files" />
+        <AssociationConnector Association="WebDocsModel.FK_FileBlobs_Files" />
+        <AssociationConnector Association="WebDocsModel.FK_FileCategories_Files" />
+        <AssociationConnector Association="WebDocsModel.FK_Files_LookupTable_FileStatuses" />
+        <AssociationConnector Association="WebDocsModel.FK_Files_LookupTable_ShareStatues" />
+        <AssociationConnector Association="WebDocsModel.FK_FileSharedWithUsers_Files" />
+        <AssociationConnector Association="WebDocsModel.FK_Notifications_Files" />
+        <AssociationConnector Association="WebDocsModel.FK_UserThatDownloadedFile_Files" />
+      </Diagram>
+      <Diagram DiagramId="bae7d04382a04c87bdf4e5eb9738f8cc" Name="Views" >
+        </Diagram>
+      <Diagram DiagramId="509c941d303f47c69ac6657ddb6dfde5" Name="Lookup Tables" >
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

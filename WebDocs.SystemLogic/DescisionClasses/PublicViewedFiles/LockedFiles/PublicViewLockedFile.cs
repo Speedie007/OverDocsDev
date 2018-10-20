@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using WebDocs.Common.Enum.DBLookupEnum;
+﻿using WebDocs.Common.Enum.DbLookupTables;
 using WebDocs.Common.Enum.SystemLogicEnum;
-using OverDocsModels.DecisionModels.PublicDocuments.IsLocked;
-using OverDocsModels.Interfaces;
+using WebDocs.DomainModels.DecisionModels.PublicDocuments.IsLocked;
+using WebDocs.DomainModels.Interfaces.FileLinks;
 using WebDocs.SystemLogic.AbstractClasses;
 
 namespace SystemLogic.DescisionClasses.PublicViewedFiles.LockedFiles
@@ -91,10 +86,10 @@ namespace SystemLogic.DescisionClasses.PublicViewedFiles.LockedFiles
         {
             switch (Model.FileSharedStautusID)
             {
-                case (int)FileSharedStatus.Public:
+                case (int)EnumFileShareStatues.Public:
                     this.IS_FILE_PUBLIC = true;
                     break;
-                case (int)FileSharedStatus.Private:
+                case (int)EnumFileShareStatues.Private:
                     this.IS_FILE_PRIVATE = true;
                     break;
                 default:

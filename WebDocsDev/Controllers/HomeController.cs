@@ -3,17 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebDocs.BusinessApplicationLayer.Interfaces;
+using WebDocs.BusinessApplicationLayer.Query;
+using WebDocs.DomainModels.Database;
 
 namespace WebDocs.Web.Controllers
 {
     public class HomeController : Controller
     {
-        WebDocs.DataAccessLayer.Models.WebDocsEntities db = new WebDocs.DataAccessLayer.Models.WebDocsEntities();
+
         public ActionResult Index()
         {
-            IList<WebDocs.DataAccessLayer.Models.File> x = db.Files.ToList();
 
-           
+            
+
+
             return View();
         }
 

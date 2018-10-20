@@ -12,7 +12,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
     <Property Name="ClaimType" Type="nvarchar(max)" />
     <Property Name="ClaimValue" Type="nvarchar(max)" />
   </EntityType>
@@ -24,21 +24,21 @@
     </Key>
     <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="AspNetUserRoles">
     <Key>
       <PropertyRef Name="UserId" />
       <PropertyRef Name="RoleId" />
     </Key>
-    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
     <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
   </EntityType>
   <EntityType Name="AspNetUsers">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Email" Type="nvarchar" MaxLength="256" />
     <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
     <Property Name="PasswordHash" Type="nvarchar(max)" />
@@ -52,6 +52,17 @@
     <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
     <Property Name="FirstName" Type="nvarchar(max)" />
     <Property Name="LastName" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="EmailSettings">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="SmtpHost" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="SmtpPort" Type="int" Nullable="false" />
+    <Property Name="SslEnabled" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="FileCategories">
     <Key>
@@ -67,8 +78,8 @@
     </Key>
     <Property Name="FileID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="ParentFileID" Type="int" Nullable="false" />
-    <Property Name="UserIDOfFileOwner" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="UserIDOfLastUploaded" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="UserIDOfFileOwner" Type="int" Nullable="false" />
+    <Property Name="UserIDOfLastUploaded" Type="int" Nullable="false" />
     <Property Name="FileLookupStatusID" Type="int" Nullable="false" />
     <Property Name="FileShareStatusID" Type="int" Nullable="false" />
     <Property Name="ContentType" Type="varchar" MaxLength="500" Nullable="false" />
@@ -84,7 +95,7 @@
       <PropertyRef Name="FileSharedWithUserID" />
     </Key>
     <Property Name="FileSharedWithUserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="UserIDOfSharedDocs" Type="nvarchar" MaxLength="128" />
+    <Property Name="UserIDOfSharedDocs" Type="int" />
     <Property Name="FileID" Type="int" Nullable="false" />
     <Property Name="DateShared" Type="datetime" Nullable="false" />
   </EntityType>
@@ -124,8 +135,8 @@
     <Property Name="FileID" Type="int" Nullable="false" />
     <Property Name="NotificationTypeID" Type="int" Nullable="false" />
     <Property Name="DateCreated" Type="datetime" Nullable="false" />
-    <Property Name="UserIDOfNotificationSender" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="UserIDOfNotificationRecipient" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="UserIDOfNotificationSender" Type="int" Nullable="false" />
+    <Property Name="UserIDOfNotificationRecipient" Type="int" Nullable="false" />
     <Property Name="UserHasAcknowledgement" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="UserThatDownloadedFile">
@@ -133,7 +144,7 @@
       <PropertyRef Name="FileID" />
     </Key>
     <Property Name="FileID" Type="int" Nullable="false" />
-    <Property Name="UserIDThatDownloadedFIle" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="UserIDThatDownloadedFIle" Type="int" Nullable="false" />
     <Property Name="DateDownloaded" Type="datetime" Nullable="false" />
     <Property Name="HasFileBeenReturned" Type="bit" Nullable="false" />
   </EntityType>
@@ -392,6 +403,18 @@ warning 6002: The table/view 'WebDocs.dbo.View_UserDocs_AllUserCreatedDocs' does
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Files_AspNetUsers1">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="Files" Type="Self.Files" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Files">
+        <PropertyRef Name="UserIDOfLastUploaded" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Files_LookupTable_FileStatuses">
     <End Role="LookupTable_FileStatuses" Type="Self.LookupTable_FileStatuses" Multiplicity="1" />
     <End Role="Files" Type="Self.Files" Multiplicity="*" />
@@ -549,6 +572,7 @@ warning 6002: The table/view 'WebDocs.dbo.View_UserDocs_AllUserCreatedDocs' does
     <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EmailSettings" EntityType="Self.EmailSettings" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="FileCategories" EntityType="Self.FileCategories" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Files" EntityType="Self.Files" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="FileSharedWithUsers" EntityType="Self.FileSharedWithUsers" Schema="dbo" store:Type="Tables" />
@@ -687,6 +711,10 @@ warning 6002: The table/view 'WebDocs.dbo.View_UserDocs_AllUserCreatedDocs' does
       <End Role="FileCategories" EntitySet="FileCategories" />
     </AssociationSet>
     <AssociationSet Name="FK_Files_AspNetUsers" Association="Self.FK_Files_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Files" EntitySet="Files" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Files_AspNetUsers1" Association="Self.FK_Files_AspNetUsers1">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="Files" EntitySet="Files" />
     </AssociationSet>

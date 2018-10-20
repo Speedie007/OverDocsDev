@@ -31,6 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -40,8 +41,35 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interface\IWebDocsBAL.cs" />
+    <Compile Include="Interfaces\IBusinessLayer.cs" />
+    <Compile Include="Interfaces\ProjectSections\INotifications.cs" />
+    <Compile Include="Interfaces\ProjectSections\IPrivatelySharedDocuments.cs" />
+    <Compile Include="Interfaces\ProjectSections\IPublicDocuments.cs" />
+    <Compile Include="Interfaces\ProjectSections\IReturnDocuments.cs" />
+    <Compile Include="Interfaces\ProjectSections\IUserDocuments.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Query\NotificationsBusinessLogic.cs" />
+    <Compile Include="Query\PrivatelySharedDocumentsBusinessLogic.cs" />
+    <Compile Include="Query\PublicDocumentsBusinessLogic.cs" />
+    <Compile Include="Query\UserDocumentsBussinessLogic.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WebDocs.Common\WebDocs.Common.csproj">
+      <Project>{cb94534d-431b-4500-86b1-3045850aa562}</Project>
+      <Name>WebDocs.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WebDocs.DataAccessLayer\WebDocs.DataAccessLayer.csproj">
+      <Project>{5747f495-9557-45b6-bec8-2f3cb093bd9f}</Project>
+      <Name>WebDocs.DataAccessLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WebDocs.DominaModels\WebDocs.DomainModels.csproj">
+      <Project>{8a947570-eecb-4409-8615-5c0529a78ca6}</Project>
+      <Name>WebDocs.DomainModels</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

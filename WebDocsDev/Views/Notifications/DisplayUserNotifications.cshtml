@@ -1,0 +1,187 @@
+﻿@model WebDocs.DomainModels.ViewModels.NotificationsViewModel
+
+@using Microsoft.AspNet.Identity;
+@using WebDocs.Common.Enum.DbLookupTables;
+
+@{
+    ViewBag.Title = "DisplayUserNotifications";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Notifications</h2>
+
+
+@{
+    int UserID_OfUserCurrentlyLoggedIn = User.Identity.GetUserId<int>();
+}
+
+<ul class="nav nav nav-tabs">
+
+
+    <li class="active"><a data-toggle="tab" href="#home">New User Notifications</a></li>
+
+    <li><a data-toggle="tab" href="#menuItemArchiveNotifcations">Archived Notifications</a></li>
+
+
+
+</ul>
+
+<div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
+
+        <table class="table">
+            <tr>
+                <th class="text-nowrap">
+                    @Html.Label("Notification#")
+                </th>
+                <th class="text-nowrap">
+                    @Html.Label("File Ref#")
+                </th>
+                <th class="text-nowrap">
+                    @Html.Label("Request File")
+                </th>
+                <th class="text-nowrap">
+                    @Html.Label("Notification Type")
+                </th>
+                <th class="text-nowrap">
+                    @Html.Label("Created")
+                </th>
+                <th class="text-nowrap">
+                    @Html.Label("Sender")
+                </th>
+
+                <th class="text-nowrap">Options</th>
+            </tr>
+            @{
+                if (Model.UserNotifications.Where(a => a.UserHasAcknowledgement == false).Count() > 0)
+                {
+                    foreach (var item in Model.UserNotifications)
+                    {
+                        if (!(item.UserHasAcknowledgement))
+                        {
+                            <tr>
+                                <td class="text-nowrap">
+                                    @item.NotificationID
+
+                                </td>
+                                <td class="text-nowrap">
+                                    @item.FileID
+
+                                </td>
+                                <td class="text-nowrap">@item.File.FullName </td>
+                                <td class="text-nowrap">
+                                    @item.NotificationTypes.NotificationType
+                                </td>
+                                <td class="text-nowrap">
+                                    @item.DateCreated
+                                </td>
+                                <td class="text-nowrap">
+                                    @item.SendingUsers.UserFullName
+                                </td>
+                                <td>
+                                    @{
+                                        string sFileName = item.File.FullName;
+                                        string sPersonNameWhichIsRequestingFile = item.SendingUsers.UserFullName;
+                                        if (item.NotificationTypeID == (int)EnumNotificationTypes.Share_Request)
+                                        {
+                                            @: [<a href="javascript:void(0);" onclick="showProcessRequestNotificationModal(@item.FileID, @item.NotificationID,'@item.UserIDOfNotificationSender','@UserID_OfUserCurrentlyLoggedIn','@sFileName','@sPersonNameWhichIsRequestingFile');">Process Notification</a>]
+                                        }
+                                    }
+                                    @*@Html.ActionLink("ShowNotifications", "ShowNotifications", new { TabIndex = 0 }) |
+                                        @Html.ActionLink("Details", "Details", new { id = item.NotificationID }) |
+                                        @Html.ActionLink("Delete", "Delete", new { id = item.NotificationID })*@
+                                </td>
+                            </tr>
+                        }
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="9">
+                            <div class="alert alert-info">
+                                <strong>Info!</strong> No New Notifications Listed!.<br />
+                                Will only show notifications users send any notification requests!!
+                            </div>
+                        </td>
+                    </tr>
+
+                }
+
+            }
+
+
+        </table>
+    </div>
+
+    <div id="menuItemArchiveNotifcations" class="tab-pane fade">
+
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.Label("Ref#")
+                </th>
+                <th>
+                    @Html.Label("Notification Type")
+                </th>
+                <th>
+                    @Html.Label("Created")
+                </th>
+                <th>
+                    @Html.Label("Sender")
+                </th>
+                <th></th>
+            </tr>
+            @{
+                if (Model.UserNotifications.Where(a => a.UserHasAcknowledgement == true).Count() > 0)
+                {
+                    foreach (var item in Model.UserNotifications)
+                    {
+                        if (item.UserHasAcknowledgement)
+                        {
+                            <tr>
+                                <td>
+                                    @item.FileID
+
+                                </td>
+                                <td>
+                                    @item.NotificationTypes.NotificationType
+                                </td>
+                                <td>
+                                    @item.DateCreated
+                                </td>
+                                <td>
+                                    @item.SendingUsers.UserFullName
+                                </td>
+
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.NotificationID }) |
+                                    @Html.ActionLink("Details", "Details", new { id = item.NotificationID }) |
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.NotificationID })
+                                </td>
+                            </tr>
+                        }
+
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="9">
+                            <div class="alert alert-info">
+                                <strong>Info!</strong> No Archive Notifications Listed!.<br />
+                                Will only show notifications items once new notifications have been processed!!
+                            </div>
+                        </td>
+                    </tr>
+                }
+            }
+
+            @*@Html.ActionLink("ShowNotifications", "ShowNotifications", new { TabIndex = 1 }) |*@
+        </table>
+    </div>
+</div>
+
+
+
+

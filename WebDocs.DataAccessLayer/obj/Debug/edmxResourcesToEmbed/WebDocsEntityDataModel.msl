@@ -1,380 +1,177 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="WebDocsModelStoreContainer" CdmEntityContainer="WebDocsEntities">
-    <EntitySetMapping Name="AspNetRoles">
-      <EntityTypeMapping TypeName="WebDocsModel.AspNetRole">
-        <MappingFragment StoreEntitySet="AspNetRoles">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="AspNetUserClaims">
-      <EntityTypeMapping TypeName="WebDocsModel.AspNetUserClaim">
-        <MappingFragment StoreEntitySet="AspNetUserClaims">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
-          <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
-          <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="AspNetUserLogins">
-      <EntityTypeMapping TypeName="WebDocsModel.AspNetUserLogin">
-        <MappingFragment StoreEntitySet="AspNetUserLogins">
-          <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
-          <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="AspNetUsers">
-      <EntityTypeMapping TypeName="WebDocsModel.AspNetUser">
+    <EntitySetMapping Name="UsersModels">
+      <EntityTypeMapping TypeName="WebDocsModel.UsersModel">
         <MappingFragment StoreEntitySet="AspNetUsers">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
-          <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
-          <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
-          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-          <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
-          <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
-          <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
-          <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
-          <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
-          <ScalarProperty Name="UserName" ColumnName="UserName" />
-          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
           <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+          <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+          <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+          <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+          <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+          <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+          <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="FileCategories">
-      <EntityTypeMapping TypeName="WebDocsModel.FileCategory">
+    <EntitySetMapping Name="ChatModels">
+      <EntityTypeMapping TypeName="WebDocsModel.ChatModel">
+        <MappingFragment StoreEntitySet="Chats">
+          <ScalarProperty Name="ChatHeading" ColumnName="ChatHeading" />
+          <ScalarProperty Name="ChatID" ColumnName="ChatID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EmailSettings">
+      <EntityTypeMapping TypeName="WebDocsModel.EmailSetting">
+        <MappingFragment StoreEntitySet="EmailSettings">
+          <ScalarProperty Name="SystemEmailAddress" ColumnName="SystemEmailAddress" />
+          <ScalarProperty Name="SslEnabled" ColumnName="SslEnabled" />
+          <ScalarProperty Name="SmtpPort" ColumnName="SmtpPort" />
+          <ScalarProperty Name="SmtpHost" ColumnName="SmtpHost" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FileArchiveModels">
+      <EntityTypeMapping TypeName="WebDocsModel.FileArchiveModel">
+        <MappingFragment StoreEntitySet="FileArchives">
+          <ScalarProperty Name="DateArchived" ColumnName="DateArchived" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="CurrentVersionNumber" ColumnName="CurrentVersionNumber" />
+          <ScalarProperty Name="FileImage" ColumnName="FileImage" />
+          <ScalarProperty Name="FileSize" ColumnName="FileSize" />
+          <ScalarProperty Name="FileExtension" ColumnName="FileExtension" />
+          <ScalarProperty Name="FileName" ColumnName="FileName" />
+          <ScalarProperty Name="ContentType" ColumnName="ContentType" />
+          <ScalarProperty Name="FileShareStatusID" ColumnName="FileShareStatusID" />
+          <ScalarProperty Name="FileLookupStatusID" ColumnName="FileLookupStatusID" />
+          <ScalarProperty Name="UserIDOfLastUploaded" ColumnName="UserIDOfLastUploaded" />
+          <ScalarProperty Name="FileID" ColumnName="FileID" />
+          <ScalarProperty Name="FileArchiveID" ColumnName="FileArchiveID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FileCategoryModels">
+      <EntityTypeMapping TypeName="WebDocsModel.FileCategoryModel">
         <MappingFragment StoreEntitySet="FileCategories">
+          <ScalarProperty Name="LookupTableFileCategoryID" ColumnName="LookupTableFileCategoryID" />
+          <ScalarProperty Name="FileID" ColumnName="FileID" />
           <ScalarProperty Name="FileCategoryID" ColumnName="FileCategoryID" />
-          <ScalarProperty Name="FileID" ColumnName="FileID" />
-          <ScalarProperty Name="LookupTableFileCategoryID" ColumnName="LookupTableFileCategoryID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Files">
-      <EntityTypeMapping TypeName="WebDocsModel.File">
-        <MappingFragment StoreEntitySet="Files">
-          <ScalarProperty Name="FileID" ColumnName="FileID" />
-          <ScalarProperty Name="ParentFileID" ColumnName="ParentFileID" />
-          <ScalarProperty Name="UserIDOfFileOwner" ColumnName="UserIDOfFileOwner" />
-          <ScalarProperty Name="UserIDOfLastUploaded" ColumnName="UserIDOfLastUploaded" />
-          <ScalarProperty Name="FileLookupStatusID" ColumnName="FileLookupStatusID" />
-          <ScalarProperty Name="FileShareStatusID" ColumnName="FileShareStatusID" />
-          <ScalarProperty Name="ContentType" ColumnName="ContentType" />
-          <ScalarProperty Name="FileName" ColumnName="FileName" />
-          <ScalarProperty Name="FileExtension" ColumnName="FileExtension" />
-          <ScalarProperty Name="FileImage" ColumnName="FileImage" />
-          <ScalarProperty Name="FileSize" ColumnName="FileSize" />
-          <ScalarProperty Name="CurrentVersionNumber" ColumnName="CurrentVersionNumber" />
-          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="FileSharedWithUsers">
-      <EntityTypeMapping TypeName="WebDocsModel.FileSharedWithUser">
-        <MappingFragment StoreEntitySet="FileSharedWithUsers">
-          <ScalarProperty Name="FileSharedWithUserID" ColumnName="FileSharedWithUserID" />
-          <ScalarProperty Name="UserIDOfSharedDocs" ColumnName="UserIDOfSharedDocs" />
-          <ScalarProperty Name="FileID" ColumnName="FileID" />
-          <ScalarProperty Name="DateShared" ColumnName="DateShared" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="LookupTable_FileCategories">
-      <EntityTypeMapping TypeName="WebDocsModel.LookupTable_FileCategories">
+    <EntitySetMapping Name="CategoriesModels">
+      <EntityTypeMapping TypeName="WebDocsModel.CategoriesModel">
         <MappingFragment StoreEntitySet="LookupTable_FileCategories">
-          <ScalarProperty Name="LookupTableFileCategoryID" ColumnName="LookupTableFileCategoryID" />
           <ScalarProperty Name="FileCategory" ColumnName="FileCategory" />
+          <ScalarProperty Name="LookupTableFileCategoryID" ColumnName="LookupTableFileCategoryID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="LookupTable_FileStatuses">
-      <EntityTypeMapping TypeName="WebDocsModel.LookupTable_FileStatuses">
-        <MappingFragment StoreEntitySet="LookupTable_FileStatuses">
-          <ScalarProperty Name="FileLookupStatusID" ColumnName="FileLookupStatusID" />
-          <ScalarProperty Name="FileStatus" ColumnName="FileStatus" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="LookupTable_ShareStatues">
-      <EntityTypeMapping TypeName="WebDocsModel.LookupTable_ShareStatues">
-        <MappingFragment StoreEntitySet="LookupTable_ShareStatues">
+    <EntitySetMapping Name="FileShareStatusModels">
+      <EntityTypeMapping TypeName="WebDocsModel.FileShareStatusModel">
+        <MappingFragment StoreEntitySet="LookupTable_FileShareStatues">
+          <ScalarProperty Name="Status" ColumnName="FileShareStatus" />
           <ScalarProperty Name="FileShareStatusID" ColumnName="FileShareStatusID" />
-          <ScalarProperty Name="FileShareStatus" ColumnName="FileShareStatus" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="LookupTableNotificationTypes">
-      <EntityTypeMapping TypeName="WebDocsModel.LookupTableNotificationType">
-        <MappingFragment StoreEntitySet="LookupTableNotificationTypes">
-          <ScalarProperty Name="NotificationTypeID" ColumnName="NotificationTypeID" />
+    <EntitySetMapping Name="FileStatusModels">
+      <EntityTypeMapping TypeName="WebDocsModel.FileStatusModel">
+        <MappingFragment StoreEntitySet="LookupTable_FileViewStatuses">
+          <ScalarProperty Name="Status" ColumnName="FileStatus" />
+          <ScalarProperty Name="FileLookupStatusID" ColumnName="FileLookupStatusID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NotificationTypesModels">
+      <EntityTypeMapping TypeName="WebDocsModel.NotificationTypesModel">
+        <MappingFragment StoreEntitySet="LookupTable_NotificationTypes">
           <ScalarProperty Name="NotificationType" ColumnName="NotificationType" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Notifications">
-      <EntityTypeMapping TypeName="WebDocsModel.Notification">
-        <MappingFragment StoreEntitySet="Notifications">
-          <ScalarProperty Name="NotificationID" ColumnName="NotificationID" />
-          <ScalarProperty Name="FileID" ColumnName="FileID" />
           <ScalarProperty Name="NotificationTypeID" ColumnName="NotificationTypeID" />
-          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-          <ScalarProperty Name="UserIDOfNotificationSender" ColumnName="UserIDOfNotificationSender" />
-          <ScalarProperty Name="UserIDOfNotificationRecipient" ColumnName="UserIDOfNotificationRecipient" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NotificationModels">
+      <EntityTypeMapping TypeName="WebDocsModel.NotificationModel">
+        <MappingFragment StoreEntitySet="Notifications">
           <ScalarProperty Name="UserHasAcknowledgement" ColumnName="UserHasAcknowledgement" />
+          <ScalarProperty Name="NotificationMessageTemplate" ColumnName="NotificationMessageTemplate" />
+          <ScalarProperty Name="RetryAttempt" ColumnName="RetryAttempt" />
+          <ScalarProperty Name="NotificationSuccessfulSent" ColumnName="NotificationSuccessfulSent" />
+          <ScalarProperty Name="UserIDOfNotificationRecipient" ColumnName="UserIDOfNotificationRecipient" />
+          <ScalarProperty Name="UserIDOfNotificationSender" ColumnName="UserIDOfNotificationSender" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="NotificationTypeID" ColumnName="NotificationTypeID" />
+          <ScalarProperty Name="FileID" ColumnName="FileID" />
+          <ScalarProperty Name="NotificationID" ColumnName="NotificationID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="UserThatDownloadedFiles">
-      <EntityTypeMapping TypeName="WebDocsModel.UserThatDownloadedFile">
+    <EntitySetMapping Name="PrivateFilesSharedWithUsers">
+      <EntityTypeMapping TypeName="WebDocsModel.PrivateFilesSharedWithUser">
+        <MappingFragment StoreEntitySet="PrivateFilesSharedWithUsers">
+          <ScalarProperty Name="DateShared" ColumnName="DateShared" />
+          <ScalarProperty Name="FileID" ColumnName="FileID" />
+          <ScalarProperty Name="UserIDPersonSharedWith" ColumnName="UserIDPersonSharedWith" />
+          <ScalarProperty Name="FileSharedWithUserID" ColumnName="FileSharedWithUserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserChatModels">
+      <EntityTypeMapping TypeName="WebDocsModel.UserChatModel">
+        <MappingFragment StoreEntitySet="UserChats">
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="ChatID" ColumnName="ChatID" />
+          <ScalarProperty Name="UserChatID" ColumnName="UserChatID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserThatDownloadedFileModels">
+      <EntityTypeMapping TypeName="WebDocsModel.UserThatDownloadedFileModel">
         <MappingFragment StoreEntitySet="UserThatDownloadedFile">
-          <ScalarProperty Name="FileID" ColumnName="FileID" />
-          <ScalarProperty Name="UserIDThatDownloadedFIle" ColumnName="UserIDThatDownloadedFIle" />
+          <ScalarProperty Name="HasFileBeenReturned" ColumnName="HasFileBeenReturned" />
           <ScalarProperty Name="DateDownloaded" ColumnName="DateDownloaded" />
-          <ScalarProperty Name="HasFileBeenReturned" ColumnName="HasFileBeenReturned" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="View_FileDownloads_ViewAllFilesThatHaveBeenDownloaded">
-      <EntityTypeMapping TypeName="WebDocsModel.View_FileDownloads_ViewAllFilesThatHaveBeenDownloaded">
-        <MappingFragment StoreEntitySet="View_FileDownloads_ViewAllFilesThatHaveBeenDownloaded">
-          <ScalarProperty Name="FileID" ColumnName="FileID" />
-          <ScalarProperty Name="ParentFileID" ColumnName="ParentFileID" />
-          <ScalarProperty Name="UserIDOfFileOwner" ColumnName="UserIDOfFileOwner" />
-          <ScalarProperty Name="UserIDOfLastUploaded" ColumnName="UserIDOfLastUploaded" />
-          <ScalarProperty Name="CurrentVersionNumber" ColumnName="CurrentVersionNumber" />
           <ScalarProperty Name="UserIDThatDownloadedFIle" ColumnName="UserIDThatDownloadedFIle" />
-          <ScalarProperty Name="HasFileBeenReturned" ColumnName="HasFileBeenReturned" />
-          <ScalarProperty Name="FullNameOfFileOwner" ColumnName="FullNameOfFileOwner" />
-          <ScalarProperty Name="FullNameOfThePersonThatLastUpdatedTheFile" ColumnName="FullNameOfThePersonThatLastUpdatedTheFile" />
-          <ScalarProperty Name="FullNameOfPersonThatDownloadedTheFile" ColumnName="FullNameOfPersonThatDownloadedTheFile" />
-          <ScalarProperty Name="FileSize" ColumnName="FileSize" />
-          <ScalarProperty Name="FileName" ColumnName="FileName" />
-          <ScalarProperty Name="FileExtension" ColumnName="FileExtension" />
-          <ScalarProperty Name="FullFileName" ColumnName="FullFileName" />
+          <ScalarProperty Name="FileID" ColumnName="FileID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="View_PrivateDocView_AllSharedPrivateFiles">
-      <EntityTypeMapping TypeName="WebDocsModel.View_PrivateDocView_AllSharedPrivateFiles">
-        <MappingFragment StoreEntitySet="View_PrivateDocView_AllSharedPrivateFiles">
-          <ScalarProperty Name="FileID" ColumnName="FileID" />
-          <ScalarProperty Name="ParentFileID" ColumnName="ParentFileID" />
-          <ScalarProperty Name="UserIDOfFileOwner" ColumnName="UserIDOfFileOwner" />
-          <ScalarProperty Name="UserIDOfLastUploaded" ColumnName="UserIDOfLastUploaded" />
-          <ScalarProperty Name="FileLookupStatusID" ColumnName="FileLookupStatusID" />
-          <ScalarProperty Name="FileShareStatusID" ColumnName="FileShareStatusID" />
-          <ScalarProperty Name="ContentType" ColumnName="ContentType" />
-          <ScalarProperty Name="FileName" ColumnName="FileName" />
-          <ScalarProperty Name="FileExtension" ColumnName="FileExtension" />
-          <ScalarProperty Name="FileSize" ColumnName="FileSize" />
-          <ScalarProperty Name="CurrentVersionNumber" ColumnName="CurrentVersionNumber" />
-          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-          <ScalarProperty Name="FileStatus" ColumnName="FileStatus" />
-          <ScalarProperty Name="NameOfFileOwner" ColumnName="NameOfFileOwner" />
-          <ScalarProperty Name="UserThatLastUpdatedFile" ColumnName="UserThatLastUpdatedFile" />
-          <ScalarProperty Name="RefID" ColumnName="RefID" />
-          <ScalarProperty Name="FullFileName" ColumnName="FullFileName" />
-          <ScalarProperty Name="FileType" ColumnName="FileType" />
-          <ScalarProperty Name="IdOfUserThatDownloadedTheFile" ColumnName="IdOfUserThatDownloadedTheFile" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="View_PublicDocView_AllFilesWithOwnerAndUserThatLastUpdatedFile">
-      <EntityTypeMapping TypeName="WebDocsModel.View_PublicDocView_AllFilesWithOwnerAndUserThatLastUpdatedFile">
-        <MappingFragment StoreEntitySet="View_PublicDocView_AllFilesWithOwnerAndUserThatLastUpdatedFile">
-          <ScalarProperty Name="FileID" ColumnName="FileID" />
-          <ScalarProperty Name="ParentFileID" ColumnName="ParentFileID" />
-          <ScalarProperty Name="UserIDOfFileOwner" ColumnName="UserIDOfFileOwner" />
-          <ScalarProperty Name="UserIDOfLastUploaded" ColumnName="UserIDOfLastUploaded" />
-          <ScalarProperty Name="CurrentFileStatus" ColumnName="CurrentFileStatus" />
-          <ScalarProperty Name="FileLookupStatusID" ColumnName="FileLookupStatusID" />
-          <ScalarProperty Name="CurrentFileShareStatus" ColumnName="CurrentFileShareStatus" />
-          <ScalarProperty Name="FileShareStatusID" ColumnName="FileShareStatusID" />
-          <ScalarProperty Name="ContentType" ColumnName="ContentType" />
-          <ScalarProperty Name="FileName" ColumnName="FileName" />
-          <ScalarProperty Name="FileExtension" ColumnName="FileExtension" />
-          <ScalarProperty Name="FullFileName" ColumnName="FullFileName" />
-          <ScalarProperty Name="FileSize" ColumnName="FileSize" />
-          <ScalarProperty Name="CurrentVersionNumber" ColumnName="CurrentVersionNumber" />
-          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-          <ScalarProperty Name="NameOfFileOwner" ColumnName="NameOfFileOwner" />
-          <ScalarProperty Name="NameOfUserThatLastUpdatedFile" ColumnName="NameOfUserThatLastUpdatedFile" />
-          <ScalarProperty Name="FileType" ColumnName="FileType" />
-          <ScalarProperty Name="ListOfUserIDThatTheFileISsharedWith" ColumnName="ListOfUserIDThatTheFileISsharedWith" />
-          <ScalarProperty Name="IdOfUserThatDownloadedTheFile" ColumnName="IdOfUserThatDownloadedTheFile" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="View_ReturnDocs_AllFilesThatHaveBeenDownloaded">
-      <EntityTypeMapping TypeName="WebDocsModel.View_ReturnDocs_AllFilesThatHaveBeenDownloaded">
-        <MappingFragment StoreEntitySet="View_ReturnDocs_AllFilesThatHaveBeenDownloaded">
-          <ScalarProperty Name="FileID" ColumnName="FileID" />
-          <ScalarProperty Name="ParentFileID" ColumnName="ParentFileID" />
-          <ScalarProperty Name="UserIDOfFileOwner" ColumnName="UserIDOfFileOwner" />
-          <ScalarProperty Name="UserIDOfLastUploaded" ColumnName="UserIDOfLastUploaded" />
-          <ScalarProperty Name="CurrentVersionNumber" ColumnName="CurrentVersionNumber" />
-          <ScalarProperty Name="UserIDThatDownloadedFIle" ColumnName="UserIDThatDownloadedFIle" />
-          <ScalarProperty Name="HasFileBeenReturned" ColumnName="HasFileBeenReturned" />
-          <ScalarProperty Name="FullNameOfFileOwner" ColumnName="FullNameOfFileOwner" />
-          <ScalarProperty Name="FullNameOfThePersonThatLastUpdatedTheFile" ColumnName="FullNameOfThePersonThatLastUpdatedTheFile" />
-          <ScalarProperty Name="FullNameOfPersonThatDownloadedTheFile" ColumnName="FullNameOfPersonThatDownloadedTheFile" />
-          <ScalarProperty Name="FileSize" ColumnName="FileSize" />
-          <ScalarProperty Name="FileName" ColumnName="FileName" />
-          <ScalarProperty Name="FileExtension" ColumnName="FileExtension" />
-          <ScalarProperty Name="FullFileName" ColumnName="FullFileName" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="View_UserDocs_AllUserCreatedDocs">
-      <EntityTypeMapping TypeName="WebDocsModel.View_UserDocs_AllUserCreatedDocs">
-        <MappingFragment StoreEntitySet="View_UserDocs_AllUserCreatedDocs">
-          <ScalarProperty Name="FileID" ColumnName="FileID" />
-          <ScalarProperty Name="ParentFileID" ColumnName="ParentFileID" />
-          <ScalarProperty Name="UserIDOfFileOwner" ColumnName="UserIDOfFileOwner" />
-          <ScalarProperty Name="UserIDOfLastUploaded" ColumnName="UserIDOfLastUploaded" />
-          <ScalarProperty Name="FileLookupStatusID" ColumnName="FileLookupStatusID" />
-          <ScalarProperty Name="FileShareStatusID" ColumnName="FileShareStatusID" />
-          <ScalarProperty Name="ContentType" ColumnName="ContentType" />
-          <ScalarProperty Name="FileName" ColumnName="FileName" />
-          <ScalarProperty Name="FileExtension" ColumnName="FileExtension" />
-          <ScalarProperty Name="FileSize" ColumnName="FileSize" />
-          <ScalarProperty Name="CurrentVersionNumber" ColumnName="CurrentVersionNumber" />
-          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-          <ScalarProperty Name="FileStatus" ColumnName="FileStatus" />
-          <ScalarProperty Name="FileShareStatus" ColumnName="FileShareStatus" />
-          <ScalarProperty Name="UserThatLastUpdated" ColumnName="UserThatLastUpdated" />
-          <ScalarProperty Name="FullFileName" ColumnName="FullFileName" />
-          <ScalarProperty Name="FileType" ColumnName="FileType" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <AssociationSetMapping Name="AspNetUserRoles" TypeName="WebDocsModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
-      <EndProperty Name="AspNetRoles">
-        <ScalarProperty Name="Id" ColumnName="RoleId" />
-      </EndProperty>
-      <EndProperty Name="AspNetUsers">
-        <ScalarProperty Name="Id" ColumnName="UserId" />
-      </EndProperty>
-    </AssociationSetMapping>
-    <FunctionImportMapping FunctionImportName="File_R_AllFileDetailsWithoutFioleImage" FunctionName="WebDocsModel.Store.File_R_AllFileDetailsWithoutFioleImage">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="WebDocsModel.File_R_AllFileDetailsWithoutFioleImage_Result">
-          <ScalarProperty Name="FileID" ColumnName="FileID" />
-          <ScalarProperty Name="ParentFileID" ColumnName="ParentFileID" />
-          <ScalarProperty Name="UserIDOfFileOwner" ColumnName="UserIDOfFileOwner" />
-          <ScalarProperty Name="UserIDOfLastUploaded" ColumnName="UserIDOfLastUploaded" />
-          <ScalarProperty Name="FileLookupStatusID" ColumnName="FileLookupStatusID" />
-          <ScalarProperty Name="FileShareStatusID" ColumnName="FileShareStatusID" />
-          <ScalarProperty Name="ContentType" ColumnName="ContentType" />
-          <ScalarProperty Name="FileName" ColumnName="FileName" />
-          <ScalarProperty Name="FileExtension" ColumnName="FileExtension" />
-          <ScalarProperty Name="FileSize" ColumnName="FileSize" />
-          <ScalarProperty Name="CurrentVersionNumber" ColumnName="CurrentVersionNumber" />
-          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="Files_I_NewFile" FunctionName="WebDocsModel.Store.Files_I_NewFile">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="WebDocsModel.Files_I_NewFile_Result">
-          <ScalarProperty Name="FileID" ColumnName="FileID" />
-          <ScalarProperty Name="ParentFileID" ColumnName="ParentFileID" />
-          <ScalarProperty Name="UserIDOfFileOwner" ColumnName="UserIDOfFileOwner" />
-          <ScalarProperty Name="UserIDOfLastUploaded" ColumnName="UserIDOfLastUploaded" />
-          <ScalarProperty Name="FileLookupStatusID" ColumnName="FileLookupStatusID" />
-          <ScalarProperty Name="FileShareStatusID" ColumnName="FileShareStatusID" />
-          <ScalarProperty Name="ContentType" ColumnName="ContentType" />
-          <ScalarProperty Name="FileName" ColumnName="FileName" />
-          <ScalarProperty Name="FileExtension" ColumnName="FileExtension" />
+    <EntitySetMapping Name="FileBlobModels">
+      <EntityTypeMapping TypeName="WebDocsModel.FileBlobModel">
+        <MappingFragment StoreEntitySet="FileBlobs">
           <ScalarProperty Name="FileImage" ColumnName="FileImage" />
-          <ScalarProperty Name="FileSize" ColumnName="FileSize" />
-          <ScalarProperty Name="CurrentVersionNumber" ColumnName="CurrentVersionNumber" />
-          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="Files_U_SetFileStatus" FunctionName="WebDocsModel.Store.Files_U_SetFileStatus" />
-    <FunctionImportMapping FunctionImportName="PrivateDocs_R_GetAllPrivateSharedUserFiles" FunctionName="WebDocsModel.Store.PrivateDocs_R_GetAllPrivateSharedUserFiles">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="WebDocsModel.PrivateDocs_R_GetAllPrivateSharedUserFiles_Result">
           <ScalarProperty Name="FileID" ColumnName="FileID" />
-          <ScalarProperty Name="ParentFileID" ColumnName="ParentFileID" />
-          <ScalarProperty Name="UserIDOfFileOwner" ColumnName="UserIDOfFileOwner" />
-          <ScalarProperty Name="UserIDOfLastUploaded" ColumnName="UserIDOfLastUploaded" />
-          <ScalarProperty Name="FileLookupStatusID" ColumnName="FileLookupStatusID" />
-          <ScalarProperty Name="FileShareStatusID" ColumnName="FileShareStatusID" />
-          <ScalarProperty Name="ContentType" ColumnName="ContentType" />
-          <ScalarProperty Name="FileName" ColumnName="FileName" />
-          <ScalarProperty Name="FileExtension" ColumnName="FileExtension" />
-          <ScalarProperty Name="FileSize" ColumnName="FileSize" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FileModels">
+      <EntityTypeMapping TypeName="WebDocsModel.FileModel">
+        <MappingFragment StoreEntitySet="Files">
+          <ScalarProperty Name="Created" ColumnName="DateCreated" />
           <ScalarProperty Name="CurrentVersionNumber" ColumnName="CurrentVersionNumber" />
-          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-          <ScalarProperty Name="FileStatus" ColumnName="FileStatus" />
-          <ScalarProperty Name="NameOfFileOwner" ColumnName="NameOfFileOwner" />
-          <ScalarProperty Name="UserThatLastUpdatedFile" ColumnName="UserThatLastUpdatedFile" />
-          <ScalarProperty Name="RefID" ColumnName="RefID" />
-          <ScalarProperty Name="FullFileName" ColumnName="FullFileName" />
-          <ScalarProperty Name="FileType" ColumnName="FileType" />
-          <ScalarProperty Name="IdOfUserThatDownloadedTheFile" ColumnName="IdOfUserThatDownloadedTheFile" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="PublicDocs_R_GetMostRecentFileVersion" FunctionName="WebDocsModel.Store.PublicDocs_R_GetMostRecentFileVersion" />
-    <FunctionImportMapping FunctionImportName="PublicDocs_R_GetSelectedFileHistory" FunctionName="WebDocsModel.Store.PublicDocs_R_GetSelectedFileHistory">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="WebDocsModel.PublicDocs_R_GetSelectedFileHistory_Result">
+          <ScalarProperty Name="Size" ColumnName="FileSize" />
+          <ScalarProperty Name="Extension" ColumnName="FileExtension" />
+          <ScalarProperty Name="Name" ColumnName="FileName" />
+          <ScalarProperty Name="ContentType" ColumnName="ContentType" />
+          <ScalarProperty Name="FileShareStatusID" ColumnName="FileShareStatusID" />
+          <ScalarProperty Name="FileLookupStatusID" ColumnName="FileLookupStatusID" />
+          <ScalarProperty Name="UserIDOfLastUploaded" ColumnName="UserIDOfLastUploaded" />
+          <ScalarProperty Name="UserIDOfFileOwner" ColumnName="UserIDOfFileOwner" />
           <ScalarProperty Name="FileID" ColumnName="FileID" />
-          <ScalarProperty Name="ParentFileID" ColumnName="ParentFileID" />
-          <ScalarProperty Name="UserIDOfFileOwner" ColumnName="UserIDOfFileOwner" />
-          <ScalarProperty Name="UserIDOfLastUploaded" ColumnName="UserIDOfLastUploaded" />
-          <ScalarProperty Name="CurrentFileStatus" ColumnName="CurrentFileStatus" />
-          <ScalarProperty Name="FileLookupStatusID" ColumnName="FileLookupStatusID" />
-          <ScalarProperty Name="CurrentFileShareStatus" ColumnName="CurrentFileShareStatus" />
-          <ScalarProperty Name="FileShareStatusID" ColumnName="FileShareStatusID" />
-          <ScalarProperty Name="ContentType" ColumnName="ContentType" />
-          <ScalarProperty Name="FileName" ColumnName="FileName" />
-          <ScalarProperty Name="FileExtension" ColumnName="FileExtension" />
-          <ScalarProperty Name="FullFileName" ColumnName="FullFileName" />
-          <ScalarProperty Name="FileSize" ColumnName="FileSize" />
-          <ScalarProperty Name="CurrentVersionNumber" ColumnName="CurrentVersionNumber" />
-          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-          <ScalarProperty Name="NameOfFileOwner" ColumnName="NameOfFileOwner" />
-          <ScalarProperty Name="NameOfUserThatLastUpdatedFile" ColumnName="NameOfUserThatLastUpdatedFile" />
-          <ScalarProperty Name="FileType" ColumnName="FileType" />
-          <ScalarProperty Name="ListOfUserIDThatTheFileISsharedWith" ColumnName="ListOfUserIDThatTheFileISsharedWith" />
-          <ScalarProperty Name="IdOfUserThatDownloadedTheFile" ColumnName="IdOfUserThatDownloadedTheFile" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="UserDocs_R_GetAllUserCreatedDocs" FunctionName="WebDocsModel.Store.UserDocs_R_GetAllUserCreatedDocs">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="WebDocsModel.UserDocs_R_GetAllUserCreatedDocs_Result">
-          <ScalarProperty Name="FileID" ColumnName="FileID" />
-          <ScalarProperty Name="ParentFileID" ColumnName="ParentFileID" />
-          <ScalarProperty Name="UserIDOfFileOwner" ColumnName="UserIDOfFileOwner" />
-          <ScalarProperty Name="UserIDOfLastUploaded" ColumnName="UserIDOfLastUploaded" />
-          <ScalarProperty Name="FileLookupStatusID" ColumnName="FileLookupStatusID" />
-          <ScalarProperty Name="FileShareStatusID" ColumnName="FileShareStatusID" />
-          <ScalarProperty Name="ContentType" ColumnName="ContentType" />
-          <ScalarProperty Name="FileName" ColumnName="FileName" />
-          <ScalarProperty Name="FileExtension" ColumnName="FileExtension" />
-          <ScalarProperty Name="FileSize" ColumnName="FileSize" />
-          <ScalarProperty Name="CurrentVersionNumber" ColumnName="CurrentVersionNumber" />
-          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-          <ScalarProperty Name="FileStatus" ColumnName="FileStatus" />
-          <ScalarProperty Name="FileShareStatus" ColumnName="FileShareStatus" />
-          <ScalarProperty Name="UserThatLastUpdated" ColumnName="UserThatLastUpdated" />
-          <ScalarProperty Name="FullFileName" ColumnName="FullFileName" />
-          <ScalarProperty Name="FileType" ColumnName="FileType" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

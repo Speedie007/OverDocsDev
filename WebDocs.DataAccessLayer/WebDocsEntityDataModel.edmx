@@ -1,0 +1,1174 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="WebDocsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar(max)" />
+          <Property Name="LastName" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Chats">
+          <Key>
+            <PropertyRef Name="ChatID" />
+          </Key>
+          <Property Name="ChatID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ChatHeading" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EmailSettings">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="SmtpHost" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="SmtpPort" Type="int" Nullable="false" />
+          <Property Name="SslEnabled" Type="bit" Nullable="false" />
+          <Property Name="SystemEmailAddress" Type="varchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FileArchives">
+          <Key>
+            <PropertyRef Name="FileArchiveID" />
+          </Key>
+          <Property Name="FileArchiveID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FileID" Type="int" Nullable="false" />
+          <Property Name="UserIDOfLastUploaded" Type="int" Nullable="false" />
+          <Property Name="FileLookupStatusID" Type="int" Nullable="false" />
+          <Property Name="FileShareStatusID" Type="int" Nullable="false" />
+          <Property Name="ContentType" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="FileName" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="FileExtension" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FileSize" Type="int" Nullable="false" />
+          <Property Name="FileImage" Type="image" Nullable="false" />
+          <Property Name="CurrentVersionNumber" Type="int" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="DateArchived" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FileBlobs">
+          <Key>
+            <PropertyRef Name="FileID" />
+          </Key>
+          <Property Name="FileID" Type="int" Nullable="false" />
+          <Property Name="FileImage" Type="image" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FileCategories">
+          <Key>
+            <PropertyRef Name="FileCategoryID" />
+          </Key>
+          <Property Name="FileCategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FileID" Type="int" Nullable="false" />
+          <Property Name="LookupTableFileCategoryID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Files">
+          <Key>
+            <PropertyRef Name="FileID" />
+          </Key>
+          <Property Name="FileID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserIDOfFileOwner" Type="int" Nullable="false" />
+          <Property Name="UserIDOfLastUploaded" Type="int" Nullable="false" />
+          <Property Name="FileLookupStatusID" Type="int" Nullable="false" />
+          <Property Name="FileShareStatusID" Type="int" Nullable="false" />
+          <Property Name="ContentType" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="FileName" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="FileExtension" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FileSize" Type="int" Nullable="false" />
+          <Property Name="CurrentVersionNumber" Type="int" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LookupTable_FileCategories">
+          <Key>
+            <PropertyRef Name="LookupTableFileCategoryID" />
+          </Key>
+          <Property Name="LookupTableFileCategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FileCategory" Type="varchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LookupTable_FileShareStatues">
+          <Key>
+            <PropertyRef Name="FileShareStatusID" />
+          </Key>
+          <Property Name="FileShareStatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FileShareStatus" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="LookupTable_FileViewStatuses">
+          <Key>
+            <PropertyRef Name="FileLookupStatusID" />
+          </Key>
+          <Property Name="FileLookupStatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FileStatus" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="LookupTable_NotificationTypes">
+          <Key>
+            <PropertyRef Name="NotificationTypeID" />
+          </Key>
+          <Property Name="NotificationTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NotificationType" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Notifications">
+          <Key>
+            <PropertyRef Name="NotificationID" />
+          </Key>
+          <Property Name="NotificationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FileID" Type="int" Nullable="false" />
+          <Property Name="NotificationTypeID" Type="int" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="UserIDOfNotificationSender" Type="int" Nullable="false" />
+          <Property Name="UserIDOfNotificationRecipient" Type="int" Nullable="false" />
+          <Property Name="NotificationSuccessfulSent" Type="bit" Nullable="false" />
+          <Property Name="RetryAttempt" Type="int" Nullable="false" />
+          <Property Name="NotificationMessageTemplate" Type="varchar(max)" Nullable="false" />
+          <Property Name="UserHasAcknowledgement" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PrivateFilesSharedWithUsers">
+          <Key>
+            <PropertyRef Name="FileSharedWithUserID" />
+          </Key>
+          <Property Name="FileSharedWithUserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserIDPersonSharedWith" Type="int" />
+          <Property Name="FileID" Type="int" Nullable="false" />
+          <Property Name="DateShared" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserChats">
+          <Key>
+            <PropertyRef Name="UserChatID" />
+          </Key>
+          <Property Name="UserChatID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ChatID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="Message" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserThatDownloadedFile">
+          <Key>
+            <PropertyRef Name="FileID" />
+          </Key>
+          <Property Name="FileID" Type="int" Nullable="false" />
+          <Property Name="UserIDThatDownloadedFIle" Type="int" Nullable="false" />
+          <Property Name="DateDownloaded" Type="datetime" Nullable="false" />
+          <Property Name="HasFileBeenReturned" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_FileArchives_Files">
+          <End Role="Files" Type="Self.Files" Multiplicity="1" />
+          <End Role="FileArchives" Type="Self.FileArchives" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Files">
+              <PropertyRef Name="FileID" />
+            </Principal>
+            <Dependent Role="FileArchives">
+              <PropertyRef Name="FileID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FileBlobs_Files">
+          <End Role="Files" Type="Self.Files" Multiplicity="1" />
+          <End Role="FileBlobs" Type="Self.FileBlobs" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Files">
+              <PropertyRef Name="FileID" />
+            </Principal>
+            <Dependent Role="FileBlobs">
+              <PropertyRef Name="FileID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FileCategories_Files">
+          <End Role="Files" Type="Self.Files" Multiplicity="1" />
+          <End Role="FileCategories" Type="Self.FileCategories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Files">
+              <PropertyRef Name="FileID" />
+            </Principal>
+            <Dependent Role="FileCategories">
+              <PropertyRef Name="FileID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FileCategories_LookupTable_FileCategories">
+          <End Role="LookupTable_FileCategories" Type="Self.LookupTable_FileCategories" Multiplicity="1" />
+          <End Role="FileCategories" Type="Self.FileCategories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LookupTable_FileCategories">
+              <PropertyRef Name="LookupTableFileCategoryID" />
+            </Principal>
+            <Dependent Role="FileCategories">
+              <PropertyRef Name="LookupTableFileCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Files_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Files" Type="Self.Files" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Files">
+              <PropertyRef Name="UserIDOfFileOwner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Files_AspNetUsers1">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Files" Type="Self.Files" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Files">
+              <PropertyRef Name="UserIDOfLastUploaded" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Files_LookupTable_FileStatuses">
+          <End Role="LookupTable_FileViewStatuses" Type="Self.LookupTable_FileViewStatuses" Multiplicity="1" />
+          <End Role="Files" Type="Self.Files" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LookupTable_FileViewStatuses">
+              <PropertyRef Name="FileLookupStatusID" />
+            </Principal>
+            <Dependent Role="Files">
+              <PropertyRef Name="FileLookupStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Files_LookupTable_ShareStatues">
+          <End Role="LookupTable_FileShareStatues" Type="Self.LookupTable_FileShareStatues" Multiplicity="1" />
+          <End Role="Files" Type="Self.Files" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LookupTable_FileShareStatues">
+              <PropertyRef Name="FileShareStatusID" />
+            </Principal>
+            <Dependent Role="Files">
+              <PropertyRef Name="FileShareStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FileSharedWithUsers_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="PrivateFilesSharedWithUsers" Type="Self.PrivateFilesSharedWithUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PrivateFilesSharedWithUsers">
+              <PropertyRef Name="UserIDPersonSharedWith" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FileSharedWithUsers_Files">
+          <End Role="Files" Type="Self.Files" Multiplicity="1" />
+          <End Role="PrivateFilesSharedWithUsers" Type="Self.PrivateFilesSharedWithUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Files">
+              <PropertyRef Name="FileID" />
+            </Principal>
+            <Dependent Role="PrivateFilesSharedWithUsers">
+              <PropertyRef Name="FileID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notifications_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Notifications" Type="Self.Notifications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Notifications">
+              <PropertyRef Name="UserIDOfNotificationSender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notifications_AspNetUsers1">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Notifications" Type="Self.Notifications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Notifications">
+              <PropertyRef Name="UserIDOfNotificationRecipient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notifications_Files">
+          <End Role="Files" Type="Self.Files" Multiplicity="1" />
+          <End Role="Notifications" Type="Self.Notifications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Files">
+              <PropertyRef Name="FileID" />
+            </Principal>
+            <Dependent Role="Notifications">
+              <PropertyRef Name="FileID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notifications_LookupTableNotificationTypes">
+          <End Role="LookupTable_NotificationTypes" Type="Self.LookupTable_NotificationTypes" Multiplicity="1" />
+          <End Role="Notifications" Type="Self.Notifications" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LookupTable_NotificationTypes">
+              <PropertyRef Name="NotificationTypeID" />
+            </Principal>
+            <Dependent Role="Notifications">
+              <PropertyRef Name="NotificationTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserChats_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="UserChats" Type="Self.UserChats" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserChats">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserChats_Chats">
+          <End Role="Chats" Type="Self.Chats" Multiplicity="1" />
+          <End Role="UserChats" Type="Self.UserChats" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Chats">
+              <PropertyRef Name="ChatID" />
+            </Principal>
+            <Dependent Role="UserChats">
+              <PropertyRef Name="ChatID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserThatDownloadedFile_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="UserThatDownloadedFile" Type="Self.UserThatDownloadedFile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserThatDownloadedFile">
+              <PropertyRef Name="UserIDThatDownloadedFIle" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserThatDownloadedFile_Files">
+          <End Role="Files" Type="Self.Files" Multiplicity="1" />
+          <End Role="UserThatDownloadedFile" Type="Self.UserThatDownloadedFile" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Files">
+              <PropertyRef Name="FileID" />
+            </Principal>
+            <Dependent Role="UserThatDownloadedFile">
+              <PropertyRef Name="FileID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <EntityContainer Name="WebDocsModelStoreContainer">
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Chats" EntityType="Self.Chats" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmailSettings" EntityType="Self.EmailSettings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FileArchives" EntityType="Self.FileArchives" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FileBlobs" EntityType="Self.FileBlobs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FileCategories" EntityType="Self.FileCategories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Files" EntityType="Self.Files" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LookupTable_FileCategories" EntityType="Self.LookupTable_FileCategories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LookupTable_FileShareStatues" EntityType="Self.LookupTable_FileShareStatues" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LookupTable_FileViewStatuses" EntityType="Self.LookupTable_FileViewStatuses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LookupTable_NotificationTypes" EntityType="Self.LookupTable_NotificationTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Notifications" EntityType="Self.Notifications" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PrivateFilesSharedWithUsers" EntityType="Self.PrivateFilesSharedWithUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserChats" EntityType="Self.UserChats" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserThatDownloadedFile" EntityType="Self.UserThatDownloadedFile" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_FileArchives_Files" Association="Self.FK_FileArchives_Files">
+            <End Role="Files" EntitySet="Files" />
+            <End Role="FileArchives" EntitySet="FileArchives" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FileBlobs_Files" Association="Self.FK_FileBlobs_Files">
+            <End Role="Files" EntitySet="Files" />
+            <End Role="FileBlobs" EntitySet="FileBlobs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FileCategories_Files" Association="Self.FK_FileCategories_Files">
+            <End Role="Files" EntitySet="Files" />
+            <End Role="FileCategories" EntitySet="FileCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FileCategories_LookupTable_FileCategories" Association="Self.FK_FileCategories_LookupTable_FileCategories">
+            <End Role="LookupTable_FileCategories" EntitySet="LookupTable_FileCategories" />
+            <End Role="FileCategories" EntitySet="FileCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Files_AspNetUsers" Association="Self.FK_Files_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Files" EntitySet="Files" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Files_AspNetUsers1" Association="Self.FK_Files_AspNetUsers1">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Files" EntitySet="Files" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Files_LookupTable_FileStatuses" Association="Self.FK_Files_LookupTable_FileStatuses">
+            <End Role="LookupTable_FileViewStatuses" EntitySet="LookupTable_FileViewStatuses" />
+            <End Role="Files" EntitySet="Files" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Files_LookupTable_ShareStatues" Association="Self.FK_Files_LookupTable_ShareStatues">
+            <End Role="LookupTable_FileShareStatues" EntitySet="LookupTable_FileShareStatues" />
+            <End Role="Files" EntitySet="Files" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FileSharedWithUsers_AspNetUsers" Association="Self.FK_FileSharedWithUsers_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="PrivateFilesSharedWithUsers" EntitySet="PrivateFilesSharedWithUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FileSharedWithUsers_Files" Association="Self.FK_FileSharedWithUsers_Files">
+            <End Role="Files" EntitySet="Files" />
+            <End Role="PrivateFilesSharedWithUsers" EntitySet="PrivateFilesSharedWithUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notifications_AspNetUsers" Association="Self.FK_Notifications_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Notifications" EntitySet="Notifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notifications_AspNetUsers1" Association="Self.FK_Notifications_AspNetUsers1">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Notifications" EntitySet="Notifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notifications_Files" Association="Self.FK_Notifications_Files">
+            <End Role="Files" EntitySet="Files" />
+            <End Role="Notifications" EntitySet="Notifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notifications_LookupTableNotificationTypes" Association="Self.FK_Notifications_LookupTableNotificationTypes">
+            <End Role="LookupTable_NotificationTypes" EntitySet="LookupTable_NotificationTypes" />
+            <End Role="Notifications" EntitySet="Notifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserChats_AspNetUsers" Association="Self.FK_UserChats_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="UserChats" EntitySet="UserChats" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserChats_Chats" Association="Self.FK_UserChats_Chats">
+            <End Role="Chats" EntitySet="Chats" />
+            <End Role="UserChats" EntitySet="UserChats" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserThatDownloadedFile_AspNetUsers" Association="Self.FK_UserThatDownloadedFile_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="UserThatDownloadedFile" EntitySet="UserThatDownloadedFile" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserThatDownloadedFile_Files" Association="Self.FK_UserThatDownloadedFile_Files">
+            <End Role="Files" EntitySet="Files" />
+            <End Role="UserThatDownloadedFile" EntitySet="UserThatDownloadedFile" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="WebDocsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="WebDocsEntities" annotation:LazyLoadingEnabled="false">
+          <EntitySet Name="UsersModels" EntityType="WebDocsModel.UsersModel" />
+          <EntitySet Name="ChatModels" EntityType="WebDocsModel.ChatModel" />
+          <EntitySet Name="EmailSettings" EntityType="WebDocsModel.EmailSetting" />
+          <EntitySet Name="FileArchiveModels" EntityType="WebDocsModel.FileArchiveModel" />
+          <EntitySet Name="FileCategoryModels" EntityType="WebDocsModel.FileCategoryModel" />
+          <EntitySet Name="CategoriesModels" EntityType="WebDocsModel.CategoriesModel" />
+          <EntitySet Name="FileShareStatusModels" EntityType="WebDocsModel.FileShareStatusModel" />
+          <EntitySet Name="FileStatusModels" EntityType="WebDocsModel.FileStatusModel" />
+          <EntitySet Name="NotificationTypesModels" EntityType="WebDocsModel.NotificationTypesModel" />
+          <EntitySet Name="NotificationModels" EntityType="WebDocsModel.NotificationModel" />
+          <EntitySet Name="PrivateFilesSharedWithUsers" EntityType="WebDocsModel.PrivateFilesSharedWithUser" />
+          <EntitySet Name="UserChatModels" EntityType="WebDocsModel.UserChatModel" />
+          <EntitySet Name="UserThatDownloadedFileModels" EntityType="WebDocsModel.UserThatDownloadedFileModel" />
+          <AssociationSet Name="FK_FileSharedWithUsers_AspNetUsers" Association="WebDocsModel.FK_FileSharedWithUsers_AspNetUsers">
+            <End Role="AspNetUser" EntitySet="UsersModels" />
+            <End Role="PrivateFilesSharedWithUser" EntitySet="PrivateFilesSharedWithUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notifications_AspNetUsers" Association="WebDocsModel.FK_Notifications_AspNetUsers">
+            <End Role="AspNetUser" EntitySet="UsersModels" />
+            <End Role="Notification" EntitySet="NotificationModels" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notifications_AspNetUsers1" Association="WebDocsModel.FK_Notifications_AspNetUsers1">
+            <End Role="AspNetUser" EntitySet="UsersModels" />
+            <End Role="Notification" EntitySet="NotificationModels" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserChats_AspNetUsers" Association="WebDocsModel.FK_UserChats_AspNetUsers">
+            <End Role="AspNetUser" EntitySet="UsersModels" />
+            <End Role="UserChat" EntitySet="UserChatModels" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserThatDownloadedFile_AspNetUsers" Association="WebDocsModel.FK_UserThatDownloadedFile_AspNetUsers">
+            <End Role="AspNetUser" EntitySet="UsersModels" />
+            <End Role="UserThatDownloadedFile" EntitySet="UserThatDownloadedFileModels" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserChats_Chats" Association="WebDocsModel.FK_UserChats_Chats">
+            <End Role="Chat" EntitySet="ChatModels" />
+            <End Role="UserChat" EntitySet="UserChatModels" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FileCategories_LookupTable_FileCategories" Association="WebDocsModel.FK_FileCategories_LookupTable_FileCategories">
+            <End Role="LookupTable_FileCategories" EntitySet="CategoriesModels" />
+            <End Role="FileCategory" EntitySet="FileCategoryModels" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notifications_LookupTableNotificationTypes" Association="WebDocsModel.FK_Notifications_LookupTableNotificationTypes">
+            <End Role="LookupTable_NotificationTypes" EntitySet="NotificationTypesModels" />
+            <End Role="Notification" EntitySet="NotificationModels" />
+          </AssociationSet>
+          <EntitySet Name="FileBlobModels" EntityType="WebDocsModel.FileBlobModel" />
+          <EntitySet Name="FileModels" EntityType="WebDocsModel.FileModel" />
+          <AssociationSet Name="FK_Files_AspNetUsers" Association="WebDocsModel.FK_Files_AspNetUsers">
+            <End Role="AspNetUser" EntitySet="UsersModels" />
+            <End Role="File" EntitySet="FileModels" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Files_AspNetUsers1" Association="WebDocsModel.FK_Files_AspNetUsers1">
+            <End Role="AspNetUser" EntitySet="UsersModels" />
+            <End Role="File" EntitySet="FileModels" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FileArchives_Files" Association="WebDocsModel.FK_FileArchives_Files">
+            <End Role="File" EntitySet="FileModels" />
+            <End Role="FileArchive" EntitySet="FileArchiveModels" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FileBlobs_Files" Association="WebDocsModel.FK_FileBlobs_Files">
+            <End Role="File" EntitySet="FileModels" />
+            <End Role="FileBlob" EntitySet="FileBlobModels" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FileCategories_Files" Association="WebDocsModel.FK_FileCategories_Files">
+            <End Role="File" EntitySet="FileModels" />
+            <End Role="FileCategory" EntitySet="FileCategoryModels" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Files_LookupTable_FileStatuses" Association="WebDocsModel.FK_Files_LookupTable_FileStatuses">
+            <End Role="LookupTable_FileViewStatuses" EntitySet="FileStatusModels" />
+            <End Role="File" EntitySet="FileModels" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Files_LookupTable_ShareStatues" Association="WebDocsModel.FK_Files_LookupTable_ShareStatues">
+            <End Role="LookupTable_FileShareStatues" EntitySet="FileShareStatusModels" />
+            <End Role="File" EntitySet="FileModels" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FileSharedWithUsers_Files" Association="WebDocsModel.FK_FileSharedWithUsers_Files">
+            <End Role="File" EntitySet="FileModels" />
+            <End Role="PrivateFilesSharedWithUser" EntitySet="PrivateFilesSharedWithUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notifications_Files" Association="WebDocsModel.FK_Notifications_Files">
+            <End Role="File" EntitySet="FileModels" />
+            <End Role="Notification" EntitySet="NotificationModels" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserThatDownloadedFile_Files" Association="WebDocsModel.FK_UserThatDownloadedFile_Files">
+            <End Role="File" EntitySet="FileModels" />
+            <End Role="UserThatDownloadedFile" EntitySet="UserThatDownloadedFileModels" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="UsersModel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PrivateFilesSharedWithUsers" Relationship="WebDocsModel.FK_FileSharedWithUsers_AspNetUsers" FromRole="AspNetUser" ToRole="PrivateFilesSharedWithUser" />
+          <NavigationProperty Name="SenderNotifications" Relationship="WebDocsModel.FK_Notifications_AspNetUsers" FromRole="AspNetUser" ToRole="Notification" />
+          <NavigationProperty Name="RecipientNotifications" Relationship="WebDocsModel.FK_Notifications_AspNetUsers1" FromRole="AspNetUser" ToRole="Notification" />
+          <NavigationProperty Name="UserChats" Relationship="WebDocsModel.FK_UserChats_AspNetUsers" FromRole="AspNetUser" ToRole="UserChat" />
+          <NavigationProperty Name="UserThatDownloadedFiles" Relationship="WebDocsModel.FK_UserThatDownloadedFile_AspNetUsers" FromRole="AspNetUser" ToRole="UserThatDownloadedFile" />
+          <NavigationProperty Name="OwnerFiles" Relationship="WebDocsModel.FK_Files_AspNetUsers" FromRole="AspNetUser" ToRole="File" />
+          <NavigationProperty Name="PersonThatLastUpdatedFile" Relationship="WebDocsModel.FK_Files_AspNetUsers1" FromRole="AspNetUser" ToRole="File" />
+        </EntityType>
+        <EntityType Name="ChatModel">
+          <Key>
+            <PropertyRef Name="ChatID" />
+          </Key>
+          <Property Name="ChatID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ChatHeading" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="UserChats" Relationship="WebDocsModel.FK_UserChats_Chats" FromRole="Chat" ToRole="UserChat" />
+        </EntityType>
+        <EntityType Name="EmailSetting">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="SmtpHost" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="SmtpPort" Type="Int32" Nullable="false" />
+          <Property Name="SslEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="SystemEmailAddress" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="FileArchiveModel">
+          <Key>
+            <PropertyRef Name="FileArchiveID" />
+          </Key>
+          <Property Name="FileArchiveID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FileID" Type="Int32" Nullable="false" />
+          <Property Name="UserIDOfLastUploaded" Type="Int32" Nullable="false" />
+          <Property Name="FileLookupStatusID" Type="Int32" Nullable="false" />
+          <Property Name="FileShareStatusID" Type="Int32" Nullable="false" />
+          <Property Name="ContentType" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="FileName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="FileExtension" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FileSize" Type="Int32" Nullable="false" />
+          <Property Name="FileImage" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="CurrentVersionNumber" Type="Int32" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DateArchived" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="File" Relationship="WebDocsModel.FK_FileArchives_Files" FromRole="FileArchive" ToRole="File" />
+        </EntityType>
+        <EntityType Name="FileCategoryModel">
+          <Key>
+            <PropertyRef Name="FileCategoryID" />
+          </Key>
+          <Property Name="FileCategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FileID" Type="Int32" Nullable="false" />
+          <Property Name="LookupTableFileCategoryID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="FileCategories" Relationship="WebDocsModel.FK_FileCategories_LookupTable_FileCategories" FromRole="FileCategory" ToRole="LookupTable_FileCategories" />
+          <NavigationProperty Name="File" Relationship="WebDocsModel.FK_FileCategories_Files" FromRole="FileCategory" ToRole="File" />
+        </EntityType>
+        <EntityType Name="CategoriesModel">
+          <Key>
+            <PropertyRef Name="LookupTableFileCategoryID" />
+          </Key>
+          <Property Name="LookupTableFileCategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FileCategory" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="FileCategories" Relationship="WebDocsModel.FK_FileCategories_LookupTable_FileCategories" FromRole="LookupTable_FileCategories" ToRole="FileCategory" />
+        </EntityType>
+        <EntityType Name="FileShareStatusModel">
+          <Key>
+            <PropertyRef Name="FileShareStatusID" />
+          </Key>
+          <Property Name="FileShareStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Files" Relationship="WebDocsModel.FK_Files_LookupTable_ShareStatues" FromRole="LookupTable_FileShareStatues" ToRole="File" />
+        </EntityType>
+        <EntityType Name="FileStatusModel">
+          <Key>
+            <PropertyRef Name="FileLookupStatusID" />
+          </Key>
+          <Property Name="FileLookupStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Status" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Files" Relationship="WebDocsModel.FK_Files_LookupTable_FileStatuses" FromRole="LookupTable_FileViewStatuses" ToRole="File" />
+        </EntityType>
+        <EntityType Name="NotificationTypesModel">
+          <Key>
+            <PropertyRef Name="NotificationTypeID" />
+          </Key>
+          <Property Name="NotificationTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NotificationType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Notifications" Relationship="WebDocsModel.FK_Notifications_LookupTableNotificationTypes" FromRole="LookupTable_NotificationTypes" ToRole="Notification" />
+        </EntityType>
+        <EntityType Name="NotificationModel">
+          <Key>
+            <PropertyRef Name="NotificationID" />
+          </Key>
+          <Property Name="NotificationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FileID" Type="Int32" Nullable="false" />
+          <Property Name="NotificationTypeID" Type="Int32" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserIDOfNotificationSender" Type="Int32" Nullable="false" />
+          <Property Name="UserIDOfNotificationRecipient" Type="Int32" Nullable="false" />
+          <Property Name="NotificationSuccessfulSent" Type="Boolean" Nullable="false" />
+          <Property Name="RetryAttempt" Type="Int32" Nullable="false" />
+          <Property Name="NotificationMessageTemplate" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="SendingUsers" Relationship="WebDocsModel.FK_Notifications_AspNetUsers" FromRole="Notification" ToRole="AspNetUser" />
+          <NavigationProperty Name="RecipientUsers" Relationship="WebDocsModel.FK_Notifications_AspNetUsers1" FromRole="Notification" ToRole="AspNetUser" />
+          <NavigationProperty Name="NotificationTypes" Relationship="WebDocsModel.FK_Notifications_LookupTableNotificationTypes" FromRole="Notification" ToRole="LookupTable_NotificationTypes" />
+          <NavigationProperty Name="File" Relationship="WebDocsModel.FK_Notifications_Files" FromRole="Notification" ToRole="File" />
+          <Property Name="UserHasAcknowledgement" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PrivateFilesSharedWithUser">
+          <Key>
+            <PropertyRef Name="FileSharedWithUserID" />
+          </Key>
+          <Property Name="FileSharedWithUserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserIDPersonSharedWith" Type="Int32" />
+          <Property Name="FileID" Type="Int32" Nullable="false" />
+          <Property Name="DateShared" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="AspNetUser" Relationship="WebDocsModel.FK_FileSharedWithUsers_AspNetUsers" FromRole="PrivateFilesSharedWithUser" ToRole="AspNetUser" />
+          <NavigationProperty Name="File" Relationship="WebDocsModel.FK_FileSharedWithUsers_Files" FromRole="PrivateFilesSharedWithUser" ToRole="File" />
+        </EntityType>
+        <EntityType Name="UserChatModel">
+          <Key>
+            <PropertyRef Name="UserChatID" />
+          </Key>
+          <Property Name="UserChatID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ChatID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="Message" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="WebDocsModel.FK_UserChats_AspNetUsers" FromRole="UserChat" ToRole="AspNetUser" />
+          <NavigationProperty Name="Chat" Relationship="WebDocsModel.FK_UserChats_Chats" FromRole="UserChat" ToRole="Chat" />
+        </EntityType>
+        <EntityType Name="UserThatDownloadedFileModel">
+          <Key>
+            <PropertyRef Name="FileID" />
+          </Key>
+          <Property Name="FileID" Type="Int32" Nullable="false" />
+          <Property Name="UserIDThatDownloadedFIle" Type="Int32" Nullable="false" />
+          <Property Name="DateDownloaded" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="HasFileBeenReturned" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="WebDocsModel.FK_UserThatDownloadedFile_AspNetUsers" FromRole="UserThatDownloadedFile" ToRole="AspNetUser" />
+          <NavigationProperty Name="File" Relationship="WebDocsModel.FK_UserThatDownloadedFile_Files" FromRole="UserThatDownloadedFile" ToRole="File" />
+        </EntityType>
+        <Association Name="FK_FileSharedWithUsers_AspNetUsers">
+          <End Type="WebDocsModel.UsersModel" Role="AspNetUser" Multiplicity="0..1" />
+          <End Type="WebDocsModel.PrivateFilesSharedWithUser" Role="PrivateFilesSharedWithUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PrivateFilesSharedWithUser">
+              <PropertyRef Name="UserIDPersonSharedWith" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notifications_AspNetUsers">
+          <End Type="WebDocsModel.UsersModel" Role="AspNetUser" Multiplicity="1" />
+          <End Type="WebDocsModel.NotificationModel" Role="Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="UserIDOfNotificationSender" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notifications_AspNetUsers1">
+          <End Type="WebDocsModel.UsersModel" Role="AspNetUser" Multiplicity="1" />
+          <End Type="WebDocsModel.NotificationModel" Role="Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="UserIDOfNotificationRecipient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserChats_AspNetUsers">
+          <End Type="WebDocsModel.UsersModel" Role="AspNetUser" Multiplicity="1" />
+          <End Type="WebDocsModel.UserChatModel" Role="UserChat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserChat">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserThatDownloadedFile_AspNetUsers">
+          <End Type="WebDocsModel.UsersModel" Role="AspNetUser" Multiplicity="1" />
+          <End Type="WebDocsModel.UserThatDownloadedFileModel" Role="UserThatDownloadedFile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserThatDownloadedFile">
+              <PropertyRef Name="UserIDThatDownloadedFIle" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserChats_Chats">
+          <End Type="WebDocsModel.ChatModel" Role="Chat" Multiplicity="1" />
+          <End Type="WebDocsModel.UserChatModel" Role="UserChat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Chat">
+              <PropertyRef Name="ChatID" />
+            </Principal>
+            <Dependent Role="UserChat">
+              <PropertyRef Name="ChatID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FileCategories_LookupTable_FileCategories">
+          <End Type="WebDocsModel.CategoriesModel" Role="LookupTable_FileCategories" Multiplicity="1" />
+          <End Type="WebDocsModel.FileCategoryModel" Role="FileCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LookupTable_FileCategories">
+              <PropertyRef Name="LookupTableFileCategoryID" />
+            </Principal>
+            <Dependent Role="FileCategory">
+              <PropertyRef Name="LookupTableFileCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notifications_LookupTableNotificationTypes">
+          <End Type="WebDocsModel.NotificationTypesModel" Role="LookupTable_NotificationTypes" Multiplicity="1" />
+          <End Type="WebDocsModel.NotificationModel" Role="Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LookupTable_NotificationTypes">
+              <PropertyRef Name="NotificationTypeID" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="NotificationTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="FileBlobModel">
+          <Key>
+            <PropertyRef Name="FileID" />
+          </Key>
+          <Property Name="FileID" Type="Int32" Nullable="false" />
+          <Property Name="FileImage" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="File" Relationship="WebDocsModel.FK_FileBlobs_Files" FromRole="FileBlob" ToRole="File" />
+        </EntityType>
+        <EntityType Name="FileModel">
+          <Key>
+            <PropertyRef Name="FileID" />
+          </Key>
+          <Property Name="FileID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserIDOfFileOwner" Type="Int32" Nullable="false" />
+          <Property Name="UserIDOfLastUploaded" Type="Int32" Nullable="false" />
+          <Property Name="FileLookupStatusID" Type="Int32" Nullable="false" />
+          <Property Name="FileShareStatusID" Type="Int32" Nullable="false" />
+          <Property Name="ContentType" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Extension" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Size" Type="Int32" Nullable="false" />
+          <Property Name="CurrentVersionNumber" Type="Int32" Nullable="false" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="FileOwner" Relationship="WebDocsModel.FK_Files_AspNetUsers" FromRole="File" ToRole="AspNetUser" />
+          <NavigationProperty Name="PersonThatLastUpdatedFile" Relationship="WebDocsModel.FK_Files_AspNetUsers1" FromRole="File" ToRole="AspNetUser" />
+          <NavigationProperty Name="FileArchives" Relationship="WebDocsModel.FK_FileArchives_Files" FromRole="File" ToRole="FileArchive" />
+          <NavigationProperty Name="FileBlob" Relationship="WebDocsModel.FK_FileBlobs_Files" FromRole="File" ToRole="FileBlob" />
+          <NavigationProperty Name="FileCategories" Relationship="WebDocsModel.FK_FileCategories_Files" FromRole="File" ToRole="FileCategory" />
+          <NavigationProperty Name="FileViewStatuses" Relationship="WebDocsModel.FK_Files_LookupTable_FileStatuses" FromRole="File" ToRole="LookupTable_FileViewStatuses" />
+          <NavigationProperty Name="FileShareStatues" Relationship="WebDocsModel.FK_Files_LookupTable_ShareStatues" FromRole="File" ToRole="LookupTable_FileShareStatues" />
+          <NavigationProperty Name="PrivateFilesSharedWithUsers" Relationship="WebDocsModel.FK_FileSharedWithUsers_Files" FromRole="File" ToRole="PrivateFilesSharedWithUser" />
+          <NavigationProperty Name="FileNotifications" Relationship="WebDocsModel.FK_Notifications_Files" FromRole="File" ToRole="Notification" />
+          <NavigationProperty Name="UserThatDownloadedFile" Relationship="WebDocsModel.FK_UserThatDownloadedFile_Files" FromRole="File" ToRole="UserThatDownloadedFile" />
+        </EntityType>
+        <Association Name="FK_Files_AspNetUsers">
+          <End Type="WebDocsModel.UsersModel" Role="AspNetUser" Multiplicity="1" />
+          <End Type="WebDocsModel.FileModel" Role="File" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="File">
+              <PropertyRef Name="UserIDOfFileOwner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Files_AspNetUsers1">
+          <End Type="WebDocsModel.UsersModel" Role="AspNetUser" Multiplicity="1" />
+          <End Type="WebDocsModel.FileModel" Role="File" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="File">
+              <PropertyRef Name="UserIDOfLastUploaded" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FileArchives_Files">
+          <End Type="WebDocsModel.FileModel" Role="File" Multiplicity="1" />
+          <End Type="WebDocsModel.FileArchiveModel" Role="FileArchive" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="File">
+              <PropertyRef Name="FileID" />
+            </Principal>
+            <Dependent Role="FileArchive">
+              <PropertyRef Name="FileID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FileBlobs_Files">
+          <End Type="WebDocsModel.FileModel" Role="File" Multiplicity="1" />
+          <End Type="WebDocsModel.FileBlobModel" Role="FileBlob" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="File">
+              <PropertyRef Name="FileID" />
+            </Principal>
+            <Dependent Role="FileBlob">
+              <PropertyRef Name="FileID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FileCategories_Files">
+          <End Type="WebDocsModel.FileModel" Role="File" Multiplicity="1" />
+          <End Type="WebDocsModel.FileCategoryModel" Role="FileCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="File">
+              <PropertyRef Name="FileID" />
+            </Principal>
+            <Dependent Role="FileCategory">
+              <PropertyRef Name="FileID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Files_LookupTable_FileStatuses">
+          <End Type="WebDocsModel.FileStatusModel" Role="LookupTable_FileViewStatuses" Multiplicity="1" />
+          <End Type="WebDocsModel.FileModel" Role="File" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LookupTable_FileViewStatuses">
+              <PropertyRef Name="FileLookupStatusID" />
+            </Principal>
+            <Dependent Role="File">
+              <PropertyRef Name="FileLookupStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Files_LookupTable_ShareStatues">
+          <End Type="WebDocsModel.FileShareStatusModel" Role="LookupTable_FileShareStatues" Multiplicity="1" />
+          <End Type="WebDocsModel.FileModel" Role="File" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LookupTable_FileShareStatues">
+              <PropertyRef Name="FileShareStatusID" />
+            </Principal>
+            <Dependent Role="File">
+              <PropertyRef Name="FileShareStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FileSharedWithUsers_Files">
+          <End Type="WebDocsModel.FileModel" Role="File" Multiplicity="1" />
+          <End Type="WebDocsModel.PrivateFilesSharedWithUser" Role="PrivateFilesSharedWithUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="File">
+              <PropertyRef Name="FileID" />
+            </Principal>
+            <Dependent Role="PrivateFilesSharedWithUser">
+              <PropertyRef Name="FileID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notifications_Files">
+          <End Type="WebDocsModel.FileModel" Role="File" Multiplicity="1" />
+          <End Type="WebDocsModel.NotificationModel" Role="Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="File">
+              <PropertyRef Name="FileID" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="FileID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserThatDownloadedFile_Files">
+          <End Type="WebDocsModel.FileModel" Role="File" Multiplicity="1" />
+          <End Type="WebDocsModel.UserThatDownloadedFileModel" Role="UserThatDownloadedFile" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="File">
+              <PropertyRef Name="FileID" />
+            </Principal>
+            <Dependent Role="UserThatDownloadedFile">
+              <PropertyRef Name="FileID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="WebDocsModelStoreContainer" CdmEntityContainer="WebDocsEntities">
+          <EntitySetMapping Name="UsersModels">
+            <EntityTypeMapping TypeName="WebDocsModel.UsersModel">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChatModels">
+            <EntityTypeMapping TypeName="WebDocsModel.ChatModel">
+              <MappingFragment StoreEntitySet="Chats">
+                <ScalarProperty Name="ChatHeading" ColumnName="ChatHeading" />
+                <ScalarProperty Name="ChatID" ColumnName="ChatID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmailSettings">
+            <EntityTypeMapping TypeName="WebDocsModel.EmailSetting">
+              <MappingFragment StoreEntitySet="EmailSettings">
+                <ScalarProperty Name="SystemEmailAddress" ColumnName="SystemEmailAddress" />
+                <ScalarProperty Name="SslEnabled" ColumnName="SslEnabled" />
+                <ScalarProperty Name="SmtpPort" ColumnName="SmtpPort" />
+                <ScalarProperty Name="SmtpHost" ColumnName="SmtpHost" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FileArchiveModels">
+            <EntityTypeMapping TypeName="WebDocsModel.FileArchiveModel">
+              <MappingFragment StoreEntitySet="FileArchives">
+                <ScalarProperty Name="DateArchived" ColumnName="DateArchived" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="CurrentVersionNumber" ColumnName="CurrentVersionNumber" />
+                <ScalarProperty Name="FileImage" ColumnName="FileImage" />
+                <ScalarProperty Name="FileSize" ColumnName="FileSize" />
+                <ScalarProperty Name="FileExtension" ColumnName="FileExtension" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="ContentType" ColumnName="ContentType" />
+                <ScalarProperty Name="FileShareStatusID" ColumnName="FileShareStatusID" />
+                <ScalarProperty Name="FileLookupStatusID" ColumnName="FileLookupStatusID" />
+                <ScalarProperty Name="UserIDOfLastUploaded" ColumnName="UserIDOfLastUploaded" />
+                <ScalarProperty Name="FileID" ColumnName="FileID" />
+                <ScalarProperty Name="FileArchiveID" ColumnName="FileArchiveID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FileCategoryModels">
+            <EntityTypeMapping TypeName="WebDocsModel.FileCategoryModel">
+              <MappingFragment StoreEntitySet="FileCategories">
+                <ScalarProperty Name="LookupTableFileCategoryID" ColumnName="LookupTableFileCategoryID" />
+                <ScalarProperty Name="FileID" ColumnName="FileID" />
+                <ScalarProperty Name="FileCategoryID" ColumnName="FileCategoryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CategoriesModels">
+            <EntityTypeMapping TypeName="WebDocsModel.CategoriesModel">
+              <MappingFragment StoreEntitySet="LookupTable_FileCategories">
+                <ScalarProperty Name="FileCategory" ColumnName="FileCategory" />
+                <ScalarProperty Name="LookupTableFileCategoryID" ColumnName="LookupTableFileCategoryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FileShareStatusModels">
+            <EntityTypeMapping TypeName="WebDocsModel.FileShareStatusModel">
+              <MappingFragment StoreEntitySet="LookupTable_FileShareStatues">
+                <ScalarProperty Name="Status" ColumnName="FileShareStatus" />
+                <ScalarProperty Name="FileShareStatusID" ColumnName="FileShareStatusID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FileStatusModels">
+            <EntityTypeMapping TypeName="WebDocsModel.FileStatusModel">
+              <MappingFragment StoreEntitySet="LookupTable_FileViewStatuses">
+                <ScalarProperty Name="Status" ColumnName="FileStatus" />
+                <ScalarProperty Name="FileLookupStatusID" ColumnName="FileLookupStatusID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NotificationTypesModels">
+            <EntityTypeMapping TypeName="WebDocsModel.NotificationTypesModel">
+              <MappingFragment StoreEntitySet="LookupTable_NotificationTypes">
+                <ScalarProperty Name="NotificationType" ColumnName="NotificationType" />
+                <ScalarProperty Name="NotificationTypeID" ColumnName="NotificationTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NotificationModels">
+            <EntityTypeMapping TypeName="WebDocsModel.NotificationModel">
+              <MappingFragment StoreEntitySet="Notifications">
+                <ScalarProperty Name="UserHasAcknowledgement" ColumnName="UserHasAcknowledgement" />
+                <ScalarProperty Name="NotificationMessageTemplate" ColumnName="NotificationMessageTemplate" />
+                <ScalarProperty Name="RetryAttempt" ColumnName="RetryAttempt" />
+                <ScalarProperty Name="NotificationSuccessfulSent" ColumnName="NotificationSuccessfulSent" />
+                <ScalarProperty Name="UserIDOfNotificationRecipient" ColumnName="UserIDOfNotificationRecipient" />
+                <ScalarProperty Name="UserIDOfNotificationSender" ColumnName="UserIDOfNotificationSender" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="NotificationTypeID" ColumnName="NotificationTypeID" />
+                <ScalarProperty Name="FileID" ColumnName="FileID" />
+                <ScalarProperty Name="NotificationID" ColumnName="NotificationID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PrivateFilesSharedWithUsers">
+            <EntityTypeMapping TypeName="WebDocsModel.PrivateFilesSharedWithUser">
+              <MappingFragment StoreEntitySet="PrivateFilesSharedWithUsers">
+                <ScalarProperty Name="DateShared" ColumnName="DateShared" />
+                <ScalarProperty Name="FileID" ColumnName="FileID" />
+                <ScalarProperty Name="UserIDPersonSharedWith" ColumnName="UserIDPersonSharedWith" />
+                <ScalarProperty Name="FileSharedWithUserID" ColumnName="FileSharedWithUserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserChatModels">
+            <EntityTypeMapping TypeName="WebDocsModel.UserChatModel">
+              <MappingFragment StoreEntitySet="UserChats">
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ChatID" ColumnName="ChatID" />
+                <ScalarProperty Name="UserChatID" ColumnName="UserChatID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserThatDownloadedFileModels">
+            <EntityTypeMapping TypeName="WebDocsModel.UserThatDownloadedFileModel">
+              <MappingFragment StoreEntitySet="UserThatDownloadedFile">
+                <ScalarProperty Name="HasFileBeenReturned" ColumnName="HasFileBeenReturned" />
+                <ScalarProperty Name="DateDownloaded" ColumnName="DateDownloaded" />
+                <ScalarProperty Name="UserIDThatDownloadedFIle" ColumnName="UserIDThatDownloadedFIle" />
+                <ScalarProperty Name="FileID" ColumnName="FileID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FileBlobModels">
+            <EntityTypeMapping TypeName="WebDocsModel.FileBlobModel">
+              <MappingFragment StoreEntitySet="FileBlobs">
+                <ScalarProperty Name="FileImage" ColumnName="FileImage" />
+                <ScalarProperty Name="FileID" ColumnName="FileID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FileModels">
+            <EntityTypeMapping TypeName="WebDocsModel.FileModel">
+              <MappingFragment StoreEntitySet="Files">
+                <ScalarProperty Name="Created" ColumnName="DateCreated" />
+                <ScalarProperty Name="CurrentVersionNumber" ColumnName="CurrentVersionNumber" />
+                <ScalarProperty Name="Size" ColumnName="FileSize" />
+                <ScalarProperty Name="Extension" ColumnName="FileExtension" />
+                <ScalarProperty Name="Name" ColumnName="FileName" />
+                <ScalarProperty Name="ContentType" ColumnName="ContentType" />
+                <ScalarProperty Name="FileShareStatusID" ColumnName="FileShareStatusID" />
+                <ScalarProperty Name="FileLookupStatusID" ColumnName="FileLookupStatusID" />
+                <ScalarProperty Name="UserIDOfLastUploaded" ColumnName="UserIDOfLastUploaded" />
+                <ScalarProperty Name="UserIDOfFileOwner" ColumnName="UserIDOfFileOwner" />
+                <ScalarProperty Name="FileID" ColumnName="FileID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

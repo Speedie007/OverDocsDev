@@ -47,6 +47,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -189,8 +195,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ContentManagementController.cs" />
+    <Compile Include="Controllers\FilesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\NotificationsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -202,6 +211,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -222,7 +232,9 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -258,10 +270,15 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Files\DisplayPublicDocs.cshtml" />
+    <Content Include="Views\Files\DisplayUserDocs.cshtml" />
+    <Content Include="Views\Files\DisplayPrivateFilesSharedWithUser.cshtml" />
+    <Content Include="Views\Notifications\DisplayUserNotifications.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
+    <Folder Include="Views\ContentManagement\" />
+    <Folder Include="Views\Notificationst\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -285,13 +302,9 @@
       <Project>{cb94534d-431b-4500-86b1-3045850aa562}</Project>
       <Name>WebDocs.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\WebDocs.DataAccessLayer\WebDocs.DataAccessLayer.csproj">
-      <Project>{5747f495-9557-45b6-bec8-2f3cb093bd9f}</Project>
-      <Name>WebDocs.DataAccessLayer</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\WebDocs.SystemLogic\WebDocs.SystemLogic.csproj">
-      <Project>{b4def235-9096-412e-91c9-e9093054e18e}</Project>
-      <Name>WebDocs.SystemLogic</Name>
+    <ProjectReference Include="..\WebDocs.DominaModels\WebDocs.DomainModels.csproj">
+      <Project>{8a947570-eecb-4409-8615-5c0529a78ca6}</Project>
+      <Name>WebDocs.DomainModels</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

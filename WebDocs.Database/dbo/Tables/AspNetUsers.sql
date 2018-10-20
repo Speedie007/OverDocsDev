@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[AspNetUsers] (
-    [Id]                   NVARCHAR (128) NOT NULL,
+    [Id]                   INT            IDENTITY (1, 1) NOT NULL,
     [Email]                NVARCHAR (256) NULL,
     [EmailConfirmed]       BIT            NOT NULL,
     [PasswordHash]         NVARCHAR (MAX) NULL,
@@ -15,6 +15,8 @@
     [LastName]             NVARCHAR (MAX) NULL,
     CONSTRAINT [PK_dbo.AspNetUsers] PRIMARY KEY CLUSTERED ([Id] ASC)
 );
+
+
 
 
 GO

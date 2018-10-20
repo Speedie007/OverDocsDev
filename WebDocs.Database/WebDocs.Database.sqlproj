@@ -68,14 +68,10 @@
     <Folder Include="dbo\PreScripts" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="dbo\Tables\LookupTableNotificationTypes.sql" />
     <Build Include="dbo\Tables\Notifications.sql" />
     <Build Include="dbo\Tables\Files.sql" />
     <Build Include="dbo\Tables\AspNetUsers.sql" />
-    <Build Include="dbo\Tables\FileSharedWithUsers.sql" />
-    <Build Include="dbo\Tables\LookupTable_FileStatuses.sql" />
     <Build Include="dbo\Tables\UserThatDownloadedFile.sql" />
-    <Build Include="dbo\Tables\LookupTable_ShareStatues.sql" />
     <Build Include="dbo\Tables\__MigrationHistory.sql" />
     <Build Include="dbo\Tables\AspNetRoles.sql" />
     <Build Include="dbo\Tables\AspNetUserClaims.sql" />
@@ -86,19 +82,14 @@
     <Build Include="dbo\Tables\LookupTable_FileCategories.sql" />
     <Build Include="dbo\Tables\UserChats.sql" />
     <Build Include="dbo\Tables\EmailSettings.sql" />
-    <Build Include="dbo\Views\View_PrivateDocView_AllSharedPrivateFiles.sql" />
-    <Build Include="dbo\Views\View_PublicDocView_AllFilesWithOwnerAndUserThatLastUpdatedFile.sql" />
-    <Build Include="dbo\Views\View_UserDocs_AllUserCreatedDocs.sql" />
-    <Build Include="dbo\Views\View_FileDownloads_ViewAllFilesThatHaveBeenDownloaded.sql" />
-    <Build Include="dbo\Views\View_ReturnDocs_AllFilesThatHaveBeenDownloaded.sql" />
-    <Build Include="dbo\Stored Procedures\PublicDocs_R_GetSelectedFileHistory.sql" />
-    <Build Include="dbo\Stored Procedures\PrivateDocs_R_GetAllPrivateSharedUserFiles.sql" />
-    <Build Include="dbo\Stored Procedures\PublicDocs_R_GetMostRecentFileVersion.sql" />
-    <Build Include="dbo\Stored Procedures\UserDocs_R_GetAllUserCreatedDocs.sql" />
-    <Build Include="dbo\Stored Procedures\Files_U_SetFileStatus.sql" />
-    <Build Include="dbo\Stored Procedures\File_R_AllFileDetailsWithoutFioleImage.sql" />
-    <Build Include="dbo\Stored Procedures\Files_I_NewFile.sql" />
     <PreDeploy Include="dbo\PostScripts\Script.PreDeployment_TEST.sql" />
+    <Build Include="dbo\Tables\LookupTable_NotificationTypes.sql" />
+    <Build Include="dbo\Tables\LookupTable_FileViewStatuses.sql" />
+    <Build Include="dbo\Tables\LookupTable_FileShareStatues.sql" />
+    <Build Include="dbo\Tables\PrivateFilesSharedWithUsers.sql" />
+    <Build Include="dbo\Tables\FileArchives.sql" />
+    <Build Include="dbo\Views\View_AllFiles.sql" />
+    <Build Include="dbo\Tables\FileBlobs.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="dbo\PreScripts\Script.PostDeployment_AddLookupTableData.sql" />

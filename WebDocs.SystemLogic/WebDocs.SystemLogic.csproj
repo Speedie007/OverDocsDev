@@ -41,19 +41,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AbstractClasses\AbstractDecision.cs" />
     <Compile Include="Class1.cs" />
-    <Compile Include="DescisionClasses\DetermineLockedControls.cs" />
-    <Compile Include="DescisionClasses\PublicViewedFiles\AvailableFiles\PublicViewAvailableFile.cs" />
-    <Compile Include="DescisionClasses\PublicViewedFiles\LockedFiles\PublicViewLockedFile.cs" />
-    <Compile Include="Interfaces\IDecsions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="DescisionClasses\PrivateViewedFiles\" />
-    <Folder Include="DescisionClasses\UserViewedFiles\" />
-  </ItemGroup>
-  <ItemGroup>
+    <ProjectReference Include="..\WebDocs.BusinessApplicationLayer\WebDocs.BusinessApplicationLayer.csproj">
+      <Project>{14041a57-79f4-48e1-a87c-24ae7779287f}</Project>
+      <Name>WebDocs.BusinessApplicationLayer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WebDocs.Common\WebDocs.Common.csproj">
       <Project>{CB94534D-431B-4500-86B1-3045850AA562}</Project>
       <Name>WebDocs.Common</Name>
@@ -61,6 +57,10 @@
     <ProjectReference Include="..\WebDocs.DataAccessLayer\WebDocs.DataAccessLayer.csproj">
       <Project>{5747F495-9557-45B6-BEC8-2F3CB093BD9F}</Project>
       <Name>WebDocs.DataAccessLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WebDocs.DominaModels\WebDocs.DomainModels.csproj">
+      <Project>{8A947570-EECB-4409-8615-5C0529A78CA6}</Project>
+      <Name>WebDocs.DomainModels</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -11,6 +11,7 @@ namespace WebDocs.Common.Enum.SystemLogicEnum
     {
         Download = 0,
         RequestPermissionNotifications = 1,
-        UploadFileNotification = 2
+        UploadFileNotification = 2,
+        NoControlDefined = 3
     }
 }

@@ -1,8 +1,10 @@
 C:\GitRepo\WebDocsDev\WebDocs.SystemLogic\bin\Debug\WebDocs.SystemLogic.dll.config
 C:\GitRepo\WebDocsDev\WebDocs.SystemLogic\bin\Debug\WebDocs.SystemLogic.dll
 C:\GitRepo\WebDocsDev\WebDocs.SystemLogic\bin\Debug\WebDocs.SystemLogic.pdb
+C:\GitRepo\WebDocsDev\WebDocs.SystemLogic\bin\Debug\WebDocs.BusinessApplicationLayer.dll
 C:\GitRepo\WebDocsDev\WebDocs.SystemLogic\bin\Debug\WebDocs.Common.dll
 C:\GitRepo\WebDocsDev\WebDocs.SystemLogic\bin\Debug\WebDocs.DataAccessLayer.dll
+C:\GitRepo\WebDocsDev\WebDocs.SystemLogic\bin\Debug\WebDocs.DomainModels.dll
 C:\GitRepo\WebDocsDev\WebDocs.SystemLogic\bin\Debug\EntityFramework.dll
 C:\GitRepo\WebDocsDev\WebDocs.SystemLogic\bin\Debug\System.Web.Mvc.dll
 C:\GitRepo\WebDocsDev\WebDocs.SystemLogic\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
@@ -14,9 +16,14 @@ C:\GitRepo\WebDocsDev\WebDocs.SystemLogic\bin\Debug\System.Web.Razor.dll
 C:\GitRepo\WebDocsDev\WebDocs.SystemLogic\bin\Debug\Microsoft.Web.Infrastructure.dll
 C:\GitRepo\WebDocsDev\WebDocs.SystemLogic\bin\Debug\Owin.dll
 C:\GitRepo\WebDocsDev\WebDocs.SystemLogic\bin\Debug\System.Web.WebPages.Deployment.dll
+C:\GitRepo\WebDocsDev\WebDocs.SystemLogic\bin\Debug\WebDocs.BusinessApplicationLayer.pdb
+C:\GitRepo\WebDocsDev\WebDocs.SystemLogic\bin\Debug\WebDocs.BusinessApplicationLayer.dll.config
 C:\GitRepo\WebDocsDev\WebDocs.SystemLogic\bin\Debug\WebDocs.Common.pdb
+C:\GitRepo\WebDocsDev\WebDocs.SystemLogic\bin\Debug\WebDocs.Common.dll.config
 C:\GitRepo\WebDocsDev\WebDocs.SystemLogic\bin\Debug\WebDocs.DataAccessLayer.pdb
 C:\GitRepo\WebDocsDev\WebDocs.SystemLogic\bin\Debug\WebDocs.DataAccessLayer.dll.config
+C:\GitRepo\WebDocsDev\WebDocs.SystemLogic\bin\Debug\WebDocs.DomainModels.pdb
+C:\GitRepo\WebDocsDev\WebDocs.SystemLogic\bin\Debug\WebDocs.DomainModels.dll.config
 C:\GitRepo\WebDocsDev\WebDocs.SystemLogic\bin\Debug\EntityFramework.xml
 C:\GitRepo\WebDocsDev\WebDocs.SystemLogic\bin\Debug\System.Web.Mvc.xml
 C:\GitRepo\WebDocsDev\WebDocs.SystemLogic\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml

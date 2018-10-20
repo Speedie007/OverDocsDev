@@ -1,0 +1,222 @@
+﻿@model PagedList.IPagedList<WebDocs.DomainModels.Database.FileModel>
+
+@using PagedList.Mvc;
+@using Microsoft.AspNet.Identity;
+
+@{
+    ViewBag.Title = "DisplayUserDocs";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>DisplayUserDocs</h2>
+
+
+
+@{
+    string UserID_OfUserCurrentlyLoggedIn = User.Identity.GetUserId();
+}
+<table class="table">
+    <tr>
+        <th>
+
+            @Html.ActionLink("Ref#", "ShowUserDocs", new { sortOrder = ViewBag.FileIDSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th>
+            @Html.ActionLink("File Name", "ShowUserDocs", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th>
+            @Html.Label("Size")
+        </th>
+        <th>
+            @Html.Label("File Owner")
+
+        </th>
+        <th>
+            @Html.Label("Last Modified")
+        </th>
+
+
+        <th>
+            @Html.Label("File Status")
+
+        </th>
+
+        <th>
+            @Html.Label("Shared Status")
+
+        </th>
+        <th>
+            @Html.Label("Version")
+        </th>
+        <th>
+            @Html.Label("Updated By")
+        </th>
+        <th>
+            <!-- Trigger the modal with a button -->
+            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#UploadUserFileModal">Upload File</button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="UploadUserFileModal" role="dialog">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Upload User File</h4>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">Select Share Status</div>
+                                <div class="panel-body">
+                                    <div class="well well-sm">
+                                        <div class="row text-center">
+                                            <div class="col-sm-2">Public:   @Html.RadioButton("radFileShareStatus", "1", true)</div>
+                                            <div class="col-sm-1"></div>
+                                            <div class="col-sm-2">Private:    @Html.RadioButton("radFileShareStatus", "2")</div>
+                                            <div class="col-sm-1"></div>
+                                            <div class="col-sm-2">Hidden:   @Html.RadioButton("radFileShareStatus", "6")</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">Select File To Upload</div>
+                                <div class="panel-body">
+                                    <div class="well well-sm">
+                                        <div class="row">
+                                            <table>
+                                                <tr>
+                                                    <td> <input type="file" name="UploadFile" id="Crtl_UploadFile" class="btn" accept=".xls,.xlsx, .doc, .txt,.csv" /></td>
+                                                    <td><input type="button" id="SubmitFileToUpload" class="btn btn-default" onclick="UploadSelectedFile();" value="Upload File" /></td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div id="UpLoadMessage"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td class="text-nowrap">
+                @Html.DisplayFor(modelItem => item.FileID)
+
+            </td>
+            <td class="text-nowrap">
+                @Html.DisplayFor(modelItem => item.FullName)
+
+            </td>
+            <td class="text-nowrap">
+                @Html.DisplayFor(modelItem => item.Size)
+            </td>
+            <td class="text-nowrap">
+                @Html.DisplayFor(modelItem => item.FileOwner.UserFullName)
+            </td>
+            <td class="text-nowrap">
+                @Html.DisplayFor(modelItem => item.Created)
+            </td>
+            <td class="text-nowrap">
+                @Html.DisplayFor(modelItem => item.FileViewStatuses.Status)
+            </td>
+            <td class="text-nowrap">
+                @Html.DisplayFor(modelItem => item.FileShareStatues.Status)
+            </td>
+            <td class="text-nowrap">
+                @Html.DisplayFor(modelItem => item.CurrentVersionNumber)
+            </td>
+            <td class="text-nowrap">
+                @Html.DisplayFor(modelItem => item.PersonThatLastUpdatedFile.UserFullName)
+            </td>
+            <td class="text-nowrap">
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new
+                { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+    }
+
+</table>
+<table class="">
+    <tr>
+        <td>Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</td>
+        <td>&nbsp;</td>
+        <td>
+            @Html.PagedListPager(Model, page => Url.Action("PublicDocDisplay", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+        </td>
+    </tr>
+</table>
+@section Scripts{
+    <script type="text/javascript">
+
+
+        function UploadSelectedFile() {
+
+            var input = $('#Crtl_UploadFile');
+            var files = input.prop("files");
+
+            if (files.length > 0) {
+                if (window.FormData !== undefined) {
+                    var data = new FormData();
+                    for (var x = 0; x < files.length; x++) {
+                        data.append("file" + x, files[x]);
+                    }
+
+                    $.ajax({
+                        type: "POST",
+                        url: '/ContentManagement/UserFileUpload?_FileShareStatusID=' + $('input[name=radFileShareStatus]:checked').val(),
+                        contentType: false,
+                        processData: false,
+                        data: data,
+                        success: function (result) {
+                            $("#UpLoadMessage").hide();
+                            $('#UpLoadMessage').html(result);
+
+                            $("#UpLoadMessage").fadeIn("slow", function () {
+                                // Animation complete.
+
+                                $(this).fadeOut("slow", function () {
+                                    $('#UpLoadMessage').html('');
+                                });
+                            });
+
+                        },
+                        error: function (xhr, status, p3, p4) {
+                            var err = "Error " + " " + status + " " + p3 + " " + p4;
+                            if (xhr.responseText && xhr.responseText[0] == "{")
+                                err = JSON.parse(xhr.responseText).Message;
+                            alert(err);
+                        }
+                    });
+                } else {
+                    alert("This browser doesn't support HTML5 file uploads!");
+                }
+
+                $('#Crtl_UploadFile').val(null);
+            }
+        }
+
+        function Filter() {
+            var value = $('#myInput').val().toLowerCase();
+            $("#ListToFilterListToFilter tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        }
+
+    </script>
+
+}
+

@@ -1,6 +1,7 @@
 C:\GitRepo\WebDocsDev\WebDocs.Database\bin\Debug\WebDocs.Database.dacpac
 C:\GitRepo\WebDocsDev\WebDocs.Database\bin\Debug\WebDocs.Database.dll
 C:\GitRepo\WebDocsDev\WebDocs.Database\bin\Debug\WebDocs.Database.pdb
+C:\GitRepo\WebDocsDev\WebDocs.Database\obj\Debug\WebDocs.Database.sqlprojAssemblyReference.cache
 C:\GitRepo\WebDocsDev\WebDocs.Database\obj\Debug\Model.xml
 C:\GitRepo\WebDocsDev\WebDocs.Database\obj\Debug\refactor.xml
 C:\GitRepo\WebDocsDev\WebDocs.Database\obj\Debug\postdeploy.sql

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a9a579af2c0b413197368420623c1362" Name="Diagram1">
+        <EntityTypeShape EntityType="WebDocsModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebDocsModel.AspNetRole" Width="1.5" PointX="0.75" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebDocsModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebDocsModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebDocsModel.AspNetUser" Width="1.5" PointX="3" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebDocsModel.Chat" Width="1.5" PointX="6" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebDocsModel.EmailSendLog" Width="1.5" PointX="5.25" PointY="16.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebDocsModel.EmailSetting" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebDocsModel.FileBlob" Width="1.5" PointX="10.5" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebDocsModel.FileCategory" Width="1.5" PointX="10.5" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebDocsModel.File" Width="1.5" PointX="8.25" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebDocsModel.FileSharedWithUser" Width="1.5" PointX="10.5" PointY="16.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebDocsModel.LookupTable_FileCategories" Width="1.5" PointX="8.25" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebDocsModel.LookupTable_FileShareStatues" Width="1.5" PointX="6" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebDocsModel.LookupTable_FileViewStatuses" Width="1.5" PointX="6" PointY="22.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebDocsModel.LookupTable_NotificationTypes" Width="1.5" PointX="11.25" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebDocsModel.Notification" Width="1.5" PointX="13.5" PointY="13.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebDocsModel.sysdiagram" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebDocsModel.UserChat" Width="1.5" PointX="8.25" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="WebDocsModel.UserThatDownloadedFile" Width="1.5" PointX="13.5" PointY="9.625" IsExpanded="true" />
+        <AssociationConnector Association="WebDocsModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="WebDocsModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="WebDocsModel.FK_EmailSendLogs_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="WebDocsModel.FK_Files_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="WebDocsModel.FK_Files_AspNetUsers1" ManuallyRouted="false" />
+        <AssociationConnector Association="WebDocsModel.FK_FileSharedWithUsers_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="WebDocsModel.FK_Notifications_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="WebDocsModel.FK_Notifications_AspNetUsers1" ManuallyRouted="false" />
+        <AssociationConnector Association="WebDocsModel.FK_UserChats_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="WebDocsModel.FK_UserThatDownloadedFile_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="WebDocsModel.FK_UserChats_Chats" ManuallyRouted="false" />
+        <AssociationConnector Association="WebDocsModel.FK_FileBlobs_Files" ManuallyRouted="false" />
+        <AssociationConnector Association="WebDocsModel.FK_FileCategories_Files" ManuallyRouted="false" />
+        <AssociationConnector Association="WebDocsModel.FK_FileCategories_LookupTable_FileCategories" ManuallyRouted="false" />
+        <AssociationConnector Association="WebDocsModel.FK_Files_LookupTable_FileStatuses" ManuallyRouted="false" />
+        <AssociationConnector Association="WebDocsModel.FK_Files_LookupTable_ShareStatues" ManuallyRouted="false" />
+        <AssociationConnector Association="WebDocsModel.FK_FileSharedWithUsers_Files" ManuallyRouted="false" />
+        <AssociationConnector Association="WebDocsModel.FK_Notifications_Files" ManuallyRouted="false" />
+        <AssociationConnector Association="WebDocsModel.FK_UserThatDownloadedFile_Files" ManuallyRouted="false" />
+        <AssociationConnector Association="WebDocsModel.FK_Notifications_LookupTableNotificationTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="WebDocsModel.AspNetUserRoles" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

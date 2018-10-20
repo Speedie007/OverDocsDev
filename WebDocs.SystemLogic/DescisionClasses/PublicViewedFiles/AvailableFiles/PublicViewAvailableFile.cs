@@ -1,14 +1,9 @@
-﻿using WebDocs.Common.Enum.DBLookupEnum;
+﻿
 using WebDocs.Common.Enum.SystemLogicEnum;
-using OverDocsModels.DecisionModels.PublicDocuments.IsAvaiable;
-using OverDocsModels.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+using WebDocs.DomainModels.Interfaces.FileLinks;
 using WebDocs.SystemLogic.AbstractClasses;
+using WebDocs.Common.Enum.DbLookupTables;
+using WebDocs.DomainModels.DecisionModels.PublicDocuments.IsAvailable;
 
 namespace SystemLogic.DescisionClasses.PublicViewedFiles.AvailableFiles
 {
@@ -87,10 +82,10 @@ namespace SystemLogic.DescisionClasses.PublicViewedFiles.AvailableFiles
         {
             switch (Model.FileSharedStautusID)
             {
-                case (int)FileSharedStatus.Public:
+                case (int)EnumFileShareStatues.Public:
                     this.IS_FILE_PUBLIC = true;
                     break;
-                case (int)FileSharedStatus.Private:
+                case (int)EnumFileShareStatues.Private:
                     this.IS_FILE_PRIVATE = true;
                     break;
                 default:

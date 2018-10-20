@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using WebDocs.DataAccessLayer.Models.Security;
+using WebDocs.DomainModels.Security;
 using WebDocsDev;
 
 namespace WebDocs.Web.Controllers
