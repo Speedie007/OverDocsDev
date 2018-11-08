@@ -1,0 +1,592 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="WebDocsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="C__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetRole">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaim">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogin">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+    <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+    <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+    <NavigationProperty Name="EmailSendLogs" Relationship="Self.FK_EmailSendLogs_AspNetUsers" FromRole="AspNetUsers" ToRole="EmailSendLogs" />
+    <NavigationProperty Name="Files" Relationship="Self.FK_Files_AspNetUsers" FromRole="AspNetUsers" ToRole="Files" />
+    <NavigationProperty Name="Files1" Relationship="Self.FK_Files_AspNetUsers1" FromRole="AspNetUsers" ToRole="Files" />
+    <NavigationProperty Name="FileSharedWithUsers" Relationship="Self.FK_FileSharedWithUsers_AspNetUsers" FromRole="AspNetUsers" ToRole="FileSharedWithUsers" />
+    <NavigationProperty Name="Notifications" Relationship="Self.FK_Notifications_AspNetUsers" FromRole="AspNetUsers" ToRole="Notifications" />
+    <NavigationProperty Name="Notifications1" Relationship="Self.FK_Notifications_AspNetUsers1" FromRole="AspNetUsers" ToRole="Notifications" />
+    <NavigationProperty Name="UserChats" Relationship="Self.FK_UserChats_AspNetUsers" FromRole="AspNetUsers" ToRole="UserChats" />
+    <NavigationProperty Name="UserThatDownloadedFiles" Relationship="Self.FK_UserThatDownloadedFile_AspNetUsers" FromRole="AspNetUsers" ToRole="UserThatDownloadedFile" />
+    <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+  </EntityType>
+  <EntityType Name="Chat">
+    <Key>
+      <PropertyRef Name="ChatID" />
+    </Key>
+    <Property Name="ChatID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ChatHeading" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="UserChats" Relationship="Self.FK_UserChats_Chats" FromRole="Chats" ToRole="UserChats" />
+  </EntityType>
+  <EntityType Name="EmailSendLog">
+    <Key>
+      <PropertyRef Name="EmailSendID" />
+    </Key>
+    <Property Name="EmailSendID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserThatSentID" Type="Int32" Nullable="false" />
+    <Property Name="ToAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FromAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FromName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_EmailSendLogs_AspNetUsers" FromRole="EmailSendLogs" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="EmailSetting">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="SmtpHost" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="SmtpPort" Type="Int32" Nullable="false" />
+    <Property Name="SslEnabled" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FileBlob">
+    <Key>
+      <PropertyRef Name="FileID" />
+    </Key>
+    <Property Name="FileID" Type="Int32" Nullable="false" />
+    <Property Name="Blob" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <NavigationProperty Name="File" Relationship="Self.FK_FileBlobs_Files" FromRole="FileBlobs" ToRole="Files" />
+  </EntityType>
+  <EntityType Name="FileCategory">
+    <Key>
+      <PropertyRef Name="FileCategoryID" />
+    </Key>
+    <Property Name="FileCategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FileID" Type="Int32" Nullable="false" />
+    <Property Name="LookupTableFileCategoryID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="File" Relationship="Self.FK_FileCategories_Files" FromRole="FileCategories" ToRole="Files" />
+    <NavigationProperty Name="LookupTable_FileCategories" Relationship="Self.FK_FileCategories_LookupTable_FileCategories" FromRole="FileCategories" ToRole="LookupTable_FileCategories" />
+  </EntityType>
+  <EntityType Name="File">
+    <Key>
+      <PropertyRef Name="FileID" />
+    </Key>
+    <Property Name="FileID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ParentFileID" Type="Int32" Nullable="false" />
+    <Property Name="UserIDOfFileOwner" Type="Int32" Nullable="false" />
+    <Property Name="UserIDOfLastUploaded" Type="Int32" Nullable="false" />
+    <Property Name="FileLookupStatusID" Type="Int32" Nullable="false" />
+    <Property Name="FileShareStatusID" Type="Int32" Nullable="false" />
+    <Property Name="ContentType" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FileName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FileExtension" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="FileSize" Type="Int32" Nullable="false" />
+    <Property Name="CurrentVersionNumber" Type="Int32" Nullable="false" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Files_AspNetUsers" FromRole="Files" ToRole="AspNetUsers" />
+    <NavigationProperty Name="AspNetUser1" Relationship="Self.FK_Files_AspNetUsers1" FromRole="Files" ToRole="AspNetUsers" />
+    <NavigationProperty Name="FileBlob" Relationship="Self.FK_FileBlobs_Files" FromRole="Files" ToRole="FileBlobs" />
+    <NavigationProperty Name="FileCategories" Relationship="Self.FK_FileCategories_Files" FromRole="Files" ToRole="FileCategories" />
+    <NavigationProperty Name="LookupTable_FileViewStatuses" Relationship="Self.FK_Files_LookupTable_FileStatuses" FromRole="Files" ToRole="LookupTable_FileViewStatuses" />
+    <NavigationProperty Name="LookupTable_FileShareStatues" Relationship="Self.FK_Files_LookupTable_ShareStatues" FromRole="Files" ToRole="LookupTable_FileShareStatues" />
+    <NavigationProperty Name="FileSharedWithUsers" Relationship="Self.FK_FileSharedWithUsers_Files" FromRole="Files" ToRole="FileSharedWithUsers" />
+    <NavigationProperty Name="Notifications" Relationship="Self.FK_Notifications_Files" FromRole="Files" ToRole="Notifications" />
+    <NavigationProperty Name="UserThatDownloadedFile" Relationship="Self.FK_UserThatDownloadedFile_Files" FromRole="Files" ToRole="UserThatDownloadedFile" />
+  </EntityType>
+  <EntityType Name="FileSharedWithUser">
+    <Key>
+      <PropertyRef Name="FileSharedWithUserID" />
+    </Key>
+    <Property Name="FileSharedWithUserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserIDOfSharedDocs" Type="Int32" />
+    <Property Name="FileID" Type="Int32" Nullable="false" />
+    <Property Name="DateShared" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_FileSharedWithUsers_AspNetUsers" FromRole="FileSharedWithUsers" ToRole="AspNetUsers" />
+    <NavigationProperty Name="File" Relationship="Self.FK_FileSharedWithUsers_Files" FromRole="FileSharedWithUsers" ToRole="Files" />
+  </EntityType>
+  <EntityType Name="LookupTable_FileCategories">
+    <Key>
+      <PropertyRef Name="LookupTableFileCategoryID" />
+    </Key>
+    <Property Name="LookupTableFileCategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FileCategory" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="FileCategories" Relationship="Self.FK_FileCategories_LookupTable_FileCategories" FromRole="LookupTable_FileCategories" ToRole="FileCategories" />
+  </EntityType>
+  <EntityType Name="LookupTable_FileShareStatues">
+    <Key>
+      <PropertyRef Name="FileShareStatusID" />
+    </Key>
+    <Property Name="FileShareStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FileShareStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Files" Relationship="Self.FK_Files_LookupTable_ShareStatues" FromRole="LookupTable_FileShareStatues" ToRole="Files" />
+  </EntityType>
+  <EntityType Name="LookupTable_FileViewStatuses">
+    <Key>
+      <PropertyRef Name="FileLookupStatusID" />
+    </Key>
+    <Property Name="FileLookupStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FileStatus" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Files" Relationship="Self.FK_Files_LookupTable_FileStatuses" FromRole="LookupTable_FileViewStatuses" ToRole="Files" />
+  </EntityType>
+  <EntityType Name="LookupTable_NotificationTypes">
+    <Key>
+      <PropertyRef Name="NotificationTypeID" />
+    </Key>
+    <Property Name="NotificationTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NotificationType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Notifications" Relationship="Self.FK_Notifications_LookupTableNotificationTypes" FromRole="LookupTable_NotificationTypes" ToRole="Notifications" />
+  </EntityType>
+  <EntityType Name="Notification">
+    <Key>
+      <PropertyRef Name="NotificationID" />
+    </Key>
+    <Property Name="NotificationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FileID" Type="Int32" Nullable="false" />
+    <Property Name="NotificationTypeID" Type="Int32" Nullable="false" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UserIDOfNotificationSender" Type="Int32" Nullable="false" />
+    <Property Name="UserIDOfNotificationRecipient" Type="Int32" Nullable="false" />
+    <Property Name="UserHasAcknowledgement" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Notifications_AspNetUsers" FromRole="Notifications" ToRole="AspNetUsers" />
+    <NavigationProperty Name="AspNetUser1" Relationship="Self.FK_Notifications_AspNetUsers1" FromRole="Notifications" ToRole="AspNetUsers" />
+    <NavigationProperty Name="File" Relationship="Self.FK_Notifications_Files" FromRole="Notifications" ToRole="Files" />
+    <NavigationProperty Name="LookupTable_NotificationTypes" Relationship="Self.FK_Notifications_LookupTableNotificationTypes" FromRole="Notifications" ToRole="LookupTable_NotificationTypes" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="UserChat">
+    <Key>
+      <PropertyRef Name="UserChatID" />
+    </Key>
+    <Property Name="UserChatID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ChatID" Type="Int32" Nullable="false" />
+    <Property Name="UserID" Type="Int32" Nullable="false" />
+    <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_UserChats_AspNetUsers" FromRole="UserChats" ToRole="AspNetUsers" />
+    <NavigationProperty Name="Chat" Relationship="Self.FK_UserChats_Chats" FromRole="UserChats" ToRole="Chats" />
+  </EntityType>
+  <EntityType Name="UserThatDownloadedFile">
+    <Key>
+      <PropertyRef Name="FileID" />
+    </Key>
+    <Property Name="FileID" Type="Int32" Nullable="false" />
+    <Property Name="UserIDThatDownloadedFIle" Type="Int32" Nullable="false" />
+    <Property Name="DateDownloaded" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="HasFileBeenReturned" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_UserThatDownloadedFile_AspNetUsers" FromRole="UserThatDownloadedFile" ToRole="AspNetUsers" />
+    <NavigationProperty Name="File" Relationship="Self.FK_UserThatDownloadedFile_Files" FromRole="UserThatDownloadedFile" ToRole="Files" />
+  </EntityType>
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserClaims" Type="Self.AspNetUserClaim" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaims">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserLogins" Type="Self.AspNetUserLogin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogins">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EmailSendLogs_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+    <End Role="EmailSendLogs" Type="Self.EmailSendLog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EmailSendLogs">
+        <PropertyRef Name="UserThatSentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Files_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+    <End Role="Files" Type="Self.File" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Files">
+        <PropertyRef Name="UserIDOfFileOwner" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Files_AspNetUsers1">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+    <End Role="Files" Type="Self.File" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Files">
+        <PropertyRef Name="UserIDOfLastUploaded" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FileSharedWithUsers_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
+    <End Role="FileSharedWithUsers" Type="Self.FileSharedWithUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FileSharedWithUsers">
+        <PropertyRef Name="UserIDOfSharedDocs" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Notifications_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+    <End Role="Notifications" Type="Self.Notification" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Notifications">
+        <PropertyRef Name="UserIDOfNotificationSender" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Notifications_AspNetUsers1">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+    <End Role="Notifications" Type="Self.Notification" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Notifications">
+        <PropertyRef Name="UserIDOfNotificationRecipient" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserChats_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+    <End Role="UserChats" Type="Self.UserChat" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserChats">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserThatDownloadedFile_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1" />
+    <End Role="UserThatDownloadedFile" Type="Self.UserThatDownloadedFile" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserThatDownloadedFile">
+        <PropertyRef Name="UserIDThatDownloadedFIle" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserChats_Chats">
+    <End Role="Chats" Type="Self.Chat" Multiplicity="1" />
+    <End Role="UserChats" Type="Self.UserChat" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Chats">
+        <PropertyRef Name="ChatID" />
+      </Principal>
+      <Dependent Role="UserChats">
+        <PropertyRef Name="ChatID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FileBlobs_Files">
+    <End Role="Files" Type="Self.File" Multiplicity="1" />
+    <End Role="FileBlobs" Type="Self.FileBlob" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Files">
+        <PropertyRef Name="FileID" />
+      </Principal>
+      <Dependent Role="FileBlobs">
+        <PropertyRef Name="FileID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FileCategories_Files">
+    <End Role="Files" Type="Self.File" Multiplicity="1" />
+    <End Role="FileCategories" Type="Self.FileCategory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Files">
+        <PropertyRef Name="FileID" />
+      </Principal>
+      <Dependent Role="FileCategories">
+        <PropertyRef Name="FileID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FileCategories_LookupTable_FileCategories">
+    <End Role="LookupTable_FileCategories" Type="Self.LookupTable_FileCategories" Multiplicity="1" />
+    <End Role="FileCategories" Type="Self.FileCategory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LookupTable_FileCategories">
+        <PropertyRef Name="LookupTableFileCategoryID" />
+      </Principal>
+      <Dependent Role="FileCategories">
+        <PropertyRef Name="LookupTableFileCategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Files_LookupTable_FileStatuses">
+    <End Role="LookupTable_FileViewStatuses" Type="Self.LookupTable_FileViewStatuses" Multiplicity="1" />
+    <End Role="Files" Type="Self.File" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LookupTable_FileViewStatuses">
+        <PropertyRef Name="FileLookupStatusID" />
+      </Principal>
+      <Dependent Role="Files">
+        <PropertyRef Name="FileLookupStatusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Files_LookupTable_ShareStatues">
+    <End Role="LookupTable_FileShareStatues" Type="Self.LookupTable_FileShareStatues" Multiplicity="1" />
+    <End Role="Files" Type="Self.File" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LookupTable_FileShareStatues">
+        <PropertyRef Name="FileShareStatusID" />
+      </Principal>
+      <Dependent Role="Files">
+        <PropertyRef Name="FileShareStatusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FileSharedWithUsers_Files">
+    <End Role="Files" Type="Self.File" Multiplicity="1" />
+    <End Role="FileSharedWithUsers" Type="Self.FileSharedWithUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Files">
+        <PropertyRef Name="FileID" />
+      </Principal>
+      <Dependent Role="FileSharedWithUsers">
+        <PropertyRef Name="FileID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Notifications_Files">
+    <End Role="Files" Type="Self.File" Multiplicity="1" />
+    <End Role="Notifications" Type="Self.Notification" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Files">
+        <PropertyRef Name="FileID" />
+      </Principal>
+      <Dependent Role="Notifications">
+        <PropertyRef Name="FileID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserThatDownloadedFile_Files">
+    <End Role="Files" Type="Self.File" Multiplicity="1" />
+    <End Role="UserThatDownloadedFile" Type="Self.UserThatDownloadedFile" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Files">
+        <PropertyRef Name="FileID" />
+      </Principal>
+      <Dependent Role="UserThatDownloadedFile">
+        <PropertyRef Name="FileID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Notifications_LookupTableNotificationTypes">
+    <End Role="LookupTable_NotificationTypes" Type="Self.LookupTable_NotificationTypes" Multiplicity="1" />
+    <End Role="Notifications" Type="Self.Notification" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LookupTable_NotificationTypes">
+        <PropertyRef Name="NotificationTypeID" />
+      </Principal>
+      <Dependent Role="Notifications">
+        <PropertyRef Name="NotificationTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AspNetUserRoles">
+    <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="WebDocsEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+    <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
+    <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
+    <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
+    <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
+    <EntitySet Name="Chats" EntityType="Self.Chat" />
+    <EntitySet Name="EmailSendLogs" EntityType="Self.EmailSendLog" />
+    <EntitySet Name="EmailSettings" EntityType="Self.EmailSetting" />
+    <EntitySet Name="FileBlobs" EntityType="Self.FileBlob" />
+    <EntitySet Name="FileCategories" EntityType="Self.FileCategory" />
+    <EntitySet Name="Files" EntityType="Self.File" />
+    <EntitySet Name="FileSharedWithUsers" EntityType="Self.FileSharedWithUser" />
+    <EntitySet Name="LookupTable_FileCategories" EntityType="Self.LookupTable_FileCategories" />
+    <EntitySet Name="LookupTable_FileShareStatues" EntityType="Self.LookupTable_FileShareStatues" />
+    <EntitySet Name="LookupTable_FileViewStatuses" EntityType="Self.LookupTable_FileViewStatuses" />
+    <EntitySet Name="LookupTable_NotificationTypes" EntityType="Self.LookupTable_NotificationTypes" />
+    <EntitySet Name="Notifications" EntityType="Self.Notification" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="UserChats" EntityType="Self.UserChat" />
+    <EntitySet Name="UserThatDownloadedFiles" EntityType="Self.UserThatDownloadedFile" />
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EmailSendLogs_AspNetUsers" Association="Self.FK_EmailSendLogs_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="EmailSendLogs" EntitySet="EmailSendLogs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Files_AspNetUsers" Association="Self.FK_Files_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Files" EntitySet="Files" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Files_AspNetUsers1" Association="Self.FK_Files_AspNetUsers1">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Files" EntitySet="Files" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FileSharedWithUsers_AspNetUsers" Association="Self.FK_FileSharedWithUsers_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="FileSharedWithUsers" EntitySet="FileSharedWithUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Notifications_AspNetUsers" Association="Self.FK_Notifications_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Notifications" EntitySet="Notifications" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Notifications_AspNetUsers1" Association="Self.FK_Notifications_AspNetUsers1">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Notifications" EntitySet="Notifications" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserChats_AspNetUsers" Association="Self.FK_UserChats_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="UserChats" EntitySet="UserChats" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserThatDownloadedFile_AspNetUsers" Association="Self.FK_UserThatDownloadedFile_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="UserThatDownloadedFile" EntitySet="UserThatDownloadedFiles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserChats_Chats" Association="Self.FK_UserChats_Chats">
+      <End Role="Chats" EntitySet="Chats" />
+      <End Role="UserChats" EntitySet="UserChats" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FileBlobs_Files" Association="Self.FK_FileBlobs_Files">
+      <End Role="Files" EntitySet="Files" />
+      <End Role="FileBlobs" EntitySet="FileBlobs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FileCategories_Files" Association="Self.FK_FileCategories_Files">
+      <End Role="Files" EntitySet="Files" />
+      <End Role="FileCategories" EntitySet="FileCategories" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FileCategories_LookupTable_FileCategories" Association="Self.FK_FileCategories_LookupTable_FileCategories">
+      <End Role="LookupTable_FileCategories" EntitySet="LookupTable_FileCategories" />
+      <End Role="FileCategories" EntitySet="FileCategories" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Files_LookupTable_FileStatuses" Association="Self.FK_Files_LookupTable_FileStatuses">
+      <End Role="LookupTable_FileViewStatuses" EntitySet="LookupTable_FileViewStatuses" />
+      <End Role="Files" EntitySet="Files" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Files_LookupTable_ShareStatues" Association="Self.FK_Files_LookupTable_ShareStatues">
+      <End Role="LookupTable_FileShareStatues" EntitySet="LookupTable_FileShareStatues" />
+      <End Role="Files" EntitySet="Files" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FileSharedWithUsers_Files" Association="Self.FK_FileSharedWithUsers_Files">
+      <End Role="Files" EntitySet="Files" />
+      <End Role="FileSharedWithUsers" EntitySet="FileSharedWithUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Notifications_Files" Association="Self.FK_Notifications_Files">
+      <End Role="Files" EntitySet="Files" />
+      <End Role="Notifications" EntitySet="Notifications" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserThatDownloadedFile_Files" Association="Self.FK_UserThatDownloadedFile_Files">
+      <End Role="Files" EntitySet="Files" />
+      <End Role="UserThatDownloadedFile" EntitySet="UserThatDownloadedFiles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Notifications_LookupTableNotificationTypes" Association="Self.FK_Notifications_LookupTableNotificationTypes">
+      <End Role="LookupTable_NotificationTypes" EntitySet="LookupTable_NotificationTypes" />
+      <End Role="Notifications" EntitySet="Notifications" />
+    </AssociationSet>
+    <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,7 @@
+C:\GitRepo\WebDocsDev\WebDocs.EmailService\bin\Debug\WebDocs.EmailService.exe.config
+C:\GitRepo\WebDocsDev\WebDocs.EmailService\bin\Debug\WebDocs.EmailService.exe
+C:\GitRepo\WebDocsDev\WebDocs.EmailService\bin\Debug\WebDocs.EmailService.pdb
+C:\GitRepo\WebDocsDev\WebDocs.EmailService\obj\Debug\WebDocs.EmailService.csprojAssemblyReference.cache
+C:\GitRepo\WebDocsDev\WebDocs.EmailService\obj\Debug\WebDocs.EmailService.csproj.CoreCompileInputs.cache
+C:\GitRepo\WebDocsDev\WebDocs.EmailService\obj\Debug\WebDocs.EmailService.exe
+C:\GitRepo\WebDocsDev\WebDocs.EmailService\obj\Debug\WebDocs.EmailService.pdb

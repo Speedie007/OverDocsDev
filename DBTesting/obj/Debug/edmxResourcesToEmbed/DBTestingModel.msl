@@ -1,0 +1,223 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="WebDocsModelStoreContainer" CdmEntityContainer="WebDocsEntities">
+    <EntitySetMapping Name="C__MigrationHistory">
+      <EntityTypeMapping TypeName="WebDocsModel.C__MigrationHistory">
+        <MappingFragment StoreEntitySet="__MigrationHistory">
+          <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+          <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetRoles">
+      <EntityTypeMapping TypeName="WebDocsModel.AspNetRole">
+        <MappingFragment StoreEntitySet="AspNetRoles">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUserClaims">
+      <EntityTypeMapping TypeName="WebDocsModel.AspNetUserClaim">
+        <MappingFragment StoreEntitySet="AspNetUserClaims">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+          <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUserLogins">
+      <EntityTypeMapping TypeName="WebDocsModel.AspNetUserLogin">
+        <MappingFragment StoreEntitySet="AspNetUserLogins">
+          <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+          <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUsers">
+      <EntityTypeMapping TypeName="WebDocsModel.AspNetUser">
+        <MappingFragment StoreEntitySet="AspNetUsers">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+          <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+          <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+          <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+          <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+          <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+          <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Chats">
+      <EntityTypeMapping TypeName="WebDocsModel.Chat">
+        <MappingFragment StoreEntitySet="Chats">
+          <ScalarProperty Name="ChatID" ColumnName="ChatID" />
+          <ScalarProperty Name="ChatHeading" ColumnName="ChatHeading" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EmailSendLogs">
+      <EntityTypeMapping TypeName="WebDocsModel.EmailSendLog">
+        <MappingFragment StoreEntitySet="EmailSendLogs">
+          <ScalarProperty Name="EmailSendID" ColumnName="EmailSendID" />
+          <ScalarProperty Name="UserThatSentID" ColumnName="UserThatSentID" />
+          <ScalarProperty Name="ToAddress" ColumnName="ToAddress" />
+          <ScalarProperty Name="FromAddress" ColumnName="FromAddress" />
+          <ScalarProperty Name="FromName" ColumnName="FromName" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EmailSettings">
+      <EntityTypeMapping TypeName="WebDocsModel.EmailSetting">
+        <MappingFragment StoreEntitySet="EmailSettings">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="SmtpHost" ColumnName="SmtpHost" />
+          <ScalarProperty Name="SmtpPort" ColumnName="SmtpPort" />
+          <ScalarProperty Name="SslEnabled" ColumnName="SslEnabled" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FileBlobs">
+      <EntityTypeMapping TypeName="WebDocsModel.FileBlob">
+        <MappingFragment StoreEntitySet="FileBlobs">
+          <ScalarProperty Name="FileID" ColumnName="FileID" />
+          <ScalarProperty Name="Blob" ColumnName="Blob" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FileCategories">
+      <EntityTypeMapping TypeName="WebDocsModel.FileCategory">
+        <MappingFragment StoreEntitySet="FileCategories">
+          <ScalarProperty Name="FileCategoryID" ColumnName="FileCategoryID" />
+          <ScalarProperty Name="FileID" ColumnName="FileID" />
+          <ScalarProperty Name="LookupTableFileCategoryID" ColumnName="LookupTableFileCategoryID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Files">
+      <EntityTypeMapping TypeName="WebDocsModel.File">
+        <MappingFragment StoreEntitySet="Files">
+          <ScalarProperty Name="FileID" ColumnName="FileID" />
+          <ScalarProperty Name="ParentFileID" ColumnName="ParentFileID" />
+          <ScalarProperty Name="UserIDOfFileOwner" ColumnName="UserIDOfFileOwner" />
+          <ScalarProperty Name="UserIDOfLastUploaded" ColumnName="UserIDOfLastUploaded" />
+          <ScalarProperty Name="FileLookupStatusID" ColumnName="FileLookupStatusID" />
+          <ScalarProperty Name="FileShareStatusID" ColumnName="FileShareStatusID" />
+          <ScalarProperty Name="ContentType" ColumnName="ContentType" />
+          <ScalarProperty Name="FileName" ColumnName="FileName" />
+          <ScalarProperty Name="FileExtension" ColumnName="FileExtension" />
+          <ScalarProperty Name="FileSize" ColumnName="FileSize" />
+          <ScalarProperty Name="CurrentVersionNumber" ColumnName="CurrentVersionNumber" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FileSharedWithUsers">
+      <EntityTypeMapping TypeName="WebDocsModel.FileSharedWithUser">
+        <MappingFragment StoreEntitySet="FileSharedWithUsers">
+          <ScalarProperty Name="FileSharedWithUserID" ColumnName="FileSharedWithUserID" />
+          <ScalarProperty Name="UserIDOfSharedDocs" ColumnName="UserIDOfSharedDocs" />
+          <ScalarProperty Name="FileID" ColumnName="FileID" />
+          <ScalarProperty Name="DateShared" ColumnName="DateShared" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LookupTable_FileCategories">
+      <EntityTypeMapping TypeName="WebDocsModel.LookupTable_FileCategories">
+        <MappingFragment StoreEntitySet="LookupTable_FileCategories">
+          <ScalarProperty Name="LookupTableFileCategoryID" ColumnName="LookupTableFileCategoryID" />
+          <ScalarProperty Name="FileCategory" ColumnName="FileCategory" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LookupTable_FileShareStatues">
+      <EntityTypeMapping TypeName="WebDocsModel.LookupTable_FileShareStatues">
+        <MappingFragment StoreEntitySet="LookupTable_FileShareStatues">
+          <ScalarProperty Name="FileShareStatusID" ColumnName="FileShareStatusID" />
+          <ScalarProperty Name="FileShareStatus" ColumnName="FileShareStatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LookupTable_FileViewStatuses">
+      <EntityTypeMapping TypeName="WebDocsModel.LookupTable_FileViewStatuses">
+        <MappingFragment StoreEntitySet="LookupTable_FileViewStatuses">
+          <ScalarProperty Name="FileLookupStatusID" ColumnName="FileLookupStatusID" />
+          <ScalarProperty Name="FileStatus" ColumnName="FileStatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LookupTable_NotificationTypes">
+      <EntityTypeMapping TypeName="WebDocsModel.LookupTable_NotificationTypes">
+        <MappingFragment StoreEntitySet="LookupTable_NotificationTypes">
+          <ScalarProperty Name="NotificationTypeID" ColumnName="NotificationTypeID" />
+          <ScalarProperty Name="NotificationType" ColumnName="NotificationType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Notifications">
+      <EntityTypeMapping TypeName="WebDocsModel.Notification">
+        <MappingFragment StoreEntitySet="Notifications">
+          <ScalarProperty Name="NotificationID" ColumnName="NotificationID" />
+          <ScalarProperty Name="FileID" ColumnName="FileID" />
+          <ScalarProperty Name="NotificationTypeID" ColumnName="NotificationTypeID" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="UserIDOfNotificationSender" ColumnName="UserIDOfNotificationSender" />
+          <ScalarProperty Name="UserIDOfNotificationRecipient" ColumnName="UserIDOfNotificationRecipient" />
+          <ScalarProperty Name="UserHasAcknowledgement" ColumnName="UserHasAcknowledgement" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="WebDocsModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserChats">
+      <EntityTypeMapping TypeName="WebDocsModel.UserChat">
+        <MappingFragment StoreEntitySet="UserChats">
+          <ScalarProperty Name="UserChatID" ColumnName="UserChatID" />
+          <ScalarProperty Name="ChatID" ColumnName="ChatID" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserThatDownloadedFiles">
+      <EntityTypeMapping TypeName="WebDocsModel.UserThatDownloadedFile">
+        <MappingFragment StoreEntitySet="UserThatDownloadedFile">
+          <ScalarProperty Name="FileID" ColumnName="FileID" />
+          <ScalarProperty Name="UserIDThatDownloadedFIle" ColumnName="UserIDThatDownloadedFIle" />
+          <ScalarProperty Name="DateDownloaded" ColumnName="DateDownloaded" />
+          <ScalarProperty Name="HasFileBeenReturned" ColumnName="HasFileBeenReturned" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="AspNetUserRoles" TypeName="WebDocsModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+      <EndProperty Name="AspNetRoles">
+        <ScalarProperty Name="Id" ColumnName="RoleId" />
+      </EndProperty>
+      <EndProperty Name="AspNetUsers">
+        <ScalarProperty Name="Id" ColumnName="UserId" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

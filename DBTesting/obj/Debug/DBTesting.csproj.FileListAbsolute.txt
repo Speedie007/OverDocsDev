@@ -1,0 +1,12 @@
+C:\GitRepo\WebDocsDev\DBTesting\bin\Debug\DBTesting.dll.config
+C:\GitRepo\WebDocsDev\DBTesting\bin\Debug\DBTesting.dll
+C:\GitRepo\WebDocsDev\DBTesting\bin\Debug\DBTesting.pdb
+C:\GitRepo\WebDocsDev\DBTesting\bin\Debug\EntityFramework.dll
+C:\GitRepo\WebDocsDev\DBTesting\bin\Debug\EntityFramework.SqlServer.dll
+C:\GitRepo\WebDocsDev\DBTesting\bin\Debug\EntityFramework.xml
+C:\GitRepo\WebDocsDev\DBTesting\bin\Debug\EntityFramework.SqlServer.xml
+C:\GitRepo\WebDocsDev\DBTesting\obj\Debug\DBTesting.csproj.CoreCompileInputs.cache
+C:\GitRepo\WebDocsDev\DBTesting\obj\Debug\DBTesting.csproj.CopyComplete
+C:\GitRepo\WebDocsDev\DBTesting\obj\Debug\DBTesting.dll
+C:\GitRepo\WebDocsDev\DBTesting\obj\Debug\DBTesting.pdb
+C:\GitRepo\WebDocsDev\DBTesting\obj\Debug\DBTesting.csprojAssemblyReference.cache
