@@ -38,6 +38,13 @@
     <Property Name="SslEnabled" Type="bit" Nullable="false" />
     <Property Name="SystemEmailAddress" Type="varchar" MaxLength="250" Nullable="false" />
   </EntityType>
+  <EntityType Name="FileArchiveBlobs">
+    <Key>
+      <PropertyRef Name="FileArchiveID" />
+    </Key>
+    <Property Name="FileArchiveID" Type="int" Nullable="false" />
+    <Property Name="FileImage" Type="image" Nullable="false" />
+  </EntityType>
   <EntityType Name="FileArchives">
     <Key>
       <PropertyRef Name="FileArchiveID" />
@@ -45,13 +52,10 @@
     <Property Name="FileArchiveID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="FileID" Type="int" Nullable="false" />
     <Property Name="UserIDOfLastUploaded" Type="int" Nullable="false" />
-    <Property Name="FileLookupStatusID" Type="int" Nullable="false" />
-    <Property Name="FileShareStatusID" Type="int" Nullable="false" />
     <Property Name="ContentType" Type="varchar" MaxLength="500" Nullable="false" />
     <Property Name="FileName" Type="varchar" MaxLength="500" Nullable="false" />
     <Property Name="FileExtension" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="FileSize" Type="int" Nullable="false" />
-    <Property Name="FileImage" Type="image" Nullable="false" />
     <Property Name="CurrentVersionNumber" Type="int" Nullable="false" />
     <Property Name="DateCreated" Type="datetime" Nullable="false" />
     <Property Name="DateArchived" Type="datetime" Nullable="false" />
@@ -114,6 +118,7 @@
     </Key>
     <Property Name="NotificationTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="NotificationType" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="NotificationMessageTemplate" Type="varchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="Notifications">
     <Key>
@@ -125,9 +130,6 @@
     <Property Name="DateCreated" Type="datetime" Nullable="false" />
     <Property Name="UserIDOfNotificationSender" Type="int" Nullable="false" />
     <Property Name="UserIDOfNotificationRecipient" Type="int" Nullable="false" />
-    <Property Name="NotificationSuccessfulSent" Type="bit" Nullable="false" />
-    <Property Name="RetryAttempt" Type="int" Nullable="false" />
-    <Property Name="NotificationMessageTemplate" Type="varchar(max)" Nullable="false" />
     <Property Name="UserHasAcknowledgement" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="PrivateFilesSharedWithUsers">
@@ -157,6 +159,30 @@
     <Property Name="DateDownloaded" Type="datetime" Nullable="false" />
     <Property Name="HasFileBeenReturned" Type="bit" Nullable="false" />
   </EntityType>
+  <Association Name="FK_FileArchiveBlobs_FileArchives">
+    <End Role="FileArchives" Type="Self.FileArchives" Multiplicity="1" />
+    <End Role="FileArchiveBlobs" Type="Self.FileArchiveBlobs" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="FileArchives">
+        <PropertyRef Name="FileArchiveID" />
+      </Principal>
+      <Dependent Role="FileArchiveBlobs">
+        <PropertyRef Name="FileArchiveID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FileArchives_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="FileArchives" Type="Self.FileArchives" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FileArchives">
+        <PropertyRef Name="UserIDOfLastUploaded" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_FileArchives_Files">
     <End Role="Files" Type="Self.Files" Multiplicity="1" />
     <End Role="FileArchives" Type="Self.FileArchives" Multiplicity="*" />
@@ -378,6 +404,7 @@
     <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Chats" EntityType="Self.Chats" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EmailSettings" EntityType="Self.EmailSettings" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FileArchiveBlobs" EntityType="Self.FileArchiveBlobs" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="FileArchives" EntityType="Self.FileArchives" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="FileBlobs" EntityType="Self.FileBlobs" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="FileCategories" EntityType="Self.FileCategories" Schema="dbo" store:Type="Tables" />
@@ -390,6 +417,14 @@
     <EntitySet Name="PrivateFilesSharedWithUsers" EntityType="Self.PrivateFilesSharedWithUsers" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserChats" EntityType="Self.UserChats" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserThatDownloadedFile" EntityType="Self.UserThatDownloadedFile" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_FileArchiveBlobs_FileArchives" Association="Self.FK_FileArchiveBlobs_FileArchives">
+      <End Role="FileArchives" EntitySet="FileArchives" />
+      <End Role="FileArchiveBlobs" EntitySet="FileArchiveBlobs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FileArchives_AspNetUsers" Association="Self.FK_FileArchives_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="FileArchives" EntitySet="FileArchives" />
+    </AssociationSet>
     <AssociationSet Name="FK_FileArchives_Files" Association="Self.FK_FileArchives_Files">
       <End Role="Files" EntitySet="Files" />
       <End Role="FileArchives" EntitySet="FileArchives" />

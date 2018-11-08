@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 using WebDocs.DataAccessLayer.Interfaces;
 using System.Data.Entity.Infrastructure;
 using WebDocs.DomainModels.Interfaces.Entities;
 using WebDocs.DomainModels.TransactionResponse;
-using System.Data.Entity.Validation;
+
 
 namespace WebDocs.DataAccessLayer
 {
@@ -34,8 +33,7 @@ namespace WebDocs.DataAccessLayer
             return list;
         }
 
-        public virtual IList<T> GetList(Func<T, bool> where,
-             params Expression<Func<T, object>>[] navigationProperties)
+        public virtual IList<T> GetList(Func<T, bool> where, params Expression<Func<T, object>>[] navigationProperties)
         {
             List<T> list;
             using (var context = new WebDocsEntities())
@@ -86,13 +84,68 @@ namespace WebDocs.DataAccessLayer
             return CurrentResponse;
         }
 
+        public virtual async Task<CompletedTransactionResponses> AsyncRemove(params T[] items)
+        {
+            CompletedTransactionResponses CurrentResponse = await AsyncUpdate(items);
+            CurrentResponse.TransActionType = TransactionType.Delete;
+            return CurrentResponse;
+        }
+
+        public virtual async Task<CompletedTransactionResponses> AsyncAdd(params T[] items)
+        {
+            CompletedTransactionResponses CurrentResponse = await AsyncUpdate(items);
+            CurrentResponse.TransActionType = TransactionType.Insert;
+            return CurrentResponse;
+        }
+
+        public virtual async Task<CompletedTransactionResponses> AsyncUpdate(params T[] items)
+        {
+            CompletedTransactionResponses CurrentResponse = new CompletedTransactionResponses()
+            {
+                Message = "",
+                TransActionType = TransactionType.Update,
+                WasSuccessfull = false
+            };
+            using (var context = new WebDocsEntities())
+            {
+
+                using (DbContextTransaction transaction = context.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        DbSet<T> dbSet = context.Set<T>();
+                        foreach (T item in items)
+                        {
+                            dbSet.Add(item);
+                            foreach (DbEntityEntry<IEntity> entry in context.ChangeTracker.Entries<IEntity>())
+                            {
+                                IEntity entity = entry.Entity;
+                                entry.State = GetEntityState(entity.EntityState);
+                            }
+                        }
+                        await context.SaveChangesAsync();
+
+                        transaction.Commit();
+                        CurrentResponse.WasSuccessfull = true;
+                        CurrentResponse.Message = "Transaction Successfully Completed.";
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        CurrentResponse.Message = "Error occurred. - " + ex.Message;
+                    }
+                }
+            }
+            return CurrentResponse;
+        }
+
         public virtual CompletedTransactionResponses Update(params T[] items)
         {
             CompletedTransactionResponses CurrentResponse = new CompletedTransactionResponses()
             {
                 Message = "",
                 TransActionType = TransactionType.Update,
-                 WasSuccessfull = false
+                WasSuccessfull = false
             };
             using (var context = new WebDocsEntities())
             {
@@ -148,6 +201,24 @@ namespace WebDocs.DataAccessLayer
                 default:
                     return System.Data.Entity.EntityState.Detached;
             }
+        }
+
+        public virtual async Task<IList<T>> AsyncGetAll(params Expression<Func<T, object>>[] navigationProperties)
+        {
+            List<T> list;
+            using (var context = new WebDocsEntities())
+            {
+                IQueryable<T> dbQuery = context.Set<T>();
+
+                //Apply eager loading
+                foreach (Expression<Func<T, object>> navigationProperty in navigationProperties)
+                    dbQuery = dbQuery.Include<T, object>(navigationProperty);
+
+                list = await dbQuery
+                    .AsNoTracking()
+                    .ToListAsync<T>();
+            }
+            return list;
         }
     }
 }

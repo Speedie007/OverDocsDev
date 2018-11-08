@@ -18,7 +18,7 @@ namespace WebDocs.DomainModels.DecisionModels.PublicDocuments.IsLocked
         public int FileOwnerID { get; set; }
         public int FileSharedStautusID { get; set; }
         public int FileStatusID { get; set; }
-        public ICollection<PrivateFilesSharedWithUser> ListOfFilesSharedWithUser { get; set; }
+        public ICollection<PrivateFilesSharedWithUserModel> ListOfFilesSharedWithUser { get; set; }
         public int UserIDOfthePersonThatDownloadedTheFile { get; set; }
         
     }

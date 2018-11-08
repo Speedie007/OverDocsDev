@@ -9,5 +9,8 @@ namespace WebDocs.BusinessApplicationLayer.Interfaces.ProjectSections
 {
     public interface IReturnDocuments : IBusinessLayer<UserThatDownloadedFileModel>
     {
+        IList<FileModel> GetAllFilesThatAreDownloaded();
+        IList<FileModel> GetAllFilesThatAreDownloadedByUser(int UserID);
+
     }
 }

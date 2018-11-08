@@ -20,6 +20,12 @@ namespace WebDocs.DataAccessLayer.Interfaces
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="navigationProperties"></param>
+        /// <returns></returns>
+        Task<IList<T>> AsyncGetAll(params Expression<Func<T, object>>[] navigationProperties);
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="where"></param>
         /// <param name="navigationProperties"></param>
         /// <returns></returns>
@@ -31,11 +37,24 @@ namespace WebDocs.DataAccessLayer.Interfaces
         /// <param name="navigationProperties"></param>
         /// <returns></returns>
         T GetSingle(Func<T, bool> where, params Expression<Func<T, object>>[] navigationProperties);
+
         /// <summary>
         /// 
         /// </summary>
         /// <param name="items"></param>
+        Task<CompletedTransactionResponses> AsyncAdd(params T[] items);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
         CompletedTransactionResponses Add(params T[] items);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        Task<CompletedTransactionResponses> AsyncUpdate(params T[] items);
         /// <summary>
         /// 
         /// </summary>
@@ -46,5 +65,11 @@ namespace WebDocs.DataAccessLayer.Interfaces
         /// </summary>
         /// <param name="items"></param>
         CompletedTransactionResponses Remove(params T[] items);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="items"></param>
+        /// <returns></returns>
+        Task<CompletedTransactionResponses> AsyncRemove(params T[] items);
     }
 }

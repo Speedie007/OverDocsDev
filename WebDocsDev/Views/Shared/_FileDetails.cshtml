@@ -1,0 +1,41 @@
+﻿@model WebDocs.DomainModels.Database.FileModel
+
+<tr>
+    <td colspan="10" id="FileDetails_@Model.FileID" class="FileDetailsClass hidden">
+        <div class="panel panel-warning">
+            <div class="panel-heading">
+                <a href="#" onclick="CloseFileDetails(@Model.FileID);" class="btn btn-default btn-default " data-toggle="tooltip" data-placement="top" title="Close File History."><span class="glyphicon glyphicon-remove"></span></a>
+                Close File Histroy
+            </div>
+            <div class="panel-body">
+
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#FileHistory_@Model.FileID">File History</a></li>
+                    <li><a data-toggle="tab" href="#TransactionHistory_@Model.FileID">Transaction History</a></li>
+
+                </ul>
+
+                <div class="tab-content">
+                    <div id="FileHistory_@Model.FileID" class="tab-pane fade in active">
+                        <div id="FileHistory_Loading_@Model.FileID">
+                            <img src="~/Images/ajax-loader.gif" />Loading..
+                        </div>
+                        <div id="FileHistory_Content_@Model.FileID">
+                        </div>
+                    </div>
+                    <div id="TransactionHistory_@Model.FileID" class="tab-pane fade">
+                        <div id="TransactionHistory_Loading_@Model.FileID">
+                            <img src="~/Images/ajax-loader.gif" />Loading..
+                        </div>
+                        <div id="TransactionHistory_Content_@Model.FileID">
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            
+        </div>
+    </td>
+</tr>
+

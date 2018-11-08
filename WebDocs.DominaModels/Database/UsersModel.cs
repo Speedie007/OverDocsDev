@@ -18,13 +18,14 @@ namespace WebDocs.DomainModels.Database
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public UsersModel()
         {
-            this.PrivateFilesSharedWithUsers = new HashSet<PrivateFilesSharedWithUser>();
+            this.PrivateFilesSharedWithUsers = new HashSet<PrivateFilesSharedWithUserModel>();
             this.SenderNotifications = new HashSet<NotificationModel>();
             this.RecipientNotifications = new HashSet<NotificationModel>();
             this.UserChats = new HashSet<UserChatModel>();
             this.UserThatDownloadedFiles = new HashSet<UserThatDownloadedFileModel>();
             this.OwnerFiles = new HashSet<FileModel>();
             this.PersonThatLastUpdatedFile = new HashSet<FileModel>();
+            this.FileArchives = new HashSet<FileArchiveModel>();
         }
     
         public int Id { get; set; }
@@ -58,7 +59,7 @@ namespace WebDocs.DomainModels.Database
     		public EntityState EntityState { get; set; }
     		
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PrivateFilesSharedWithUser> PrivateFilesSharedWithUsers { get; set; }
+        public virtual ICollection<PrivateFilesSharedWithUserModel> PrivateFilesSharedWithUsers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NotificationModel> SenderNotifications { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -71,5 +72,7 @@ namespace WebDocs.DomainModels.Database
         public virtual ICollection<FileModel> OwnerFiles { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FileModel> PersonThatLastUpdatedFile { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FileArchiveModel> FileArchives { get; set; }
     }
 }

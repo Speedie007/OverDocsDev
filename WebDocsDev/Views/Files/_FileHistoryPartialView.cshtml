@@ -1,0 +1,104 @@
+﻿@model IEnumerable<WebDocs.DomainModels.Database.FileArchiveModel>
+
+
+<table class="table">
+    <thead>
+
+        <tr>
+            <th class="text-nowrap">
+                @Html.Label("Ref#")
+            </th>
+            <th class="text-nowrap">
+                @Html.Label("File Name")
+            </th>
+            <th class="text-nowrap">
+                @Html.Label("File Size")
+
+            </th>
+            @*<th class="text-nowrap">
+            @Html.ActionLink("File Owner", "DisplayPublicDocs", new { sortOrder = ViewBag.NameOfFileOwnerSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th class="text-nowrap">
+            @Html.ActionLink("Last Modified By", "DisplayPublicDocs", new { sortOrder = ViewBag.FileIDSortParm, currentFilter = ViewBag.CurrentFilter })
+
+        </th>*@
+            @*<th class="text-nowrap">
+            @Html.ActionLink("Created", "DisplayPublicDocs", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>*@
+            @*<th class="text-nowrap">
+            @Html.ActionLink("File Status", "DisplayPublicDocs", new { sortOrder = ViewBag.CurrentFileStatusSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>*@
+            <th class="text-nowrap">
+                @Html.Label("Date Archived")
+            </th>
+            <th class="text-nowrap">
+                @Html.Label("Version")
+            </th>
+            <th class="text-nowrap">@Html.Label("Downloaded/Updated By")</th>
+            <th>@Html.Label("Options")</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            if (Model.Count() > 0)
+            {
+                foreach (var item in Model)
+                {
+        <tr>
+            <td class="text-nowrap text-center">
+                @Html.DisplayFor(modelItem => item.FileID)
+            </td>
+
+            <td class="text-nowrap">
+                @Html.DisplayFor(modelItem => item.FullFileName)
+            </td>
+            <td class="text-nowrap">
+                @Html.Label(WebDocs.Common.Helper.Formatters.FileSize.ToFileSize(Convert.ToDouble(item.Size)))
+            </td>
+            @*<td class="text-nowrap">
+            @Html.DisplayFor(modelItem => item.FileOwner.UserFullName)
+        </td>
+        <td class="text-nowrap">
+            @Html.DisplayFor(modelItem => item.PersonThatLastUpdatedFile.UserFullName)
+        </td>*@
+            @*<td class="text-nowrap">
+            @Html.Label(item.DateCreated.ToString("MMMM dd, yyyy"))
+        </td>*@
+            @*<td class="text-nowrap ">
+            @Html.DisplayFor(modelItem => item.FileViewStatuses.Status)
+        </td>*@
+            <td class="text-nowrap ">
+                @Html.DisplayFor(modelItem => item.DateArchived)
+            </td>
+            <td class="text-nowrap">
+                @Html.DisplayFor(modelItem => item.Version)
+            </td>
+            <td class="text-nowrap">
+                @Html.DisplayFor(modelItem => item.UserThatUploadedTheFile.UserFullName)
+            </td>
+            <td class="text-nowrap">
+                @Html.ActionLink("Download", "Edit", new { /* id=item.PrimaryKey */ })
+                @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+            </td>
+        </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="9">
+                        <div class="alert alert-info">
+                            <strong>Info!</strong> No history for this file is recorded!.<br />
+                            Will only show history once new or modified versions of this file are uploaded!!
+                        </div>
+                    </td>
+                </tr>
+            }
+        }
+
+
+    </tbody>
+
+</table>
+

@@ -8,7 +8,7 @@ using WebDocs.DomainModels.Database;
 
 namespace WebDocs.DataAccessLayer.Repositories
 {
-    public class FileRepository : GenericDataRepository<FileModel>, IFileRepository
+    public class FileRepository : GenericDataRepository<FileModel>, IFileRepository, IFileProcessingRepository
     {
     }
 }

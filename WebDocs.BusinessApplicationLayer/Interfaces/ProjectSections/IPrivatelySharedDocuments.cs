@@ -7,7 +7,7 @@ using WebDocs.DomainModels.Database;
 
 namespace WebDocs.BusinessApplicationLayer.Interfaces.ProjectSections
 {
-    public interface IPrivatelySharedDocuments : IBusinessLayer<PrivateFilesSharedWithUser>
+    public interface IPrivatelySharedDocuments : IBusinessLayer<PrivateFilesSharedWithUserModel>
     {
         IList<FileModel> GetAllPersonalFilesSharedWithUser(int UserID);
     }

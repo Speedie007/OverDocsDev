@@ -47,14 +47,11 @@
         <MappingFragment StoreEntitySet="FileArchives">
           <ScalarProperty Name="DateArchived" ColumnName="DateArchived" />
           <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
-          <ScalarProperty Name="CurrentVersionNumber" ColumnName="CurrentVersionNumber" />
-          <ScalarProperty Name="FileImage" ColumnName="FileImage" />
-          <ScalarProperty Name="FileSize" ColumnName="FileSize" />
-          <ScalarProperty Name="FileExtension" ColumnName="FileExtension" />
-          <ScalarProperty Name="FileName" ColumnName="FileName" />
+          <ScalarProperty Name="Version" ColumnName="CurrentVersionNumber" />
+          <ScalarProperty Name="Size" ColumnName="FileSize" />
+          <ScalarProperty Name="Extension" ColumnName="FileExtension" />
+          <ScalarProperty Name="Name" ColumnName="FileName" />
           <ScalarProperty Name="ContentType" ColumnName="ContentType" />
-          <ScalarProperty Name="FileShareStatusID" ColumnName="FileShareStatusID" />
-          <ScalarProperty Name="FileLookupStatusID" ColumnName="FileLookupStatusID" />
           <ScalarProperty Name="UserIDOfLastUploaded" ColumnName="UserIDOfLastUploaded" />
           <ScalarProperty Name="FileID" ColumnName="FileID" />
           <ScalarProperty Name="FileArchiveID" ColumnName="FileArchiveID" />
@@ -97,6 +94,7 @@
     <EntitySetMapping Name="NotificationTypesModels">
       <EntityTypeMapping TypeName="WebDocsModel.NotificationTypesModel">
         <MappingFragment StoreEntitySet="LookupTable_NotificationTypes">
+          <ScalarProperty Name="NotificationMessageTemplate" ColumnName="NotificationMessageTemplate" />
           <ScalarProperty Name="NotificationType" ColumnName="NotificationType" />
           <ScalarProperty Name="NotificationTypeID" ColumnName="NotificationTypeID" />
         </MappingFragment>
@@ -106,9 +104,6 @@
       <EntityTypeMapping TypeName="WebDocsModel.NotificationModel">
         <MappingFragment StoreEntitySet="Notifications">
           <ScalarProperty Name="UserHasAcknowledgement" ColumnName="UserHasAcknowledgement" />
-          <ScalarProperty Name="NotificationMessageTemplate" ColumnName="NotificationMessageTemplate" />
-          <ScalarProperty Name="RetryAttempt" ColumnName="RetryAttempt" />
-          <ScalarProperty Name="NotificationSuccessfulSent" ColumnName="NotificationSuccessfulSent" />
           <ScalarProperty Name="UserIDOfNotificationRecipient" ColumnName="UserIDOfNotificationRecipient" />
           <ScalarProperty Name="UserIDOfNotificationSender" ColumnName="UserIDOfNotificationSender" />
           <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
@@ -118,8 +113,8 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="PrivateFilesSharedWithUsers">
-      <EntityTypeMapping TypeName="WebDocsModel.PrivateFilesSharedWithUser">
+    <EntitySetMapping Name="PrivateFilesSharedWithUserModels">
+      <EntityTypeMapping TypeName="WebDocsModel.PrivateFilesSharedWithUserModel">
         <MappingFragment StoreEntitySet="PrivateFilesSharedWithUsers">
           <ScalarProperty Name="DateShared" ColumnName="DateShared" />
           <ScalarProperty Name="FileID" ColumnName="FileID" />
@@ -170,6 +165,14 @@
           <ScalarProperty Name="UserIDOfLastUploaded" ColumnName="UserIDOfLastUploaded" />
           <ScalarProperty Name="UserIDOfFileOwner" ColumnName="UserIDOfFileOwner" />
           <ScalarProperty Name="FileID" ColumnName="FileID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FileArchiveBlobModels">
+      <EntityTypeMapping TypeName="WebDocsModel.FileArchiveBlobModel">
+        <MappingFragment StoreEntitySet="FileArchiveBlobs">
+          <ScalarProperty Name="FileImage" ColumnName="FileImage" />
+          <ScalarProperty Name="FileArchiveID" ColumnName="FileArchiveID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

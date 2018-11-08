@@ -9,16 +9,27 @@ namespace WebDocs.DomainModels.TransactionResponse
 {
     public class CompletedTransactionResponses : ITransactionResponses
     {
+        public CompletedTransactionResponses()
+        {
+            this.Message = "Tranaction Not Executed";
+            this.WasSuccessfull = false;
+            this.TransActionType = TransactionType.NoneExecuted;
+        }
+
+
         public TransactionType TransActionType { get; set; }
         public string Message { get; set; }
         public bool WasSuccessfull { get; set; }
+        
     }
 
     public enum TransactionType
     {
         Insert,
         Update,
-        Delete
+        Delete,
+        Read,
+        NoneExecuted
     }
 
 }

@@ -25,6 +25,8 @@ namespace WebDocs.DomainModels.Database
     	
         public string NotificationType { get; set; }
     	
+        public string NotificationMessageTemplate { get; set; }
+    	
     		public EntityState EntityState { get; set; }
     		
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

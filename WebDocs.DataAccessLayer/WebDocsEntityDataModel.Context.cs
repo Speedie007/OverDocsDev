@@ -38,10 +38,11 @@ namespace WebDocs.DataAccessLayer
         public virtual DbSet<FileStatusModel> FileStatusModels { get; set; }
         public virtual DbSet<NotificationTypesModel> NotificationTypesModels { get; set; }
         public virtual DbSet<NotificationModel> NotificationModels { get; set; }
-        public virtual DbSet<PrivateFilesSharedWithUser> PrivateFilesSharedWithUsers { get; set; }
+        public virtual DbSet<PrivateFilesSharedWithUserModel> PrivateFilesSharedWithUserModels { get; set; }
         public virtual DbSet<UserChatModel> UserChatModels { get; set; }
         public virtual DbSet<UserThatDownloadedFileModel> UserThatDownloadedFileModels { get; set; }
         public virtual DbSet<FileBlobModel> FileBlobModels { get; set; }
         public virtual DbSet<FileModel> FileModels { get; set; }
+        public virtual DbSet<FileArchiveBlobModel> FileArchiveBlobModels { get; set; }
     }
 }

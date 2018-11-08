@@ -41,6 +41,14 @@ namespace WebDocsDev
                defaults: new { controller = "Notifications", action = "DisplayUserNotifications", id = UrlParameter.Optional }
            );
             #endregion
+
+           // #region Content Management 
+           // routes.MapRoute(
+           //    name: "DispalyUserNotifications",
+           //    url: "{controller}/{action}/{id}",
+           //    defaults: new { controller = "ContentManagement", action = "Download", id = UrlParameter.Optional }
+           //);
+           // #endregion
         }
     }
 }

@@ -7,7 +7,7 @@ using WebDocs.DomainModels.Database;
 
 namespace WebDocs.DataAccessLayer.Interfaces.Entities
 {
-    public interface IPrivateFilesSharedWithUsers : IGenericDataRepository<PrivateFilesSharedWithUser>
+    public interface IPrivateFilesSharedWithUsersRepository : IGenericDataRepository<PrivateFilesSharedWithUserModel>
     {
     }
 }

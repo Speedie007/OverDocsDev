@@ -1,0 +1,29 @@
+﻿<!-- Modal -->
+<div class="modal fade" id="ProcessFileRequestNotificationModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 style="color:orange;"><span class="glyphicon glyphicon-exclamation-sign"></span> Process File Request Notification</h4>
+            </div>
+            <div class="modal-body">
+                <p>A Request Notification was recievevied from <u> <span id="requestNotificationSenderName"></span></u> has been recieved. The request is to gain acces to:<h2>Ref# <span id="requestedNotificationFileID"></span> - <span id="requestedFileNameToShareBaseOnTheREquestNotificationRecieved"></span></h2></p>
+                <br />
+                How Would you like to procced?
+                <br />
+                <br />
+                <div class="row ">
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default btn-info " data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+                <button id="btnDenyFileShareRequest" class="btn btn-danger  "><span class="glyphicon glyphicon-ban-circle"></span> Deny</button>
+                <button id="btnAcceptFileShareRequest" class="btn btn-success" onclick="ProcessAcceptedFileShareRequest();"><span class="glyphicon glyphicon-ban-circle" ></span> Accept</button>
+
+            </div>
+        </div>
+    </div>
+</div>

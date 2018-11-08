@@ -1,7 +1,8 @@
-﻿@model WebDocs.DomainModels.ViewModels.NotificationsViewModel
+﻿@model WebDocs.DomainModels.ViewModels.Notifications.NotificationsViewModel
 
 @using Microsoft.AspNet.Identity;
 @using WebDocs.Common.Enum.DbLookupTables;
+@using PagedList.Mvc;
 
 @{
     ViewBag.Title = "DisplayUserNotifications";
@@ -14,173 +15,284 @@
 @{
     int UserID_OfUserCurrentlyLoggedIn = User.Identity.GetUserId<int>();
 }
+<div class="panel panel-primary">
+    <div class="panel-heading"><h2>Public Viewable Documents</h2></div>
+    <div class="panel-body">
+        <ul class="nav nav nav-tabs">
+            <li class="active"><a data-toggle="tab" onclick="SetTabIndex(0);" href="#home">New User Notifications</a></li>
 
-<ul class="nav nav nav-tabs">
+            <li><a onclick="SetTabIndex(1);" data-toggle="tab" href="#menuItemArchiveNotifcations">Archived Notifications</a></li>
+        </ul>
 
+        <div class="tab-content">
+            <div id="home" class="tab-pane fade in active">
 
-    <li class="active"><a data-toggle="tab" href="#home">New User Notifications</a></li>
+                <table class="table">
+                    <tr>
+                        <th class="text-nowrap">
+                            @Html.Label("Notification#")
+                        </th>
+                        <th class="text-nowrap">
+                            @Html.Label("File Ref#")
+                        </th>
+                        <th class="text-nowrap">
+                            @Html.Label("Request File")
+                        </th>
+                        <th class="text-nowrap">
+                            @Html.Label("Notification Type")
+                        </th>
+                        <th class="text-nowrap">
+                            @Html.Label("Created")
+                        </th>
+                        <th class="text-nowrap">
+                            @Html.Label("Sender")
+                        </th>
 
-    <li><a data-toggle="tab" href="#menuItemArchiveNotifcations">Archived Notifications</a></li>
+                        <th class="text-nowrap">Options</th>
+                    </tr>
+                    @{
+                        if (Model.NewUserNotifications.Count() > 0)
+                        {
+                            foreach (var item in Model.NewUserNotifications)
+                            {
+                                if (!(item.UserHasAcknowledgement))
+                                {
+                                    <tr>
+                                        <td class="text-nowrap">
+                                            @item.NotificationID
 
+                                        </td>
+                                        <td class="text-nowrap">
+                                            @item.FileID
 
-
-</ul>
-
-<div class="tab-content">
-    <div id="home" class="tab-pane fade in active">
-
-        <table class="table">
-            <tr>
-                <th class="text-nowrap">
-                    @Html.Label("Notification#")
-                </th>
-                <th class="text-nowrap">
-                    @Html.Label("File Ref#")
-                </th>
-                <th class="text-nowrap">
-                    @Html.Label("Request File")
-                </th>
-                <th class="text-nowrap">
-                    @Html.Label("Notification Type")
-                </th>
-                <th class="text-nowrap">
-                    @Html.Label("Created")
-                </th>
-                <th class="text-nowrap">
-                    @Html.Label("Sender")
-                </th>
-
-                <th class="text-nowrap">Options</th>
-            </tr>
-            @{
-                if (Model.UserNotifications.Where(a => a.UserHasAcknowledgement == false).Count() > 0)
-                {
-                    foreach (var item in Model.UserNotifications)
-                    {
-                        if (!(item.UserHasAcknowledgement))
+                                        </td>
+                                        <td class="text-nowrap">@item.File.FullFileName </td>
+                                        <td class="text-nowrap">
+                                            @item.NotificationTypes.NotificationType
+                                        </td>
+                                        <td class="text-nowrap">
+                                            @item.DateCreated
+                                        </td>
+                                        <td class="text-nowrap">
+                                            @item.SendingUsers.UserFullName
+                                        </td>
+                                        <td>
+                                            @{
+                                                string sFileName = item.File.FullFileName;
+                                                string sPersonNameWhichIsRequestingFile = item.SendingUsers.UserFullName;
+                                                if (item.NotificationTypeID == (int)EnumNotificationTypes.Share_Request)
+                                                {
+                                                    @: [<a href="javascript:void(0);" onclick="showProcessRequestNotificationModal(@item.FileID, @item.NotificationID,'@item.UserIDOfNotificationSender','@UserID_OfUserCurrentlyLoggedIn','@sFileName','@sPersonNameWhichIsRequestingFile');">Process Notification</a>]
+                                                }
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            <tr>
+                                <td colspan="7">
+                                    <div class="well">
+                                        <table>
+                                            <tr>
+                                                <td>Page @(Model.NewUserNotifications.PageCount < Model.NewUserNotifications.PageNumber ? 0 : Model.NewUserNotifications.PageNumber) of @Model.NewUserNotifications.PageCount</td>
+                                                <td>&nbsp;</td>
+                                                <td>
+                                                    @Html.PagedListPager(Model.NewUserNotifications, page => Url.Action("DisplayUserNotifications", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                        else
                         {
                             <tr>
-                                <td class="text-nowrap">
-                                    @item.NotificationID
+                                <td colspan="9">
+                                    <div class="alert alert-info">
+                                        <strong>Info!</strong> No New Notifications Listed!.<br />
+                                        Will only show notifications users send any notification requests!!
+                                    </div>
+                                </td>
+                            </tr>
 
-                                </td>
-                                <td class="text-nowrap">
-                                    @item.FileID
+                        }
 
+                    }
+
+
+                </table>
+            </div>
+
+            <div id="menuItemArchiveNotifcations" class="tab-pane fade">
+
+                <table class="table">
+                    <tr>
+                        <th>
+                            @Html.Label("Ref#")
+                        </th>
+                        <th>
+                            @Html.Label("Notification Type")
+                        </th>
+                        <th>
+                            @Html.Label("Created")
+                        </th>
+                        <th>
+                            @Html.Label("Sender")
+                        </th>
+                        <th></th>
+                    </tr>
+                    @{
+                        if (Model.ArchivedUserNotifications.Count > 0)
+                        {
+                            foreach (var item in Model.ArchivedUserNotifications)
+                            {
+                                if (item.UserHasAcknowledgement)
+                                {
+                                    <tr>
+                                        <td>
+                                            @item.FileID
+
+                                        </td>
+                                        <td>
+                                            @item.NotificationTypes.NotificationType
+                                        </td>
+                                        <td>
+                                            @item.DateCreated
+                                        </td>
+                                        <td>
+                                            @item.SendingUsers.UserFullName
+                                        </td>
+
+                                        <td>
+                                            @Html.ActionLink("Edit", "Edit", new { id = item.NotificationID }) |
+                                            @Html.ActionLink("Details", "Details", new { id = item.NotificationID }) |
+                                            @Html.ActionLink("Delete", "Delete", new { id = item.NotificationID })
+                                        </td>
+                                    </tr>
+                                }
+
+                            }
+                            <tr>
+                                <td colspan="5">
+                                    <table>
+                                        <tr>
+                                            <td>Page @(Model.ArchivedUserNotifications.PageCount < Model.ArchivedUserNotifications.PageNumber ? 0 : Model.ArchivedUserNotifications.PageNumber) of @Model.ArchivedUserNotifications.PageCount</td>
+                                            <td>&nbsp;</td>
+                                            <td>
+                                                @Html.PagedListPager(Model.ArchivedUserNotifications, page => Url.Action("DisplayUserNotifications", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </td>
-                                <td class="text-nowrap">@item.File.FullName </td>
-                                <td class="text-nowrap">
-                                    @item.NotificationTypes.NotificationType
-                                </td>
-                                <td class="text-nowrap">
-                                    @item.DateCreated
-                                </td>
-                                <td class="text-nowrap">
-                                    @item.SendingUsers.UserFullName
-                                </td>
-                                <td>
-                                    @{
-                                        string sFileName = item.File.FullName;
-                                        string sPersonNameWhichIsRequestingFile = item.SendingUsers.UserFullName;
-                                        if (item.NotificationTypeID == (int)EnumNotificationTypes.Share_Request)
-                                        {
-                                            @: [<a href="javascript:void(0);" onclick="showProcessRequestNotificationModal(@item.FileID, @item.NotificationID,'@item.UserIDOfNotificationSender','@UserID_OfUserCurrentlyLoggedIn','@sFileName','@sPersonNameWhichIsRequestingFile');">Process Notification</a>]
-                                        }
-                                    }
-                                    @*@Html.ActionLink("ShowNotifications", "ShowNotifications", new { TabIndex = 0 }) |
-                                        @Html.ActionLink("Details", "Details", new { id = item.NotificationID }) |
-                                        @Html.ActionLink("Delete", "Delete", new { id = item.NotificationID })*@
+                            </tr>
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="9">
+                                    <div class="alert alert-info">
+                                        <strong>Info!</strong> No Archive Notifications Listed!.<br />
+                                        Will only show notifications items once new notifications have been processed!!
+                                    </div>
                                 </td>
                             </tr>
                         }
                     }
-                }
-                else
-                {
-                    <tr>
-                        <td colspan="9">
-                            <div class="alert alert-info">
-                                <strong>Info!</strong> No New Notifications Listed!.<br />
-                                Will only show notifications users send any notification requests!!
-                            </div>
-                        </td>
-                    </tr>
 
-                }
+                    @*@Html.ActionLink("ShowNotifications", "ShowNotifications", new { TabIndex = 1 }) |*@
 
-            }
-
-
-        </table>
+                </table>
+            </div>
+        </div>
     </div>
-
-    <div id="menuItemArchiveNotifcations" class="tab-pane fade">
-
-        <table class="table">
-            <tr>
-                <th>
-                    @Html.Label("Ref#")
-                </th>
-                <th>
-                    @Html.Label("Notification Type")
-                </th>
-                <th>
-                    @Html.Label("Created")
-                </th>
-                <th>
-                    @Html.Label("Sender")
-                </th>
-                <th></th>
-            </tr>
-            @{
-                if (Model.UserNotifications.Where(a => a.UserHasAcknowledgement == true).Count() > 0)
-                {
-                    foreach (var item in Model.UserNotifications)
-                    {
-                        if (item.UserHasAcknowledgement)
-                        {
-                            <tr>
-                                <td>
-                                    @item.FileID
-
-                                </td>
-                                <td>
-                                    @item.NotificationTypes.NotificationType
-                                </td>
-                                <td>
-                                    @item.DateCreated
-                                </td>
-                                <td>
-                                    @item.SendingUsers.UserFullName
-                                </td>
-
-                                <td>
-                                    @Html.ActionLink("Edit", "Edit", new { id = item.NotificationID }) |
-                                    @Html.ActionLink("Details", "Details", new { id = item.NotificationID }) |
-                                    @Html.ActionLink("Delete", "Delete", new { id = item.NotificationID })
-                                </td>
-                            </tr>
-                        }
-
-                    }
-                }
-                else
-                {
-                    <tr>
-                        <td colspan="9">
-                            <div class="alert alert-info">
-                                <strong>Info!</strong> No Archive Notifications Listed!.<br />
-                                Will only show notifications items once new notifications have been processed!!
-                            </div>
-                        </td>
-                    </tr>
-                }
-            }
-
-            @*@Html.ActionLink("ShowNotifications", "ShowNotifications", new { TabIndex = 1 }) |*@
-        </table>
+    <div class="panel-footer panel-danger">
+        
     </div>
 </div>
+
+
+<a onclick="RefreshPage();" href="#">REFRESH TEST</a>
+@using (Html.BeginForm("DisplayUserNotifications", "Notifications", FormMethod.Post))
+{
+    @Html.Hidden("TabIndex", "0");
+    <input type="submit" id="btnRefreshPage" value="" style="display:none" />
+}
+
+@Html.Partial("_ProcessRequestNotification")
+@Html.Partial("_SuccessDialog")
+@Html.Partial("_FailureDialog")
+
+@section Scripts{
+
+
+    <script type="text/javascript">
+
+        function RefreshPage() {
+            $("#btnRefreshPage")[0].click();
+        }
+
+        function SetTabIndex(iTabIndex) {
+            $("#TabIndex").val(iTabIndex);
+        }
+
+        //$("#Download_Notification_Modal").on('hidden.bs.modal', function () {
+        //    $("#btnRefreshPage")[0].click();
+        //});
+
+        window.onload = function () {
+        //script goes here
+         $('.nav-tabs li:eq('+ @Model.CurrentTabIndex +') a').tab('show');
+        };
+        var _AcceptFileRequestNotifictionViewModel;
+
+        function showProcessRequestNotificationModal(FileID, NotificationID, FileName, PersonNameWhichIsRequestingFile) {
+
+            //Create Json Object
+            _AcceptFileRequestNotifictionViewModel = JSON.parse('{}');
+            _AcceptFileRequestNotifictionViewModel.TabIndex = 0;
+            _AcceptFileRequestNotifictionViewModel.NotificationID = NotificationID;
+
+            //debugger;
+            $("#requestNotificationSenderName").html(PersonNameWhichIsRequestingFile);
+            $("#requestedFileNameToShareBaseOnTheREquestNotificationRecieved").html(FileName);
+            $("#requestedNotificationFileID").html(FileID);
+
+
+            $("#ProcessFileRequestNotificationModal").modal("show");
+
+        }
+
+        function ProcessAcceptedFileShareRequest() {
+
+            $("#ProcessFileRequestNotificationModal").modal("hide");
+            //debugger;
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("AcceptFileRequestNotification", "Notifications")',
+                data: JSON.stringify(_AcceptFileRequestNotifictionViewModel),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+
+                    $('#SuccessConfiramtionMessage').html(data.Message);
+
+                    $('#SuccessConfirmationModal').modal('show');
+                },
+                error: function (xhr, textStatus, error) {
+
+                    $('#FailureConfiramtionMessage').html(error);
+                    //$('#ShowFileRequerstNotificationConfirmationModal').modal(options);
+                    $('#FailureConfirmationModal').modal('show');
+
+                }
+            });
+        }
+    </script>
+}
+
+
+
 
 
 

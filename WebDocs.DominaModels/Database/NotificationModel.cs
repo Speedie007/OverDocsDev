@@ -27,12 +27,6 @@ namespace WebDocs.DomainModels.Database
     	
         public int UserIDOfNotificationRecipient { get; set; }
     	
-        public bool NotificationSuccessfulSent { get; set; }
-    	
-        public int RetryAttempt { get; set; }
-    	
-        public string NotificationMessageTemplate { get; set; }
-    	
         public bool UserHasAcknowledgement { get; set; }
     	
     		public EntityState EntityState { get; set; }

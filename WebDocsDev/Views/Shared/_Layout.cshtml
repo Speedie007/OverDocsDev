@@ -9,7 +9,7 @@
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -25,7 +25,7 @@
                     <li>@Html.ActionLink("Public Docs", "DisplayPublicDocs", "Files")</li>
                     <li>@Html.ActionLink("User Docs", "DisplayUserDocs", "Files")</li>
                     <li>@Html.ActionLink("Privately Shared Docs", "DisplayPrivateFilesSharedWithUser", "Files")</li>
-                    <li>@Html.ActionLink("Return Docs", "DisplayUserDocs", "Files")</li>
+                    <li>@Html.ActionLink("Return Docs", "DisplayUserUploadDocs", "Files")</li>
                     <li>@Html.ActionLink("Notifications", "DisplayUserNotifications", "Notifications")</li>
                     <li>@Html.ActionLink("Help", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
@@ -38,12 +38,38 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - WebDocs Complied By Ricco Hammond.</p>
         </footer>
     </div>
 
+
+    @using (Html.BeginForm("DownLoadSelectedFile", "Files", FormMethod.Post))
+    {
+        <input type="hidden" id="FileID" name="FileID" />
+        <input type="hidden" id="UserIDOfPersonThatDownloadedTheFile" name="UserIDOfPersonThatDownloadedTheFile" />
+        <input type="submit" id="btnDownload" value="Download" style="display:none" />
+    }
+
+    @Html.Partial("_DownloadFileDialog")
+    @Html.Partial("_UploadNewUpdateDialog")
+    @Html.Partial("_UserFileUpload")
+    @Html.Partial("_SuccessDialog")
+    @Html.Partial("_FailureDialog")
+
+
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/CustromAppScripts")
+
+
+    <script>
+            window.rootUrl = '@Url.Content("~/")';
+    </script>
+
+
     @RenderSection("scripts", required: false)
+
+
+
 </body>
 </html>

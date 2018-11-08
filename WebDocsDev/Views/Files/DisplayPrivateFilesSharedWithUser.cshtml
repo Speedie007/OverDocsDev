@@ -1,100 +1,134 @@
-﻿@model IEnumerable<WebDocs.DomainModels.Database.FileModel>
+﻿@model PagedList.IPagedList<WebDocs.DomainModels.Database.FileModel>
 
+
+@using WebDocs.Common.Helper.Formatters;
+@using Microsoft.AspNet.Identity;
+@using PagedList.Mvc;
 @{
     ViewBag.Title = "DisplayPrivateFilesSharedWithUser";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>DisplayPrivateFilesSharedWithUser</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.FullName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FileID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UserIDOfFileOwner)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UserIDOfLastUploaded)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FileLookupStatusID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FileShareStatusID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ContentType)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Extension)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Size)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CurrentVersionNumber)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Created)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.FullName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FileID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UserIDOfFileOwner)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UserIDOfLastUploaded)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FileLookupStatusID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FileShareStatusID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ContentType)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Extension)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Size)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CurrentVersionNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Created)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
+<br />
+<div class="panel panel-primary">
+    <div class="panel-heading"><h2>Privately Shared Documents (Docs shared with you.)</h2></div>
+    <div class="panel-body">
+        <div class="table-responsive">
+            <table class="table table-striped table-hover table-condensed">
 
-</table>
+                <thead>
+
+                    <tr>
+                        <th class="text-nowrap">
+                            @Html.ActionLink("Ref#", "DisplayPublicDocs", new { sortOrder = ViewBag.FileIDSortParm, currentFilter = ViewBag.CurrentFilter })
+                        </th>
+                        <th class="text-nowrap">
+                            @Html.ActionLink("File Name", "DisplayPublicDocs", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+                        </th>
+                        <th class="text-nowrap">
+                            @Html.ActionLink("File Size", "DisplayPublicDocs", new { sortOrder = ViewBag.FileSizeSortParm, currentFilter = ViewBag.CurrentFilter })
+
+                        </th>
+                        <th class="text-nowrap">
+                            @Html.ActionLink("File Owner", "DisplayPublicDocs", new { sortOrder = ViewBag.NameOfFileOwnerSortParm, currentFilter = ViewBag.CurrentFilter })
+                        </th>
+                        <th class="text-nowrap">
+                            @Html.ActionLink("Last Modified By", "DisplayPublicDocs", new { sortOrder = ViewBag.NameOfPersonLastUpdatedBySortParm, currentFilter = ViewBag.CurrentFilter })
+
+                        </th>
+                        <th class="text-nowrap">
+                            @Html.ActionLink("Created", "DisplayPublicDocs", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
+                        </th>
+                        <th class="text-nowrap">
+                            @Html.ActionLink("File Status", "DisplayPublicDocs", new { sortOrder = ViewBag.CurrentFileStatusSortParm, currentFilter = ViewBag.CurrentFilter })
+                        </th>
+                        <th class="text-nowrap">
+                            @Html.ActionLink("Shared Status", "DisplayPublicDocs", new { sortOrder = ViewBag.CurrentFileShareStatusSortParm, currentFilter = ViewBag.CurrentFilter })
+                        </th>
+                        <th class="text-nowrap">
+                            @Html.ActionLink("Version", "DisplayPublicDocs", new { sortOrder = ViewBag.CurrentVersionNumberSortParm, currentFilter = ViewBag.CurrentFilter })
+                        </th>
+                        @*<th class="text-nowrap">@Html.Label("Downloaded By")</th>*@
+                        <th>@Html.Label("Options")</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        if (Model.Count() > 0)
+                        {
+                            foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td class="text-nowrap text-center">
+                                        @Html.DisplayFor(modelItem => item.FileID)
+                                    </td>
+                                    <td class="text-nowrap">
+                                        @Html.DisplayFor(modelItem => item.FullFileName)
+                                    </td>
+                                    <td class="text-nowrap">
+                                        @Html.Label(FileSize.ToFileSize(Convert.ToDouble(item.Size)))
+                                    </td>
+                                    <td class="text-nowrap">
+                                        @Html.DisplayFor(modelItem => item.FileOwner.UserFullName)
+                                    </td>
+                                    <td class="text-nowrap">
+                                        @Html.DisplayFor(modelItem => item.PersonThatLastUpdatedFile.UserFullName)
+                                    </td>
+                                    <td class="text-nowrap">
+                                        @Html.Label(item.Created.ToString("MMMM dd, yyyy"))
+                                    </td>
+                                    <td class="text-nowrap ">
+                                        @Html.DisplayFor(modelItem => item.FileViewStatuses.Status)
+                                    </td>
+                                    <td class="text-nowrap ">
+                                        @Html.DisplayFor(modelItem => item.FileShareStatues.Status)
+                                    </td>
+                                    <td class="text-nowrap text-center">
+                                        @Html.DisplayFor(modelItem => item.CurrentVersionNumber)
+                                    </td>
+
+                                    <td>
+                                        [@Html.ActionLink("History", "Edit", new { /* id=item.PrimaryKey */ })]
+                                        [@Html.ActionLink("Download", "Details", new { /* id=item.PrimaryKey */ })]
+                                        [@Html.ActionLink("UnList", "Delete", new { /* id=item.PrimaryKey */ })]
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="9">
+                                    <div class="alert alert-info">
+                                        <strong>Info!</strong> No Private Files Listed!.<br />
+                                        To gain access to files that are private search for the file in the public repository and request access by clicking on the [Request Access] Link!!
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="10"></td>
+                    </tr>
+                </tfoot>
+            </table>
+
+        </div>
+    </div>
+    <div class="panel-footer panel-danger">
+        <table class="panel-primary">
+            <tr>
+                <td>Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</td>
+                <td>&nbsp;</td>
+                <td>
+                    @Html.PagedListPager(Model, page => Url.Action("DisplayPublicDocs", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

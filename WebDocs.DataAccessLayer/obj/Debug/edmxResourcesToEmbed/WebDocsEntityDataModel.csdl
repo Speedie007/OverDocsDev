@@ -11,12 +11,12 @@
     <EntitySet Name="FileStatusModels" EntityType="WebDocsModel.FileStatusModel" />
     <EntitySet Name="NotificationTypesModels" EntityType="WebDocsModel.NotificationTypesModel" />
     <EntitySet Name="NotificationModels" EntityType="WebDocsModel.NotificationModel" />
-    <EntitySet Name="PrivateFilesSharedWithUsers" EntityType="WebDocsModel.PrivateFilesSharedWithUser" />
+    <EntitySet Name="PrivateFilesSharedWithUserModels" EntityType="WebDocsModel.PrivateFilesSharedWithUserModel" />
     <EntitySet Name="UserChatModels" EntityType="WebDocsModel.UserChatModel" />
     <EntitySet Name="UserThatDownloadedFileModels" EntityType="WebDocsModel.UserThatDownloadedFileModel" />
     <AssociationSet Name="FK_FileSharedWithUsers_AspNetUsers" Association="WebDocsModel.FK_FileSharedWithUsers_AspNetUsers">
       <End Role="AspNetUser" EntitySet="UsersModels" />
-      <End Role="PrivateFilesSharedWithUser" EntitySet="PrivateFilesSharedWithUsers" />
+      <End Role="PrivateFilesSharedWithUser" EntitySet="PrivateFilesSharedWithUserModels" />
     </AssociationSet>
     <AssociationSet Name="FK_Notifications_AspNetUsers" Association="WebDocsModel.FK_Notifications_AspNetUsers">
       <End Role="AspNetUser" EntitySet="UsersModels" />
@@ -78,7 +78,7 @@
     </AssociationSet>
     <AssociationSet Name="FK_FileSharedWithUsers_Files" Association="WebDocsModel.FK_FileSharedWithUsers_Files">
       <End Role="File" EntitySet="FileModels" />
-      <End Role="PrivateFilesSharedWithUser" EntitySet="PrivateFilesSharedWithUsers" />
+      <End Role="PrivateFilesSharedWithUser" EntitySet="PrivateFilesSharedWithUserModels" />
     </AssociationSet>
     <AssociationSet Name="FK_Notifications_Files" Association="WebDocsModel.FK_Notifications_Files">
       <End Role="File" EntitySet="FileModels" />
@@ -87,6 +87,15 @@
     <AssociationSet Name="FK_UserThatDownloadedFile_Files" Association="WebDocsModel.FK_UserThatDownloadedFile_Files">
       <End Role="File" EntitySet="FileModels" />
       <End Role="UserThatDownloadedFile" EntitySet="UserThatDownloadedFileModels" />
+    </AssociationSet>
+    <EntitySet Name="FileArchiveBlobModels" EntityType="WebDocsModel.FileArchiveBlobModel" />
+    <AssociationSet Name="FK_FileArchiveBlobs_FileArchives" Association="WebDocsModel.FK_FileArchiveBlobs_FileArchives">
+      <End Role="FileArchiveModel" EntitySet="FileArchiveModels" />
+      <End Role="FileArchiveBlob" EntitySet="FileArchiveBlobModels" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FileArchives_AspNetUsers" Association="WebDocsModel.FK_FileArchives_AspNetUsers">
+      <End Role="UsersModel" EntitySet="UsersModels" />
+      <End Role="FileArchiveModel" EntitySet="FileArchiveModels" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="UsersModel">
@@ -114,6 +123,7 @@
     <NavigationProperty Name="UserThatDownloadedFiles" Relationship="WebDocsModel.FK_UserThatDownloadedFile_AspNetUsers" FromRole="AspNetUser" ToRole="UserThatDownloadedFile" />
     <NavigationProperty Name="OwnerFiles" Relationship="WebDocsModel.FK_Files_AspNetUsers" FromRole="AspNetUser" ToRole="File" />
     <NavigationProperty Name="PersonThatLastUpdatedFile" Relationship="WebDocsModel.FK_Files_AspNetUsers1" FromRole="AspNetUser" ToRole="File" />
+    <NavigationProperty Name="FileArchives" Relationship="WebDocsModel.FK_FileArchives_AspNetUsers" FromRole="UsersModel" ToRole="FileArchiveModel" />
   </EntityType>
   <EntityType Name="ChatModel">
     <Key>
@@ -142,17 +152,16 @@
     <Property Name="FileArchiveID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="FileID" Type="Int32" Nullable="false" />
     <Property Name="UserIDOfLastUploaded" Type="Int32" Nullable="false" />
-    <Property Name="FileLookupStatusID" Type="Int32" Nullable="false" />
-    <Property Name="FileShareStatusID" Type="Int32" Nullable="false" />
     <Property Name="ContentType" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-    <Property Name="FileName" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-    <Property Name="FileExtension" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="FileSize" Type="Int32" Nullable="false" />
-    <Property Name="FileImage" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
-    <Property Name="CurrentVersionNumber" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Extension" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Size" Type="Int32" Nullable="false" />
+    <Property Name="Version" Type="Int32" Nullable="false" />
     <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="DateArchived" Type="DateTime" Nullable="false" Precision="3" />
     <NavigationProperty Name="File" Relationship="WebDocsModel.FK_FileArchives_Files" FromRole="FileArchive" ToRole="File" />
+    <NavigationProperty Name="FileArchiveBlob" Relationship="WebDocsModel.FK_FileArchiveBlobs_FileArchives" FromRole="FileArchiveModel" ToRole="FileArchiveBlob" />
+    <NavigationProperty Name="UserThatUploadedTheFile" Relationship="WebDocsModel.FK_FileArchives_AspNetUsers" FromRole="FileArchiveModel" ToRole="UsersModel" />
   </EntityType>
   <EntityType Name="FileCategoryModel">
     <Key>
@@ -195,6 +204,7 @@
     <Property Name="NotificationTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="NotificationType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Notifications" Relationship="WebDocsModel.FK_Notifications_LookupTableNotificationTypes" FromRole="LookupTable_NotificationTypes" ToRole="Notification" />
+    <Property Name="NotificationMessageTemplate" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="NotificationModel">
     <Key>
@@ -206,16 +216,13 @@
     <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="UserIDOfNotificationSender" Type="Int32" Nullable="false" />
     <Property Name="UserIDOfNotificationRecipient" Type="Int32" Nullable="false" />
-    <Property Name="NotificationSuccessfulSent" Type="Boolean" Nullable="false" />
-    <Property Name="RetryAttempt" Type="Int32" Nullable="false" />
-    <Property Name="NotificationMessageTemplate" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="SendingUsers" Relationship="WebDocsModel.FK_Notifications_AspNetUsers" FromRole="Notification" ToRole="AspNetUser" />
     <NavigationProperty Name="RecipientUsers" Relationship="WebDocsModel.FK_Notifications_AspNetUsers1" FromRole="Notification" ToRole="AspNetUser" />
     <NavigationProperty Name="NotificationTypes" Relationship="WebDocsModel.FK_Notifications_LookupTableNotificationTypes" FromRole="Notification" ToRole="LookupTable_NotificationTypes" />
     <NavigationProperty Name="File" Relationship="WebDocsModel.FK_Notifications_Files" FromRole="Notification" ToRole="File" />
     <Property Name="UserHasAcknowledgement" Type="Boolean" Nullable="false" />
   </EntityType>
-  <EntityType Name="PrivateFilesSharedWithUser">
+  <EntityType Name="PrivateFilesSharedWithUserModel">
     <Key>
       <PropertyRef Name="FileSharedWithUserID" />
     </Key>
@@ -223,7 +230,7 @@
     <Property Name="UserIDPersonSharedWith" Type="Int32" />
     <Property Name="FileID" Type="Int32" Nullable="false" />
     <Property Name="DateShared" Type="DateTime" Nullable="false" Precision="3" />
-    <NavigationProperty Name="AspNetUser" Relationship="WebDocsModel.FK_FileSharedWithUsers_AspNetUsers" FromRole="PrivateFilesSharedWithUser" ToRole="AspNetUser" />
+    <NavigationProperty Name="UserThatFileIsSharedWith" Relationship="WebDocsModel.FK_FileSharedWithUsers_AspNetUsers" FromRole="PrivateFilesSharedWithUser" ToRole="AspNetUser" />
     <NavigationProperty Name="File" Relationship="WebDocsModel.FK_FileSharedWithUsers_Files" FromRole="PrivateFilesSharedWithUser" ToRole="File" />
   </EntityType>
   <EntityType Name="UserChatModel">
@@ -245,12 +252,12 @@
     <Property Name="UserIDThatDownloadedFIle" Type="Int32" Nullable="false" />
     <Property Name="DateDownloaded" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="HasFileBeenReturned" Type="Boolean" Nullable="false" />
-    <NavigationProperty Name="AspNetUser" Relationship="WebDocsModel.FK_UserThatDownloadedFile_AspNetUsers" FromRole="UserThatDownloadedFile" ToRole="AspNetUser" />
+    <NavigationProperty Name="PersonTahtDownloadedTheFile" Relationship="WebDocsModel.FK_UserThatDownloadedFile_AspNetUsers" FromRole="UserThatDownloadedFile" ToRole="AspNetUser" />
     <NavigationProperty Name="File" Relationship="WebDocsModel.FK_UserThatDownloadedFile_Files" FromRole="UserThatDownloadedFile" ToRole="File" />
   </EntityType>
   <Association Name="FK_FileSharedWithUsers_AspNetUsers">
     <End Type="WebDocsModel.UsersModel" Role="AspNetUser" Multiplicity="0..1" />
-    <End Type="WebDocsModel.PrivateFilesSharedWithUser" Role="PrivateFilesSharedWithUser" Multiplicity="*" />
+    <End Type="WebDocsModel.PrivateFilesSharedWithUserModel" Role="PrivateFilesSharedWithUser" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="AspNetUser">
         <PropertyRef Name="Id" />
@@ -464,7 +471,7 @@
   </Association>
   <Association Name="FK_FileSharedWithUsers_Files">
     <End Type="WebDocsModel.FileModel" Role="File" Multiplicity="1" />
-    <End Type="WebDocsModel.PrivateFilesSharedWithUser" Role="PrivateFilesSharedWithUser" Multiplicity="*" />
+    <End Type="WebDocsModel.PrivateFilesSharedWithUserModel" Role="PrivateFilesSharedWithUser" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="File">
         <PropertyRef Name="FileID" />
@@ -495,6 +502,38 @@
       </Principal>
       <Dependent Role="UserThatDownloadedFile">
         <PropertyRef Name="FileID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="FileArchiveBlobModel">
+    <Key>
+      <PropertyRef Name="FileArchiveID" />
+    </Key>
+    <Property Name="FileArchiveID" Type="Int32" Nullable="false" />
+    <Property Name="FileImage" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+    <NavigationProperty Name="FileArchive" Relationship="WebDocsModel.FK_FileArchiveBlobs_FileArchives" FromRole="FileArchiveBlob" ToRole="FileArchiveModel" />
+  </EntityType>
+  <Association Name="FK_FileArchiveBlobs_FileArchives">
+    <End Type="WebDocsModel.FileArchiveModel" Role="FileArchiveModel" Multiplicity="1" />
+    <End Type="WebDocsModel.FileArchiveBlobModel" Role="FileArchiveBlob" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="FileArchiveModel">
+        <PropertyRef Name="FileArchiveID" />
+      </Principal>
+      <Dependent Role="FileArchiveBlob">
+        <PropertyRef Name="FileArchiveID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FileArchives_AspNetUsers">
+    <End Type="WebDocsModel.UsersModel" Role="UsersModel" Multiplicity="1" />
+    <End Type="WebDocsModel.FileArchiveModel" Role="FileArchiveModel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UsersModel">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FileArchiveModel">
+        <PropertyRef Name="UserIDOfLastUploaded" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

@@ -1,13 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using Json;
 using WebDocs.BusinessApplicationLayer.Interfaces.ProjectSections;
+using WebDocs.Common.Enum.DbLookupTables;
 using WebDocs.DataAccessLayer.Interfaces.Entities;
 using WebDocs.DataAccessLayer.Repositories;
 using WebDocs.DomainModels.Database;
 using WebDocs.DomainModels.TransactionResponse;
+using WebDocs.DomainModels.ViewModels.Files;
 
 namespace WebDocs.BusinessApplicationLayer.Query
 {
@@ -16,39 +24,64 @@ namespace WebDocs.BusinessApplicationLayer.Query
 
         private readonly IFileRepository _FileRepsoitory;
 
+        public CompletedTransactionResponses CTR { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
         public UserDocumentsBussinessLogic()
         {
             _FileRepsoitory = new FileRepository();
         }
 
+       
 
-        public List<FileUploadResponses> SaveUploadedUserFiles(List<FileModel> CurrentFiles)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="UNUFM"></param>
+        /// <returns></returns>
+        public FileUploadResponses SaveUploadedUserFiles(UploadingNewUserFileModel UNUFM)//List<FileModel> CurrentFiles)
         {
 
-            List<FileUploadResponses> Rtn = new List<FileUploadResponses>();
-            foreach (FileModel FileToSave in CurrentFiles)
+            if (UNUFM.file != null && UNUFM.file.ContentLength > 0)
             {
-                try
+                byte[] uploadedFile = new byte[UNUFM.file.InputStream.Length];
+                UNUFM.file.InputStream.Read(uploadedFile, 0, uploadedFile.Length);
+
+                FileModel NewFileUpload = new FileModel()
                 {
-                    _FileRepsoitory.Add(FileToSave);
-                    Rtn.Add(new FileUploadResponses()
+                    FileBlob = new FileBlobModel()
                     {
-                        FileName = FileToSave.FullName,
-                        Message = "Successfully Uploaded",
-                        WasSuccessfull = true
-                    });
-                }
-                catch (Exception ex)
-                {
-                    Rtn.Add(new FileUploadResponses()
-                    {
-                        FileName = FileToSave.FullName,
-                        Message = "Fialed To Upload - Error : " + ex.Message,
-                        WasSuccessfull = true
-                    });
-                }
+                        EntityState = DomainModels.EntityState.Added,
+                        FileImage = uploadedFile
+                    },
+                    ContentType = UNUFM.file.ContentType,
+                    CurrentVersionNumber = 1,
+                    Created = DateTime.Now,
+
+                    Name = Path.GetFileNameWithoutExtension(UNUFM.file.FileName),
+                    Size = UNUFM.file.ContentLength,
+                    UserIDOfFileOwner = UNUFM.IDOfCurrentUser,
+                    UserIDOfLastUploaded = UNUFM.IDOfCurrentUser,
+                    FileLookupStatusID = (int)EnumFileViewStatuses.Available,
+                    FileShareStatusID = UNUFM.FileShareStatusID,
+                    Extension = Path.GetExtension(UNUFM.file.FileName).Replace(".", ""),
+                    EntityState = DomainModels.EntityState.Added
+                };
+
+                return WebDocs.Common.Helper.Files.UploadHelper.SaveUploadedFile(NewFileUpload);
             }
-            return Rtn;
+            else
+            {
+                                     
+                return new FileUploadResponses()
+                {
+                    FileName = UNUFM.file.FileName,
+                    Message = "Failed To Upload - Error :  file is Null or Not uploaded correctly.",
+                    WasSuccessfull = false
+                };
+            }
+
+
+
 
         }
 
@@ -59,7 +92,8 @@ namespace WebDocs.BusinessApplicationLayer.Query
                 a => a.FileOwner,
                 a => a.PersonThatLastUpdatedFile,
                 a => a.FileViewStatuses,
-                a => a.FileShareStatues);
+                a => a.FileShareStatues,
+                a => a.UserThatDownloadedFile);
 
             return SelectedUserFiles;
         }

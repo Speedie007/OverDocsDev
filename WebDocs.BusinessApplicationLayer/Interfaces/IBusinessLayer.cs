@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WebDocs.DomainModels.Database;
+using WebDocs.DomainModels.TransactionResponse;
 
 namespace WebDocs.BusinessApplicationLayer.Interfaces
 {
@@ -13,6 +14,6 @@ namespace WebDocs.BusinessApplicationLayer.Interfaces
     /// <typeparam name="T"></typeparam>
     public interface IBusinessLayer<T> where T : class
     {
-       
+        CompletedTransactionResponses CTR { get; set; }
     }
 }

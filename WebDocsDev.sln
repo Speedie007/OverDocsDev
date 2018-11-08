@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebDocs.BusinessApplication
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebDocs.DomainModels", "WebDocs.DominaModels\WebDocs.DomainModels.csproj", "{8A947570-EECB-4409-8615-5C0529A78CA6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebDocs.EmailService", "WebDocs.EmailService\WebDocs.EmailService.csproj", "{F564991D-BB95-426D-A4EB-28696B3D1DE2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,10 @@ Global
 		{8A947570-EECB-4409-8615-5C0529A78CA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8A947570-EECB-4409-8615-5C0529A78CA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8A947570-EECB-4409-8615-5C0529A78CA6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F564991D-BB95-426D-A4EB-28696B3D1DE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F564991D-BB95-426D-A4EB-28696B3D1DE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F564991D-BB95-426D-A4EB-28696B3D1DE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F564991D-BB95-426D-A4EB-28696B3D1DE2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

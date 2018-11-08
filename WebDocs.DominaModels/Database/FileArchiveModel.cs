@@ -21,21 +21,15 @@ namespace WebDocs.DomainModels.Database
     	
         public int UserIDOfLastUploaded { get; set; }
     	
-        public int FileLookupStatusID { get; set; }
-    	
-        public int FileShareStatusID { get; set; }
-    	
         public string ContentType { get; set; }
     	
-        public string FileName { get; set; }
+        public string Name { get; set; }
     	
-        public string FileExtension { get; set; }
+        public string Extension { get; set; }
     	
-        public int FileSize { get; set; }
+        public int Size { get; set; }
     	
-        public byte[] FileImage { get; set; }
-    	
-        public int CurrentVersionNumber { get; set; }
+        public int Version { get; set; }
     	
         public System.DateTime DateCreated { get; set; }
     	
@@ -44,5 +38,7 @@ namespace WebDocs.DomainModels.Database
     		public EntityState EntityState { get; set; }
     		
         public virtual FileModel File { get; set; }
+        public virtual FileArchiveBlobModel FileArchiveBlob { get; set; }
+        public virtual UsersModel UserThatUploadedTheFile { get; set; }
     }
 }

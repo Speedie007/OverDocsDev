@@ -12,32 +12,126 @@ namespace WebDocs.Common.Helper.Files
 {
     public static class UploadHelper
     {
-        public static List<FileUploadResponses> SaveUploadedUserFiles(List<FileModel> CurrentFiles)
+        public static FileUploadResponses SaveUploadedFile(FileModel CurrentFile)
         {
 
             IFileRepository _FileRepsoitory = new FileRepository();
-            List<FileUploadResponses> Rtn = new List<FileUploadResponses>();
-            foreach (FileModel FileToSave in CurrentFiles)
+            FileUploadResponses Rtn;
+
+            try
             {
-                try
+               CompletedTransactionResponses CTR =  _FileRepsoitory.Add(CurrentFile);
+                if (CTR.WasSuccessfull)
                 {
-                    _FileRepsoitory.Add(FileToSave);
-                    Rtn.Add(new FileUploadResponses()
+                    Rtn = new FileUploadResponses()
                     {
-                        FileName = FileToSave.FullName,
-                        Message = "Successfully Uploaded",
+                        FileName = CurrentFile.FullFileName,
+                        Message = "Successfully Saved",
                         WasSuccessfull = true
-                    });
+                    };
                 }
-                catch (Exception ex)
+                else
                 {
-                    Rtn.Add(new FileUploadResponses()
+                    Rtn = new FileUploadResponses()
                     {
-                        FileName = FileToSave.FullName,
-                        Message = "Fialed To Upload - Error : " + ex.Message,
-                        WasSuccessfull = true
-                    });
+                        FileName = CurrentFile.FullFileName,
+                        Message = "Failed To Upload - Error : " + CTR.Message,
+                        WasSuccessfull = false
+                    };
                 }
+               
+            }
+            catch (Exception ex)
+            {
+                Rtn = new FileUploadResponses()
+                {
+                    FileName = CurrentFile.FullFileName,
+                    Message = "Failed To Upload - Error : " + ex.Message,
+                    WasSuccessfull = false
+                };
+            }
+            return Rtn;
+        }
+
+        public static FileUploadResponses SaveArchivedFiles(FileArchiveModel CurrentFile)
+        {
+
+            IFileArchiveRepository _FileArchiveRepository = new FileArchiveRepository();
+            FileUploadResponses Rtn;
+
+            try
+            {
+                CompletedTransactionResponses CTR = _FileArchiveRepository.Add(CurrentFile);
+                if (CTR.WasSuccessfull)
+                {
+                    Rtn = new FileUploadResponses()
+                    {
+                        FileName = CurrentFile.FullFileName,
+                        Message = "Successfully Saved",
+                        WasSuccessfull = true
+                    };
+                }
+                else
+                {
+                    Rtn = new FileUploadResponses()
+                    {
+                        FileName = CurrentFile.FullFileName,
+                        Message = "Failed To Upload - Error : " + CTR.Message,
+                        WasSuccessfull = false
+                    };
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Rtn = new FileUploadResponses()
+                {
+                    FileName = CurrentFile.FullFileName,
+                    Message = "Failed To Upload - Error : " + ex.Message,
+                    WasSuccessfull = false
+                };
+            }
+            return Rtn;
+
+        }
+
+        public static FileUploadResponses UpdateUploadedFiles(FileModel CurrentFile)
+        {
+
+            IFileRepository _FileRepsoitory = new FileRepository();
+            FileUploadResponses Rtn;
+
+            try
+            {
+                CompletedTransactionResponses CTR = _FileRepsoitory.Update(CurrentFile);
+                if (CTR.WasSuccessfull)
+                {
+                    Rtn = new FileUploadResponses()
+                    {
+                        FileName = CurrentFile.FullFileName,
+                        Message = "Successfully Saved",
+                        WasSuccessfull = true
+                    };
+                }
+                else
+                {
+                    Rtn = new FileUploadResponses()
+                    {
+                        FileName = CurrentFile.FullFileName,
+                        Message = "Failed To Upload - Error : " + CTR.Message,
+                        WasSuccessfull = false
+                    };
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Rtn = new FileUploadResponses()
+                {
+                    FileName = CurrentFile.FullFileName,
+                    Message = "Failed To Upload - Error : " + ex.Message,
+                    WasSuccessfull = false
+                };
             }
             return Rtn;
 

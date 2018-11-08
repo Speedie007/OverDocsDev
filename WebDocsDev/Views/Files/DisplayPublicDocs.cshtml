@@ -14,141 +14,199 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="row">
-    <div class="col-md-4"><h2>Public Documents</h2></div>
-    <div class="col-md-8"></div>
-</div>
+
 @*<p>
         @Html.ActionLink("Create New", "Create")
     </p>*@
 @{
     int UserID_OfUserCurrentlyLoggedIn = User.Identity.GetUserId<int>();
 }
-<div class="table-responsive">
-    <table class="table">
-        <tr>
-            <th class="text-nowrap">
+<br />
+<div class="panel panel-primary">
+    <div class="panel-heading"><h2>Public Viewable Documents</h2></div>
+    <div class="panel-body">
+        <div class="table-responsive">
+            <table class="table table-striped table-hover table-condensed">
 
-                @Html.ActionLink("Ref#", "DisplayPublicDocs", new { sortOrder = ViewBag.FileIDSortParm, currentFilter = ViewBag.CurrentFilter })
-            </th>
-            <th class="text-nowrap">
-                @Html.Label("File Name")
-            </th>
-            <th class="text-nowrap">
-                @Html.Label("File Size")
-            </th>
-            <th class="text-nowrap">
-                @Html.Label("Update By")
-            </th>
-            <th class="text-nowrap">
-                @Html.Label("Last Modified By")
-            </th>
-            <th class="text-nowrap">
-                @Html.Label("Created")
-            </th>
-            <th class="text-nowrap">
-                @Html.Label("File Status")
-            </th>
-            <th class="text-nowrap">
-                @Html.Label("Shared Status")
-            </th>
-            <th class="text-nowrap">
-                @Html.Label("Version")
-            </th>
+                <thead>
 
-            <th>@Html.Label("Options")</th>
-        </tr>
+                    <tr>
+                        <th class="text-nowrap">
+                            @Html.ActionLink("Ref#", "DisplayPublicDocs", new { sortOrder = ViewBag.FileIDSortParm, currentFilter = ViewBag.CurrentFilter })
+                        </th>
+                        <th class="text-nowrap">
+                            @Html.ActionLink("File Name", "DisplayPublicDocs", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+                        </th>
+                        <th class="text-nowrap">
+                            @Html.ActionLink("File Size", "DisplayPublicDocs", new { sortOrder = ViewBag.FileSizeSortParm, currentFilter = ViewBag.CurrentFilter })
 
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td class="text-nowrap text-center">
-                    @Html.DisplayFor(modelItem => item.FileID)
-                </td>
-                <td class="text-nowrap">
-                    @Html.DisplayFor(modelItem => item.FullName)
-                </td>
-                <td class="text-nowrap">
-                    @Html.Label(FileSize.ToFileSize(Convert.ToDouble(item.Size)))
-                </td>
-                <td class="text-nowrap">
-                    @Html.DisplayFor(modelItem => item.FileOwner.UserFullName)
-                </td>
-                <td class="text-nowrap">
-                    @Html.DisplayFor(modelItem => item.PersonThatLastUpdatedFile.UserFullName)
-                </td>
-                <td class="text-nowrap">
-                    @Html.Label(item.Created.ToString("MMMM dd, yyyy"))
-                </td>
-                <td class="text-nowrap ">
-                    @Html.DisplayFor(modelItem => item.FileViewStatuses.Status)
-                </td>
-                <td class="text-nowrap ">
-                    @Html.DisplayFor(modelItem => item.FileShareStatues.Status)
-                </td>
-                <td class="text-nowrap text-center">
-                    @Html.DisplayFor(modelItem => item.CurrentVersionNumber)
-                </td>
-                <td class="text-nowrap">
+                        </th>
+                        <th class="text-nowrap">
+                            @Html.ActionLink("File Owner", "DisplayPublicDocs", new { sortOrder = ViewBag.NameOfFileOwnerSortParm, currentFilter = ViewBag.CurrentFilter })
+                        </th>
+                        <th class="text-nowrap">
+                            @Html.ActionLink("Last Modified By", "DisplayPublicDocs", new { sortOrder = ViewBag.NameOfPersonLastUpdatedBySortParm, currentFilter = ViewBag.CurrentFilter })
+
+                        </th>
+                        <th class="text-nowrap">
+                            @Html.ActionLink("Created", "DisplayPublicDocs", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
+                        </th>
+                        <th class="text-nowrap">
+                            @Html.ActionLink("File Status", "DisplayPublicDocs", new { sortOrder = ViewBag.CurrentFileStatusSortParm, currentFilter = ViewBag.CurrentFilter })
+                        </th>
+                        <th class="text-nowrap">
+                            @Html.ActionLink("Shared Status", "DisplayPublicDocs", new { sortOrder = ViewBag.CurrentFileShareStatusSortParm, currentFilter = ViewBag.CurrentFilter })
+                        </th>
+                        <th class="text-nowrap">
+                            @Html.ActionLink("Version", "DisplayPublicDocs", new { sortOrder = ViewBag.CurrentVersionNumberSortParm, currentFilter = ViewBag.CurrentFilter })
+                        </th>
+                        @*<th class="text-nowrap">@Html.Label("Downloaded By")</th>*@
+                        <th>@Html.Label("Options")</th>
+                    </tr>
+                </thead>
+                <tbody>
                     @{
-                        IDecsions Decision = LinkDecision.GetFileLinkDecsion(item, User.Identity.GetUserId<int>());
-                    }
-                    <table style=" border: none;">
-                        <tr>
-                            <td>
-                                [<a href="javascript:void(0);" onclick="showHistory(@item.FileID,'@item.FullName');" class="showHistory">History</a>]
-                            </td>
-                            <td>&nbsp;</td>
-                            <td>
-                                <div class="text-nowrap">
-                                    [@if (Decision != null)
-                                    {
-                                        switch (Decision.FinalDecision)
-                                        {
-                                            case ControlTypes.Download:
-                                                <a href="#" onclick="showDownloadNotificationModal(@item.FileID,'@item.FullName', @UserID_OfUserCurrentlyLoggedIn )">Download</a>
-                                                break;
-                                            case ControlTypes.UploadFileNotification:
-                                                @Html.ActionLink("Notify to Upload", "DownLoadSelectedFile", "DownLoadFile", new { fileID = item.FileID }, null)
-                                                break;
-                                            case ControlTypes.RequestPermissionNotifications:
-                                                <a href="#" onclick="sendRequestNotification(@item.FileID,@Convert.ToInt32(WebDocs.Common.Enum.DbLookupTables.EnumNotificationTypes.Share_Request),'@UserID_OfUserCurrentlyLoggedIn','@item.UserIDOfFileOwner')">Request Permission</a>
-                                                break;
-                                            default:
-                                                break;
+                        if (Model.Count > 0)
+                        {
+                            foreach (var item in Model)
+                            {
 
+                                <tr>
+                                    <td class="text-nowrap text-center">
+                                        @Html.DisplayFor(modelItem => item.FileID)
+                                    </td>
+                                    <td class="text-nowrap">
+                                        @Html.DisplayFor(modelItem => item.FullFileName)
+                                    </td>
+                                    <td class="text-nowrap">
+                                        @Html.Label(FileSize.ToFileSize(Convert.ToDouble(item.Size)))
+                                    </td>
+                                    <td class="text-nowrap">
+                                        @Html.DisplayFor(modelItem => item.FileOwner.UserFullName)
+                                    </td>
+                                    <td class="text-nowrap">
+                                        @Html.DisplayFor(modelItem => item.PersonThatLastUpdatedFile.UserFullName)
+                                    </td>
+                                    <td class="text-nowrap">
+                                        @Html.Label(item.Created.ToString("MMMM dd, yyyy"))
+                                    </td>
+                                    <td class="text-nowrap ">
+                                        @Html.DisplayFor(modelItem => item.FileViewStatuses.Status)
+                                    </td>
+                                    <td class="text-nowrap ">
+                                        @Html.DisplayFor(modelItem => item.FileShareStatues.Status)
+                                    </td>
+                                    <td class="text-nowrap text-center">
+                                        @Html.DisplayFor(modelItem => item.CurrentVersionNumber)
+                                    </td>
+
+                                    <td class="text-nowrap">
+                                        @{
+                                            IDecsions Decision = LinkDecision.GetPublicDocsFileLinkDecsion(item, User.Identity.GetUserId<int>());
                                         }
-                                    }
-                                    else
-                                    {
-                                        <div class="alert alert-info">
-                                            <strong>Info!</strong> - No Links To Display!
-                                        </div>
+                                        <table style=" border: none;">
+                                            <tr>
+                                                <td>
+                                                    <a href="javascript:void(0);" onclick="showFileDetails(@item.FileID);" class="btn btn-info btn-sm showHistory">
+                                                        <span class="glyphicon glyphicon-list-alt"> History</span>
+                                                    </a>
+                                                </td>
+                                                <td>&nbsp;</td>
+                                                <td>
+                                                    <div class="text-nowrap">
+                                                        @if (Decision != null)
+                                                        {
+                                                            switch (Decision.FinalDecision)
+                                                            {
+                                                                case ControlTypes.Download:
+                                                                    <a class="btn btn-primary btn-sm btn-block" data-toggle="tooltip" data-placement="top" title="Click To Download File." href="#" onclick="showDownloadNotificationModal(@item.FileID,'@item.FullFileName', @UserID_OfUserCurrentlyLoggedIn )">
+                                                                        <span class="glyphicon glyphicon-cloud-download"> Download</span>
+                                                                    </a>
+                                                                    break;
+                                                                case ControlTypes.UploadFileNotification:
+                                                                    <a class="btn btn-warning btn-sm btn-block" data-toggle="tooltip" data-placement="top" title="Click To Send Notification." href="javascript:void(0);">
+                                                                        <span class="glyphicon glyphicon-upload"> Notify-To-Upload</span>
+                                                                    </a>
+                                                                    @*@Html.ActionLink("Notify to Upload", "DownLoadSelectedFile", "DownLoadFile", new { fileID = item.FileID }, null)*@
+                                                                    break;
+                                                                case ControlTypes.RequestPermissionNotifications:
+                                                                    <a  class="btn btn-success btn-sm btn-block" href="javascript:void(0);" onclick="sendRequestNotification(@item.FileID,@UserID_OfUserCurrentlyLoggedIn,@item.UserIDOfFileOwner)">
+                                                                        <span class="glyphicon glyphicon-copy"> Request-Permission</span>
+                                                                    </a>
+                                                                    break;
+                                                                default:
+                                                                    break;
 
-                                    }]
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
+                                                            }
+                                                        }
+                                                        else
+                                                        {
+                                                            <div class="alert alert-info">
+                                                                <strong>Info!</strong> - No Links To Display!
+                                                            </div>
 
-                    @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+                                                        }
+                                                    </div>
+
+                                                </td>
+                                            </tr>
+                                        </table>
+
+
+                                    </td>
+                                </tr>
+                                <tr></tr>
+                                @Html.Partial("_FileDetails", item);
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="9">
+                                    <div class="alert alert-info">
+                                        <strong>Info!</strong> No Files Listed!.<br />
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+
+                    }
+
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="10"></td>
+                    </tr>
+                </tfoot>
+            </table>
+
+        </div>
+    </div>
+    <div class="panel-footer panel-danger">
+        <table class="panel-primary">
+            <tr>
+                <td>Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</td>
+                <td>&nbsp;</td>
+                <td>
+                    @Html.PagedListPager(Model, page => Url.Action("DisplayPublicDocs", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
                 </td>
             </tr>
-        }
-
-    </table>
-    <table class="">
-        <tr>
-            <td>Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</td>
-            <td>&nbsp;</td>
-            <td>
-                @Html.PagedListPager(Model, page => Url.Action("DisplayPublicDocs", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
-            </td>
-        </tr>
-    </table>
+        </table>
+    </div>
 </div>
+
+
+@using (Html.BeginForm("DisplayPublicDocs", "Files", new { sortOrder = "", currentFilter = ViewBag.CurrentFilter, page = Model.PageNumber }, FormMethod.Get))
+{
+    <input type="hidden" id="sortOrder" name="sortOrder" value="@ViewBag.CurrentSort" />
+    <input type="hidden" id="currentFilter" name="currentFilter" value="@ViewBag.CurrentFilter" />
+
+    <input type="hidden" id="page" name="page" value="@Model.PageNumber" />
+
+    <input type="submit" id="btnRefreshPage" value="" style="display:none" />
+}
+
+
 
 
 

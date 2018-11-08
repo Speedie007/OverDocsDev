@@ -107,7 +107,7 @@ namespace WebDocs.Common.DescisionClasses.PublicViewedFiles.AvailableFiles
             if (((PublicDocsAvailableDataModel)Model).ListOfFilesSharedWithUser.Count > 0)
             {
 
-                foreach (PrivateFilesSharedWithUser SharedFile in ((PublicDocsAvailableDataModel)Model).ListOfFilesSharedWithUser)
+                foreach (PrivateFilesSharedWithUserModel SharedFile in ((PublicDocsAvailableDataModel)Model).ListOfFilesSharedWithUser)
                 {
                     if (this.ID_OfUserCurrentlyLoggedIn == SharedFile.UserIDPersonSharedWith)
                     {

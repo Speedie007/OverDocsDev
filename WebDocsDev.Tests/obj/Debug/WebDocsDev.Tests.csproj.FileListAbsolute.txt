@@ -20,6 +20,7 @@ C:\GitRepo\WebDocsDev\WebDocsDev.Tests\bin\Debug\Microsoft.Owin.dll
 C:\GitRepo\WebDocsDev\WebDocsDev.Tests\bin\Debug\WebDocs.DomainModels.dll
 C:\GitRepo\WebDocsDev\WebDocsDev.Tests\bin\Debug\Microsoft.AspNet.Identity.Core.dll
 C:\GitRepo\WebDocsDev\WebDocsDev.Tests\bin\Debug\Microsoft.AspNet.Identity.Owin.dll
+C:\GitRepo\WebDocsDev\WebDocsDev.Tests\bin\Debug\WebDocs.DataAccessLayer.dll
 C:\GitRepo\WebDocsDev\WebDocsDev.Tests\bin\Debug\WebDocs.BusinessApplicationLayer.dll
 C:\GitRepo\WebDocsDev\WebDocsDev.Tests\bin\Debug\System.Web.Optimization.dll
 C:\GitRepo\WebDocsDev\WebDocsDev.Tests\bin\Debug\Microsoft.Owin.Security.dll
@@ -31,7 +32,6 @@ C:\GitRepo\WebDocsDev\WebDocsDev.Tests\bin\Debug\Microsoft.AspNet.Identity.Entit
 C:\GitRepo\WebDocsDev\WebDocsDev.Tests\bin\Debug\Microsoft.Owin.Security.Cookies.dll
 C:\GitRepo\WebDocsDev\WebDocsDev.Tests\bin\Debug\EntityFramework.dll
 C:\GitRepo\WebDocsDev\WebDocsDev.Tests\bin\Debug\Microsoft.Owin.Security.OAuth.dll
-C:\GitRepo\WebDocsDev\WebDocsDev.Tests\bin\Debug\WebDocs.DataAccessLayer.dll
 C:\GitRepo\WebDocsDev\WebDocsDev.Tests\bin\Debug\WebGrease.dll
 C:\GitRepo\WebDocsDev\WebDocsDev.Tests\bin\Debug\Antlr3.Runtime.dll
 C:\GitRepo\WebDocsDev\WebDocsDev.Tests\bin\Debug\WebDocs.Web.pdb
@@ -50,6 +50,8 @@ C:\GitRepo\WebDocsDev\WebDocsDev.Tests\bin\Debug\WebDocs.DomainModels.pdb
 C:\GitRepo\WebDocsDev\WebDocsDev.Tests\bin\Debug\WebDocs.DomainModels.dll.config
 C:\GitRepo\WebDocsDev\WebDocsDev.Tests\bin\Debug\Microsoft.AspNet.Identity.Core.xml
 C:\GitRepo\WebDocsDev\WebDocsDev.Tests\bin\Debug\Microsoft.AspNet.Identity.Owin.xml
+C:\GitRepo\WebDocsDev\WebDocsDev.Tests\bin\Debug\WebDocs.DataAccessLayer.pdb
+C:\GitRepo\WebDocsDev\WebDocsDev.Tests\bin\Debug\WebDocs.DataAccessLayer.dll.config
 C:\GitRepo\WebDocsDev\WebDocsDev.Tests\bin\Debug\WebDocs.BusinessApplicationLayer.pdb
 C:\GitRepo\WebDocsDev\WebDocsDev.Tests\bin\Debug\WebDocs.BusinessApplicationLayer.dll.config
 C:\GitRepo\WebDocsDev\WebDocsDev.Tests\bin\Debug\System.Web.Optimization.xml
@@ -62,8 +64,6 @@ C:\GitRepo\WebDocsDev\WebDocsDev.Tests\bin\Debug\Microsoft.AspNet.Identity.Entit
 C:\GitRepo\WebDocsDev\WebDocsDev.Tests\bin\Debug\Microsoft.Owin.Security.Cookies.xml
 C:\GitRepo\WebDocsDev\WebDocsDev.Tests\bin\Debug\EntityFramework.xml
 C:\GitRepo\WebDocsDev\WebDocsDev.Tests\bin\Debug\Microsoft.Owin.Security.OAuth.xml
-C:\GitRepo\WebDocsDev\WebDocsDev.Tests\bin\Debug\WebDocs.DataAccessLayer.pdb
-C:\GitRepo\WebDocsDev\WebDocsDev.Tests\bin\Debug\WebDocs.DataAccessLayer.dll.config
 C:\GitRepo\WebDocsDev\WebDocsDev.Tests\bin\Debug\Antlr3.Runtime.pdb
 C:\GitRepo\WebDocsDev\WebDocsDev.Tests\obj\Debug\WebDocsDev.Tests.csprojAssemblyReference.cache
 C:\GitRepo\WebDocsDev\WebDocsDev.Tests\obj\Debug\WebDocsDev.Tests.csproj.CoreCompileInputs.cache

@@ -14,7 +14,7 @@ namespace WebDocs.DomainModels.DecisionModels.PublicDocuments.IsAvailable
         public int FileID { get; set; }
         public int FileOwnerID { get; set; }
         public int FileSharedStautusID { get; set; }
-        public ICollection<PrivateFilesSharedWithUser> ListOfFilesSharedWithUser { get; set; }
+        public ICollection<PrivateFilesSharedWithUserModel> ListOfFilesSharedWithUser { get; set; }
         public int FileStatusID { get; set; }
         public int IDOfUserThatLastDownLoadedTheSelectedFile { get; set; }
         

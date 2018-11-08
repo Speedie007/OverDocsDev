@@ -12,7 +12,7 @@ namespace WebDocs.DomainModels.Database
     using WebDocs.DomainModels.Interfaces.Entities;
     public partial class FileModel : IEntity
     {
-        public string FullName
+        public string FullFileName
         {
             get
             {

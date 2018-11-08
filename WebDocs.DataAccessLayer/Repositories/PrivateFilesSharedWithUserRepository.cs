@@ -8,7 +8,7 @@ using WebDocs.DomainModels.Database;
 
 namespace WebDocs.DataAccessLayer.Repositories
 {
-    public class PrivateFilesSharedWithUserRepository : GenericDataRepository<PrivateFilesSharedWithUser>, IPrivateFilesSharedWithUsers
+    public class PrivateFilesSharedWithUserRepository : GenericDataRepository<PrivateFilesSharedWithUserModel>, IPrivateFilesSharedWithUsersRepository
     {
     }
 }

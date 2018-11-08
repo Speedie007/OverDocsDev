@@ -87,13 +87,15 @@ C:\GitRepo\WebDocsDev\WebDocsDev\bin\System.Web.WebPages.dll
 C:\GitRepo\WebDocsDev\WebDocsDev\bin\System.Web.WebPages.Razor.dll
 C:\GitRepo\WebDocsDev\WebDocsDev\bin\WebDocs.BusinessApplicationLayer.dll
 C:\GitRepo\WebDocsDev\WebDocsDev\bin\WebDocs.Common.dll
+C:\GitRepo\WebDocsDev\WebDocsDev\bin\WebDocs.DataAccessLayer.dll
 C:\GitRepo\WebDocsDev\WebDocsDev\bin\WebDocs.DomainModels.dll
 C:\GitRepo\WebDocsDev\WebDocsDev\bin\WebGrease.dll
-C:\GitRepo\WebDocsDev\WebDocsDev\bin\WebDocs.DataAccessLayer.dll
 C:\GitRepo\WebDocsDev\WebDocsDev\bin\WebDocs.BusinessApplicationLayer.pdb
 C:\GitRepo\WebDocsDev\WebDocsDev\bin\WebDocs.BusinessApplicationLayer.dll.config
 C:\GitRepo\WebDocsDev\WebDocsDev\bin\WebDocs.Common.pdb
 C:\GitRepo\WebDocsDev\WebDocsDev\bin\WebDocs.Common.dll.config
+C:\GitRepo\WebDocsDev\WebDocsDev\bin\WebDocs.DataAccessLayer.pdb
+C:\GitRepo\WebDocsDev\WebDocsDev\bin\WebDocs.DataAccessLayer.dll.config
 C:\GitRepo\WebDocsDev\WebDocsDev\bin\WebDocs.DomainModels.pdb
 C:\GitRepo\WebDocsDev\WebDocsDev\bin\WebDocs.DomainModels.dll.config
 C:\GitRepo\WebDocsDev\WebDocsDev\bin\PagedList.xml
@@ -127,8 +129,6 @@ C:\GitRepo\WebDocsDev\WebDocsDev\bin\Microsoft.AI.DependencyCollector.xml
 C:\GitRepo\WebDocsDev\WebDocsDev\bin\Microsoft.AI.WindowsServer.xml
 C:\GitRepo\WebDocsDev\WebDocsDev\bin\Microsoft.AI.Web.xml
 C:\GitRepo\WebDocsDev\WebDocsDev\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\GitRepo\WebDocsDev\WebDocsDev\bin\WebDocs.DataAccessLayer.pdb
-C:\GitRepo\WebDocsDev\WebDocsDev\bin\WebDocs.DataAccessLayer.dll.config
 C:\GitRepo\WebDocsDev\WebDocsDev\obj\Debug\WebDocs.Web.csprojAssemblyReference.cache
 C:\GitRepo\WebDocsDev\WebDocsDev\obj\Debug\WebDocs.Web.csproj.CoreCompileInputs.cache
 C:\GitRepo\WebDocsDev\WebDocsDev\obj\Debug\WebDocs.Web.csproj.CopyComplete

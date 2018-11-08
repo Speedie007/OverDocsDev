@@ -1,10 +1,13 @@
 C:\GitRepo\WebDocsDev\WebDocs.BusinessApplicationLayer\bin\Debug\WebDocs.BusinessApplicationLayer.dll.config
 C:\GitRepo\WebDocsDev\WebDocs.BusinessApplicationLayer\bin\Debug\WebDocs.BusinessApplicationLayer.dll
 C:\GitRepo\WebDocsDev\WebDocs.BusinessApplicationLayer\bin\Debug\WebDocs.BusinessApplicationLayer.pdb
+C:\GitRepo\WebDocsDev\WebDocs.BusinessApplicationLayer\bin\Debug\Json.dll
+C:\GitRepo\WebDocsDev\WebDocs.BusinessApplicationLayer\bin\Debug\Newtonsoft.Json.dll
 C:\GitRepo\WebDocsDev\WebDocs.BusinessApplicationLayer\bin\Debug\WebDocs.Common.dll
 C:\GitRepo\WebDocsDev\WebDocs.BusinessApplicationLayer\bin\Debug\WebDocs.DataAccessLayer.dll
 C:\GitRepo\WebDocsDev\WebDocs.BusinessApplicationLayer\bin\Debug\WebDocs.DomainModels.dll
 C:\GitRepo\WebDocsDev\WebDocs.BusinessApplicationLayer\bin\Debug\EntityFramework.dll
+C:\GitRepo\WebDocsDev\WebDocs.BusinessApplicationLayer\bin\Debug\PagedList.dll
 C:\GitRepo\WebDocsDev\WebDocs.BusinessApplicationLayer\bin\Debug\System.Web.Mvc.dll
 C:\GitRepo\WebDocsDev\WebDocs.BusinessApplicationLayer\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
 C:\GitRepo\WebDocsDev\WebDocs.BusinessApplicationLayer\bin\Debug\Microsoft.AspNet.Identity.Core.dll
@@ -21,7 +24,10 @@ C:\GitRepo\WebDocsDev\WebDocs.BusinessApplicationLayer\bin\Debug\WebDocs.DataAcc
 C:\GitRepo\WebDocsDev\WebDocs.BusinessApplicationLayer\bin\Debug\WebDocs.DataAccessLayer.dll.config
 C:\GitRepo\WebDocsDev\WebDocs.BusinessApplicationLayer\bin\Debug\WebDocs.DomainModels.pdb
 C:\GitRepo\WebDocsDev\WebDocs.BusinessApplicationLayer\bin\Debug\WebDocs.DomainModels.dll.config
+C:\GitRepo\WebDocsDev\WebDocs.BusinessApplicationLayer\bin\Debug\Json.pdb
+C:\GitRepo\WebDocsDev\WebDocs.BusinessApplicationLayer\bin\Debug\Newtonsoft.Json.xml
 C:\GitRepo\WebDocsDev\WebDocs.BusinessApplicationLayer\bin\Debug\EntityFramework.xml
+C:\GitRepo\WebDocsDev\WebDocs.BusinessApplicationLayer\bin\Debug\PagedList.xml
 C:\GitRepo\WebDocsDev\WebDocs.BusinessApplicationLayer\bin\Debug\System.Web.Mvc.xml
 C:\GitRepo\WebDocsDev\WebDocs.BusinessApplicationLayer\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
 C:\GitRepo\WebDocsDev\WebDocs.BusinessApplicationLayer\bin\Debug\Microsoft.AspNet.Identity.Core.xml

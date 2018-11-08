@@ -25,7 +25,7 @@ namespace WebDocs.DomainModels.Database
     	
     		public EntityState EntityState { get; set; }
     		
-        public virtual UsersModel AspNetUser { get; set; }
+        public virtual UsersModel PersonTahtDownloadedTheFile { get; set; }
         public virtual FileModel File { get; set; }
     }
 }
