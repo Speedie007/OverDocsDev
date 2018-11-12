@@ -21,7 +21,6 @@ C:\GitRepo\WebDocsDev\WebDocs.Common\bin\Debug\System.Web.WebPages.dll
 C:\GitRepo\WebDocsDev\WebDocs.Common\bin\Debug\System.Web.WebPages.Razor.dll
 C:\GitRepo\WebDocsDev\WebDocs.Common\bin\Debug\WebDocs.DataAccessLayer.dll
 C:\GitRepo\WebDocsDev\WebDocs.Common\bin\Debug\WebDocs.DomainModels.dll
-C:\GitRepo\WebDocsDev\WebDocs.Common\bin\Debug\PagedList.dll
 C:\GitRepo\WebDocsDev\WebDocs.Common\bin\Debug\WebDocs.DataAccessLayer.pdb
 C:\GitRepo\WebDocsDev\WebDocs.Common\bin\Debug\WebDocs.DataAccessLayer.dll.config
 C:\GitRepo\WebDocsDev\WebDocs.Common\bin\Debug\WebDocs.DomainModels.pdb
@@ -42,7 +41,6 @@ C:\GitRepo\WebDocsDev\WebDocs.Common\bin\Debug\System.Web.Razor.xml
 C:\GitRepo\WebDocsDev\WebDocs.Common\bin\Debug\System.Web.WebPages.xml
 C:\GitRepo\WebDocsDev\WebDocs.Common\bin\Debug\System.Web.WebPages.Deployment.xml
 C:\GitRepo\WebDocsDev\WebDocs.Common\bin\Debug\System.Web.WebPages.Razor.xml
-C:\GitRepo\WebDocsDev\WebDocs.Common\bin\Debug\PagedList.xml
 C:\GitRepo\WebDocsDev\WebDocs.Common\obj\Debug\WebDocs.Common.csprojAssemblyReference.cache
 C:\GitRepo\WebDocsDev\WebDocs.Common\obj\Debug\WebDocs.Common.csproj.CoreCompileInputs.cache
 C:\GitRepo\WebDocsDev\WebDocs.Common\obj\Debug\WebDocs.Common.csproj.CopyComplete

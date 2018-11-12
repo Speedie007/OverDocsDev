@@ -9,14 +9,16 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Notifications</h2>
 
 
 @{
     int UserID_OfUserCurrentlyLoggedIn = User.Identity.GetUserId<int>();
 }
+<br />
 <div class="panel panel-primary">
-    <div class="panel-heading"><h2>Public Viewable Documents</h2></div>
+    <div class="panel-heading">
+        <h2>Notifications</h2>
+    </div>
     <div class="panel-body">
         <ul class="nav nav nav-tabs">
             <li class="active"><a data-toggle="tab" onclick="SetTabIndex(0);" href="#home">New User Notifications</a></li>
@@ -89,21 +91,21 @@
                                     </tr>
                                 }
                             }
-                            <tr>
-                                <td colspan="7">
-                                    <div class="well">
-                                        <table>
-                                            <tr>
-                                                <td>Page @(Model.NewUserNotifications.PageCount < Model.NewUserNotifications.PageNumber ? 0 : Model.NewUserNotifications.PageNumber) of @Model.NewUserNotifications.PageCount</td>
-                                                <td>&nbsp;</td>
-                                                <td>
-                                                    @Html.PagedListPager(Model.NewUserNotifications, page => Url.Action("DisplayUserNotifications", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </td>
-                            </tr>
+                            @*<tr>
+                                    <td colspan="7">
+                                        <div class="well">
+                                            <table>
+                                                <tr>
+                                                    <td>Page @(Model.NewUserNotifications.PageCount < Model.NewUserNotifications.PageNumber ? 0 : Model.NewUserNotifications.PageNumber) of @Model.NewUserNotifications.PageCount</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>
+                                                        @Html.PagedListPager(Model.NewUserNotifications, page => Url.Action("DisplayUserNotifications", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </td>
+                                </tr>*@
                         }
                         else
                         {
@@ -173,19 +175,19 @@
                                 }
 
                             }
-                            <tr>
-                                <td colspan="5">
-                                    <table>
-                                        <tr>
-                                            <td>Page @(Model.ArchivedUserNotifications.PageCount < Model.ArchivedUserNotifications.PageNumber ? 0 : Model.ArchivedUserNotifications.PageNumber) of @Model.ArchivedUserNotifications.PageCount</td>
-                                            <td>&nbsp;</td>
-                                            <td>
-                                                @Html.PagedListPager(Model.ArchivedUserNotifications, page => Url.Action("DisplayUserNotifications", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                            </tr>
+                            @*<tr>
+                                    <td colspan="5">
+                                        <table>
+                                            <tr>
+                                                <td>Page @(Model.ArchivedUserNotifications.PageCount < Model.ArchivedUserNotifications.PageNumber ? 0 : Model.ArchivedUserNotifications.PageNumber) of @Model.ArchivedUserNotifications.PageCount</td>
+                                                <td>&nbsp;</td>
+                                                <td>
+                                                    @Html.PagedListPager(Model.ArchivedUserNotifications, page => Url.Action("DisplayUserNotifications", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>*@
                         }
                         else
                         {
@@ -206,9 +208,9 @@
             </div>
         </div>
     </div>
-    <div class="panel-footer panel-danger">
-        
-    </div>
+    @*<div class="panel-footer panel-danger">
+
+        </div>*@
 </div>
 
 
@@ -220,8 +222,8 @@
 }
 
 @Html.Partial("_ProcessRequestNotification")
-@Html.Partial("_SuccessDialog")
-@Html.Partial("_FailureDialog")
+@*@Html.Partial("_SuccessDialog")
+    @Html.Partial("_FailureDialog")*@
 
 @section Scripts{
 

@@ -4,7 +4,6 @@ C:\GitRepo\WebDocsDev\WebDocs.DataAccessLayer\bin\Debug\WebDocs.DataAccessLayer.
 C:\GitRepo\WebDocsDev\WebDocs.DataAccessLayer\bin\Debug\EntityFramework.dll
 C:\GitRepo\WebDocsDev\WebDocs.DataAccessLayer\bin\Debug\EntityFramework.SqlServer.dll
 C:\GitRepo\WebDocsDev\WebDocs.DataAccessLayer\bin\Debug\WebDocs.DomainModels.dll
-C:\GitRepo\WebDocsDev\WebDocs.DataAccessLayer\bin\Debug\PagedList.dll
 C:\GitRepo\WebDocsDev\WebDocs.DataAccessLayer\bin\Debug\System.Web.Mvc.dll
 C:\GitRepo\WebDocsDev\WebDocs.DataAccessLayer\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
 C:\GitRepo\WebDocsDev\WebDocs.DataAccessLayer\bin\Debug\Microsoft.AspNet.Identity.Core.dll
@@ -19,7 +18,6 @@ C:\GitRepo\WebDocsDev\WebDocs.DataAccessLayer\bin\Debug\WebDocs.DomainModels.pdb
 C:\GitRepo\WebDocsDev\WebDocs.DataAccessLayer\bin\Debug\WebDocs.DomainModels.dll.config
 C:\GitRepo\WebDocsDev\WebDocs.DataAccessLayer\bin\Debug\EntityFramework.xml
 C:\GitRepo\WebDocsDev\WebDocs.DataAccessLayer\bin\Debug\EntityFramework.SqlServer.xml
-C:\GitRepo\WebDocsDev\WebDocs.DataAccessLayer\bin\Debug\PagedList.xml
 C:\GitRepo\WebDocsDev\WebDocs.DataAccessLayer\bin\Debug\System.Web.Mvc.xml
 C:\GitRepo\WebDocsDev\WebDocs.DataAccessLayer\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
 C:\GitRepo\WebDocsDev\WebDocs.DataAccessLayer\bin\Debug\Microsoft.AspNet.Identity.Core.xml

@@ -2,13 +2,18 @@
 
 
 @using WebDocs.Common.Helper.Formatters;
+@using WebDocs.Common.Interfaces;
+@using WebDocs.Common.Enum.SystemLogicEnum;
 @using Microsoft.AspNet.Identity;
+@using WebDocs.Common.Helper.LinkDecision;
 @using PagedList.Mvc;
 @{
     ViewBag.Title = "DisplayPrivateFilesSharedWithUser";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+@{
+    int UserID_OfUserCurrentlyLoggedIn = User.Identity.GetUserId<int>();
+}
 
 
 <br />
@@ -90,11 +95,65 @@
                                     </td>
 
                                     <td>
-                                        [@Html.ActionLink("History", "Edit", new { /* id=item.PrimaryKey */ })]
-                                        [@Html.ActionLink("Download", "Details", new { /* id=item.PrimaryKey */ })]
-                                        [@Html.ActionLink("UnList", "Delete", new { /* id=item.PrimaryKey */ })]
+                                        @{
+                                            IDecsions Decision = LinkDecision.GetPublicDocsFileLinkDecsion(item, User.Identity.GetUserId<int>());
+                                        }
+                                        <table style=" border: none;">
+                                            <tr>
+                                                <td>
+                                                    <a href="javascript:void(0);" onclick="showFileDetails(@item.FileID);" class="btn btn-info btn-sm showHistory">
+                                                        <span class="glyphicon glyphicon-list-alt"> History</span>
+                                                    </a>
+                                                </td>
+                                                <td>&nbsp;</td>
+                                                <td>
+                                                    <div class="text-nowrap">
+                                                        @if (Decision != null)
+                                                        {
+                                                            switch (Decision.FinalDecision)
+                                                            {
+                                                                case ControlTypes.Download:
+                                                                    <a class="btn btn-primary btn-sm btn-block" data-toggle="tooltip" data-placement="top" title="Click To Download File." href="#" onclick="showDownloadNotificationModal(@item.FileID,'@item.FullFileName', @UserID_OfUserCurrentlyLoggedIn )">
+                                                                        <span class="glyphicon glyphicon-cloud-download"> Download</span>
+                                                                    </a>
+                                                                    break;
+                                                                case ControlTypes.UploadFileNotification:
+                                                                    <a class="btn btn-warning btn-sm btn-block" data-toggle="tooltip" data-placement="top" title="Click To Send Notification." href="javascript:void(0);">
+                                                                        <span class="glyphicon glyphicon-upload"> Notify-To-Upload</span>
+                                                                    </a>
+                                                                    @*@Html.ActionLink("Notify to Upload", "DownLoadSelectedFile", "DownLoadFile", new { fileID = item.FileID }, null)*@
+                                                                    break;
+                                                               
+                                                                default:
+                                                                    break;
+
+                                                            }
+                                                        }
+                                                        else
+                                                        {
+                                                            <div class="alert alert-info">
+                                                                <strong>Info!</strong> - No Links To Display!
+                                                            </div>
+
+                                                        }
+                                                    </div>
+                                                </td>
+                                                <td>&nbsp;</td>
+                                                <td>
+                                                    <a href="javascript:void(0);" onclick="showFileDetails(@item.FileID);" class="btn btn-danger btn-sm showHistory">
+                                                        <span class="glyphicon glyphicon-remove-sign"> Unlink</span>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                           
+                                        </table>
+                                        @*[@Html.ActionLink("History", "Edit", new { /* id=item.PrimaryKey */ })]
+                            [@Html.ActionLink("Download", "Details", new { /* id=item.PrimaryKey */ })]
+                            [@Html.ActionLink("UnList", "Delete", new { /* id=item.PrimaryKey */ })]*@
                                     </td>
                                 </tr>
+                                <tr></tr>
+                                @Html.Partial("_FileDetails", item);
                             }
                         }
                         else

@@ -10,8 +10,10 @@ namespace WebDocs.DomainModels.ViewModels.Notifications
 {
     public class NotificationsViewModel
     {
-        public IPagedList<NotificationModel> NewUserNotifications { get; set; }
-        public IPagedList<NotificationModel> ArchivedUserNotifications { get; set; }
+        //public IPagedList<NotificationModel> NewUserNotifications { get; set; }
+        //public IPagedList<NotificationModel> ArchivedUserNotifications { get; set; }
+        public List<NotificationModel> NewUserNotifications { get; set; }
+        public List<NotificationModel> ArchivedUserNotifications { get; set; }
         public int CurrentTabIndex { get; set; }
     }
 }

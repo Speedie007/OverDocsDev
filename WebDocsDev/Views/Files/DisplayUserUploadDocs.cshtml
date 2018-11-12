@@ -96,14 +96,21 @@
                                         <table>
                                             <tr>
                                                 <td>
-                                                    [<a href="javascript:void(0);" onclick="showFileDetails(@item.FileID);" class="showHistory">History</a>]
+                                                    <a href="javascript:void(0);" onclick="showFileDetails(@item.FileID);" class="btn btn-info btn-sm showHistory">
+                                                        <span class="glyphicon glyphicon-list-alt"> History</span>
+                                                    </a>
                                                 </td>
                                                 <td>&nbsp;</td>
                                                 <td>
-                                                    <div>
-                                                        [<a data-toggle="tooltip" data-placement="top" title="Click To Upload New Updated File." href="#" onclick="showUploadNewUpdateModal(@item.FileID,'@item.FullFileName', @UserID_OfUserCurrentlyLoggedIn )">Upload Updates</a>]
-                                                    </div>
 
+                                                    <a class="btn btn-success btn-sm btn-block" data-toggle="tooltip" data-placement="top" title="Click To Upload New Updated File." href="#"
+                                                       onclick="showUploadNewUpdateModal(@item.FileID,'@item.FullFileName', @UserID_OfUserCurrentlyLoggedIn )">
+                                                        <span class="glyphicon glyphicon-cloud-upload"> Upload</span>
+                                                    </a>
+
+                                                    @*<a class="btn btn-success btn-sm btn-block" href="javascript:void(0);" onclick="sendRequestNotification(@item.FileID,@UserID_OfUserCurrentlyLoggedIn,@item.UserIDOfFileOwner)">
+                                                        <span class="glyphicon glyphicon-copy"> Request-Permission</span>
+                                                    </a>*@
                                                 </td>
                                             </tr>
                                         </table>

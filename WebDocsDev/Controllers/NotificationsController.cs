@@ -37,22 +37,12 @@ namespace WebDocs.Web.Controllers
             ViewBag.CurrentVersionNumberSortParm = sortOrder == "Version" ? "Version_desc" : "Version";
             ViewBag.FileSizeSortParm = sortOrder == "FileSize" ? "FileSize_desc" : "FileSize";
 
-            if (searchString != null)
-            {
-                page = 1;
-            }
-            else
-            {
-                searchString = currentFilter;
-            }
-
-            ViewBag.CurrentFilter = searchString;
-
+           
             IList<NotificationModel> Rtn = NBL.GetCurrentUserNotifications(User.Identity.GetUserId<int>());
 
             //ViewBag.CurrentFilter = "";
-            int pageSize = 10;
-            int pageNumber = (page ?? 1);
+           
+          
 
             //var ThereIsGoing = Rtn.Where(a => a.UserHasAcknowledgement == false).ToPagedList<NotificationModel>(pageNumber, pageSize);
             //var ccc = Rtn.Where(a => a.UserHasAcknowledgement == true).ToPagedList<NotificationModel>(pageNumber, pageSize);
@@ -60,8 +50,8 @@ namespace WebDocs.Web.Controllers
             return View(new NotificationsViewModel()
             {
                 CurrentTabIndex = TabIndex,
-                NewUserNotifications = Rtn.Where(a => a.UserHasAcknowledgement == false).ToPagedList<NotificationModel>(pageNumber, pageSize),
-                ArchivedUserNotifications = Rtn.Where(a => a.UserHasAcknowledgement == true).ToPagedList<NotificationModel>(pageNumber, pageSize)
+                NewUserNotifications = Rtn.Where(a => a.UserHasAcknowledgement == false).ToList<NotificationModel>(),
+                ArchivedUserNotifications = Rtn.Where(a => a.UserHasAcknowledgement == true).ToList<NotificationModel>()
             });
         }
 

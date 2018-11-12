@@ -90,6 +90,7 @@
     <Build Include="dbo\Tables\FileArchives.sql" />
     <Build Include="dbo\Views\View_AllFiles.sql" />
     <Build Include="dbo\Tables\FileBlobs.sql" />
+    <Build Include="dbo\Tables\FileArchiveBlobs.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="dbo\PreScripts\Script.PostDeployment_AddLookupTableData.sql" />
