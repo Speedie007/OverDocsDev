@@ -206,6 +206,26 @@ namespace WebDocs.Web.Controllers
             {
                 return View("Error", new HandleErrorInfo(new Exception(), "ContentManagement", "DownLoadSelectedFile"));
             }
+        }
+
+        public ActionResult UnlinkPrivteSharedFile(int UserIDPersonSharedWith, int FileID, string _sortOrder, string _currentFilter, int? _page)
+        {
+            PrivatelySharedDocumentsBusinessLogic PSDBL = new PrivatelySharedDocumentsBusinessLogic();
+
+            CompletedTransactionResponses CTR = PSDBL.UnlinkPrivatelySharedDocument(UserIDPersonSharedWith, FileID);
+            if (CTR.WasSuccessfull)
+            {
+                return RedirectToAction("DisplayPrivateFilesSharedWithUser", new
+                {
+                    sortOrder = _sortOrder,
+                    currentFilter = _currentFilter,
+                    page = _page
+                });
+            }
+            else
+            {
+                return View("Error", new HandleErrorInfo(new Exception(), "Files", "UnlinkPrivteSharedFile"));
+            }
 
         }
     }

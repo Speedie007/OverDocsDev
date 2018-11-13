@@ -158,11 +158,13 @@
     <Compile Include="TransactionResponse\CompletedTransactionResponses.cs" />
     <Compile Include="TransactionResponse\FileUploadResponses.cs" />
     <Compile Include="ViewModels\Files\ProcessDownloadingOfSelectedFileModel.cs" />
+    <Compile Include="ViewModels\Files\UnlinkPrivatelySharedDocumentsModel.cs" />
     <Compile Include="ViewModels\Files\UploadingNewUserFileModel.cs" />
     <Compile Include="ViewModels\Files\UploadingUpdatedUserFileModel.cs" />
     <Compile Include="ViewModels\Notifications\Processing\AcceptFileRequestNotifictionViewModel.cs" />
     <Compile Include="ViewModels\Notifications\NotificationsViewModel.cs" />
     <Compile Include="ViewModels\Notifications\Processing\ProcessFileRequestNotificationViewModel.cs" />
+    <Compile Include="ViewModels\Notifications\Processing\RemoveNotificationViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DecisionModels\PrivateDocuments\" />

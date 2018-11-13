@@ -82,11 +82,23 @@
                                             @{
                                                 string sFileName = item.File.FullFileName;
                                                 string sPersonNameWhichIsRequestingFile = item.SendingUsers.UserFullName;
+                                                //if REquest notifiocatiopn
                                                 if (item.NotificationTypeID == (int)EnumNotificationTypes.Share_Request)
                                                 {
-                                                    @: [<a href="javascript:void(0);" onclick="showProcessRequestNotificationModal(@item.FileID, @item.NotificationID,'@item.UserIDOfNotificationSender','@UserID_OfUserCurrentlyLoggedIn','@sFileName','@sPersonNameWhichIsRequestingFile');">Process Notification</a>]
+                                                    @*@: [<a href="javascript:void(0);" onclick="showProcessRequestNotificationModal(@item.FileID, @item.NotificationID,'@item.UserIDOfNotificationSender','@UserID_OfUserCurrentlyLoggedIn','@sFileName','@sPersonNameWhichIsRequestingFile');">Process Notification</a>]*@
+                                                    <a class="btn btn-primary btn-sm btn-block"
+                                                       data-toggle="tooltip"
+                                                       data-placement="top"
+                                                       title="Click To Download File."
+                                                       href="javascript:void(0);"
+                                                       onclick="showProcessRequestNotificationModal(@item.FileID, @item.NotificationID,'@item.UserIDOfNotificationSender','@UserID_OfUserCurrentlyLoggedIn','@sFileName','@sPersonNameWhichIsRequestingFile');">
+                                                        <span class="glyphicon glyphicon-refresh"> Process Notification</span>
+                                                    </a>
                                                 }
                                             }
+
+
+
                                         </td>
                                     </tr>
                                 }
@@ -167,9 +179,16 @@
                                         </td>
 
                                         <td>
-                                            @Html.ActionLink("Edit", "Edit", new { id = item.NotificationID }) |
-                                            @Html.ActionLink("Details", "Details", new { id = item.NotificationID }) |
-                                            @Html.ActionLink("Delete", "Delete", new { id = item.NotificationID })
+                                            <a class="btn btn-danger btn-sm btn-block"
+                                               data-toggle="tooltip"
+                                               data-placement="top"
+                                               title="Click To Remove Notification."
+                                               href="@Url.Action("DeleteNotification", "Notifications", new { NotifictionID = item.NotificationID, _TabIndex = 1 })">
+                                                <span class="glyphicon glyphicon-cloud-download"> Delete</span>
+                                            </a>
+                                            @*@Html.ActionLink("Edit", "Edit", new { id = item.NotificationID }) |
+                                                @Html.ActionLink("Details", "Details", new { id = item.NotificationID }) |
+                                                @Html.ActionLink("Delete", "Delete", new { id = item.NotificationID })*@
                                         </td>
                                     </tr>
                                 }
@@ -230,66 +249,21 @@
 
     <script type="text/javascript">
 
-        function RefreshPage() {
-            $("#btnRefreshPage")[0].click();
-        }
+        window.onload = function () {
+    //script goes here
+            $('.nav-tabs li:eq(' + @Model.CurrentTabIndex +') a').tab('show');
+        };
+        //function RefreshPage() {
+        //    $("#btnRefreshPage")[0].click();
+        //}
 
-        function SetTabIndex(iTabIndex) {
-            $("#TabIndex").val(iTabIndex);
-        }
+
 
         //$("#Download_Notification_Modal").on('hidden.bs.modal', function () {
         //    $("#btnRefreshPage")[0].click();
         //});
 
-        window.onload = function () {
-        //script goes here
-         $('.nav-tabs li:eq('+ @Model.CurrentTabIndex +') a').tab('show');
-        };
-        var _AcceptFileRequestNotifictionViewModel;
 
-        function showProcessRequestNotificationModal(FileID, NotificationID, FileName, PersonNameWhichIsRequestingFile) {
-
-            //Create Json Object
-            _AcceptFileRequestNotifictionViewModel = JSON.parse('{}');
-            _AcceptFileRequestNotifictionViewModel.TabIndex = 0;
-            _AcceptFileRequestNotifictionViewModel.NotificationID = NotificationID;
-
-            //debugger;
-            $("#requestNotificationSenderName").html(PersonNameWhichIsRequestingFile);
-            $("#requestedFileNameToShareBaseOnTheREquestNotificationRecieved").html(FileName);
-            $("#requestedNotificationFileID").html(FileID);
-
-
-            $("#ProcessFileRequestNotificationModal").modal("show");
-
-        }
-
-        function ProcessAcceptedFileShareRequest() {
-
-            $("#ProcessFileRequestNotificationModal").modal("hide");
-            //debugger;
-            $.ajax({
-                type: "POST",
-                url: '@Url.Action("AcceptFileRequestNotification", "Notifications")',
-                data: JSON.stringify(_AcceptFileRequestNotifictionViewModel),
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (data) {
-
-                    $('#SuccessConfiramtionMessage').html(data.Message);
-
-                    $('#SuccessConfirmationModal').modal('show');
-                },
-                error: function (xhr, textStatus, error) {
-
-                    $('#FailureConfiramtionMessage').html(error);
-                    //$('#ShowFileRequerstNotificationConfirmationModal').modal(options);
-                    $('#FailureConfirmationModal').modal('show');
-
-                }
-            });
-        }
     </script>
 }
 

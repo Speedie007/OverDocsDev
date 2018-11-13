@@ -140,8 +140,10 @@
                                                 </td>
                                                 <td>&nbsp;</td>
                                                 <td>
-                                                    <a href="javascript:void(0);" onclick="showFileDetails(@item.FileID);" class="btn btn-danger btn-sm showHistory">
-                                                        <span class="glyphicon glyphicon-remove-sign"> Unlink</span>
+                                                    <a
+                                                    href="@Url.Action("UnlinkPrivteSharedFile", "Files", new { UserIDPersonSharedWith = UserID_OfUserCurrentlyLoggedIn, FileID = item.FileID, _sortOrder = ViewBag.CurrentSort, _currentFilter = ViewBag.CurrentFilter, _page = Model.PageNumber })" 
+                                                       class="btn btn-danger btn-sm showHistory">
+                                                    <span class="glyphicon glyphicon-transfer"> Unlink</span>
                                                     </a>
                                                 </td>
                                             </tr>

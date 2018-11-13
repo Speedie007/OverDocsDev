@@ -22,7 +22,7 @@ namespace WebDocs.BusinessApplicationLayer.Query
             this._PrivateFilesSharedWithUserRepository = new PrivateFilesSharedWithUserRepository();
         }
 
-        public CompletedTransactionResponses CTR { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public CompletedTransactionResponses CTR { get; set; }
 
         public IList<FileModel> GetAllPersonalFilesSharedWithUser(int UserID)
         {
@@ -34,6 +34,22 @@ namespace WebDocs.BusinessApplicationLayer.Query
                 a => a.File.FileViewStatuses);
             return (from a in allFilesSharedwithUser
                     select a.File).ToList<FileModel>();
+        }
+
+        public CompletedTransactionResponses UnlinkPrivatelySharedDocument(int UserIDPersonSharedWith, int FileID)
+        {
+
+            PrivateFilesSharedWithUserModel PFSWUM = _PrivateFilesSharedWithUserRepository.GetSingle(a => a.FileID == FileID && a.UserIDPersonSharedWith == UserIDPersonSharedWith);
+
+            PFSWUM.EntityState = DomainModels.EntityState.Deleted;
+
+            CTR = _PrivateFilesSharedWithUserRepository.Remove(PFSWUM);
+            if (CTR.WasSuccessfull)
+            {
+                CTR.Message = CTR + " -  Successfully unlinked this file that was shared.";
+            }
+            return CTR;
+
         }
     }
 }

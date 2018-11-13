@@ -21,6 +21,7 @@ namespace WebDocs.Web.Controllers
     {
         // GET: Notificationst
         [HttpGet]
+        [Authorize]
         public ActionResult DisplayUserNotifications(string sortOrder, string currentFilter, string searchString, int? page, int TabIndex = 0)
         {
             NotificationsBusinessLogic NBL = new NotificationsBusinessLogic();
@@ -37,12 +38,12 @@ namespace WebDocs.Web.Controllers
             ViewBag.CurrentVersionNumberSortParm = sortOrder == "Version" ? "Version_desc" : "Version";
             ViewBag.FileSizeSortParm = sortOrder == "FileSize" ? "FileSize_desc" : "FileSize";
 
-           
+
             IList<NotificationModel> Rtn = NBL.GetCurrentUserNotifications(User.Identity.GetUserId<int>());
 
             //ViewBag.CurrentFilter = "";
-           
-          
+
+
 
             //var ThereIsGoing = Rtn.Where(a => a.UserHasAcknowledgement == false).ToPagedList<NotificationModel>(pageNumber, pageSize);
             //var ccc = Rtn.Where(a => a.UserHasAcknowledgement == true).ToPagedList<NotificationModel>(pageNumber, pageSize);
@@ -70,6 +71,19 @@ namespace WebDocs.Web.Controllers
             //await NBL.ProcessAcceptedFileRequest(AFRN);
             return Json(await NBL.ProcessAcceptedFileRequest(AFRN), JsonRequestBehavior.AllowGet);
             // return RedirectToAction("DisplayUserNotifications", new { TabIndex = AFRN.PageIndex });
+        }
+
+        public ActionResult DeleteNotification(int NotifictionID, int _TabIndex)
+        {
+            NotificationsBusinessLogic NBL = new NotificationsBusinessLogic();
+
+            NBL.RemoveNotification(new RemoveNotificationViewModel()
+            {
+                NotificationID = NotifictionID
+            });
+
+            return RedirectToAction("DisplayUserNotifications", new { TabIndex = _TabIndex });
+
         }
     }
 }

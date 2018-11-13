@@ -65,6 +65,10 @@ $(function () {
         $("#btnRefreshPage")[0].click();
     });
 
+    $("#ProcessFileRequestNotificationModal").on('hidden.bs.modal', function () {
+        $("#btnRefreshPage")[0].click();
+    });
+
     
 
     $('[data-toggle="tooltip"]').tooltip();
@@ -267,4 +271,65 @@ function UploadUpdatedFile() {
         input.val(null);
     }
 
+}
+
+function SetTabIndex(iTabIndex) {
+    $("#TabIndex").val(iTabIndex);
+}
+
+
+var _AcceptFileRequestNotifictionViewModel;
+
+function showProcessRequestNotificationModal(FileID, NotificationID, FileName, PersonNameWhichIsRequestingFile) {
+
+    //Create Json Object
+    _AcceptFileRequestNotifictionViewModel = JSON.parse('{}');
+    _AcceptFileRequestNotifictionViewModel.TabIndex = 0;
+    _AcceptFileRequestNotifictionViewModel.NotificationID = NotificationID;
+
+    //debugger;
+    $("#requestNotificationSenderName").html(PersonNameWhichIsRequestingFile);
+    $("#requestedFileNameToShareBaseOnTheREquestNotificationRecieved").html(FileName);
+    $("#requestedNotificationFileID").html(FileID);
+
+
+    $("#ProcessFileRequestNotificationModal").modal("show");
+
+}
+
+function ProcessAcceptedFileShareRequest() {
+
+    var ajaxCallURL = window.rootUrl + 'Notifications/AcceptFileRequestNotification';
+    //debugger;
+    $.ajax({
+        type: "POST",
+        url: ajaxCallURL,//'@Url.Action("AcceptFileRequestNotification", "Notifications")',
+        data: JSON.stringify(_AcceptFileRequestNotifictionViewModel),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data) {
+
+            $("#ProcessFileRequestNotificationModal").modal("hide");
+
+            $('#SuccessConfiramtionMessage').html(data.Message);
+
+            $('#SuccessConfirmationModal').modal('show');
+
+            var f = function () {
+                setTimeout(function () {
+                    $('#SuccessConfirmationModal').modal('hide');
+                }, 3000);
+            };
+            f();
+        },
+        error: function (xhr, textStatus, error) {
+
+            $('#FailureConfiramtionMessage').html(error);
+            //$('#ShowFileRequerstNotificationConfirmationModal').modal(options);
+            $('#FailureConfirmationModal').modal('show');
+
+        }
+    });
+
+    
 }

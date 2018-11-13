@@ -18,8 +18,33 @@ namespace WebDocs.BusinessApplicationLayer.Query
     {
         private readonly INotificationRepository _NotificationsRepsoitory;
         private readonly IPrivateFilesSharedWithUsersRepository _PrivateFilesSharedWithUserRepository;
+        private CompletedTransactionResponses _CTR;
 
-        public CompletedTransactionResponses CTR { get; set; }
+        public CompletedTransactionResponses CTR
+        {
+            get
+            {
+                if (_CTR is null)
+                {
+                    _CTR = new CompletedTransactionResponses()
+                    {
+                        Message = "",
+                        TransActionType = TransactionType.NoneExecuted,
+                        WasSuccessfull = false
+                    };
+                    return _CTR;
+                }
+                else
+                {
+                    return _CTR;
+                }
+            }
+            set
+            {
+                CTR = value;
+            }
+        }
+
 
         public NotificationsBusinessLogic()
         {
@@ -39,6 +64,22 @@ namespace WebDocs.BusinessApplicationLayer.Query
 
 
             return Rtn;
+        }
+
+        public CompletedTransactionResponses RemoveNotification(RemoveNotificationViewModel RNVM)
+        {
+            WebDocs.DomainModels.Database.NotificationModel NM = new NotificationModel()
+            {
+                NotificationID = RNVM.NotificationID,
+                EntityState = DomainModels.EntityState.Deleted
+            };
+            CTR = _NotificationsRepsoitory.Remove(NM);
+
+            if (CTR.WasSuccessfull)
+            {
+                CTR.Message = CTR.Message + " - Notification Removed.";
+            }
+            return CTR;
         }
 
         public async Task<CompletedTransactionResponses> ProcessFileRequest(ProcessFileRequestNotificationViewModel PFRN)
