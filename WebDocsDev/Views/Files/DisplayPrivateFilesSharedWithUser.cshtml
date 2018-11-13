@@ -123,7 +123,7 @@
                                                                     </a>
                                                                     @*@Html.ActionLink("Notify to Upload", "DownLoadSelectedFile", "DownLoadFile", new { fileID = item.FileID }, null)*@
                                                                     break;
-                                                               
+
                                                                 default:
                                                                     break;
 
@@ -140,18 +140,17 @@
                                                 </td>
                                                 <td>&nbsp;</td>
                                                 <td>
-                                                    <a
-                                                    href="@Url.Action("UnlinkPrivteSharedFile", "Files", new { UserIDPersonSharedWith = UserID_OfUserCurrentlyLoggedIn, FileID = item.FileID, _sortOrder = ViewBag.CurrentSort, _currentFilter = ViewBag.CurrentFilter, _page = Model.PageNumber })" 
+                                                    <a href="@Url.Action("UnlinkPrivteSharedFile", "Files", new { UserIDPersonSharedWith = UserID_OfUserCurrentlyLoggedIn, FileID = item.FileID, _sortOrder = ViewBag.CurrentSort, _currentFilter = ViewBag.CurrentFilter, _page = Model.PageNumber })"
                                                        class="btn btn-danger btn-sm showHistory">
-                                                    <span class="glyphicon glyphicon-transfer"> Unlink</span>
+                                                        <span class="glyphicon glyphicon-transfer"> Unlink</span>
                                                     </a>
                                                 </td>
                                             </tr>
-                                           
+
                                         </table>
                                         @*[@Html.ActionLink("History", "Edit", new { /* id=item.PrimaryKey */ })]
-                            [@Html.ActionLink("Download", "Details", new { /* id=item.PrimaryKey */ })]
-                            [@Html.ActionLink("UnList", "Delete", new { /* id=item.PrimaryKey */ })]*@
+                                            [@Html.ActionLink("Download", "Details", new { /* id=item.PrimaryKey */ })]
+                                            [@Html.ActionLink("UnList", "Delete", new { /* id=item.PrimaryKey */ })]*@
                                     </td>
                                 </tr>
                                 <tr></tr>
@@ -193,3 +192,12 @@
         </table>
     </div>
 </div>
+@using (Html.BeginForm("DisplayPrivateFilesSharedWithUser", "Files", new { sortOrder = "", currentFilter = ViewBag.CurrentFilter, page = Model.PageNumber }, FormMethod.Get))
+{
+    <input type="hidden" id="sortOrder" name="sortOrder" value="@ViewBag.CurrentSort" />
+    <input type="hidden" id="currentFilter" name="currentFilter" value="@ViewBag.CurrentFilter" />
+
+    <input type="hidden" id="page" name="page" value="@Model.PageNumber" />
+
+    <input type="submit" id="btnRefreshPage" value="" style="display:none" />
+}

@@ -56,6 +56,15 @@ namespace WebDocs.Web.Controllers
             });
         }
 
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult DisplayUserNotifications(int _TabIndex = 0)
+        {
+            return RedirectToAction("DisplayUserNotifications", new { TabIndex = _TabIndex });
+        }
+
+
         [HttpPost]
         public async Task<ActionResult> ProcessRequestNotification(ProcessFileRequestNotificationViewModel PFRN)
         {

@@ -41,7 +41,7 @@ namespace WebDocs.BusinessApplicationLayer.Query
             }
             set
             {
-                CTR = value;
+                _CTR = value;
             }
         }
 

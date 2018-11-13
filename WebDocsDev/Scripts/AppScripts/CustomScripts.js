@@ -274,7 +274,7 @@ function UploadUpdatedFile() {
 }
 
 function SetTabIndex(iTabIndex) {
-    $("#TabIndex").val(iTabIndex);
+    $("#_TabIndex").val(iTabIndex);
 }
 
 
@@ -300,7 +300,7 @@ function showProcessRequestNotificationModal(FileID, NotificationID, FileName, P
 function ProcessAcceptedFileShareRequest() {
 
     var ajaxCallURL = window.rootUrl + 'Notifications/AcceptFileRequestNotification';
-    //debugger;
+    debugger;
     $.ajax({
         type: "POST",
         url: ajaxCallURL,//'@Url.Action("AcceptFileRequestNotification", "Notifications")',
@@ -314,7 +314,7 @@ function ProcessAcceptedFileShareRequest() {
             $('#SuccessConfiramtionMessage').html(data.Message);
 
             $('#SuccessConfirmationModal').modal('show');
-
+            SetTabIndex(_AcceptFileRequestNotifictionViewModel.TabIndex);
             var f = function () {
                 setTimeout(function () {
                     $('#SuccessConfirmationModal').modal('hide');

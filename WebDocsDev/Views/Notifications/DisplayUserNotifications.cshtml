@@ -233,10 +233,10 @@
 </div>
 
 
-<a onclick="RefreshPage();" href="#">REFRESH TEST</a>
+@*<a onclick="RefreshPage();" href="#">REFRESH TEST</a>*@
 @using (Html.BeginForm("DisplayUserNotifications", "Notifications", FormMethod.Post))
 {
-    @Html.Hidden("TabIndex", "0");
+    @Html.Hidden("_TabIndex", "0");
     <input type="submit" id="btnRefreshPage" value="" style="display:none" />
 }
 
