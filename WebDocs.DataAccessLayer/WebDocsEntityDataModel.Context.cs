@@ -44,5 +44,6 @@ namespace WebDocs.DataAccessLayer
         public virtual DbSet<FileBlobModel> FileBlobModels { get; set; }
         public virtual DbSet<FileModel> FileModels { get; set; }
         public virtual DbSet<FileArchiveBlobModel> FileArchiveBlobModels { get; set; }
+        public virtual DbSet<EmailCacheModel> EmailCacheModels { get; set; }
     }
 }

@@ -26,6 +26,8 @@ namespace WebDocs.DomainModels.Database
             this.OwnerFiles = new HashSet<FileModel>();
             this.PersonThatLastUpdatedFile = new HashSet<FileModel>();
             this.FileArchives = new HashSet<FileArchiveModel>();
+            this.EmailCaches = new HashSet<EmailCacheModel>();
+            this.EmailCaches1 = new HashSet<EmailCacheModel>();
         }
     
         public int Id { get; set; }
@@ -74,5 +76,9 @@ namespace WebDocs.DomainModels.Database
         public virtual ICollection<FileModel> PersonThatLastUpdatedFile { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FileArchiveModel> FileArchives { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EmailCacheModel> EmailCaches { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EmailCacheModel> EmailCaches1 { get; set; }
     }
 }

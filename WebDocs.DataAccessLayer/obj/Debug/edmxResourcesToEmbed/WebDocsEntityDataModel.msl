@@ -176,5 +176,18 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="EmailCacheModels">
+      <EntityTypeMapping TypeName="WebDocsModel.EmailCacheModel">
+        <MappingFragment StoreEntitySet="EmailCache">
+          <ScalarProperty Name="EmailSubject" ColumnName="EmailSubject" />
+          <ScalarProperty Name="IDOfRecipient" ColumnName="IDOfRecipient" />
+          <ScalarProperty Name="IDOfPersonSender" ColumnName="IDOfPersonSender" />
+          <ScalarProperty Name="RetryAttempt" ColumnName="RetryAttempt" />
+          <ScalarProperty Name="HasBeenSent" ColumnName="HasBeenSent" />
+          <ScalarProperty Name="EmailMessage" ColumnName="EmailMessage" />
+          <ScalarProperty Name="EmailCacheID" ColumnName="EmailCacheID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

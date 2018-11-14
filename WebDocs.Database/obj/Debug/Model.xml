@@ -825,6 +825,22 @@
 			</Relationship>
 			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="18" />
 		</Element>
+		<Element Type="SqlDefaultConstraint" Name="[dbo].[DF_LookupTable_NotificationTypes_NotificationMessageTemplate]">
+			<Property Name="DefaultExpressionScript">
+				<Value><![CDATA[('')]]></Value>
+			</Property>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[LookupTable_NotificationTypes]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForColumn">
+				<Entry>
+					<References Name="[dbo].[LookupTable_NotificationTypes].[NotificationMessageTemplate]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="19" />
+		</Element>
 		<Element Type="SqlDefaultConstraint" Name="[dbo].[DF_LookupTableNotificationTypes_NotificationType]">
 			<Property Name="DefaultExpressionScript">
 				<Value><![CDATA[('Unknown')]]></Value>
@@ -839,25 +855,9 @@
 					<References Name="[dbo].[LookupTable_NotificationTypes].[NotificationType]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="19" />
-		</Element>
-		<Element Type="SqlDefaultConstraint" Name="[dbo].[DF_Notifications_RetryAttempt]">
-			<Property Name="DefaultExpressionScript">
-				<Value><![CDATA[((0))]]></Value>
-			</Property>
-			<Relationship Name="DefiningTable">
-				<Entry>
-					<References Name="[dbo].[Notifications]" />
-				</Entry>
-			</Relationship>
-			<Relationship Name="ForColumn">
-				<Entry>
-					<References Name="[dbo].[Notifications].[RetryAttempt]" />
-				</Entry>
-			</Relationship>
 			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="20" />
 		</Element>
-		<Element Type="SqlDefaultConstraint" Name="[dbo].[DF_Notifications_UserHasAcknowledgement]">
+		<Element Type="SqlDefaultConstraint" Name="[dbo].[DF_Notifications_UserHasAcknowledgement_1]">
 			<Property Name="DefaultExpressionScript">
 				<Value><![CDATA[((0))]]></Value>
 			</Property>
@@ -868,7 +868,7 @@
 			</Relationship>
 			<Relationship Name="ForColumn">
 				<Entry>
-					<References Name="[dbo].[Notifications].[NotificationSuccessfulSent]" />
+					<References Name="[dbo].[Notifications].[UserHasAcknowledgement]" />
 				</Entry>
 			</Relationship>
 			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="21" />
@@ -1036,6 +1036,50 @@
 			</Relationship>
 			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="24" />
 		</Element>
+		<Element Type="SqlTable" Name="[dbo].[FileArchiveBlobs]">
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="Columns">
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[FileArchiveBlobs].[FileArchiveID]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[FileArchiveBlobs].[FileImage]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[image]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="Schema">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="25" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="26" />
+		</Element>
 		<Element Type="SqlTable" Name="[dbo].[FileArchives]">
 			<Property Name="IsAnsiNullsOn" Value="True" />
 			<Relationship Name="Columns">
@@ -1074,38 +1118,6 @@
 				</Entry>
 				<Entry>
 					<Element Type="SqlSimpleColumn" Name="[dbo].[FileArchives].[UserIDOfLastUploaded]">
-						<Property Name="IsNullable" Value="False" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[int]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[dbo].[FileArchives].[FileLookupStatusID]">
-						<Property Name="IsNullable" Value="False" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[int]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[dbo].[FileArchives].[FileShareStatusID]">
 						<Property Name="IsNullable" Value="False" />
 						<Relationship Name="TypeSpecifier">
 							<Entry>
@@ -1188,22 +1200,6 @@
 					</Element>
 				</Entry>
 				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[dbo].[FileArchives].[FileImage]">
-						<Property Name="IsNullable" Value="False" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[image]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
-				<Entry>
 					<Element Type="SqlSimpleColumn" Name="[dbo].[FileArchives].[CurrentVersionNumber]">
 						<Property Name="IsNullable" Value="False" />
 						<Relationship Name="TypeSpecifier">
@@ -1258,8 +1254,9 @@
 					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="25" />
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="26" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="27" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="28" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="29" />
 		</Element>
 		<Element Type="SqlTable" Name="[dbo].[FileBlobs]">
 			<Property Name="IsAnsiNullsOn" Value="True" />
@@ -1302,8 +1299,8 @@
 					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="27" />
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="28" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="30" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="31" />
 		</Element>
 		<Element Type="SqlTable" Name="[dbo].[FileCategories]">
 			<Property Name="IsAnsiNullsOn" Value="True" />
@@ -1363,9 +1360,9 @@
 					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="29" />
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="30" />
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="31" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="32" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="33" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="34" />
 		</Element>
 		<Element Type="SqlTable" Name="[dbo].[Files]">
 			<Property Name="IsAnsiNullsOn" Value="True" />
@@ -1556,11 +1553,11 @@
 					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="32" />
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="33" />
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="34" />
 			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="35" />
 			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="36" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="37" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="38" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="39" />
 		</Element>
 		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_dbo.AspNetUserClaims_dbo.AspNetUsers_UserId]">
 			<Property Name="OnDeleteAction" Value="1" />
@@ -1658,6 +1655,52 @@
 			</Relationship>
 			<AttachedAnnotation Disambiguator="11" />
 		</Element>
+		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_FileArchiveBlobs_FileArchives]">
+			<Relationship Name="Columns">
+				<Entry>
+					<References Name="[dbo].[FileArchiveBlobs].[FileArchiveID]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[FileArchiveBlobs]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForeignColumns">
+				<Entry>
+					<References Name="[dbo].[FileArchives].[FileArchiveID]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForeignTable">
+				<Entry>
+					<References Name="[dbo].[FileArchives]" />
+				</Entry>
+			</Relationship>
+			<AttachedAnnotation Disambiguator="26" />
+		</Element>
+		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_FileArchives_AspNetUsers]">
+			<Relationship Name="Columns">
+				<Entry>
+					<References Name="[dbo].[FileArchives].[UserIDOfLastUploaded]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[FileArchives]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForeignColumns">
+				<Entry>
+					<References Name="[dbo].[AspNetUsers].[Id]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="ForeignTable">
+				<Entry>
+					<References Name="[dbo].[AspNetUsers]" />
+				</Entry>
+			</Relationship>
+			<AttachedAnnotation Disambiguator="28" />
+		</Element>
 		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_FileArchives_Files]">
 			<Relationship Name="Columns">
 				<Entry>
@@ -1679,7 +1722,7 @@
 					<References Name="[dbo].[Files]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="26" />
+			<AttachedAnnotation Disambiguator="29" />
 		</Element>
 		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_FileBlobs_Files]">
 			<Relationship Name="Columns">
@@ -1702,7 +1745,7 @@
 					<References Name="[dbo].[Files]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="28" />
+			<AttachedAnnotation Disambiguator="31" />
 		</Element>
 		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_FileCategories_Files]">
 			<Relationship Name="Columns">
@@ -1725,7 +1768,7 @@
 					<References Name="[dbo].[Files]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="30" />
+			<AttachedAnnotation Disambiguator="33" />
 		</Element>
 		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_FileCategories_LookupTable_FileCategories]">
 			<Relationship Name="Columns">
@@ -1748,7 +1791,7 @@
 					<References Name="[dbo].[LookupTable_FileCategories]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="31" />
+			<AttachedAnnotation Disambiguator="34" />
 		</Element>
 		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_Files_AspNetUsers]">
 			<Relationship Name="Columns">
@@ -1771,7 +1814,7 @@
 					<References Name="[dbo].[AspNetUsers]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="33" />
+			<AttachedAnnotation Disambiguator="36" />
 		</Element>
 		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_Files_AspNetUsers1]">
 			<Relationship Name="Columns">
@@ -1794,7 +1837,7 @@
 					<References Name="[dbo].[AspNetUsers]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="34" />
+			<AttachedAnnotation Disambiguator="37" />
 		</Element>
 		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_Files_LookupTable_FileStatuses]">
 			<Relationship Name="Columns">
@@ -1817,7 +1860,7 @@
 					<References Name="[dbo].[LookupTable_FileViewStatuses]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="35" />
+			<AttachedAnnotation Disambiguator="38" />
 		</Element>
 		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_Files_LookupTable_ShareStatues]">
 			<Relationship Name="Columns">
@@ -1840,7 +1883,7 @@
 					<References Name="[dbo].[LookupTable_FileShareStatues]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="36" />
+			<AttachedAnnotation Disambiguator="39" />
 		</Element>
 		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_FileSharedWithUsers_AspNetUsers]">
 			<Relationship Name="Columns">
@@ -1863,7 +1906,7 @@
 					<References Name="[dbo].[AspNetUsers]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="37" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="40" />
 		</Element>
 		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_FileSharedWithUsers_Files]">
 			<Relationship Name="Columns">
@@ -1886,7 +1929,7 @@
 					<References Name="[dbo].[Files]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="38" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="41" />
 		</Element>
 		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_Notifications_AspNetUsers]">
 			<Relationship Name="Columns">
@@ -1909,7 +1952,7 @@
 					<References Name="[dbo].[AspNetUsers]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="39" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="42" />
 		</Element>
 		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_Notifications_AspNetUsers1]">
 			<Relationship Name="Columns">
@@ -1932,7 +1975,7 @@
 					<References Name="[dbo].[AspNetUsers]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="40" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="43" />
 		</Element>
 		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_Notifications_Files]">
 			<Relationship Name="Columns">
@@ -1955,7 +1998,7 @@
 					<References Name="[dbo].[Files]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="41" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="44" />
 		</Element>
 		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_Notifications_LookupTableNotificationTypes]">
 			<Relationship Name="Columns">
@@ -1978,7 +2021,7 @@
 					<References Name="[dbo].[LookupTable_NotificationTypes]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="42" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="45" />
 		</Element>
 		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_UserChats_AspNetUsers]">
 			<Relationship Name="Columns">
@@ -2001,7 +2044,7 @@
 					<References Name="[dbo].[AspNetUsers]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="43" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="46" />
 		</Element>
 		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_UserChats_Chats]">
 			<Relationship Name="Columns">
@@ -2024,7 +2067,7 @@
 					<References Name="[dbo].[Chats]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="44" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="47" />
 		</Element>
 		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_UserThatDownloadedFile_AspNetUsers]">
 			<Relationship Name="Columns">
@@ -2047,7 +2090,7 @@
 					<References Name="[dbo].[AspNetUsers]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="45" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="48" />
 		</Element>
 		<Element Type="SqlForeignKeyConstraint" Name="[dbo].[FK_UserThatDownloadedFile_Files]">
 			<Relationship Name="Columns">
@@ -2070,7 +2113,7 @@
 					<References Name="[dbo].[Files]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="46" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="49" />
 		</Element>
 		<Element Type="SqlTable" Name="[dbo].[LookupTable_FileCategories]">
 			<Property Name="IsAnsiNullsOn" Value="True" />
@@ -2115,7 +2158,7 @@
 					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="47" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="50" />
 		</Element>
 		<Element Type="SqlTable" Name="[dbo].[LookupTable_FileShareStatues]">
 			<Property Name="IsAnsiNullsOn" Value="True" />
@@ -2159,7 +2202,7 @@
 					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="48" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="51" />
 		</Element>
 		<Element Type="SqlTable" Name="[dbo].[LookupTable_FileViewStatuses]">
 			<Property Name="IsAnsiNullsOn" Value="True" />
@@ -2203,7 +2246,7 @@
 					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="49" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="52" />
 		</Element>
 		<Element Type="SqlTable" Name="[dbo].[LookupTable_NotificationTypes]">
 			<Property Name="IsAnsiNullsOn" Value="True" />
@@ -2240,6 +2283,24 @@
 								</Element>
 							</Entry>
 						</Relationship>
+						<AttachedAnnotation Disambiguator="20" />
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSimpleColumn" Name="[dbo].[LookupTable_NotificationTypes].[NotificationMessageTemplate]">
+						<Property Name="IsNullable" Value="False" />
+						<Relationship Name="TypeSpecifier">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Property Name="IsMax" Value="True" />
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[varchar]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
 						<AttachedAnnotation Disambiguator="19" />
 					</Element>
 				</Entry>
@@ -2249,7 +2310,7 @@
 					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="50" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="53" />
 		</Element>
 		<Element Type="SqlTable" Name="[dbo].[Notifications]">
 			<Property Name="IsAnsiNullsOn" Value="True" />
@@ -2352,7 +2413,7 @@
 					</Element>
 				</Entry>
 				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[dbo].[Notifications].[NotificationSuccessfulSent]">
+					<Element Type="SqlSimpleColumn" Name="[dbo].[Notifications].[UserHasAcknowledgement]">
 						<Property Name="IsNullable" Value="False" />
 						<Relationship Name="TypeSpecifier">
 							<Entry>
@@ -2368,51 +2429,17 @@
 						<AttachedAnnotation Disambiguator="21" />
 					</Element>
 				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[dbo].[Notifications].[RetryAttempt]">
-						<Property Name="IsNullable" Value="False" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[int]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-						<AttachedAnnotation Disambiguator="20" />
-					</Element>
-				</Entry>
-				<Entry>
-					<Element Type="SqlSimpleColumn" Name="[dbo].[Notifications].[NotificationMessageTemplate]">
-						<Property Name="IsNullable" Value="False" />
-						<Relationship Name="TypeSpecifier">
-							<Entry>
-								<Element Type="SqlTypeSpecifier">
-									<Property Name="IsMax" Value="True" />
-									<Relationship Name="Type">
-										<Entry>
-											<References ExternalSource="BuiltIns" Name="[varchar]" />
-										</Entry>
-									</Relationship>
-								</Element>
-							</Entry>
-						</Relationship>
-					</Element>
-				</Entry>
 			</Relationship>
 			<Relationship Name="Schema">
 				<Entry>
 					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="51" />
-			<AttachedAnnotation Disambiguator="39" />
-			<AttachedAnnotation Disambiguator="40" />
-			<AttachedAnnotation Disambiguator="41" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="54" />
 			<AttachedAnnotation Disambiguator="42" />
+			<AttachedAnnotation Disambiguator="43" />
+			<AttachedAnnotation Disambiguator="44" />
+			<AttachedAnnotation Disambiguator="45" />
 		</Element>
 		<Element Type="SqlPrimaryKeyConstraint" Name="[dbo].[PK_Chats]">
 			<Relationship Name="ColumnSpecifications">
@@ -2602,6 +2629,25 @@
 			</Relationship>
 			<AttachedAnnotation Disambiguator="24" />
 		</Element>
+		<Element Type="SqlPrimaryKeyConstraint" Name="[dbo].[PK_FileArchiveBlobs]">
+			<Relationship Name="ColumnSpecifications">
+				<Entry>
+					<Element Type="SqlIndexedColumnSpecification">
+						<Relationship Name="Column">
+							<Entry>
+								<References Name="[dbo].[FileArchiveBlobs].[FileArchiveID]" />
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="DefiningTable">
+				<Entry>
+					<References Name="[dbo].[FileArchiveBlobs]" />
+				</Entry>
+			</Relationship>
+			<AttachedAnnotation Disambiguator="25" />
+		</Element>
 		<Element Type="SqlPrimaryKeyConstraint" Name="[dbo].[PK_FileArchives]">
 			<Relationship Name="ColumnSpecifications">
 				<Entry>
@@ -2619,7 +2665,7 @@
 					<References Name="[dbo].[FileArchives]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="25" />
+			<AttachedAnnotation Disambiguator="27" />
 		</Element>
 		<Element Type="SqlPrimaryKeyConstraint" Name="[dbo].[PK_FileBlobs]">
 			<Relationship Name="ColumnSpecifications">
@@ -2638,7 +2684,7 @@
 					<References Name="[dbo].[FileBlobs]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="27" />
+			<AttachedAnnotation Disambiguator="30" />
 		</Element>
 		<Element Type="SqlPrimaryKeyConstraint" Name="[dbo].[PK_FileCategories]">
 			<Relationship Name="ColumnSpecifications">
@@ -2657,7 +2703,7 @@
 					<References Name="[dbo].[FileCategories]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="29" />
+			<AttachedAnnotation Disambiguator="32" />
 		</Element>
 		<Element Type="SqlPrimaryKeyConstraint" Name="[dbo].[PK_Files]">
 			<Relationship Name="ColumnSpecifications">
@@ -2676,7 +2722,7 @@
 					<References Name="[dbo].[Files]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="32" />
+			<AttachedAnnotation Disambiguator="35" />
 		</Element>
 		<Element Type="SqlPrimaryKeyConstraint" Name="[dbo].[PK_FileSharedWithUsers]">
 			<Relationship Name="ColumnSpecifications">
@@ -2695,7 +2741,7 @@
 					<References Name="[dbo].[PrivateFilesSharedWithUsers]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="52" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="55" />
 		</Element>
 		<Element Type="SqlPrimaryKeyConstraint" Name="[dbo].[PK_LookupTable_FileCategories]">
 			<Relationship Name="ColumnSpecifications">
@@ -2714,7 +2760,7 @@
 					<References Name="[dbo].[LookupTable_FileCategories]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="47" />
+			<AttachedAnnotation Disambiguator="50" />
 		</Element>
 		<Element Type="SqlPrimaryKeyConstraint" Name="[dbo].[PK_LookupTable_FileStatuses]">
 			<Relationship Name="ColumnSpecifications">
@@ -2733,7 +2779,7 @@
 					<References Name="[dbo].[LookupTable_FileViewStatuses]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="49" />
+			<AttachedAnnotation Disambiguator="52" />
 		</Element>
 		<Element Type="SqlPrimaryKeyConstraint" Name="[dbo].[PK_LookupTable_ShareStatues]">
 			<Relationship Name="ColumnSpecifications">
@@ -2752,7 +2798,7 @@
 					<References Name="[dbo].[LookupTable_FileShareStatues]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="48" />
+			<AttachedAnnotation Disambiguator="51" />
 		</Element>
 		<Element Type="SqlPrimaryKeyConstraint" Name="[dbo].[PK_LookupTableNotificationTypes]">
 			<Relationship Name="ColumnSpecifications">
@@ -2771,7 +2817,7 @@
 					<References Name="[dbo].[LookupTable_NotificationTypes]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="50" />
+			<AttachedAnnotation Disambiguator="53" />
 		</Element>
 		<Element Type="SqlPrimaryKeyConstraint" Name="[dbo].[PK_Notifications]">
 			<Relationship Name="ColumnSpecifications">
@@ -2790,7 +2836,7 @@
 					<References Name="[dbo].[Notifications]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="51" />
+			<AttachedAnnotation Disambiguator="54" />
 		</Element>
 		<Element Type="SqlPrimaryKeyConstraint" Name="[dbo].[PK_UserChats]">
 			<Relationship Name="ColumnSpecifications">
@@ -2809,7 +2855,7 @@
 					<References Name="[dbo].[UserChats]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="53" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="56" />
 		</Element>
 		<Element Type="SqlPrimaryKeyConstraint" Name="[dbo].[PK_UserThatDownloadedFile]">
 			<Relationship Name="ColumnSpecifications">
@@ -2828,7 +2874,7 @@
 					<References Name="[dbo].[UserThatDownloadedFile]" />
 				</Entry>
 			</Relationship>
-			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="54" />
+			<Annotation Type="SqlInlineConstraintAnnotation" Disambiguator="57" />
 		</Element>
 		<Element Type="SqlTable" Name="[dbo].[PrivateFilesSharedWithUsers]">
 			<Property Name="IsAnsiNullsOn" Value="True" />
@@ -2903,9 +2949,9 @@
 					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="52" />
-			<AttachedAnnotation Disambiguator="37" />
-			<AttachedAnnotation Disambiguator="38" />
+			<AttachedAnnotation Disambiguator="55" />
+			<AttachedAnnotation Disambiguator="40" />
+			<AttachedAnnotation Disambiguator="41" />
 		</Element>
 		<Element Type="SqlTable" Name="[dbo].[UserChats]">
 			<Property Name="IsAnsiNullsOn" Value="True" />
@@ -2982,9 +3028,9 @@
 					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="53" />
-			<AttachedAnnotation Disambiguator="43" />
-			<AttachedAnnotation Disambiguator="44" />
+			<AttachedAnnotation Disambiguator="56" />
+			<AttachedAnnotation Disambiguator="46" />
+			<AttachedAnnotation Disambiguator="47" />
 		</Element>
 		<Element Type="SqlTable" Name="[dbo].[UserThatDownloadedFile]">
 			<Property Name="IsAnsiNullsOn" Value="True" />
@@ -3061,9 +3107,9 @@
 					<References ExternalSource="BuiltIns" Name="[dbo]" />
 				</Entry>
 			</Relationship>
-			<AttachedAnnotation Disambiguator="54" />
-			<AttachedAnnotation Disambiguator="45" />
-			<AttachedAnnotation Disambiguator="46" />
+			<AttachedAnnotation Disambiguator="57" />
+			<AttachedAnnotation Disambiguator="48" />
+			<AttachedAnnotation Disambiguator="49" />
 		</Element>
 		<Element Type="SqlView" Name="[dbo].[View_AllFiles]">
 			<Property Name="QueryScript">

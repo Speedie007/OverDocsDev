@@ -97,6 +97,15 @@
       <End Role="UsersModel" EntitySet="UsersModels" />
       <End Role="FileArchiveModel" EntitySet="FileArchiveModels" />
     </AssociationSet>
+    <EntitySet Name="EmailCacheModels" EntityType="WebDocsModel.EmailCacheModel" />
+    <AssociationSet Name="FK_EmailCache_AspNetUsers" Association="WebDocsModel.FK_EmailCache_AspNetUsers">
+      <End Role="UsersModel" EntitySet="UsersModels" />
+      <End Role="EmailCache" EntitySet="EmailCacheModels" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EmailCache_AspNetUsers1" Association="WebDocsModel.FK_EmailCache_AspNetUsers1">
+      <End Role="UsersModel" EntitySet="UsersModels" />
+      <End Role="EmailCache" EntitySet="EmailCacheModels" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="UsersModel">
     <Key>
@@ -124,6 +133,8 @@
     <NavigationProperty Name="OwnerFiles" Relationship="WebDocsModel.FK_Files_AspNetUsers" FromRole="AspNetUser" ToRole="File" />
     <NavigationProperty Name="PersonThatLastUpdatedFile" Relationship="WebDocsModel.FK_Files_AspNetUsers1" FromRole="AspNetUser" ToRole="File" />
     <NavigationProperty Name="FileArchives" Relationship="WebDocsModel.FK_FileArchives_AspNetUsers" FromRole="UsersModel" ToRole="FileArchiveModel" />
+    <NavigationProperty Name="EmailCaches" Relationship="WebDocsModel.FK_EmailCache_AspNetUsers" FromRole="UsersModel" ToRole="EmailCache" />
+    <NavigationProperty Name="EmailCaches1" Relationship="WebDocsModel.FK_EmailCache_AspNetUsers1" FromRole="UsersModel" ToRole="EmailCache" />
   </EntityType>
   <EntityType Name="ChatModel">
     <Key>
@@ -534,6 +545,44 @@
       </Principal>
       <Dependent Role="FileArchiveModel">
         <PropertyRef Name="UserIDOfLastUploaded" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="EmailCacheModel">
+    <Key>
+      <PropertyRef Name="EmailCacheID" />
+    </Key>
+    <Property Name="EmailCacheID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EmailMessage" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="HasBeenSent" Type="Boolean" Nullable="false" />
+    <Property Name="RetryAttempt" Type="Int32" Nullable="false" />
+    <Property Name="IDOfPersonSender" Type="Int32" Nullable="false" />
+    <Property Name="IDOfRecipient" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="EmailSender" Relationship="WebDocsModel.FK_EmailCache_AspNetUsers" FromRole="EmailCache" ToRole="UsersModel" />
+    <NavigationProperty Name="EmailRecipient" Relationship="WebDocsModel.FK_EmailCache_AspNetUsers1" FromRole="EmailCache" ToRole="UsersModel" />
+    <Property Name="EmailSubject" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="FK_EmailCache_AspNetUsers">
+    <End Type="WebDocsModel.UsersModel" Role="UsersModel" Multiplicity="1" />
+    <End Type="WebDocsModel.EmailCacheModel" Role="EmailCache" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UsersModel">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EmailCache">
+        <PropertyRef Name="IDOfPersonSender" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EmailCache_AspNetUsers1">
+    <End Type="WebDocsModel.UsersModel" Role="UsersModel" Multiplicity="1" />
+    <End Type="WebDocsModel.EmailCacheModel" Role="EmailCache" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UsersModel">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="EmailCache">
+        <PropertyRef Name="IDOfRecipient" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

@@ -93,6 +93,9 @@
     <Compile Include="Database\ChatModel.cs">
       <DependentUpon>WebDocsEntityDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Database\EmailCacheModel.cs">
+      <DependentUpon>WebDocsEntityDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Database\FileArchiveBlobModel.cs">
       <DependentUpon>WebDocsEntityDataModel.tt</DependentUpon>
     </Compile>

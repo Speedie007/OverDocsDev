@@ -300,7 +300,7 @@ function showProcessRequestNotificationModal(FileID, NotificationID, FileName, P
 function ProcessAcceptedFileShareRequest() {
 
     var ajaxCallURL = window.rootUrl + 'Notifications/AcceptFileRequestNotification';
-    debugger;
+    //debugger;
     $.ajax({
         type: "POST",
         url: ajaxCallURL,//'@Url.Action("AcceptFileRequestNotification", "Notifications")',

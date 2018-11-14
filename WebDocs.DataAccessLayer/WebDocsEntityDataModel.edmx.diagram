@@ -6,7 +6,7 @@
     <edmx:Diagrams>
       <Diagram DiagramId="cd6b7ea9f3ab4490b4853dab60605ba9" Name="Diagram1" ZoomLevel="100">
         <EntityTypeShape EntityType="WebDocsModel.UsersModel" Width="2.625" PointX="0.75" PointY="9.875" />
-        <EntityTypeShape EntityType="WebDocsModel.ChatModel" Width="1.5" PointX="1.875" PointY="6.75" />
+        <EntityTypeShape EntityType="WebDocsModel.ChatModel" Width="1.5" PointX="1.125" PointY="5.75" />
         <EntityTypeShape EntityType="WebDocsModel.EmailSetting" Width="1.875" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="WebDocsModel.FileArchiveModel" Width="2.125" PointX="15.5" PointY="9.75" />
         <EntityTypeShape EntityType="WebDocsModel.FileCategoryModel" Width="2.5" PointX="14.5" PointY="14.5" />
@@ -14,9 +14,9 @@
         <EntityTypeShape EntityType="WebDocsModel.FileShareStatusModel" Width="2" PointX="5.375" PointY="15.5" />
         <EntityTypeShape EntityType="WebDocsModel.FileStatusModel" Width="2.25" PointX="5.125" PointY="17.875" />
         <EntityTypeShape EntityType="WebDocsModel.NotificationTypesModel" Width="2.375" PointX="1" PointY="16.625" />
-        <EntityTypeShape EntityType="WebDocsModel.NotificationModel" Width="2.375" PointX="4.125" PointY="11" />
+        <EntityTypeShape EntityType="WebDocsModel.NotificationModel" Width="2.375" PointX="4.75" PointY="11" />
         <EntityTypeShape EntityType="WebDocsModel.PrivateFilesSharedWithUserModel" Width="2.5" PointX="11.5" PointY="8.375" />
-        <EntityTypeShape EntityType="WebDocsModel.UserChatModel" Width="1.875" PointX="4.125" PointY="7.375" />
+        <EntityTypeShape EntityType="WebDocsModel.UserChatModel" Width="1.875" PointX="5.75" PointY="6.125" IsExpanded="true" />
         <EntityTypeShape EntityType="WebDocsModel.UserThatDownloadedFileModel" Width="2.375" PointX="11.5" PointY="11.375" />
         <AssociationConnector Association="WebDocsModel.FK_FileSharedWithUsers_AspNetUsers" />
         <AssociationConnector Association="WebDocsModel.FK_Notifications_AspNetUsers" />
@@ -41,6 +41,9 @@
         <EntityTypeShape EntityType="WebDocsModel.FileArchiveBlobModel" Width="2" PointX="18.375" PointY="10.75" />
         <AssociationConnector Association="WebDocsModel.FK_FileArchiveBlobs_FileArchives" />
         <AssociationConnector Association="WebDocsModel.FK_FileArchives_AspNetUsers" />
+        <EntityTypeShape EntityType="WebDocsModel.EmailCacheModel" Width="2.25" PointX="3.375" PointY="0.75" />
+        <AssociationConnector Association="WebDocsModel.FK_EmailCache_AspNetUsers" />
+        <AssociationConnector Association="WebDocsModel.FK_EmailCache_AspNetUsers1" />
       </Diagram>
       <Diagram DiagramId="bae7d04382a04c87bdf4e5eb9738f8cc" Name="Views" >
         </Diagram>

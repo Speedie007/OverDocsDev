@@ -91,7 +91,10 @@ namespace WebDocs.BusinessApplicationLayer.Query
             NotificationModel NM = _NotificationsRepsoitory.GetSingle(
                 a => a.FileID == PFRN.FileID &&
                 a.UserIDOfNotificationSender == PFRN.IDOFPersonLoggedOn &&
-                a.UserIDOfNotificationRecipient == PFRN.IDOfTheFileOwner);
+                a.UserIDOfNotificationRecipient == PFRN.IDOfTheFileOwner,//where
+                a => a.RecipientUsers,//include
+                a => a.SendingUsers,
+                a=>a.File);//include
 
             if (NM is null)
             {
@@ -112,13 +115,63 @@ namespace WebDocs.BusinessApplicationLayer.Query
                 {
                     //Send Message to Recipient - Must still implement..
                     CTR.Message = CTR.Message + " - Notification Sent.";
+                    NotificationModel NME = _NotificationsRepsoitory.GetSingle(
+                        a => a.NotificationID == newRequestNotification.NotificationID,//where
+                        a => a.RecipientUsers,//include
+                        a => a.SendingUsers);//include
+                    //add email that will be sent tot the recipient
+                    await Common.Helper.Email.EmailHelper.addEmailToCache(
+                    new EmailCacheModel()
+                    {
+                        IDOfPersonSender = NME.UserIDOfNotificationSender,
+                        IDOfRecipient = NME.UserIDOfNotificationRecipient,
+                        EmailMessage = "A request for the File# " + NME.FileID + " to be share your private file has been sent File Name:<br/><b>" + NME.File.FullFileName + "</b><br/>Regards Web Docs Team.",
+                        EmailSubject = "Request to share your private file - (File# " + NME.FileID + ")",
+                        HasBeenSent = false,
+                        EntityState = DomainModels.EntityState.Added,
+                        RetryAttempt = 0
+                    });
+                    //add email that will be sent to the sender 
+                    await Common.Helper.Email.EmailHelper.addEmailToCache(
+                    new EmailCacheModel()
+                    {
+                        IDOfPersonSender = NME.UserIDOfNotificationRecipient,
+                        IDOfRecipient = NME.UserIDOfNotificationSender,
+                        EmailMessage = "A Notification  has been sent to " + NME.RecipientUsers.UserFullName + " to in form him/her that you requested that the file be shared. Name of the file that was requested is:<br/><b>" + NME.File.FullFileName + "</b><br/>Regards Web Docs Team.",
+                        EmailSubject = "Request to share your private file - (File# " + NME.FileID + ")",
+                        HasBeenSent = false,
+                        EntityState = DomainModels.EntityState.Added,
+                        RetryAttempt = 0
+                    });
                 }
+
             }
             else
             {
-                /*Implement section where it sends a notification to recipient with new notification.
-                 * 
-                 * */
+                
+                await Common.Helper.Email.EmailHelper.addEmailToCache(
+                new EmailCacheModel()
+                {
+                    IDOfPersonSender = NM.UserIDOfNotificationSender,
+                    IDOfRecipient = NM.UserIDOfNotificationRecipient,
+                    EmailMessage = "A request for the File# " + NM.FileID + " to be share your private file has already been sent from previously for File:<br/><b>" + NM.File.FullFileName + "</b><br/>This is just a friendly remainder sent from the same user for file.<br/>Regards Web Docs Team.",
+                    EmailSubject = "Request to share your private file - (File# " + NM.FileID + ")",
+                    HasBeenSent = false,
+                    EntityState = DomainModels.EntityState.Added,
+                    RetryAttempt = 0
+                });
+                //add email that will be sent to the sender 
+                await Common.Helper.Email.EmailHelper.addEmailToCache(
+                new EmailCacheModel()
+                {
+                    IDOfPersonSender = NM.UserIDOfNotificationRecipient,
+                    IDOfRecipient = NM.UserIDOfNotificationSender,
+                    EmailMessage = "A Notification  has been resent to " + NM.RecipientUsers.UserFullName + " to in form him/her that you requested that the file be shared. Name of the file that was requested is:<br/><b>" + NM.File.FullFileName + "</b><br/>Regards Web Docs Team.",
+                    EmailSubject = "Resend of Request to share your private file - (File# " + NM.FileID + ")",
+                    HasBeenSent = false,
+                    EntityState = DomainModels.EntityState.Added,
+                    RetryAttempt = 0
+                });
                 CTR.Message = CTR.Message + " Recipient already been notified, how ever another request has been sent!";
                 CTR.WasSuccessfull = true;
             }
