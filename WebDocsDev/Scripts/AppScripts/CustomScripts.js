@@ -1,15 +1,70 @@
-﻿
+﻿var _SendUploadNotifictionViewModel;
+function sendUploadNotification(FileID, UserID_OfUserCurrentlyLoggedIn) {
+
+    /*
+     *  public int FileID { get; set; }
+        public int UserIDOfPersonThatDownloadedTheFile { get; set; }
+        */
+
+    //Create Json Object
+    _SendUploadNotifictionViewModel = JSON.parse('{}');
+    _SendUploadNotifictionViewModel.FileID = FileID;
+    _SendUploadNotifictionViewModel.UserIDOfPersonThatDownloadedTheFile = UserID_OfUserCurrentlyLoggedIn;
+
+    //$("#btnSendNotification")[0].click();
+
+    var ajaxCallURL = window.rootUrl + 'Files/SendUploadFileNotification';
+    //
+    $.ajax({
+        type: "POST",
+        url: ajaxCallURL,//'@Url.Action("AcceptFileRequestNotification", "Notifications")',
+        data: JSON.stringify(_SendUploadNotifictionViewModel),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data) {
+
+            // $("#ProcessFileRequestNotificationModal").modal("hide");
+            //
+            var rtn = JSON.parse(data);
+            var s = data.Message;
+            //
+            $('#SuccessConfiramtionMessage').html(rtn.Message);
+
+            $('#SuccessConfirmationModal').modal('show');
+            //SetTabIndex(_AcceptFileRequestNotifictionViewModel.TabIndex);
+            var f = function () {
+                setTimeout(function () {
+                    $('#SuccessConfirmationModal').modal('hide');
+                }, 3000);
+            };
+            f();
+        },
+        error: function (xhr, textStatus, error) {
+
+            $('#FailureConfiramtionMessage').html(error);
+            //$('#ShowFileRequerstNotificationConfirmationModal').modal(options);
+            $('#FailureConfirmationModal').modal('show');
+
+        }
+    });
+}
 function showDownloadNotificationModal(FileID, FileName, UserIDOfPersonThatDownloadedTheFile) {
     $("#FileID").val(FileID);
     $("#UserIDOfPersonThatDownloadedTheFile").val(UserIDOfPersonThatDownloadedTheFile);
     $("#DownloadSelectedFileModal").modal("show");
+}
+function showDownloadHistoriclNotificationModal(FileID, FileName, UserIDOfPersonThatDownloadedTheFile) {
+
+    $("#HistoryFileID").val(FileID);
+    $("#HistoryUserIDOfPersonThatDownloadedTheFile").val(UserIDOfPersonThatDownloadedTheFile);
+    $("#DownloadSelectedHistoricalFileModal").modal("show");
 }
 function CloseFileDetails(fileID) {
     var tdObj = $("#FileDetails_" + fileID);
     tdObj.addClass("hidden");
 }
 function showFileDetails(fileID) {
-    //debugger;
+    //
     $(".FileDetailsClass").addClass("hidden");
     var tdObj = $("#FileDetails_" + fileID);
     tdObj.removeClass("hidden");
@@ -22,7 +77,7 @@ function loadFileHistory(FileID) {
 
     //var ajaxCallURL = '@Url.Action("GetFileHistory", "Files")';
     var ajaxCallURL = window.rootUrl + 'Files/GetFileHistory';
-    //debugger;
+    //
     var DataObj = JSON.parse('{}');
 
     DataObj.FileID = FileID;
@@ -51,7 +106,7 @@ function loadFileHistory(FileID) {
 }
 $(function () {
     $("#closeFileHistory").click(function () {
-        //debugger;
+        //
         $('#ShowFileHistoryModal').modal('hide');
     });
     $("#DownloadSelectedFileModal").on('hidden.bs.modal', function () {
@@ -69,11 +124,14 @@ $(function () {
         $("#btnRefreshPage")[0].click();
     });
 
-    
+
 
     $('[data-toggle="tooltip"]').tooltip();
 
 });
+function DownloadHistoricalFile() {
+    $("#btnDownloadHistorical")[0].click();
+}
 function DownloadFile() {
     $("#btnDownload")[0].click();
 }
@@ -118,7 +176,7 @@ function UploadSelectedFile() {
 
     var input = $('#Crtl_UploadFile');
     var files = input.prop("files");
-    //debugger;
+    //
     if (files.length > 0) {
         if (window.FormData !== undefined) {
             var data = new FormData();
@@ -128,11 +186,11 @@ function UploadSelectedFile() {
 
             //data.append("FileShareStatusID", $('input[name=radFileShareStatus]:checked').val());
 
-           // var test = $('input[name=radFileShareStatus]:checked').val();
+            // var test = $('input[name=radFileShareStatus]:checked').val();
 
             //var ajaxCallURL = '@Url.Action("SaveNewUserFile", "Files")' + '?FileShareStatusID=' + $('input[name=radFileShareStatus]:checked').val();
-            var ajaxCallURL = window.rootUrl +'Files/SaveNewUserFile?FileShareStatusID=' + $('input[name=radFileShareStatus]:checked').val();
-            
+            var ajaxCallURL = window.rootUrl + 'Files/SaveNewUserFile?FileShareStatusID=' + $('input[name=radFileShareStatus]:checked').val();
+
             $.ajax({
                 type: "POST",
                 url: ajaxCallURL,//'/ContentManagement/UserFileUpload?_FileShareStatusID=' + $('input[name=radFileShareStatus]:checked').val(),
@@ -214,7 +272,7 @@ function showUploadNewUpdateModal(FileID, FileName, UserIDOfPersonThatUploadingT
 function UploadUpdatedFile() {
     var input = $('#Crtl_UploadUpdatedFile');
     var files = input.prop("files");
-   // debugger;
+    // 
     if (files.length > 0) {
         if (window.FormData !== undefined) {
             var data = new FormData();
@@ -222,7 +280,7 @@ function UploadUpdatedFile() {
                 data.append("file" + x, files[x]);
             }
             //var ajaxCallURL = 'Url.Action("SaveNewUserFile", "Files")' + '?FileShareStatusID=' + $('input[name=radFileShareStatus]:checked').val();
-           // var ajaxCallURL = '@Url.Action("UpdateCurrentFile", "Files")' + '?FileIDToUpdate=' + _FileUploadModel.FileID + '&UserIDOfPersonThatUploadingTheFile=' + _FileUploadModel.UserIDOfPersonThatUploadingTheFile;
+            // var ajaxCallURL = '@Url.Action("UpdateCurrentFile", "Files")' + '?FileIDToUpdate=' + _FileUploadModel.FileID + '&UserIDOfPersonThatUploadingTheFile=' + _FileUploadModel.UserIDOfPersonThatUploadingTheFile;
             var ajaxCallURL = window.rootUrl + 'Files/UpdateCurrentFile?FileIDToUpdate=' + _FileUploadModel.FileID + '&UserIDOfPersonThatUploadingTheFile=' + _FileUploadModel.UserIDOfPersonThatUploadingTheFile;
             $.ajax({
                 type: "POST",
@@ -287,7 +345,7 @@ function showProcessRequestNotificationModal(FileID, NotificationID, FileName, P
     _AcceptFileRequestNotifictionViewModel.TabIndex = 0;
     _AcceptFileRequestNotifictionViewModel.NotificationID = NotificationID;
 
-    //debugger;
+    //
     $("#requestNotificationSenderName").html(PersonNameWhichIsRequestingFile);
     $("#requestedFileNameToShareBaseOnTheREquestNotificationRecieved").html(FileName);
     $("#requestedNotificationFileID").html(FileID);
@@ -300,7 +358,7 @@ function showProcessRequestNotificationModal(FileID, NotificationID, FileName, P
 function ProcessAcceptedFileShareRequest() {
 
     var ajaxCallURL = window.rootUrl + 'Notifications/AcceptFileRequestNotification';
-    //debugger;
+    //
     $.ajax({
         type: "POST",
         url: ajaxCallURL,//'@Url.Action("AcceptFileRequestNotification", "Notifications")',
@@ -331,5 +389,5 @@ function ProcessAcceptedFileShareRequest() {
         }
     });
 
-    
+
 }

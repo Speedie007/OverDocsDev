@@ -16,12 +16,13 @@ namespace WebDocs.Web.Controllers
 
     public class FilesController : Controller
     {
+        WebDocsBussinessLogic WDBL = new WebDocsBussinessLogic();
         // GET: Files
         [Authorize]
         [HttpGet]
         public ActionResult DisplayPublicDocs(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            PublicDocumentsBusinessLogic PDBL = new PublicDocumentsBusinessLogic();
+            WebDocsBussinessLogic WDBL = new WebDocsBussinessLogic();
 
             ViewBag.CurrentSort = sortOrder;
 
@@ -46,7 +47,7 @@ namespace WebDocs.Web.Controllers
 
             ViewBag.CurrentFilter = searchString;
 
-            IList<FileModel> Rtn = Common.Helper.Sorting.FilesFieldSorting.SortFields(PDBL.GetAllPublicFiles(), sortOrder);
+            IList<FileModel> Rtn = Common.Helper.Sorting.FilesFieldSorting.SortFields(WDBL.GetAllPublicFiles(), sortOrder);
 
             //ViewBag.CurrentFilter = "";
             int pageSize = 10;
@@ -58,15 +59,13 @@ namespace WebDocs.Web.Controllers
         [HttpPost]
         public PartialViewResult GetFileHistory(int FileID)
         {
-            FileArchivesBussinessLogic FABL = new FileArchivesBussinessLogic();
-
-            return PartialView("_FileHistoryPartialView", FABL.GetFileArchivesByFileID(FileID));
+            return PartialView("_FileHistoryPartialView", WDBL.GetFileArchivesByFileID(FileID));
         }
 
         [Authorize]
         public ActionResult DisplayUserDocs(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            UserDocumentsBussinessLogic UDBL = new UserDocumentsBussinessLogic();
+            //UserDocumentsBussinessLogic UDBL = new UserDocumentsBussinessLogic();
 
             ViewBag.CurrentSort = sortOrder;
 
@@ -90,7 +89,7 @@ namespace WebDocs.Web.Controllers
             }
 
             ViewBag.CurrentFilter = searchString;
-            IList<FileModel> Rtn = Common.Helper.Sorting.FilesFieldSorting.SortFields(UDBL.GetSelectedUserFiles(User.Identity.GetUserId<int>()), sortOrder);
+            IList<FileModel> Rtn = Common.Helper.Sorting.FilesFieldSorting.SortFields(WDBL.GetSelectedUserFiles(User.Identity.GetUserId<int>()), sortOrder);
             //ViewBag.CurrentFilter = "";
             int pageSize = 10;
             int pageNumber = (page ?? 1);
@@ -100,7 +99,7 @@ namespace WebDocs.Web.Controllers
         [Authorize]
         public ActionResult DisplayPrivateFilesSharedWithUser(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            PrivatelySharedDocumentsBusinessLogic PSDBL = new PrivatelySharedDocumentsBusinessLogic();
+            
 
             ViewBag.CurrentSort = sortOrder;
 
@@ -125,7 +124,7 @@ namespace WebDocs.Web.Controllers
 
             ViewBag.CurrentFilter = searchString;
 
-            IList<FileModel> Rtn = Common.Helper.Sorting.FilesFieldSorting.SortFields(PSDBL.GetAllPersonalFilesSharedWithUser(User.Identity.GetUserId<int>()), sortOrder);
+            IList<FileModel> Rtn = Common.Helper.Sorting.FilesFieldSorting.SortFields(WDBL.GetAllPersonalFilesSharedWithUser(User.Identity.GetUserId<int>()), sortOrder);
 
             //ViewBag.CurrentFilter = "";
             int pageSize = 10;
@@ -139,10 +138,8 @@ namespace WebDocs.Web.Controllers
         public ActionResult DisplayUserUploadDocs()
         {
 
-            ReturnDocumentsBussinessLogic RDBL = new ReturnDocumentsBussinessLogic();
-
             // IList<FileModel> AllFilesDownloadeByThisUSer = RDBL.GetAllFilesThatAreDownloadedByUser(User.Identity.GetUserId<int>());
-            IList<FileModel> Rtn = RDBL.GetAllFilesThatAreDownloadedByUser(User.Identity.GetUserId<int>());
+            IList<FileModel> Rtn = WDBL.GetAllFilesThatAreDownloadedByUser(User.Identity.GetUserId<int>());
 
             return View(Rtn);
         }
@@ -151,7 +148,6 @@ namespace WebDocs.Web.Controllers
         public ActionResult SaveNewUserFile(int FileShareStatusID)
         {
 
-            UserDocumentsBussinessLogic UDBL = new UserDocumentsBussinessLogic();
             int UserID = User.Identity.GetUserId<int>();
 
             List<FileUploadResponses> AllFileResponses = new List<FileUploadResponses>();
@@ -159,7 +155,7 @@ namespace WebDocs.Web.Controllers
             foreach (string file in Request.Files)
             {
                 //in the list of responses for each file indicates weather or not it has passed and the file name of each file that was uploaded.
-                AllFileResponses.Add(UDBL.SaveUploadedUserFiles(new UploadingNewUserFileModel()
+                AllFileResponses.Add(WDBL.SaveUploadedUserFiles(new UploadingNewUserFileModel()
                 {
                     FileShareStatusID = FileShareStatusID,
                     file = Request.Files[file],
@@ -172,9 +168,30 @@ namespace WebDocs.Web.Controllers
         }
 
         [HttpPost]
+        public ActionResult DownLoadSelectedHistoricalFile(ProcessDownloadingOfSelectedFileModel PDOSFM)
+        {
+            FileModel FM = WDBL.DownloadHistoricalFile(PDOSFM);
+            //FileModel FM = await Common.Helper.Files.DownloadHelper.DownloadFile(PDOSFM);
+            if (!(FM is null))
+            {
+                return File(FM.FileBlob.FileImage, FM.ContentType, FM.FullFileName);
+            }
+            else
+            {
+                return View("Error", new HandleErrorInfo(new Exception(), "Files", "DownLoadSelectedHistoricalFile"));
+            }
+        }
+
+        public ActionResult SendUploadFileNotification(ProcessDownloadingOfSelectedFileModel PDOSFM)
+        {
+            CompletedTransactionResponses RTN =  WDBL.SendFileUploadNotification(PDOSFM);
+
+            return Json(Newtonsoft.Json.JsonConvert.SerializeObject(RTN), JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
         public ActionResult UpdateCurrentFile(int FileIDToUpdate, int UserIDOfPersonThatUploadingTheFile)
         {
-            ReturnDocumentsBussinessLogic RDBL = new ReturnDocumentsBussinessLogic();
             int UserID = User.Identity.GetUserId<int>();
 
             List<FileUploadResponses> AllFileResponses = new List<FileUploadResponses>();
@@ -182,7 +199,7 @@ namespace WebDocs.Web.Controllers
             foreach (string file in Request.Files)
             {
                 //in the list of responses for each file indicates weather or not it has passed and the file name of each file that was uploaded.
-                AllFileResponses.Add(RDBL.SaveUpdatedUserFiles(new UploadingUpdatedUserFileModel()
+                AllFileResponses.Add(WDBL.SaveUpdatedUserFiles(new UploadingUpdatedUserFileModel()
                 {
                     FileID = FileIDToUpdate,
                     IDOfCurrentUserUpdatingTheFile = UserIDOfPersonThatUploadingTheFile,
@@ -197,7 +214,8 @@ namespace WebDocs.Web.Controllers
         public async Task<ActionResult> DownLoadSelectedFile(ProcessDownloadingOfSelectedFileModel PDOSFM)//int FileID, int UserIDOfPersonThatDownloadedTheFile)
         {
 
-            FileModel FM = await Common.Helper.Files.DownloadHelper.DownloadFile(PDOSFM);
+            FileModel FM = await WDBL.DownloadSelectedFile(PDOSFM);
+            //FileModel FM = await Common.Helper.Files.DownloadHelper.DownloadFile(PDOSFM);
             if (!(FM is null))
             {
                 return File(FM.FileBlob.FileImage, FM.ContentType, FM.FullFileName);
@@ -210,9 +228,7 @@ namespace WebDocs.Web.Controllers
 
         public ActionResult UnlinkPrivteSharedFile(int UserIDPersonSharedWith, int FileID, string _sortOrder, string _currentFilter, int? _page)
         {
-            PrivatelySharedDocumentsBusinessLogic PSDBL = new PrivatelySharedDocumentsBusinessLogic();
-
-            CompletedTransactionResponses CTR = PSDBL.UnlinkPrivatelySharedDocument(UserIDPersonSharedWith, FileID);
+            CompletedTransactionResponses CTR = WDBL.UnlinkPrivatelySharedDocument(UserIDPersonSharedWith, FileID);
             if (CTR.WasSuccessfull)
             {
                 return RedirectToAction("DisplayPrivateFilesSharedWithUser", new

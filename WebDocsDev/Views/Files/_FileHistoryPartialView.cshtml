@@ -1,5 +1,10 @@
 ﻿@model IEnumerable<WebDocs.DomainModels.Database.FileArchiveModel>
 
+@using Microsoft.AspNet.Identity;
+
+@{
+    int UserID_OfUserCurrentlyLoggedIn = User.Identity.GetUserId<int>();
+}
 
 <table class="table">
     <thead>
@@ -16,18 +21,18 @@
 
             </th>
             @*<th class="text-nowrap">
-            @Html.ActionLink("File Owner", "DisplayPublicDocs", new { sortOrder = ViewBag.NameOfFileOwnerSortParm, currentFilter = ViewBag.CurrentFilter })
-        </th>
-        <th class="text-nowrap">
-            @Html.ActionLink("Last Modified By", "DisplayPublicDocs", new { sortOrder = ViewBag.FileIDSortParm, currentFilter = ViewBag.CurrentFilter })
+                    @Html.ActionLink("File Owner", "DisplayPublicDocs", new { sortOrder = ViewBag.NameOfFileOwnerSortParm, currentFilter = ViewBag.CurrentFilter })
+                </th>
+                <th class="text-nowrap">
+                    @Html.ActionLink("Last Modified By", "DisplayPublicDocs", new { sortOrder = ViewBag.FileIDSortParm, currentFilter = ViewBag.CurrentFilter })
 
-        </th>*@
+                </th>*@
             @*<th class="text-nowrap">
-            @Html.ActionLink("Created", "DisplayPublicDocs", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
-        </th>*@
+                    @Html.ActionLink("Created", "DisplayPublicDocs", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
+                </th>*@
             @*<th class="text-nowrap">
-            @Html.ActionLink("File Status", "DisplayPublicDocs", new { sortOrder = ViewBag.CurrentFileStatusSortParm, currentFilter = ViewBag.CurrentFilter })
-        </th>*@
+                    @Html.ActionLink("File Status", "DisplayPublicDocs", new { sortOrder = ViewBag.CurrentFileStatusSortParm, currentFilter = ViewBag.CurrentFilter })
+                </th>*@
             <th class="text-nowrap">
                 @Html.Label("Date Archived")
             </th>
@@ -44,44 +49,47 @@
             {
                 foreach (var item in Model)
                 {
-        <tr>
-            <td class="text-nowrap text-center">
-                @Html.DisplayFor(modelItem => item.FileID)
-            </td>
+                    <tr>
+                        <td class="text-nowrap text-center">
+                            @Html.DisplayFor(modelItem => item.FileID)
+                        </td>
 
-            <td class="text-nowrap">
-                @Html.DisplayFor(modelItem => item.FullFileName)
-            </td>
-            <td class="text-nowrap">
-                @Html.Label(WebDocs.Common.Helper.Formatters.FileSize.ToFileSize(Convert.ToDouble(item.Size)))
-            </td>
-            @*<td class="text-nowrap">
-            @Html.DisplayFor(modelItem => item.FileOwner.UserFullName)
-        </td>
-        <td class="text-nowrap">
-            @Html.DisplayFor(modelItem => item.PersonThatLastUpdatedFile.UserFullName)
-        </td>*@
-            @*<td class="text-nowrap">
-            @Html.Label(item.DateCreated.ToString("MMMM dd, yyyy"))
-        </td>*@
-            @*<td class="text-nowrap ">
-            @Html.DisplayFor(modelItem => item.FileViewStatuses.Status)
-        </td>*@
-            <td class="text-nowrap ">
-                @Html.DisplayFor(modelItem => item.DateArchived)
-            </td>
-            <td class="text-nowrap">
-                @Html.DisplayFor(modelItem => item.Version)
-            </td>
-            <td class="text-nowrap">
-                @Html.DisplayFor(modelItem => item.UserThatUploadedTheFile.UserFullName)
-            </td>
-            <td class="text-nowrap">
-                @Html.ActionLink("Download", "Edit", new { /* id=item.PrimaryKey */ })
-                @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
-            </td>
-        </tr>
+                        <td class="text-nowrap">
+                            @Html.DisplayFor(modelItem => item.FullFileName)
+                        </td>
+                        <td class="text-nowrap">
+                            @Html.Label(WebDocs.Common.Helper.Formatters.FileSize.ToFileSize(Convert.ToDouble(item.Size)))
+                        </td>
+                        @*<td class="text-nowrap">
+                                @Html.DisplayFor(modelItem => item.FileOwner.UserFullName)
+                            </td>
+                            <td class="text-nowrap">
+                                @Html.DisplayFor(modelItem => item.PersonThatLastUpdatedFile.UserFullName)
+                            </td>*@
+                        @*<td class="text-nowrap">
+                                @Html.Label(item.DateCreated.ToString("MMMM dd, yyyy"))
+                            </td>*@
+                        @*<td class="text-nowrap ">
+                                @Html.DisplayFor(modelItem => item.FileViewStatuses.Status)
+                            </td>*@
+                        <td class="text-nowrap ">
+                            @Html.DisplayFor(modelItem => item.DateArchived)
+                        </td>
+                        <td class="text-nowrap">
+                            @Html.DisplayFor(modelItem => item.Version)
+                        </td>
+                        <td class="text-nowrap">
+                            @Html.DisplayFor(modelItem => item.UserThatUploadedTheFile.UserFullName)
+                        </td>
+                        <td class="text-nowrap">
+                            <a class="btn btn-primary btn-sm btn-block" data-toggle="tooltip" data-placement="top" title="Click To Download File." href="#" onclick="showDownloadHistoriclNotificationModal(@item.FileID,'@item.FullFileName', @UserID_OfUserCurrentlyLoggedIn )">
+                                <span class="glyphicon glyphicon-cloud-download"> Download</span>
+                            </a>
+                            @*@Html.ActionLink("Download", "Edit", new { /* id=item.PrimaryKey */ })*@
+                            @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+                        </td>
+                    </tr>
                 }
             }
             else

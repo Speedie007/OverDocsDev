@@ -22,6 +22,7 @@ namespace WebDocs.DomainModels.Database
             this.FileCategories = new HashSet<FileCategoryModel>();
             this.PrivateFilesSharedWithUsers = new HashSet<PrivateFilesSharedWithUserModel>();
             this.FileNotifications = new HashSet<NotificationModel>();
+            this.SystemTransactionLogs = new HashSet<SystemTransactionLogsModel>();
         }
     
         public int FileID { get; set; }
@@ -62,5 +63,7 @@ namespace WebDocs.DomainModels.Database
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NotificationModel> FileNotifications { get; set; }
         public virtual UserThatDownloadedFileModel UserThatDownloadedFile { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SystemTransactionLogsModel> SystemTransactionLogs { get; set; }
     }
 }

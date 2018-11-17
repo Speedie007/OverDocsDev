@@ -51,19 +51,25 @@
   <ItemGroup>
     <Compile Include="DbContextExtensions.cs" />
     <Compile Include="GenericDataRepository.cs" />
+    <Compile Include="Interfaces\Entities\IEmailCacheRepository.cs" />
     <Compile Include="Interfaces\Entities\IFileArchiveRepository.cs" />
     <Compile Include="Interfaces\Entities\IFileProcessingRepository.cs" />
     <Compile Include="Interfaces\Entities\IFileRepository.cs" />
     <Compile Include="Interfaces\Entities\INotificationRepository.cs" />
+    <Compile Include="Interfaces\Entities\ISystemTransactionRepository.cs" />
+    <Compile Include="Interfaces\Entities\IUsersRepository.cs" />
     <Compile Include="Interfaces\Entities\IUserThatDownloadedFileRepository.cs" />
     <Compile Include="Interfaces\Entities\IPrivateFilesSharedWithUsers.cs" />
     <Compile Include="Interfaces\IGenericDataRepository.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\EmailCacheRepository.cs" />
     <Compile Include="Repositories\FileArchiveRepository.cs" />
     <Compile Include="Repositories\FileRepository.cs" />
     <Compile Include="Repositories\NotificationRepsitory.cs" />
     <Compile Include="Repositories\PrivateFilesSharedWithUserRepository.cs" />
+    <Compile Include="Repositories\SystemTransctionRepository.cs" />
+    <Compile Include="Repositories\UserRepsoitory.cs" />
     <Compile Include="Repositories\UserThatDownloadedFileRepository.cs" />
     <Compile Include="WebDocsEntityDataModel.Context.cs">
       <AutoGen>True</AutoGen>

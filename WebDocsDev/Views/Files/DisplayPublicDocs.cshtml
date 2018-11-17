@@ -124,7 +124,7 @@
                                                                     </a>
                                                                     break;
                                                                 case ControlTypes.UploadFileNotification:
-                                                                    <a class="btn btn-warning btn-sm btn-block" data-toggle="tooltip" data-placement="top" title="Click To Send Notification." href="javascript:void(0);">
+                                                                    <a class="btn btn-warning btn-sm btn-block" data-toggle="tooltip" data-placement="top" title="Click To Send Notification." href="javascript:void(0);" onclick="sendUploadNotification(@item.FileID,@UserID_OfUserCurrentlyLoggedIn)">
                                                                         <span class="glyphicon glyphicon-upload"> Notify-To-Upload</span>
                                                                     </a>
                                                                     @*@Html.ActionLink("Notify to Upload", "DownLoadSelectedFile", "DownLoadFile", new { fileID = item.FileID }, null)*@

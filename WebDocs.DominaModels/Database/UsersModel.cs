@@ -28,6 +28,7 @@ namespace WebDocs.DomainModels.Database
             this.FileArchives = new HashSet<FileArchiveModel>();
             this.EmailCaches = new HashSet<EmailCacheModel>();
             this.EmailCaches1 = new HashSet<EmailCacheModel>();
+            this.SystemTransactionLogs = new HashSet<SystemTransactionLogsModel>();
         }
     
         public int Id { get; set; }
@@ -80,5 +81,7 @@ namespace WebDocs.DomainModels.Database
         public virtual ICollection<EmailCacheModel> EmailCaches { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EmailCacheModel> EmailCaches1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SystemTransactionLogsModel> SystemTransactionLogs { get; set; }
     }
 }

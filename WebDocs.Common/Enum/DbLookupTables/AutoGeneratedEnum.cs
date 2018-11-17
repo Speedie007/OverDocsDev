@@ -26,6 +26,20 @@ namespace WebDocs.Common.Enum.DbLookupTables
     {
         Share_Request = 1, Request_File_Upload = 2, Download = 3, Revoked = 4, Unshare = 5
     }
+    public enum EnumSystemTransactionTypes : int
+    {
+        ViewFileHistory
+         = 1, DownloadedCurrentFileVersion
+          = 2, DownloadedHistoricalVersion
+           = 3, UploadedNewUserFile
+            = 4, UnlinkedFileThatIsPrivatelyShared
+             = 5, UploadedUpdatedVersionOfFile
+              = 6, AcceptedFileShareRequestNotification
+               = 7, SendFileShareRequestNotification
+                = 8, DenyFileShareREquestNotification
+                 = 9, SendFileUploadNotification
+                  = 10
+    }
 }
 
 

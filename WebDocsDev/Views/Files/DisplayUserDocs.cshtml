@@ -17,6 +17,7 @@
     string UserID_OfUserCurrentlyLoggedIn = User.Identity.GetUserId();
 }
 <br />
+
 <div class="panel panel-primary">
     <div class="panel-heading"><h2>User Personal Documents</h2></div>
     <div class="panel-body">
@@ -117,10 +118,10 @@
                                                             </a>
                                                             break;
                                                         case ControlTypes.UploadFileNotification:
-                                                            <a  href="~/" class="btn btn-warning btn-sm btn-block" data-toggle="tooltip" data-placement="top" title="Click To Download File." href="#" onclick="showDownloadNotificationModal(@item.FileID,'@item.FullFileName', @UserID_OfUserCurrentlyLoggedIn )">
+                                                            <a href="~/" class="btn btn-warning btn-sm btn-block" data-toggle="tooltip" data-placement="top" title="Click To Download File." href="#" onclick="showDownloadNotificationModal(@item.FileID,'@item.FullFileName', @UserID_OfUserCurrentlyLoggedIn )">
                                                                 <span class="glyphicon glyphicon-cloud-upload"> Notify-To-Upload</span>
                                                             </a>
-                                                           @*@Html.ActionLink("Notify to Upload", "DownLoadSelectedFile", "DownLoadFile", new { fileID = item.FileID }, new { @class = "btn btn-primary btn-sm btn-block" })</span>*@
+                                                            @*@Html.ActionLink("Notify to Upload", "DownLoadSelectedFile", "DownLoadFile", new { fileID = item.FileID }, new { @class = "btn btn-primary btn-sm btn-block" })</span>*@
                                                             break;
                                                         default:
                                                             break;

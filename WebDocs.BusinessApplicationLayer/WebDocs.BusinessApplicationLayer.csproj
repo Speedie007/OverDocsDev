@@ -48,9 +48,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Query\BussinessLogic.cs" />
     <Compile Include="AbstractClassess\AbstractFileProcessing.cs" />
     <Compile Include="Interfaces\CommonSections\IFileProcessing.cs" />
     <Compile Include="Interfaces\IBusinessLayer.cs" />
+    <Compile Include="Interfaces\ProjectSections\IEmailCaches.cs" />
     <Compile Include="Interfaces\ProjectSections\IFileArchives.cs" />
     <Compile Include="Interfaces\ProjectSections\INotifications.cs" />
     <Compile Include="Interfaces\ProjectSections\IPrivatelySharedDocuments.cs" />
@@ -58,12 +60,6 @@
     <Compile Include="Interfaces\ProjectSections\IReturnDocuments.cs" />
     <Compile Include="Interfaces\ProjectSections\IUserDocuments.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Query\FileArchivesBussinessLogic.cs" />
-    <Compile Include="Query\NotificationsBusinessLogic.cs" />
-    <Compile Include="Query\PrivatelySharedDocumentsBusinessLogic.cs" />
-    <Compile Include="Query\PublicDocumentsBusinessLogic.cs" />
-    <Compile Include="Query\UserDocumentsBussinessLogic.cs" />
-    <Compile Include="Query\ReturnDocumentsBussinessLogic.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WebDocs.Common\WebDocs.Common.csproj">

@@ -132,6 +132,13 @@
     <Property Name="NotificationType" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="NotificationMessageTemplate" Type="varchar(max)" Nullable="false" />
   </EntityType>
+  <EntityType Name="LookupTable_SystemTransactionTypes">
+    <Key>
+      <PropertyRef Name="SystemTransactionTypeID" />
+    </Key>
+    <Property Name="SystemTransactionTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SystemTransactionType" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
   <EntityType Name="Notifications">
     <Key>
       <PropertyRef Name="NotificationID" />
@@ -152,6 +159,17 @@
     <Property Name="UserIDPersonSharedWith" Type="int" />
     <Property Name="FileID" Type="int" Nullable="false" />
     <Property Name="DateShared" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SystemTransactionLogs">
+    <Key>
+      <PropertyRef Name="SystemTransactionLogID" />
+    </Key>
+    <Property Name="SystemTransactionLogID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SystemTransactionTypeID" Type="int" Nullable="false" />
+    <Property Name="FileID" Type="int" Nullable="false" />
+    <Property Name="UserIDThatPerformedTansaction" Type="int" Nullable="false" />
+    <Property Name="DateTansactionPerformed" Type="datetime" Nullable="false" />
+    <Property Name="TransactionComments" Type="varchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="UserChats">
     <Key>
@@ -387,6 +405,42 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_SystemTransactionLogs_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="SystemTransactionLogs" Type="Self.SystemTransactionLogs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SystemTransactionLogs">
+        <PropertyRef Name="UserIDThatPerformedTansaction" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SystemTransactionLogs_Files">
+    <End Role="Files" Type="Self.Files" Multiplicity="1" />
+    <End Role="SystemTransactionLogs" Type="Self.SystemTransactionLogs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Files">
+        <PropertyRef Name="FileID" />
+      </Principal>
+      <Dependent Role="SystemTransactionLogs">
+        <PropertyRef Name="FileID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SystemTransactionLogs_LookupTable_SystemTransactionTypes">
+    <End Role="LookupTable_SystemTransactionTypes" Type="Self.LookupTable_SystemTransactionTypes" Multiplicity="1" />
+    <End Role="SystemTransactionLogs" Type="Self.SystemTransactionLogs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LookupTable_SystemTransactionTypes">
+        <PropertyRef Name="SystemTransactionTypeID" />
+      </Principal>
+      <Dependent Role="SystemTransactionLogs">
+        <PropertyRef Name="SystemTransactionTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_UserChats_AspNetUsers">
     <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
     <End Role="UserChats" Type="Self.UserChats" Multiplicity="*" />
@@ -450,8 +504,10 @@
     <EntitySet Name="LookupTable_FileShareStatues" EntityType="Self.LookupTable_FileShareStatues" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LookupTable_FileViewStatuses" EntityType="Self.LookupTable_FileViewStatuses" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="LookupTable_NotificationTypes" EntityType="Self.LookupTable_NotificationTypes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LookupTable_SystemTransactionTypes" EntityType="Self.LookupTable_SystemTransactionTypes" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Notifications" EntityType="Self.Notifications" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PrivateFilesSharedWithUsers" EntityType="Self.PrivateFilesSharedWithUsers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SystemTransactionLogs" EntityType="Self.SystemTransactionLogs" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserChats" EntityType="Self.UserChats" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserThatDownloadedFile" EntityType="Self.UserThatDownloadedFile" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_EmailCache_AspNetUsers" Association="Self.FK_EmailCache_AspNetUsers">
@@ -525,6 +581,18 @@
     <AssociationSet Name="FK_Notifications_LookupTableNotificationTypes" Association="Self.FK_Notifications_LookupTableNotificationTypes">
       <End Role="LookupTable_NotificationTypes" EntitySet="LookupTable_NotificationTypes" />
       <End Role="Notifications" EntitySet="Notifications" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SystemTransactionLogs_AspNetUsers" Association="Self.FK_SystemTransactionLogs_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="SystemTransactionLogs" EntitySet="SystemTransactionLogs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SystemTransactionLogs_Files" Association="Self.FK_SystemTransactionLogs_Files">
+      <End Role="Files" EntitySet="Files" />
+      <End Role="SystemTransactionLogs" EntitySet="SystemTransactionLogs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SystemTransactionLogs_LookupTable_SystemTransactionTypes" Association="Self.FK_SystemTransactionLogs_LookupTable_SystemTransactionTypes">
+      <End Role="LookupTable_SystemTransactionTypes" EntitySet="LookupTable_SystemTransactionTypes" />
+      <End Role="SystemTransactionLogs" EntitySet="SystemTransactionLogs" />
     </AssociationSet>
     <AssociationSet Name="FK_UserChats_AspNetUsers" Association="Self.FK_UserChats_AspNetUsers">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />

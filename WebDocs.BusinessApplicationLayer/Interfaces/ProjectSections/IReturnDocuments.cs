@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WebDocs.DomainModels.Database;
+using WebDocs.DomainModels.TransactionResponse;
+using WebDocs.DomainModels.ViewModels.Files;
 
 namespace WebDocs.BusinessApplicationLayer.Interfaces.ProjectSections
 {
@@ -11,6 +13,6 @@ namespace WebDocs.BusinessApplicationLayer.Interfaces.ProjectSections
     {
         IList<FileModel> GetAllFilesThatAreDownloaded();
         IList<FileModel> GetAllFilesThatAreDownloadedByUser(int UserID);
-
+        FileUploadResponses SaveUpdatedUserFiles(UploadingUpdatedUserFileModel UUUFM);
     }
 }

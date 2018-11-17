@@ -15,21 +15,21 @@ namespace WebDocs.BusinessApplicationLayer.Query
     {
         public CompletedTransactionResponses CTR { get; set; }
 
-        private readonly IFileArchiveRepository _FileArchiveRepsoitory;
+       
 
         //FileArchiveRepository
 
         public FileArchivesBussinessLogic()
         {
-            _FileArchiveRepsoitory = new FileArchiveRepository();
+            //_FileArchiveRepsoitory = new FileArchiveRepository();
         }
 
-        public IList<FileArchiveModel> GetFileArchivesByFileID(int FIleID)
-        {
-            IList<FileArchiveModel> Rtn = _FileArchiveRepsoitory.GetList(a => a.FileID == FIleID,
-                a=>a.UserThatUploadedTheFile);
+        //public IList<FileArchiveModel> GetFileArchivesByFileID(int FIleID)
+        //{
+        //    IList<FileArchiveModel> Rtn = _FileArchiveRepsoitory.GetList(a => a.FileID == FIleID,
+        //        a=>a.UserThatUploadedTheFile);
 
-            return Rtn;
-        }
+        //    return Rtn;
+        //}
     }
 }

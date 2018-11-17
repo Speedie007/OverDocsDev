@@ -50,13 +50,29 @@
         <input type="submit" id="btnDownload" value="Download" style="display:none" />
     }
 
+    @using (Html.BeginForm("DownLoadSelectedHistoricalFile", "Files", FormMethod.Post))
+    {
+        <input type="hidden" id="HistoryFileID" name="FileID" />
+        <input type="hidden" id="HistoryUserIDOfPersonThatDownloadedTheFile" name="UserIDOfPersonThatDownloadedTheFile" />
+        <input type="submit" id="btnDownloadHistorical" value="Download" style="display:none" />
+    }
+
+    @using (Html.BeginForm("DownLoadSelectedHistoricalFile", "Files", FormMethod.Post))
+    {
+        <input type="hidden" id="NotificationFileID" name="FileID" />
+        <input type="hidden" id="notificationUserIDOfPersonThatDownloadedTheFile" name="UserIDOfPersonThatDownloadedTheFile" />
+        <input type="submit" id="btnSendNotification" value="Download" style="display:none" />
+    }
+
+    @Html.Partial("_DownloadHistoricalFileDialog")
     @Html.Partial("_DownloadFileDialog")
     @Html.Partial("_UploadNewUpdateDialog")
     @Html.Partial("_UserFileUpload")
-    
+
+
     @Html.Partial("_SuccessDialog")
     @Html.Partial("_FailureDialog")
-    
+
 
 
     @Scripts.Render("~/bundles/jquery")

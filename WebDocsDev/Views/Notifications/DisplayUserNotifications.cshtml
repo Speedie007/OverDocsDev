@@ -84,22 +84,26 @@
                                                     string sFileName = item.File.FullFileName;
                                                     string sPersonNameWhichIsRequestingFile = item.SendingUsers.UserFullName;
                                                     //if REquest notifiocatiopn
-                                                    if (item.NotificationTypeID == (int)EnumNotificationTypes.Share_Request)
+                                                    switch (item.NotificationTypeID)
                                                     {
-                                                        @*@: [<a href="javascript:void(0);" onclick="showProcessRequestNotificationModal(@item.FileID, @item.NotificationID,'@item.UserIDOfNotificationSender','@UserID_OfUserCurrentlyLoggedIn','@sFileName','@sPersonNameWhichIsRequestingFile');">Process Notification</a>]*@
-                                                        <a class="btn btn-primary btn-sm btn-block"
-                                                           data-toggle="tooltip"
-                                                           data-placement="top"
-                                                           title="Click To Download File."
-                                                           href="javascript:void(0);"
-                                                           onclick="showProcessRequestNotificationModal(@item.FileID, @item.NotificationID,'@item.UserIDOfNotificationSender','@UserID_OfUserCurrentlyLoggedIn','@sFileName','@sPersonNameWhichIsRequestingFile');">
-                                                            <span class="glyphicon glyphicon-refresh"> Process Notification</span>
-                                                        </a>
-                                                    }
+                                                        case (int)WebDocs.Common.Enum.DbLookupTables.EnumNotificationTypes.Request_File_Upload:
+                                                            @Html.ActionLink("Go To File Upload", "DisplayUserUploadDocs", "Files", null, null)
+                                                            break;
+                                                        case (int)EnumNotificationTypes.Share_Request:
+                                                            @*@: [<a href="javascript:void(0);" onclick="showProcessRequestNotificationModal(@item.FileID, @item.NotificationID,'@item.UserIDOfNotificationSender','@UserID_OfUserCurrentlyLoggedIn','@sFileName','@sPersonNameWhichIsRequestingFile');">Process Notification</a>]*@
+                                                            <a class="btn btn-primary btn-sm btn-block"
+                                                               data-toggle="tooltip"
+                                                               data-placement="top"
+                                                               title="Click To Download File."
+                                                               href="javascript:void(0);"
+                                                               onclick="showProcessRequestNotificationModal(@item.FileID, @item.NotificationID,'@item.UserIDOfNotificationSender','@UserID_OfUserCurrentlyLoggedIn','@sFileName','@sPersonNameWhichIsRequestingFile');">
+                                                                <span class="glyphicon glyphicon-refresh"> Process Notification</span>
+                                                            </a>
+                                                            break;
+                                                        default:
+                                                            break;
+                                                    };
                                                 }
-
-
-
                                             </td>
                                         </tr>
                                     }

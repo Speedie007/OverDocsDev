@@ -6,7 +6,8 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.FullName)
+            @*@Html.DisplayNameFor(model => model.FullName)*@
+            @Html.Label("Owner")
         </th>
         <th>
             @Html.DisplayNameFor(model => model.FileID)
@@ -47,7 +48,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.FullName)
+            @Html.DisplayFor(modelItem => item.FileOwner.UserFullName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.FileID)

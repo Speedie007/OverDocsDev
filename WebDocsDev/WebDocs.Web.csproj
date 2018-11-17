@@ -364,6 +364,7 @@
     <Content Include="Views\Files\_FileHistoryPartialView.cshtml" />
     <Content Include="Views\Shared\_UploadNewUpdateDialog.cshtml" />
     <Content Include="Views\Shared\_UserFileUpload.cshtml" />
+    <Content Include="Views\Shared\_DownloadHistoricalFileDialog.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

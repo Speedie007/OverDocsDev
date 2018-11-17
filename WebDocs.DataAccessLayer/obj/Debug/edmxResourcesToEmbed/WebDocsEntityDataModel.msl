@@ -189,5 +189,25 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="SystemTransactionTypesModels">
+      <EntityTypeMapping TypeName="WebDocsModel.SystemTransactionTypesModel">
+        <MappingFragment StoreEntitySet="LookupTable_SystemTransactionTypes">
+          <ScalarProperty Name="SystemTransactionType" ColumnName="SystemTransactionType" />
+          <ScalarProperty Name="SystemTransactionTypeID" ColumnName="SystemTransactionTypeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SystemTransactionLogsModels">
+      <EntityTypeMapping TypeName="WebDocsModel.SystemTransactionLogsModel">
+        <MappingFragment StoreEntitySet="SystemTransactionLogs">
+          <ScalarProperty Name="TransactionComments" ColumnName="TransactionComments" />
+          <ScalarProperty Name="FileID" ColumnName="FileID" />
+          <ScalarProperty Name="DateTansactionPerformed" ColumnName="DateTansactionPerformed" />
+          <ScalarProperty Name="UserIDThatPerformedTansaction" ColumnName="UserIDThatPerformedTansaction" />
+          <ScalarProperty Name="SystemTransactionTypeID" ColumnName="SystemTransactionTypeID" />
+          <ScalarProperty Name="SystemTransactionLogID" ColumnName="SystemTransactionLogID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

@@ -128,6 +128,12 @@
     <Compile Include="Database\PrivateFilesSharedWithUserModel.cs">
       <DependentUpon>WebDocsEntityDataModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Database\SystemTransactionLogsModel.cs">
+      <DependentUpon>WebDocsEntityDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\SystemTransactionTypesModel.cs">
+      <DependentUpon>WebDocsEntityDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Database\UserChatModel.cs">
       <DependentUpon>WebDocsEntityDataModel.tt</DependentUpon>
     </Compile>
@@ -167,6 +173,7 @@
     <Compile Include="ViewModels\Notifications\Processing\AcceptFileRequestNotifictionViewModel.cs" />
     <Compile Include="ViewModels\Notifications\NotificationsViewModel.cs" />
     <Compile Include="ViewModels\Notifications\Processing\ProcessFileRequestNotificationViewModel.cs" />
+    <Compile Include="ViewModels\Notifications\Processing\ProcessRequestFileUpload.cs" />
     <Compile Include="ViewModels\Notifications\Processing\RemoveNotificationViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -19,7 +19,7 @@ using WebDocs.DomainModels.ViewModels.Files;
 
 namespace WebDocs.BusinessApplicationLayer.Query
 {
-    public class UserDocumentsBussinessLogic : IUserDocuments
+    public class UserDocumentsBussinessLogic 
     {
 
         private readonly IFileRepository _FileRepsoitory;
@@ -38,64 +38,11 @@ namespace WebDocs.BusinessApplicationLayer.Query
         /// </summary>
         /// <param name="UNUFM"></param>
         /// <returns></returns>
-        public FileUploadResponses SaveUploadedUserFiles(UploadingNewUserFileModel UNUFM)//List<FileModel> CurrentFiles)
-        {
+        
 
-            if (UNUFM.file != null && UNUFM.file.ContentLength > 0)
-            {
-                byte[] uploadedFile = new byte[UNUFM.file.InputStream.Length];
-                UNUFM.file.InputStream.Read(uploadedFile, 0, uploadedFile.Length);
-
-                FileModel NewFileUpload = new FileModel()
-                {
-                    FileBlob = new FileBlobModel()
-                    {
-                        EntityState = DomainModels.EntityState.Added,
-                        FileImage = uploadedFile
-                    },
-                    ContentType = UNUFM.file.ContentType,
-                    CurrentVersionNumber = 1,
-                    Created = DateTime.Now,
-
-                    Name = Path.GetFileNameWithoutExtension(UNUFM.file.FileName),
-                    Size = UNUFM.file.ContentLength,
-                    UserIDOfFileOwner = UNUFM.IDOfCurrentUser,
-                    UserIDOfLastUploaded = UNUFM.IDOfCurrentUser,
-                    FileLookupStatusID = (int)EnumFileViewStatuses.Available,
-                    FileShareStatusID = UNUFM.FileShareStatusID,
-                    Extension = Path.GetExtension(UNUFM.file.FileName).Replace(".", ""),
-                    EntityState = DomainModels.EntityState.Added
-                };
-
-                return WebDocs.Common.Helper.Files.UploadHelper.SaveUploadedFile(NewFileUpload);
-            }
-            else
-            {
-                                     
-                return new FileUploadResponses()
-                {
-                    FileName = UNUFM.file.FileName,
-                    Message = "Failed To Upload - Error :  file is Null or Not uploaded correctly.",
-                    WasSuccessfull = false
-                };
-            }
-
-
-
-
-        }
-
-        public IList<FileModel> GetSelectedUserFiles(int UserID)
-        {
-            IList<FileModel> SelectedUserFiles = _FileRepsoitory.GetList(
-                a => a.UserIDOfFileOwner == UserID,
-                a => a.FileOwner,
-                a => a.PersonThatLastUpdatedFile,
-                a => a.FileViewStatuses,
-                a => a.FileShareStatues,
-                a => a.UserThatDownloadedFile);
-
-            return SelectedUserFiles;
-        }
+        //public IList<FileModel> GetSelectedUserFiles(int UserID)
+        //{
+           
+        //}
     }
 }

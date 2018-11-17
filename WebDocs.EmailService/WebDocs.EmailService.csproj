@@ -69,10 +69,16 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\WebDocs.BusinessApplicationLayer\WebDocs.BusinessApplicationLayer.csproj">
+      <Project>{14041a57-79f4-48e1-a87c-24ae7779287f}</Project>
+      <Name>WebDocs.BusinessApplicationLayer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WebDocs.Common\WebDocs.Common.csproj">
       <Project>{cb94534d-431b-4500-86b1-3045850aa562}</Project>
       <Name>WebDocs.Common</Name>

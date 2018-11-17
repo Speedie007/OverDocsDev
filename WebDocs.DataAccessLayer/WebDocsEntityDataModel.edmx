@@ -137,6 +137,13 @@
           <Property Name="NotificationType" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="NotificationMessageTemplate" Type="varchar(max)" Nullable="false" />
         </EntityType>
+        <EntityType Name="LookupTable_SystemTransactionTypes">
+          <Key>
+            <PropertyRef Name="SystemTransactionTypeID" />
+          </Key>
+          <Property Name="SystemTransactionTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SystemTransactionType" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="Notifications">
           <Key>
             <PropertyRef Name="NotificationID" />
@@ -157,6 +164,17 @@
           <Property Name="UserIDPersonSharedWith" Type="int" />
           <Property Name="FileID" Type="int" Nullable="false" />
           <Property Name="DateShared" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SystemTransactionLogs">
+          <Key>
+            <PropertyRef Name="SystemTransactionLogID" />
+          </Key>
+          <Property Name="SystemTransactionLogID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SystemTransactionTypeID" Type="int" Nullable="false" />
+          <Property Name="FileID" Type="int" Nullable="false" />
+          <Property Name="UserIDThatPerformedTansaction" Type="int" Nullable="false" />
+          <Property Name="DateTansactionPerformed" Type="datetime" Nullable="false" />
+          <Property Name="TransactionComments" Type="varchar(max)" Nullable="false" />
         </EntityType>
         <EntityType Name="UserChats">
           <Key>
@@ -392,6 +410,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_SystemTransactionLogs_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="SystemTransactionLogs" Type="Self.SystemTransactionLogs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SystemTransactionLogs">
+              <PropertyRef Name="UserIDThatPerformedTansaction" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SystemTransactionLogs_Files">
+          <End Role="Files" Type="Self.Files" Multiplicity="1" />
+          <End Role="SystemTransactionLogs" Type="Self.SystemTransactionLogs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Files">
+              <PropertyRef Name="FileID" />
+            </Principal>
+            <Dependent Role="SystemTransactionLogs">
+              <PropertyRef Name="FileID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SystemTransactionLogs_LookupTable_SystemTransactionTypes">
+          <End Role="LookupTable_SystemTransactionTypes" Type="Self.LookupTable_SystemTransactionTypes" Multiplicity="1" />
+          <End Role="SystemTransactionLogs" Type="Self.SystemTransactionLogs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LookupTable_SystemTransactionTypes">
+              <PropertyRef Name="SystemTransactionTypeID" />
+            </Principal>
+            <Dependent Role="SystemTransactionLogs">
+              <PropertyRef Name="SystemTransactionTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_UserChats_AspNetUsers">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
           <End Role="UserChats" Type="Self.UserChats" Multiplicity="*" />
@@ -455,8 +509,10 @@
           <EntitySet Name="LookupTable_FileShareStatues" EntityType="Self.LookupTable_FileShareStatues" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LookupTable_FileViewStatuses" EntityType="Self.LookupTable_FileViewStatuses" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LookupTable_NotificationTypes" EntityType="Self.LookupTable_NotificationTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LookupTable_SystemTransactionTypes" EntityType="Self.LookupTable_SystemTransactionTypes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Notifications" EntityType="Self.Notifications" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PrivateFilesSharedWithUsers" EntityType="Self.PrivateFilesSharedWithUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SystemTransactionLogs" EntityType="Self.SystemTransactionLogs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserChats" EntityType="Self.UserChats" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserThatDownloadedFile" EntityType="Self.UserThatDownloadedFile" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_EmailCache_AspNetUsers" Association="Self.FK_EmailCache_AspNetUsers">
@@ -530,6 +586,18 @@
           <AssociationSet Name="FK_Notifications_LookupTableNotificationTypes" Association="Self.FK_Notifications_LookupTableNotificationTypes">
             <End Role="LookupTable_NotificationTypes" EntitySet="LookupTable_NotificationTypes" />
             <End Role="Notifications" EntitySet="Notifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SystemTransactionLogs_AspNetUsers" Association="Self.FK_SystemTransactionLogs_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="SystemTransactionLogs" EntitySet="SystemTransactionLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SystemTransactionLogs_Files" Association="Self.FK_SystemTransactionLogs_Files">
+            <End Role="Files" EntitySet="Files" />
+            <End Role="SystemTransactionLogs" EntitySet="SystemTransactionLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SystemTransactionLogs_LookupTable_SystemTransactionTypes" Association="Self.FK_SystemTransactionLogs_LookupTable_SystemTransactionTypes">
+            <End Role="LookupTable_SystemTransactionTypes" EntitySet="LookupTable_SystemTransactionTypes" />
+            <End Role="SystemTransactionLogs" EntitySet="SystemTransactionLogs" />
           </AssociationSet>
           <AssociationSet Name="FK_UserChats_AspNetUsers" Association="Self.FK_UserChats_AspNetUsers">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
@@ -658,6 +726,20 @@
             <End Role="UsersModel" EntitySet="UsersModels" />
             <End Role="EmailCache" EntitySet="EmailCacheModels" />
           </AssociationSet>
+          <EntitySet Name="SystemTransactionTypesModels" EntityType="WebDocsModel.SystemTransactionTypesModel" />
+          <EntitySet Name="SystemTransactionLogsModels" EntityType="WebDocsModel.SystemTransactionLogsModel" />
+          <AssociationSet Name="FK_SystemTransactionLogs_AspNetUsers" Association="WebDocsModel.FK_SystemTransactionLogs_AspNetUsers">
+            <End Role="UsersModel" EntitySet="UsersModels" />
+            <End Role="SystemTransactionLog" EntitySet="SystemTransactionLogsModels" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SystemTransactionLogs_LookupTable_SystemTransactionTypes" Association="WebDocsModel.FK_SystemTransactionLogs_LookupTable_SystemTransactionTypes">
+            <End Role="LookupTable_SystemTransactionTypes" EntitySet="SystemTransactionTypesModels" />
+            <End Role="SystemTransactionLog" EntitySet="SystemTransactionLogsModels" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SystemTransactionLogs_Files" Association="WebDocsModel.FK_SystemTransactionLogs_Files">
+            <End Role="FileModel" EntitySet="FileModels" />
+            <End Role="SystemTransactionLogsModel" EntitySet="SystemTransactionLogsModels" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="UsersModel">
           <Key>
@@ -687,6 +769,7 @@
           <NavigationProperty Name="FileArchives" Relationship="WebDocsModel.FK_FileArchives_AspNetUsers" FromRole="UsersModel" ToRole="FileArchiveModel" />
           <NavigationProperty Name="EmailCaches" Relationship="WebDocsModel.FK_EmailCache_AspNetUsers" FromRole="UsersModel" ToRole="EmailCache" />
           <NavigationProperty Name="EmailCaches1" Relationship="WebDocsModel.FK_EmailCache_AspNetUsers1" FromRole="UsersModel" ToRole="EmailCache" />
+          <NavigationProperty Name="SystemTransactionLogs" Relationship="WebDocsModel.FK_SystemTransactionLogs_AspNetUsers" FromRole="UsersModel" ToRole="SystemTransactionLog" />
         </EntityType>
         <EntityType Name="ChatModel">
           <Key>
@@ -947,6 +1030,7 @@
           <NavigationProperty Name="PrivateFilesSharedWithUsers" Relationship="WebDocsModel.FK_FileSharedWithUsers_Files" FromRole="File" ToRole="PrivateFilesSharedWithUser" />
           <NavigationProperty Name="FileNotifications" Relationship="WebDocsModel.FK_Notifications_Files" FromRole="File" ToRole="Notification" />
           <NavigationProperty Name="UserThatDownloadedFile" Relationship="WebDocsModel.FK_UserThatDownloadedFile_Files" FromRole="File" ToRole="UserThatDownloadedFile" />
+          <NavigationProperty Name="SystemTransactionLogs" Relationship="WebDocsModel.FK_SystemTransactionLogs_Files" FromRole="FileModel" ToRole="SystemTransactionLogsModel" />
         </EntityType>
         <Association Name="FK_Files_AspNetUsers">
           <End Type="WebDocsModel.UsersModel" Role="AspNetUser" Multiplicity="1" />
@@ -1135,6 +1219,64 @@
             </Principal>
             <Dependent Role="EmailCache">
               <PropertyRef Name="IDOfRecipient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="SystemTransactionTypesModel">
+          <Key>
+            <PropertyRef Name="SystemTransactionTypeID" />
+          </Key>
+          <Property Name="SystemTransactionTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SystemTransactionType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="SystemTransactionLogs" Relationship="WebDocsModel.FK_SystemTransactionLogs_LookupTable_SystemTransactionTypes" FromRole="LookupTable_SystemTransactionTypes" ToRole="SystemTransactionLog" />
+        </EntityType>
+        <EntityType Name="SystemTransactionLogsModel">
+          <Key>
+            <PropertyRef Name="SystemTransactionLogID" />
+          </Key>
+          <Property Name="SystemTransactionLogID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SystemTransactionTypeID" Type="Int32" Nullable="false" />
+          <Property Name="UserIDThatPerformedTansaction" Type="Int32" Nullable="false" />
+          <Property Name="DateTansactionPerformed" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="PersonThatPerformedTransactions" Relationship="WebDocsModel.FK_SystemTransactionLogs_AspNetUsers" FromRole="SystemTransactionLog" ToRole="UsersModel" />
+          <NavigationProperty Name="SystemTransactionTypes" Relationship="WebDocsModel.FK_SystemTransactionLogs_LookupTable_SystemTransactionTypes" FromRole="SystemTransactionLog" ToRole="LookupTable_SystemTransactionTypes" />
+          <Property Name="FileID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="File" Relationship="WebDocsModel.FK_SystemTransactionLogs_Files" FromRole="SystemTransactionLogsModel" ToRole="FileModel" />
+          <Property Name="TransactionComments" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_SystemTransactionLogs_AspNetUsers">
+          <End Type="WebDocsModel.UsersModel" Role="UsersModel" Multiplicity="1" />
+          <End Type="WebDocsModel.SystemTransactionLogsModel" Role="SystemTransactionLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UsersModel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SystemTransactionLog">
+              <PropertyRef Name="UserIDThatPerformedTansaction" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SystemTransactionLogs_LookupTable_SystemTransactionTypes">
+          <End Type="WebDocsModel.SystemTransactionTypesModel" Role="LookupTable_SystemTransactionTypes" Multiplicity="1" />
+          <End Type="WebDocsModel.SystemTransactionLogsModel" Role="SystemTransactionLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LookupTable_SystemTransactionTypes">
+              <PropertyRef Name="SystemTransactionTypeID" />
+            </Principal>
+            <Dependent Role="SystemTransactionLog">
+              <PropertyRef Name="SystemTransactionTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SystemTransactionLogs_Files">
+          <End Type="WebDocsModel.FileModel" Role="FileModel" Multiplicity="1" />
+          <End Type="WebDocsModel.SystemTransactionLogsModel" Role="SystemTransactionLogsModel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FileModel">
+              <PropertyRef Name="FileID" />
+            </Principal>
+            <Dependent Role="SystemTransactionLogsModel">
+              <PropertyRef Name="FileID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1329,6 +1471,26 @@
                 <ScalarProperty Name="HasBeenSent" ColumnName="HasBeenSent" />
                 <ScalarProperty Name="EmailMessage" ColumnName="EmailMessage" />
                 <ScalarProperty Name="EmailCacheID" ColumnName="EmailCacheID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SystemTransactionTypesModels">
+            <EntityTypeMapping TypeName="WebDocsModel.SystemTransactionTypesModel">
+              <MappingFragment StoreEntitySet="LookupTable_SystemTransactionTypes">
+                <ScalarProperty Name="SystemTransactionType" ColumnName="SystemTransactionType" />
+                <ScalarProperty Name="SystemTransactionTypeID" ColumnName="SystemTransactionTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SystemTransactionLogsModels">
+            <EntityTypeMapping TypeName="WebDocsModel.SystemTransactionLogsModel">
+              <MappingFragment StoreEntitySet="SystemTransactionLogs">
+                <ScalarProperty Name="TransactionComments" ColumnName="TransactionComments" />
+                <ScalarProperty Name="FileID" ColumnName="FileID" />
+                <ScalarProperty Name="DateTansactionPerformed" ColumnName="DateTansactionPerformed" />
+                <ScalarProperty Name="UserIDThatPerformedTansaction" ColumnName="UserIDThatPerformedTansaction" />
+                <ScalarProperty Name="SystemTransactionTypeID" ColumnName="SystemTransactionTypeID" />
+                <ScalarProperty Name="SystemTransactionLogID" ColumnName="SystemTransactionLogID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -19,13 +19,14 @@ namespace WebDocs.Web.Controllers
 {
     public class NotificationsController : Controller
     {
+        WebDocsBussinessLogic WDBL = new WebDocsBussinessLogic();
+
         // GET: Notificationst
         [HttpGet]
         [Authorize]
         public ActionResult DisplayUserNotifications(string sortOrder, string currentFilter, string searchString, int? page, int TabIndex = 0)
         {
-            NotificationsBusinessLogic NBL = new NotificationsBusinessLogic();
-
+            
             ViewBag.CurrentSort = sortOrder;
 
             ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "FullName_desc" : "";
@@ -39,7 +40,7 @@ namespace WebDocs.Web.Controllers
             ViewBag.FileSizeSortParm = sortOrder == "FileSize" ? "FileSize_desc" : "FileSize";
 
 
-            IList<NotificationModel> Rtn = NBL.GetCurrentUserNotifications(User.Identity.GetUserId<int>());
+            IList<NotificationModel> Rtn = WDBL.GetCurrentUserNotifications(User.Identity.GetUserId<int>());
 
             //ViewBag.CurrentFilter = "";
 
@@ -68,25 +69,21 @@ namespace WebDocs.Web.Controllers
         [HttpPost]
         public async Task<ActionResult> ProcessRequestNotification(ProcessFileRequestNotificationViewModel PFRN)
         {
-            NotificationsBusinessLogic NBL = new NotificationsBusinessLogic();
-            CompletedTransactionResponses rtnSuccessMessage = await NBL.ProcessFileRequest(PFRN);
+            CompletedTransactionResponses rtnSuccessMessage = await WDBL.ProcessFileRequest(PFRN);
             return Json(rtnSuccessMessage, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
         public async Task<ActionResult> AcceptFileRequestNotification(AcceptFileRequestNotifictionViewModel AFRN)
         {
-            NotificationsBusinessLogic NBL = new NotificationsBusinessLogic();
             //await NBL.ProcessAcceptedFileRequest(AFRN);
-            return Json(await NBL.ProcessAcceptedFileRequest(AFRN), JsonRequestBehavior.AllowGet);
+            return Json(await WDBL.ProcessAcceptedFileRequest(AFRN), JsonRequestBehavior.AllowGet);
             // return RedirectToAction("DisplayUserNotifications", new { TabIndex = AFRN.PageIndex });
         }
 
         public ActionResult DeleteNotification(int NotifictionID, int _TabIndex)
         {
-            NotificationsBusinessLogic NBL = new NotificationsBusinessLogic();
-
-            NBL.RemoveNotification(new RemoveNotificationViewModel()
+            WDBL.RemoveNotification(new RemoveNotificationViewModel()
             {
                 NotificationID = NotifictionID
             });
