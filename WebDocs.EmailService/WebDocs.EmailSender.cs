@@ -39,7 +39,7 @@ namespace WebDocs.EmailService
             this.EmailTimer.Interval = 2000; //every 60 seconds
             this.EmailTimer.Elapsed += new System.Timers.ElapsedEventHandler(EmailTimer_Tick);
             this.EmailTimer.Enabled = true;
-            ///Common.WindowsServices.ServiceLogFiles.WrtieToLog("WebDocs Service Strarted");
+           // Common.WindowsServices.ServiceLogFiles.WrtieToLog("WebDocs Service Strarted");
 
         }
 
@@ -47,7 +47,7 @@ namespace WebDocs.EmailService
         {
             //Stop timer untill the function completes.
             EmailTimer.Enabled = false;
-            //Common.WindowsServices.ServiceLogFiles.WrtieToLog("Timer tick event entered and stoped - 1");
+           //Common.WindowsServices.ServiceLogFiles.WrtieToLog("Timer tick event entered and stoped - 1");
             //get relivant emails and email settings.
 
             
@@ -63,11 +63,11 @@ namespace WebDocs.EmailService
                         .ToListAsync<EmailCacheModel>();
 
                 }
-                // Common.WindowsServices.ServiceLogFiles.WrtieToLog("Email Settings and List of unsent emails are populated - 2");
+                //Common.WindowsServices.ServiceLogFiles.WrtieToLog("Email Settings and List of unsent emails are populated - 2");
             }
             catch
             {
-                // Common.WindowsServices.ServiceLogFiles.WrtieToLog("Failed at - 2 Error Message: " + ex.Message + " Inner Message : " + ex.InnerException.Message);
+                //Common.WindowsServices.ServiceLogFiles.WrtieToLog("Failed at - 2 Error Message: " + ex.Message + " Inner Message : " + ex.InnerException.Message);
             }
 
            
@@ -80,7 +80,7 @@ namespace WebDocs.EmailService
             }
            
             //restart Timer
-            //Common.WindowsServices.ServiceLogFiles.WrtieToLog("Email Timer Resstarted - 4");
+           //Common.WindowsServices.ServiceLogFiles.WrtieToLog("Email Timer Resstarted - 4");
             this.EmailTimer.Enabled = true;
 
         }
@@ -138,7 +138,7 @@ namespace WebDocs.EmailService
 
         protected override void OnStop()
         {
-            // Common.WindowsServices.ServiceLogFiles.WrtieToLog("Web Docs Service Stopped - 5");
+            //Common.WindowsServices.ServiceLogFiles.WrtieToLog("Web Docs Service Stopped - 5");
             EmailTimer.Enabled = false;
 
         }
