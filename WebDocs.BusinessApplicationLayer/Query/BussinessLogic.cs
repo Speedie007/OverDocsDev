@@ -417,7 +417,7 @@ namespace WebDocs.BusinessApplicationLayer.Query
                         SystemTransactionTypeID = (int)Common.Enum.DbLookupTables.EnumSystemTransactionTypes.SendFileShareRequestNotification,
                         UserIDThatPerformedTansaction = NME.UserIDOfNotificationSender,
                         DateTansactionPerformed = DateTime.Now,
-                        TransactionComments = "An Notification to share this document was sent by " + NM.SendingUsers.UserFullName,
+                        TransactionComments = "An Notification to share this document was sent by " + NME.SendingUsers.UserFullName,
                         FileID = NME.FileID
                     });
                     WriteToSystemTransactionLog(new SystemTransactionLogsModel()
@@ -425,7 +425,7 @@ namespace WebDocs.BusinessApplicationLayer.Query
                         SystemTransactionTypeID = (int)Common.Enum.DbLookupTables.EnumSystemTransactionTypes.SendFileShareRequestNotification,
                         UserIDThatPerformedTansaction = NME.UserIDOfNotificationSender,
                         DateTansactionPerformed = DateTime.Now,
-                        TransactionComments = "An Notification requesting that this file be shared was sent to: " + NM.RecipientUsers.UserFullName,
+                        TransactionComments = "An Notification requesting that this file be shared was sent to: " + NME.RecipientUsers.UserFullName,
                         FileID = NME.FileID
                     });
                     //add email that will be sent tot the recipient

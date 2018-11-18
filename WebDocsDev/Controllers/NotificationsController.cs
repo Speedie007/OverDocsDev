@@ -44,8 +44,6 @@ namespace WebDocs.Web.Controllers
 
             //ViewBag.CurrentFilter = "";
 
-
-
             //var ThereIsGoing = Rtn.Where(a => a.UserHasAcknowledgement == false).ToPagedList<NotificationModel>(pageNumber, pageSize);
             //var ccc = Rtn.Where(a => a.UserHasAcknowledgement == true).ToPagedList<NotificationModel>(pageNumber, pageSize);
 

@@ -338,7 +338,9 @@ function SetTabIndex(iTabIndex) {
 
 var _AcceptFileRequestNotifictionViewModel;
 
-function showProcessRequestNotificationModal(FileID, NotificationID, FileName, PersonNameWhichIsRequestingFile) {
+
+//@item.FileID, @item.NotificationID,'@item.UserIDOfNotificationSender','@UserID_OfUserCurrentlyLoggedIn','@sFileName','@sPersonNameWhichIsRequestingFile'
+function showProcessRequestNotificationModal(FileID, NotificationID, UserIDOfNotificationSender, UserID_OfUserCurrentlyLoggedIn, FileName, PersonNameWhichIsRequestingFile) {
 
     //Create Json Object
     _AcceptFileRequestNotifictionViewModel = JSON.parse('{}');
